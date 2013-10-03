@@ -1,0 +1,8 @@
+
+<h3><a href='#article/<%- _id %>'><%- title %></a></h3>
+<div class="row-fluid">
+	<% var image = images.split(".").pop(); %>
+	<img class="preview-image span3" src="<%= image %>" />
+	<p class="span6"><%= desc.slice(0, 250) %> ...</p>
+</div>
+<p><a href='#article/<%- _id %>'>>> mehr lesen</a></p>
