@@ -1,0 +1,38 @@
+<div class="preview">
+	<h1><%- model.title %></h1>
+	<h5>by <%- model.author %></h5>
+	<p><%- model.desc %></p>
+	<% if (model.images) { %>
+	<% var images = model.images.split("."); %>
+		<% for (var i = 0; i < images.length; i++) { %> <img src="<%= images[i] %>" /> <%  }; %>
+	<% } %>
+</div>
+<div class="edit">
+	<label>Titel</label><input type="text" name="title" value="<%- model.title %>" /> <br/>
+	<label>Autor</label><input type="text" name="author" value="<%- model.author %>" /> <br/>
+	<label>External</label><input type="text" name="external" value="<%- model.external %>" /> <br/>
+	<label>Artikel</label><textarea name="article"><%- model.desc %></textarea> <br/>
+	<label>Bilder</label> 
+	<div id="images">
+		<input type="file" name="images[]" multiple />
+		<output>
+			<% if (model.images) { %>
+				<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
+			<% } %>
+		</output>
+	</div>
+</div>
+<div class="buttons">
+	<div class="edit">
+		<button class="save btn btn-success">Save</button>
+	</div>
+	<div class="saved">
+		<button class="delete btn btn-danger">Delete</button>	
+		<% if (model.privatecode === true) { %>
+			<button id="publish" class="btn btn-success">Publish</button>
+		<% } else { %>
+			<button id="publish" class="btn">Unpublish</button>
+		<% } %>
+		<button id="edit" class="btn btn-primary">Edit</button>
+	</div>
+</div>
