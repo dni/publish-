@@ -4,6 +4,7 @@ require.config({
 		jquery: "/lib/jquery-1.8.3.min",
 		lodash: "/lib/lodash.min",
 		backbone: "/lib/backbone",
+		marionette: "/lib/backbone.marionette",
         localstorage: "/lib/backbone-localstorage",
 		text: '/lib/text',
 		cs: '/lib/cs',
@@ -19,5 +20,9 @@ require.config({
 		'jquery.fancybox': ['jquery'],
 		'jquery.collapse': ['jquery'],
 		'backbone.localstorage': ['backbone'],
+		"marionette":{
+            "deps":["lodash", "backbone", "jquery"],
+            "exports":"Marionette"
+        },
 	}
 });
