@@ -1,6 +1,6 @@
 {
   "name": "Publish",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "crossmedia publishing",
   "main": "app.js",
   "dependencies": {

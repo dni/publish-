@@ -1,0 +1,33 @@
+{
+	"name": "facebook",
+	"author": "Daniel Krahofer",
+	"version":"0.0.1",
+	"config": {
+		"settings": {
+			"model": {
+				"facebookid": {
+					"type": "checkbox"
+				}		
+			}
+		},
+		"article": {
+			"buttons": "facebookButton",
+			"model": {
+			
+				"postedOnFacebook": {
+					"label": "Posted on Facebook",
+					"type": "date",
+					"config": {
+						"format": "YYYY.mm.dd"
+					}
+				},
+				"likes": {
+					"label": "Posted on Facebook",
+					"type": "plain",
+				}
+				
+			
+			}
+		}
+	}
+}

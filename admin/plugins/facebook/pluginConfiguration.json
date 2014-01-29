@@ -1,0 +1,11 @@
+{
+	"name": "facebook",
+	"author": "Daniel Krahofer",
+	"version":"0.0.1",
+	"config": {
+		"article": {
+			"buttons": "facebookButton"
+			"model": 
+		}
+	}
+}
