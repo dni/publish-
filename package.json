@@ -20,7 +20,10 @@
     "scissors": "~0.1.0",
     "socket.io": "~0.9.16",
     "ejs": "~0.8.4",
-    "mongoose": "~3.6.20"
+    "mongoose": "~3.6.20",
+    "formidable": "~1.0.14",
+    "node-static": "~0.7.3",
+    "imagemagick": "~0.1.3"
   },
   "devDependencies": {},
   "scripts": {
