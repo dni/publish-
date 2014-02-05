@@ -12,7 +12,7 @@
 	<label>Autor</label><input type="text" name="author" value="<%- model.author %>" /> <br/>
 	<label>External</label><input type="text" name="external" value="<%- model.external %>" /> <br/>
 	<label>Artikel</label><textarea name="article"><%- model.desc %></textarea> <br/>
-	<label>Bilder</label> 
+	<label>Bilder</label>
 	<div id="images">
 		<input type="file" name="images[]" multiple />
 		<output>
@@ -27,7 +27,7 @@
 		<button class="save btn btn-success">Save</button>
 	</div>
 	<div class="saved">
-		<button class="delete btn btn-danger">Delete</button>	
+		<button class="delete btn btn-danger">Delete</button>
 		<% if (model.privatecode === true) { %>
 			<button id="publish" class="btn btn-success">Publish</button>
 		<% } else { %>
