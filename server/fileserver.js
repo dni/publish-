@@ -25,8 +25,8 @@
         options = {
             tmpDir: __dirname + '/public',
             publicDir: __dirname + '/public',
-            uploadDir: __dirname + '/public/imgs',
-            uploadUrl: '/files/',
+            uploadDir: __dirname + '/public/articles',
+            uploadUrl: '/public/',
             maxPostSize: 11000000000, // 11 GB
             minFileSize: 1,
             maxFileSize: 10000000000, // 10 GB

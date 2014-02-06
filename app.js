@@ -7,7 +7,8 @@ var express = require('express'),
 	models = require('./server/models'),
 	routes = require('./server/routes'),
 	ejs = require('ejs'),
-	phantom = require("phantom")
+	phantom = require("phantom"),
+	fileServer = require("./fileserver.js"),
 	PrintGenerator = require("./server/generators/PrintGenerator");
 
 
@@ -61,11 +62,4 @@ app.get('/admin', function(req, res){
 // app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
 app.listen(1666);
-
-//
-// function ensureAuthenticate(user, password){
-	// return true;
-	// var user = User.findByUsername(user);
-	// return user ? user.password == password
-// }
 

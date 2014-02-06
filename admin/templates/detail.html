@@ -13,13 +13,15 @@
 	<label>External</label><input type="text" name="external" value="<%- model.external %>" /> <br/>
 	<label>Artikel</label><textarea name="article"><%- model.desc %></textarea> <br/>
 	<label>Bilder</label>
-	<div id="images">
-		<input type="file" name="images[]" multiple />
-		<output>
-			<% if (model.images) { %>
-				<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
-			<% } %>
-		</output>
+	<div id="images" class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Add files...</span>
+		<input id="imageUpload" type="file" name="images[]" multiple />
+	</div>
+	<div id="files">
+		<% if (model.images) { %>
+			<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
+		<% } %>
 	</div>
 </div>
 <div class="buttons">
