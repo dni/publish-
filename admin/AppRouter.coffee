@@ -12,7 +12,7 @@ define [
     'cs!models/Article',
     'cs!models/Articles',
     'cs!models/Magazine',
-    'cs!models/Magazines'
+    'cs!models/Magazines',
     'fileupload',
 ],
 ( $, _, Backbone, Start, ListView, DetailView, LoginView, PublicView, Navigation, MagazineDetailView, Article, Articles, Magazine, Magazines, fileupload ) ->
@@ -106,38 +106,18 @@ define [
 
     uploadHandler: (selector, model) ->
 
-      xhr = $(selector).fileupload({
-        dataType: 'json',
-        url: 'http://localhost:8888',
-        add: (e, data) ->
-          i = 0
-          while f = data.files[i]
-            continue unless f.type.match("image.*")
-            reader = new FileReader()
-            reader.onload = ((theFile) ->
-              (e) ->
-                $("output").append "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
-                data.submit();
-            )(f)
-            reader.readAsDataURL(f)
-            i++
+      xhr = $(selector).fileupload
+        dataType: 'json'
+        url: 'http://localhost:8888'
+        
         done: (e, data) ->
-          alert("uploadet")
-          $.each(data.result.files, (index, file) ->
-            $('<p/>').text(file.name).appendTo(document.body)
-            #images = model.get 'images'
-            #model.set
-              #images: images.push(file.name)
-            #$(selector + " output").html "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
-          );
+          $.each data.result.files, (index, file) ->
+            $('#files').append '<img src="static/articles/'+file.name+'" />'
+
         progressall: (e, data) ->
-            progress = parseInt(data.loaded / data.total * 100, 10)
-            $(selector + " output").append("progressALL = "+progress + '%')
-        drop: (e, data) ->
-          $.each(data.files, (index, file) ->
-            alert('Dropped file: ' + file.name);
-          )
-      });
+          progress = parseInt data.loaded / data.total * 100, 10
+          $(selector + " output").append "progressALL = "+progress + '%'
+          
 
     # uploadHandler: (selector)->
       # $(selector + " input[type=file]").change (evt) ->

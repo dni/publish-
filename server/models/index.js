@@ -16,7 +16,10 @@ var ArticleSchema = new Schema({
   desc: String,
   date: Date,
   privatecode: Boolean,
-  images: String
+  images: {
+      type: Array,
+      'default': []
+    }
 });
 
 

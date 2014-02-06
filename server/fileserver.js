@@ -23,9 +23,9 @@
         nodeStatic = require('node-static'),
         imageMagick = require('imagemagick'),
         options = {
-            tmpDir: __dirname + '/public',
-            publicDir: __dirname + '/public',
-            uploadDir: __dirname + '/public/articles',
+            tmpDir: './public',
+            publicDir: './public',
+            uploadDir: './public/articles',
             uploadUrl: '/public/',
             maxPostSize: 11000000000, // 11 GB
             minFileSize: 1,
