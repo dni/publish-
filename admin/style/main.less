@@ -3,12 +3,12 @@
  *
  * Copyright 2012 Daniel Krahofer www.dnilabs.com
  * Designed and built with love and passion.
- * 
+ *
  *  --- main template
- * 
+ *
  */
 
-// bootstrap 3.0.3, 
+// bootstrap 3.0.3,
 // find the mixins, variables here
 // http://twitter.github.com/bootstrap/less.html
 @import "bootstrap/bootstrap.less";
@@ -18,25 +18,25 @@
 .navbar-inner {border-radius:0px;}
 
 
-html {  
+html {
   font-family:Arial;
   font-size:12px;
   height:100%;
 }
-// url('../imgs/VertLine1.png') 
+// url('../imgs/VertLine1.png')
 body {margin:0;padding:0;height:100%;background:#999;}
 
 .flex {
   padding:12px;
   max-height:100%;
-  
+
   box-sizing: border-box
 }
 
 #main {
   padding:80px 40px;
   box-sizing:border-box;
-  
+
   > div {
     overflow-y:scroll;
      > *  {
@@ -49,8 +49,8 @@ body {margin:0;padding:0;height:100%;background:#999;}
         background: -o-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
         background: -ms-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* IE10+ */
         background: linear-gradient(135deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* W3C */
-      
-       
+
+
      }
   }
 }
@@ -58,9 +58,9 @@ body {margin:0;padding:0;height:100%;background:#999;}
 /* LOGIN */
 #login > div {display:none;}
 
- 
+
 /* SIDEBAR */
-#sidebar { 
+#sidebar {
   .form-inline {margin-bottom:24px;}
   margin-bottom:24px;
   label { display:inline; }
@@ -100,6 +100,23 @@ body {margin:0;padding:0;height:100%;background:#999;}
 }
 
 
+.fileinput-button {
+  position:relative;
+
+  input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    -ms-filter: 'alpha(opacity=0)';
+    font-size: 20px;
+    direction: ltr;
+    cursor: pointer;
+    height:32px;
+  }
+
+}
 #content select {margin-bottom:12px;}
 
 #content textarea, #content input {vertical-align: top; -webkit-appearance: none;
@@ -136,7 +153,12 @@ footer a {color:#008000;}
 #content .edit {display:none;}
 
 /* LIST */
-.list {display:none;} 
-.list.active {display:block;} 
+.list {display:none;}
+.list.active {display:block;}
 
 #pageList {ul{list-style:none;margin:18px 0;padding:0;}}
+
+#info {
+  position: absolute;
+  bottom:0;
+}

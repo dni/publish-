@@ -104,22 +104,40 @@ define [
         html = view.render()
       $(selector).html html
 
-    uploadHandler: (selector)->
-      $(selector + " input[type=file]").fileupload({
+    uploadHandler: (selector, model) ->
+
+      xhr = $(selector).fileupload({
         dataType: 'json',
         url: 'http://localhost:8888',
+        add: (e, data) ->
+          i = 0
+          while f = data.files[i]
+            continue unless f.type.match("image.*")
+            reader = new FileReader()
+            reader.onload = ((theFile) ->
+              (e) ->
+                $("output").append "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
+                data.submit();
+            )(f)
+            reader.readAsDataURL(f)
+            i++
         done: (e, data) ->
-            $.each(data.result.files, (index, file) ->
-              $('<p/>').text(file.name).appendTo(document.body)
-              #$(selector + " output").html "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
-            );
+          alert("uploadet")
+          $.each(data.result.files, (index, file) ->
+            $('<p/>').text(file.name).appendTo(document.body)
+            #images = model.get 'images'
+            #model.set
+              #images: images.push(file.name)
+            #$(selector + " output").html "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
+          );
         progressall: (e, data) ->
             progress = parseInt(data.loaded / data.total * 100, 10)
-            $(selector + " output").text("progressALL = "progress + '%')
-        progressall: (e, data) ->
-            progress = parseInt(data.loaded / data.total * 100, 10)
-            $(selector + " output").text("progress = "progress + '%')
-        });
+            $(selector + " output").append("progressALL = "+progress + '%')
+        drop: (e, data) ->
+          $.each(data.files, (index, file) ->
+            alert('Dropped file: ' + file.name);
+          )
+      });
 
     # uploadHandler: (selector)->
       # $(selector + " input[type=file]").change (evt) ->

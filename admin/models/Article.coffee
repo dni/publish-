@@ -7,6 +7,7 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "images": ""
       "author": "dnilabs"
       "privatecode": true
-          
+
     togglePublish: ->
       @.set "privatecode", not @.get "privatecode";
+
