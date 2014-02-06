@@ -31,12 +31,14 @@ define ['jquery', 'lodash', 'backbone', 'text!templates/detail.html'], ( $, _, B
       @model.save()
 
     saveArticle: ->
-
-      app.uploadHandler "#imageUpload", @model
-
+      
+      files = []
+      $('#files').children().each -> files.push $(this).attr('src')
+      
       @model.set
         title: $('input[name=title]').val()
         author: $('input[name=author]').val()
+        images: files
         desc: $('textarea[name=article]').val()
       if @model.isNew()
         app.articles.create @model,

@@ -2,8 +2,7 @@
 <h5>by <%- model.author %></h5>
 <p><%- model.desc %></p>
 
-<% var images = model.images.split("."); %>
-<% for (var i = 0; i < images.length; i++) { %> <img src="<%= images[i] %>" /> <%  }; %>
+<% for (var i = 0; i < model.images.length; i++) { %> <img src="<%= model.images[i] %>" /> <%  }; %>
 
 <div class="buttons">
 	<a href="#" class="back btn">Zurück</a>

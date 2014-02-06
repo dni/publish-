@@ -3,8 +3,7 @@
 	<h5>by <%- model.author %></h5>
 	<p><%- model.desc %></p>
 	<% if (model.images) { %>
-	<% var images = model.images.split("."); %>
-		<% for (var i = 0; i < images.length; i++) { %> <img src="<%= images[i] %>" /> <%  }; %>
+		<% for (var i = 0; i < model.images.length; i++) { %> <img width="150" src="<%= model.images[i] %>" /> <%  }; %>
 	<% } %>
 </div>
 <div class="edit">
@@ -20,7 +19,7 @@
 	</div>
 	<div id="files">
 		<% if (model.images) { %>
-			<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
+			<% for (var i = 0; i < model.images.length; i++) { %> <img width="150" src="<%= model.images[i] %>" /> <%  }; %>
 		<% } %>
 	</div>
 </div>

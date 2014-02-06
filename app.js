@@ -1,4 +1,3 @@
-// drs was geererdfgrs
 var express = require('express'),
 	app = express(),
 	mongoose = require("mongoose"),
@@ -8,7 +7,7 @@ var express = require('express'),
 	routes = require('./server/routes'),
 	ejs = require('ejs'),
 	phantom = require("phantom"),
-	fileServer = require("./fileserver.js"),
+	fileServer = require("./server/fileserver.js"),
 	PrintGenerator = require("./server/generators/PrintGenerator");
 
 
@@ -19,7 +18,12 @@ app.configure(function() {
 	app.use('/static', express.static(__dirname + '/public'));
 	app.use('/lib', express.static('lib'));
 	app.use(express.cookieParser());
-	app.use(express.bodyParser());
+	app.use(express.bodyParser({
+          keepExtensions: true,
+          limit: 15000000, // 10M limit
+          defer: true              
+    }));
+    
 	app.use(express.session({ secret: 'keyboard cat' }));
 
 	// app.engine('.html', require('uinexpress').__express)

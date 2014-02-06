@@ -14,17 +14,38 @@ module.exports.getArticles = function(req, res){
 };
 
 module.exports.postArticles = function(req, res){
+	
+	
+	
 	var article = new db.Article();
 	article.title = req.body.title;
 	article.desc = req.body.desc;
 	article.author = req.body.author;
-	articel.images = req.body.images;
+	article.images = req.body.images;
 	article.privatecode = req.body.privatecode;
 	article.date = new Date();
 
-	article.save(function () {
-		res.send(article);
-	});
+	// upload progress
+	// req.form.on('progress', function(bytesReceived, bytesExpected) {
+        // console.log(((bytesReceived / bytesExpected)*100) + "% uploaded");
+    // });
+//     
+//     
+    // req.form.on('end', function() {
+//     	
+    	// //upload done
+        // console.log(req.files);
+        // res.send("well done");
+//         
+//         
+//         
+    // });
+	
+		article.save(function () {
+			res.send(article);
+		});
+	
+	
 };
 
 module.exports.updateArticle = function(req, res){

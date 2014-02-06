@@ -1,4 +1,5 @@
 node_modules
 .project
-public/articles
-public/magazines
+public/articles/*
+public/magazines/*
+.DS_Store
