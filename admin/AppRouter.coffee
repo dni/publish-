@@ -104,27 +104,21 @@ define [
         html = view.render()
       $(selector).html html
 
-    # $('#fileupload').fileupload({
-        # dataType: 'json',
-        # done: function (e, data) {
-            # $.each(data.result.files, function (index, file) {
-                # $('<p/>').text(file.name).appendTo(document.body);
-            # });
-        # }
-    # });
-
     uploadHandler: (selector)->
       $(selector + " input[type=file]").fileupload({
         dataType: 'json',
         url: 'http://localhost:8888',
         done: (e, data) ->
             $.each(data.result.files, (index, file) ->
-              $('<p/>').text(file.name).appendTo(document.body);
+              $('<p/>').text(file.name).appendTo(document.body)
               #$(selector + " output").html "<img width='100' class='thumb' src='"+ e.target.result+ "' title='" + escape(theFile.name) +  "'/>"
             );
         progressall: (e, data) ->
-            progress = parseInt(data.loaded / data.total * 100, 10);
-            $(selector + " output").text("progress = "progress + '%');
+            progress = parseInt(data.loaded / data.total * 100, 10)
+            $(selector + " output").text("progressALL = "progress + '%')
+        progressall: (e, data) ->
+            progress = parseInt(data.loaded / data.total * 100, 10)
+            $(selector + " output").text("progress = "progress + '%')
         });
 
     # uploadHandler: (selector)->
