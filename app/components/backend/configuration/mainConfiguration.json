@@ -1,0 +1,15 @@
+{
+	"name": "cms",
+	"author": "dnilabs e.U",
+	"version":"0.0.1",
+	"models": {
+		"article": "ArticleModel",
+		"magazine": "MagazineModel",
+		"setting":"SettingModel"
+	},
+	"views": "ArticleDetail, ",
+	"entrypoints": "button, overlay",
+	"modules": {
+		"article": "ArticleModule"
+	}
+}

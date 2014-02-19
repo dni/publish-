@@ -16,7 +16,7 @@ phantom.create(PrintGenerator.startPhantom);
 app.configure(function() {
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
-	app.use('/lib', express.static('lib'));
+	app.use('/admin/lib', express.static(__dirname + '/app/components/backend/bower_components'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser({
           keepExtensions: true,
@@ -53,14 +53,14 @@ app.configure(function() {
 
 // web app
 app.get('/', function(req, res){
-  app.use('/frontend', express.static('frontend'));
-  res.sendfile('./frontend/index.html');
+  app.use('/', express.static(__dirname + '/app/components/frontend/'));
+  res.sendfile('./app/components/frontend/index.html');
 });
 
 app.get('/admin', function(req, res){
   app.use(express.basicAuth('admin', 'password'));
-  app.use('/admin', express.static('admin'));
-  res.sendfile('./admin/index.html');
+  app.use('/admin', express.static(__dirname + '/app/components/backend/'));
+  res.sendfile('./app/components/backend/index.html');
 });
 
 // app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));

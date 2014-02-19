@@ -1,18 +1,24 @@
-Publish! Crossplattform Publishing
-==================================
+# Publish! Crossplattform Publishing
 
 cms, for publishing crossplattform webapps
 
+* 1.
+* 2.
+* 3.
+
 PROTOTYPE
 
-INSTALLATION
-============
+## Requirements
+
+nodejs, bower, grunt
+
+## Installation
 
 git clone https://github.com/dni/publish-.git
 npm install
+bower install
 
 
-STARTING TO APP
-===============
+## Starting the App
 
 node app
