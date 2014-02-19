@@ -1,0 +1,27 @@
+{
+	"navigation": {
+		"button": 0,
+		"route": "/articles",
+		"label": "Artikel",
+		"class": "articles"
+	},
+	"model": {
+		"article": {
+			"fields" : {
+				"title": {
+					"type": "text",
+					"label": "Titel",
+					"default": "Hello Titel",
+					"eval": {
+						"maxLength": "100"
+					}
+				},
+				"description": {
+					"type": "text",
+					"label": "Titel",
+					"default": "Hello Description"
+				}
+			}
+		}
+	}
+}

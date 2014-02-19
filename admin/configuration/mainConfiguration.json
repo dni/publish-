@@ -1,9 +1,0 @@
-{
-	"name": "cms",
-	"author": "dnilabs e.U",
-	"version":"0.0.1",
-	"models": "article, magazine, setting",
-	"views": "ArticleDetail, "
-	"entrypoints": "button, overlay",
-	
-}

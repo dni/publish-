@@ -1,0 +1,12 @@
+{
+	"hello": "world",
+	"route": '/admin',
+	"models": {
+		"Info": {
+			"message": "defaults",
+			"message": "defaults",
+			"message": "defaults",
+		}
+	} 
+	
+}
