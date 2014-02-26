@@ -25,34 +25,38 @@ define (require)->
   
   App.addRegions
     navigationRegion:"#navigation"
-    contentRegion:"#main"
+    contentRegion:"#content"
     infoRegion:"#info"
     overlayRegion: "#overlay"
-    sidebarRegion:"#sidebar"
+    listTopRegion: "#list-top"
+    listRegion:"#list"
+    
+  App.navItems = new NavItems 
+  App.router = new AppRouter
 
-  App.addInitializer = ()->
+  # App.addInitializer = ()->
     
-    Backbone.history.start() 
-    App.navItems = new NavItems 
-    App.router = new AppRouter
-    
-    App.navigationRegion.show new NavigationView App.navItems
-    App.contentRegion.show new WelcomeView
+  Backbone.history.start() 
+  App.navigationRegion.show new NavigationView collection: App.navItems
+  App.contentRegion.show new WelcomeView
 
 
   Command.setHandler 'app:addModule', (module)->
     App.Modules[module.name] = module
-    if module.config.navigation then App.navItems.add module.config.navigation
+    if module.config.navigation then App.navItems.add new NavItem module.config.navigation
     
-  Command.setHandler 'updateContentRegion', (view)->
-    App.contentRegion.show view
+  Command.setHandler 'app:updateRegion', (region, view)->
+    App[region].show view
 
 
   App.start
     onStart:->    
       for moduleKey, moduleName of App.config.modules
         # NOT Working :(
-        # require "cs!./modules/#{moduleKey}/#{moduleName}"   
+        # require "cs!./modules/#{moduleKey}/#{moduleName}"
+        # this is working for saylermorph.com ....
+        # require([jsUrl]);
+      
         require "cs!./modules/article/ArticleModule"
         
 

@@ -1,26 +1,18 @@
 define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _, Backbone, Template) ->
 
-  class ArticleDetailView extends Backbone.View
-    # Not required since 'div' is the default if no el or tagName specified
-    initialize: ->
-      @template = Template
-      @model.bind "change", this.render, this
-
-    render: (eventName) ->
-      @$el.html @template
-        model:@model.toJSON()
-
-      @$el.find("output img").dblclick ()->
-        $(@).remove()
-        console.log "click"
-      @el
-
+  class ArticleDetailView extends Backbone.Marionette.ItemView
+    template: Template
     events:
       "click #edit": "toggleEdit"
       "click .save": "saveArticle"
       "click .delete": "deleteArticle"
       'click #publish': "publishArticle"
 
+    ui:
+      inputTitle: 'input[name=title]'
+      inputAuthor: 'input[name=author]'
+      inputArticle: 'textarea[name=article]'
+  
     toggleEdit: ->
       @$el.find('.edit').toggle();
       @$el.find('.preview').toggle();
@@ -31,20 +23,20 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       @model.save()
 
     saveArticle: ->
-      
+      console.log @model
       files = []
       $('#files').children().each -> files.push $(this).attr('src')
       
       @model.set
-        title: $('input[name=title]').val()
-        author: $('input[name=author]').val()
+        title: @ui.inputTitle.val()
+        author: @ui.inputAuthor.val()
         images: files
-        desc: $('textarea[name=article]').val()
+        desc: @ui.inputArticle.val()
       if @model.isNew()
-        app.articles.create @model,
+        App.Articles.create @model,
           wait: true
           success: (res) ->
-            app.navigate 'article/'+res.attributes._id, false
+            App.ArticleRouter.navigate 'article/'+res.attributes._id, false
       else
         @model.save()
         @render()
@@ -52,8 +44,5 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       false
 
     deleteArticle: ->
-      @model.destroy
-        success: ->
-      app.navigate "/articles", false
-      false
-      $("#content").html ""
+      @model.destroy 
+      App.ArticleRouter.navigate "/articles", false

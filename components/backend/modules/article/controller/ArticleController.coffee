@@ -4,27 +4,28 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'cs!../ArticleModule'
   'cs!../view/ArticleListView'
   'cs!../view/ArticleDetailView'
   'cs!../model/Article'
+  'cs!../view/ListView' 
 ],
-( Command, $, _, Backbone, Marionette, Module, ArticleListView, ArticleDetailView, Article ) ->
+( Command, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
 
     detailsArticle: (id) ->
-      article = Module.Articles.where _id: id
-      Command.trigger 'updateContentRegion', new ArticleDetailView model: article[0]
+      article = App.Articles.where _id: id
+      Command.execute 'app:updateRegion', "contentRegion", new ArticleDetailView model: article[0]
       # App.uploadHandler '#images', article
 
     addArticle: ->
-      # model = new Article()
+      Command.execute 'app:updateRegion', 'contentRegion', new ArticleDetailView model: new Article
+      
       # view = new ArticleDetailView model: model
       # App.contentRegion.show view
       # view.toggleEdit()
       # App.uploadHandler '#images', model
 
     articles: ->
-      console.log Module
-      # Command.trigger 'updateContentRegion', new ArticleListView model: Module.Articles
+      Command.execute 'app:updateRegion', 'listTopRegion', new ListView
+      Command.execute 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles

@@ -15,8 +15,6 @@ define [
   Command.setHandler "app:ready", ()->   
     App.Articles = new Articles
     App.Articles.fetch
+      success:->
     App.ArticleRouter = new Router
     Command.execute "app:addModule", module
-
-
-  
