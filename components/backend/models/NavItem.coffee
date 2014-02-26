@@ -3,5 +3,5 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     defaults: 
       "label": "Neuer Navigationspunkt"
       "route": ""
-      "class": ""
+      "classNames": ""
       "button": 0

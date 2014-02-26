@@ -1,9 +1,9 @@
 {
 	"navigation": {
 		"button": 0,
-		"route": "/articles",
+		"route": "articles",
 		"label": "Artikel",
-		"class": "articles"
+		"classNames": "articles"
 	},
 	"model": {
 		"article": {

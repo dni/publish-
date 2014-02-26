@@ -1,12 +1,10 @@
-define ['jquery', 'lodash', 'backbone', 'tpl!../templates/listItem.html', 'tpl!../templates/filter.html'], 
-($, _, Backbone, Template, FilterTemplate) ->
-
+define ['jquery', 'lodash', 'backbone', 'tpl!../templates/listItem.html', 'tpl!../templates/list.html', 'tpl!../templates/filter.html'], 
+($, _, Backbone, Template, ListTemplate, FilterTemplate) ->
 
   class ArticleListItemView extends Backbone.Marionette.ItemView 
     template: Template
-    # initialize: ->
-      # @model.bind "change", @render, @
-      # @model.bind "destroy", @close, @
+    onRender: ->
+      console.log "lol"
 # 
 #       
   # class FilterView extends Backbone.View  
@@ -25,5 +23,5 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/listItem.html', 'tpl!.
    
    
   class ArticleListView extends Backbone.Marionette.CollectionView
-    itemView: new ArticleListItemView
-       
+    itemView: ArticleListItemView
+    

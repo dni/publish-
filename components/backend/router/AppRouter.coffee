@@ -8,8 +8,8 @@ define [
 ( $, _, Backbone, Marionette, Controller ) ->
   class AppRouter extends Marionette.AppRouter
     controller: new Controller
-    appRoutes:
-      "": "welcome"
+    # appRoutes:
+      # "": "welcome"
       # "settings": 'settings'
       # "article/new": "addArticle"
       # "article/:id": "detailsArticle"

@@ -1,16 +1,16 @@
 <div class="preview">
-	<h1><%- model.title %></h1>
-	<h5>by <%- model.author %></h5>
-	<p><%- model.desc %></p>
-	<% if (model.images) { %>
-		<% for (var i = 0; i < model.images.length; i++) { %> <img width="150" src="<%= model.images[i] %>" /> <%  }; %>
+	<h1><%- title %></h1>
+	<h5>by <%- author %></h5>
+	<p><%- desc %></p>
+	<% if (images) { %>
+		<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
 	<% } %>
 </div>
 <div class="edit">
-	<label>Titel</label><input type="text" name="title" value="<%- model.title %>" /> <br/>
-	<label>Autor</label><input type="text" name="author" value="<%- model.author %>" /> <br/>
-	<label>External</label><input type="text" name="external" value="<%- model.external %>" /> <br/>
-	<label>Artikel</label><textarea name="article"><%- model.desc %></textarea> <br/>
+	<label>Titel</label><input type="text" name="title" value="<%- title %>" /> <br/>
+	<label>Autor</label><input type="text" name="author" value="<%- author %>" /> <br/>
+	<label>External</label><input type="text" name="external" value="<%- external %>" /> <br/>
+	<label>Artikel</label><textarea name="article"><%- desc %></textarea> <br/>
 	<label>Bilder</label>
 	<div id="images" class="btn btn-success fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
@@ -18,8 +18,8 @@
 		<input id="imageUpload" type="file" name="images[]" multiple />
 	</div>
 	<div id="files">
-		<% if (model.images) { %>
-			<% for (var i = 0; i < model.images.length; i++) { %> <img width="150" src="<%= model.images[i] %>" /> <%  }; %>
+		<% if (images) { %>
+			<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
 		<% } %>
 	</div>
 </div>
@@ -29,7 +29,7 @@
 	</div>
 	<div class="saved">
 		<button class="delete btn btn-danger">Delete</button>
-		<% if (model.privatecode === true) { %>
+		<% if (privatecode === true) { %>
 			<button id="publish" class="btn btn-success">Publish</button>
 		<% } else { %>
 			<button id="publish" class="btn">Unpublish</button>
