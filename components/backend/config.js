@@ -2,7 +2,7 @@ require.config({
 	deps: ["cs!/admin/App"],
 	baseUrl: '/admin/lib',
 	paths: {
-		jquery: "jquery/jquery",
+		jquery: "jquery/dist/jquery",
 		lodash: "lodash-amd/main",
 		underscore: "underscore-amd/underscore",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
@@ -28,7 +28,7 @@ require.config({
 	  	location: 'coffee-script',
 	    name: 'coffee-script',
 	    main: 'index'
-	  }     
+	  }
     ],
 	shim: {
 		'jquery.fileupload':['jquery'],
