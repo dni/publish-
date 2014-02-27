@@ -1,3 +1,4 @@
 {
-	"article"
+	"article": "ArticleModule",
+	"magazine": "MAgazineModule"
 }

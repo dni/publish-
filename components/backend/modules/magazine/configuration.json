@@ -1,0 +1,27 @@
+{
+	"navigation": {
+		"button": 0,
+		"route": "magazines",
+		"label": "Magazine",
+		"classNames": "magazines"
+	},
+	"model": {
+		"magazine": {
+			"fields" : {
+				"title": {
+					"type": "text",
+					"label": "Titel",
+					"default": "Hello Titel",
+					"eval": {
+						"maxLength": "100"
+					}
+				},
+				"description": {
+					"type": "text",
+					"label": "Titel",
+					"default": "Hello Description"
+				}
+			}
+		}
+	}
+}
