@@ -53,10 +53,8 @@ define (require)->
     onStart:->    
       for moduleKey, moduleName of App.config.modules
         # NOT Working :(
-        # require "cs!./modules/#{moduleKey}/#{moduleName}"
-        # this is working for saylermorph.com ....
-        # require([jsUrl]);
-      
+        # str "cs!./modules/#{moduleKey}/#{moduleName}"
+        # require str
         require "cs!./modules/article/ArticleModule"
         
 

@@ -1,7 +1,5 @@
-<li>    
-	<% if (button) { %> 
-		<a href="#<%= route %>"class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-<%= button %>"></span></a>
-	<% } else { %>
-		<a class="navButton <%= classNames %>" href="#<%= route %>"><%= label %></a>
-	<% } %>	
-</li>
+<% if (button) { %> 
+	<a href="#<%= route %>"class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-<%= button %>"></span></a>
+<% } else { %>
+	<a class="navButton <%= classNames %>" href="#<%= route %>"><%= label %></a>
+<% } %>	
