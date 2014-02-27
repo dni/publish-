@@ -1,19 +1,20 @@
 define [
-    'jquery'
-    'lodash'
-    'backbone'
-    'marionette'
-    'cs!./views/MagazineDetailView'
-    'cs!./views/MagazineListView'
-    'cs!./models/Magazine'
+  'cs!../../../Command'
+  'jquery'
+  'lodash'
+  'backbone'
+  'marionette'
+  'cs!../view/MagazineDetailView'
+  'cs!../view/MagazineListView'
+  'cs!../model/Magazine'
 ],
-( $, _, Backbone, Marionette, MagazineDetailView, MagazineListView, Magazine ) ->
+( Command, $, _, Backbone, Marionette, MagazineDetailView, MagazineListView, Magazine ) ->
 
   class MagazineController extends Backbone.Marionette.Controller
 
     generator: ->
       $.get "generator", (data) -> console.log data
-      
+
     detailsMagazine: (id) ->
       magazine = App.magazines.where _id: id
       view = new MagazineDetailView model: magazine[0]
