@@ -6,8 +6,5 @@ define [
   'tpl!../templates/list.html'
 ], 
 ($, _, Backbone, Marionette, Template) ->   
-  class ListView extends Backbone.Marionette.ItemView    
+  class SettingsListTopView extends Backbone.Marionette.ItemView    
     template: Template
-    ui:
-      add: "#add"
-      search: "#search"

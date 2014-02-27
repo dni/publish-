@@ -1,6 +1,6 @@
 {
 	"config": {
-	    "name": "SettingsModule"
+	    "name": "SettingsModule",
     	"namespace": "settings"
     },
 

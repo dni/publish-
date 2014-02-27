@@ -1,6 +1,6 @@
 {
 	"config": {
-	    "name": "ArticleModule"
+	    "name": "ArticleModule",
     	"namespace": "article"
     },
 	"navigation": {

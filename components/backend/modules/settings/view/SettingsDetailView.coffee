@@ -1,6 +1,6 @@
 define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _, Backbone, Template) ->
 
-  class ArticleDetailView extends Backbone.Marionette.ItemView
+  class SettingsDetailView extends Backbone.Marionette.ItemView
     
     template: Template
 
@@ -16,18 +16,7 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       files: '#files'
   
     events:
-      "click #edit": "toggleEdit"
       "click .save": "saveArticle"
-      "click .delete": "deleteArticle"
-      'click #publish': "publishArticle"
-    
-    toggleEdit: ->
-      @ui.edit.toggle()
-      @ui.preview.toggle()
-      
-    publishArticle: ->
-      @model.togglePublish()
-      @model.save()
 
     saveArticle: ->
       files = []
@@ -44,11 +33,3 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
             App.ArticleRouter.navigate 'article/'+res.attributes._id, false
       else
         @model.save()
-      @toggleEdit()
-
-    deleteArticle: ->
-      # TODO, bug: backbone doesnt send the delete request
-      App.Articles.remove @model.cid
-      @model.destroy
-        success:->
-          App.ArticleRouter.navigate "/articles", true
