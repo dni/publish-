@@ -15,8 +15,6 @@ module.exports.getArticles = function(req, res){
 
 module.exports.postArticles = function(req, res){
 	
-	
-	
 	var article = new db.Article();
 	article.title = req.body.title;
 	article.desc = req.body.desc;

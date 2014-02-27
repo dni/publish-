@@ -4,20 +4,22 @@ define [
   'backbone'
   'marionette'
   'cs!../Command'
-  'tpl!../templates/navigation.html'
   'tpl!../templates/navItem.html'
-  "cs!../models/NavItems"
-  "cs!../models/NavItem"
 ],
-($, _, Backbone, Marionette, Command, Template, ItemTemplate, NavItems, NavItem) ->
+($, _, Backbone, Marionette, Command, Template) ->
   
   class NavigationItemView extends Backbone.Marionette.ItemView
-    template: ItemTemplate
-    className: 'navitem'
-
+    template: Template
+    tagName: 'li'
 
   class NavigationView extends Backbone.Marionette.CollectionView
     el: "#navigation"
     itemView: NavigationItemView
-    template: Template   
-
+    
+    events:
+      "click li": "clicked"
+      
+    clicked: (e)->
+      @children.each (view)->
+        view.$el.removeClass "active"
+      $(e.target).parent().addClass "active"

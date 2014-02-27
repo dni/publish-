@@ -15,6 +15,6 @@ define [
   Command.setHandler "app:ready", ()->   
     App.Articles = new Articles
     App.Articles.fetch
-      success:->
+      success:(e)-> console.log e
     App.ArticleRouter = new Router
     Command.execute "app:addModule", module
