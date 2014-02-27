@@ -8,10 +8,10 @@ define [
 ( Marionette, Command, Settings, Router, Config ) -> 
 
   Command.setHandler "app:ready", ()->   
-    App.Articles = new Articles
-    App.Articles.fetch
+    App.Settings = new Settings
+    App.Settings.fetch
       success:->
-    App.ArticleRouter = new Router
+    App.SettingsRouter = new Router
     
     Command.execute "app:addModule", JSON.parse Config
 

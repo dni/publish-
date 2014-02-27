@@ -40,11 +40,10 @@ define (require)->
   App.navigationRegion.show new NavigationView collection: App.navItems
   App.contentRegion.show new WelcomeView
 
-
   Command.setHandler 'app:addModule', (config)->
-    App.Modules[module.config.name].config = config
-    if module.config.navigation then App.navItems.add new NavItem module.config.navigation
-    Command.trigger module.config.namespace+":ready"
+    App.Modules[config.name] = config
+    if config.navigation then App.navItems.add new NavItem config.navigation
+    Command.trigger config.namespace+":ready"
 
   Command.setHandler 'app:updateRegion', (region, view)->
     App[region].show view
@@ -57,7 +56,7 @@ define (require)->
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
         # require str
         require "cs!./modules/article/ArticleModule"
-        
+        r#equire "cs!./modules/settings/SettingsModule"
         # require "cs!./modules/magazine/MagazineModule"
 
 
