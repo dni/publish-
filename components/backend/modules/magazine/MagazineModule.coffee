@@ -1,16 +1,21 @@
 define [
     'marionette'
-    'cs!/modules/magazine/router/MagazineRouter'
-    'cs!/modules/magazine/controller/MagazineController'
-    'cs!/modules/magazine/models/Magazines'
+    'cs!../../Command'
+    'cs!./model/Magazines'
+    'cs!./router/MagazineRouter'
+    "text!./configuration.json"
 ],
-( Marionette, Router, Controller, Magazines ) ->
-  
-  MagazineModule = App.module "MagazineModule"
-  
-  MagazineModule.addInitializer ->
-    App.magazines = new Magazines()
-    App.magazines.fetch
-    new Router controller: new Controller()
+( Marionette, Command, Magazines, Router, Config ) ->
 
-  MagazineModule
+  module = {
+    name: "MagazineModule"
+    namespace: "article"
+    config: JSON.parse Config
+  }
+
+  Command.setHandler "app:ready", ()->
+    App.Magazines = new Magazines
+    App.Magazines.fetch
+      success:->
+    App.MagazineRouter = new Router
+    Command.execute "app:addModule", module
