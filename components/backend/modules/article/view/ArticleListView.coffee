@@ -3,8 +3,6 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/listItem.html', 'tpl!.
 
   class ArticleListItemView extends Backbone.Marionette.ItemView 
     template: Template
-    onRender: ->
-      console.log "lol"
 # 
 #       
   # class FilterView extends Backbone.View  

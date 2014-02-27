@@ -9,29 +9,33 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       'click #publish': "publishArticle"
 
     ui:
+      edit: ".edit"
+      preview: ".preview"
       inputTitle: 'input[name=title]'
       inputAuthor: 'input[name=author]'
       inputArticle: 'textarea[name=article]'
+      files: '#files'
   
     toggleEdit: ->
-      @$el.find('.edit').toggle();
-      @$el.find('.preview').toggle();
-      @$el.find('.saved').toggle();
+      @ui.edit.toggle()
+      @ui.preview.toggle()
+      
 
     publishArticle: ->
       @model.togglePublish()
       @model.save()
 
     saveArticle: ->
-      console.log @model
       files = []
-      $('#files').children().each -> files.push $(this).attr('src')
       
+      @ui.files.children().each -> files.push $(this).attr('src')
+
       @model.set
         title: @ui.inputTitle.val()
         author: @ui.inputAuthor.val()
         images: files
         desc: @ui.inputArticle.val()
+      
       if @model.isNew()
         App.Articles.create @model,
           wait: true
@@ -39,10 +43,10 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
             App.ArticleRouter.navigate 'article/'+res.attributes._id, false
       else
         @model.save()
-        @render()
-      @trigger('toggleEdit')
-      false
+        
+      @toggleEdit()
 
     deleteArticle: ->
-      @model.destroy 
-      App.ArticleRouter.navigate "/articles", false
+      @model.destroy
+        success:->
+      App.ArticleRouter.navigate "/articles"
