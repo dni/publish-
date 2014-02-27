@@ -57,8 +57,8 @@ define (require)->
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
         # require str
         require "cs!./modules/article/ArticleModule"
-        
-        # require "cs!./modules/magazine/MagazineModule"
+
+        require "cs!./modules/magazine/MagazineModule"
 
 
   App.uploadHandler = (selector, model) ->
