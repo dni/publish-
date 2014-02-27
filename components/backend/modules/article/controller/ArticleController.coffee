@@ -19,11 +19,12 @@ define [
       # App.uploadHandler '#images', article
 
     addArticle: ->
-      Command.execute 'app:updateRegion', 'contentRegion', new ArticleDetailView model: new Article
+      view = new ArticleDetailView model: new Article
+      Command.execute 'app:updateRegion', 'contentRegion', view
+      view.toggleEdit()
       
       # view = new ArticleDetailView model: model
       # App.contentRegion.show view
-      # view.toggleEdit()
       # App.uploadHandler '#images', model
 
     articles: ->
