@@ -1,14 +1,16 @@
 {
 	"config": {
-	    "name": "ArticleModule"
-    	"namespace": "article"
+	    "name": "SettingsModule"
+    	"namespace": "settings"
     },
+
 	"navigation": {
 		"button": 0,
-		"route": "articles",
-		"label": "Artikel",
-		"classNames": "articles"
+		"route": "settings",
+		"label": "Settings",
+		"classNames": ""
 	},
+	
 	"model": {
 		"article": {
 			"fields" : {
