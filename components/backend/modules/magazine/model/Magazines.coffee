@@ -1,6 +1,6 @@
-define ["lodash","backbone","localstorage", "cs!models/Magazine"], 
-(_, Backbone, LocalStorage, Magazine) ->
+define ["lodash","backbone", "cs!./Magazine"],
+(_, Backbone, Model) ->
+
   class Magazines extends Backbone.Collection
-    
-    model: Magazine
+    model: Model
     url: "/magazines/"

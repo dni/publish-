@@ -1,15 +1,14 @@
 define [
-    'jquery'
-    'lodash'
-    'backbone'
     'marionette'
+    "cs!../controller/MagazineController"
 ],
-( $, _, Backbone, Marionette ) ->
+( Marionette, Controller ) ->
 
-  class MagazineRouter extends Backbone.Marionette.Router
-    
+  class MagazineRouter extends Marionette.AppRouter
+
+    controller: new Controller
+
     appRoutes:
       "magazine/new": "addMagazine"
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
-      "generator": "generator"
