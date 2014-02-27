@@ -12,7 +12,7 @@ define [
 
     generator: ->
       $.get "generator", (data) -> console.log data
-      
+
     settings: ->
       App.overlayRegion.show new LoginView
 
