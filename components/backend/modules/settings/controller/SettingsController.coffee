@@ -1,5 +1,5 @@
 define [
-  'cs!../../../Command'
+  'cs!../../../Vent'
   'jquery'
   'lodash'
   'backbone'
@@ -8,16 +8,15 @@ define [
   'cs!../view/SettingsDetailView'
   'cs!../view/SettingsListTopView' 
 ],
-( Command, $, _, Backbone, Marionette, ListView, DetailView, ListTopView ) ->
+( Vent, $, _, Backbone, Marionette, ListView, DetailView, ListTopView ) ->
 
   class SettingsController extends Backbone.Marionette.Controller
 
     details: (id) ->
       model = App.Settings.where _id: id
-      Command.execute 'app:updateRegion', "contentRegion", new DetailView model: model[0]
+      Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
       # App.uploadHandler '#images', article
 
-
     list: ->
-      Command.execute 'app:updateRegion', 'listTopRegion', new ListTopView
-      Command.execute 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListTopView
+      Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings

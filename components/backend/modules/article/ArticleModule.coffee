@@ -1,15 +1,23 @@
 define [
     'marionette'
-    'cs!../../Command'
+    'cs!../../Vent'
     'cs!./model/Articles'
-    'cs!./router/ArticleRouter'
+    'cs!./controller/ArticleController'
     "text!./configuration.json"
 ],
-( Marionette, Command, Articles, Router, Config ) -> 
+( Marionette, Vent, Articles, Controller, Config ) -> 
 
-  Command.setHandler "app:ready", ()->   
+  
+  Vent.on "app:ready", ()->   
+  
+    Vent.trigger "app:addModule", JSON.parse Config
+  
     App.Articles = new Articles
     App.Articles.fetch
       success:->
-    App.ArticleRouter = new Router
-    Command.execute "app:addModule", JSON.parse Config
+        
+    App.Router.processAppRoutes new Controller,
+      "articles": "list"
+      "article/:id": "details"
+      "newArticle": "add"
+      

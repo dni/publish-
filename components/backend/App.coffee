@@ -11,7 +11,7 @@ define (require)->
   AppRouter = require 'cs!./router/AppRouter'
   Less = require 'less!./style/main.less'
   Config = require 'text!./configuration/mainConfiguration.json'
-  Command = require "cs!./Command"
+  Vent = require "cs!./Vent"
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
@@ -32,30 +32,29 @@ define (require)->
     listRegion:"#list"
 
   App.navItems = new NavItems
-  App.router = new AppRouter
+  App.Router = new AppRouter
 
   # App.addInitializer = ()->
 
-  Backbone.history.start()
   App.navigationRegion.show new NavigationView collection: App.navItems
   App.contentRegion.show new WelcomeView
 
-  Command.setHandler 'app:addModule', (config)->
-    App.Modules[config.name] = config
+  Vent.on 'app:addModule', (config)->
+    App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
-    Command.trigger config.namespace+":ready"
+    Vent.trigger config.config.namespace+":ready"
 
-  Command.setHandler 'app:updateRegion', (region, view)->
+  Vent.on 'app:updateRegion', (region, view)->
     App[region].show view
-
 
   App.start
     onStart:->
-      for moduleKey, moduleName of App.config.modules
+      articleModule = require "cs!./modules/article/ArticleModule"
+      settingsModule = require "cs!./modules/settings/SettingsModule"
+      # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
         # require str
-        require "cs!./modules/article/ArticleModule"
         #require "cs!./modules/magazine/MagazineModule"
 
 
@@ -73,5 +72,5 @@ define (require)->
         $(selector + " output").append "progressALL = "+progress + '%'
 
   window.App = App
-
-  Command.execute 'app:ready'
+  Backbone.history.start()
+  Vent.trigger 'app:ready'

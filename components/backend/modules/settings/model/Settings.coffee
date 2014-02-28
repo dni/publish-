@@ -1,6 +1,6 @@
-define ["lodash","backbone", "cs!./Article"], 
+define ["lodash","backbone", "cs!./Setting"], 
 (_, Backbone, Model) ->
   
-  class Articles extends Backbone.Collection   
+  class Settings extends Backbone.Collection   
     model: Model
-    url: "/articles/"
+    # url:"/settings/"

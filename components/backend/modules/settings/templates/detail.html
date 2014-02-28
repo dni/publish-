@@ -1,0 +1,39 @@
+<div class="preview">
+	<h1><%= title %></h1>
+	<h5>by <%= author %></h5>
+	<p><%= desc %></p>
+	<% if (images) { %>
+		<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
+	<% } %>
+</div>
+<% console.log(); %>
+<div class="edit">
+	<label>Titel</label><input type="text" name="title" value="<%= title %>" /> <br/>
+	<label>Autor</label><input type="text" name="author" value="<%= author %>" /> <br/>
+	<label>Artikel</label><textarea name="article"><%= desc %></textarea> <br/>
+	<label>Bilder</label>
+	<div id="images" class="btn btn-success fileinput-button">
+        <i class="glyphicon glyphicon-plus"></i>
+        <span>Add files...</span>
+		<input id="imageUpload" type="file" name="images[]" multiple />
+	</div>
+	<div id="files">
+		<% if (images) { %>
+			<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
+		<% } %>
+	</div>
+</div>
+<div class="buttons">
+	<div class="edit">
+		<button class="save btn btn-success">Save</button>
+	</div>
+	<div class="preview">
+		<button class="delete btn btn-danger">Delete</button>
+		<% if (privatecode === true) { %>
+			<button id="publish" class="btn btn-success">Publish</button>
+		<% } else { %>
+			<button id="publish" class="btn">Unpublish</button>
+		<% } %>
+		<button id="edit" class="btn btn-primary">Edit</button>
+	</div>
+</div>
