@@ -9,6 +9,15 @@
 		"label": "Artikel",
 		"classNames": "articles"
 	},
+	
+	"settings": {
+		"title" : {
+			"type": "text",
+			"label": "Titel",
+			"default": "Hello Titel"
+		}
+	},
+	
 	"model": {
 		"article": {
 			"fields" : {

@@ -17,6 +17,7 @@ app.configure(function() {
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
 	app.use('/admin/lib', express.static(__dirname + '/components/backend/bower_components'));
+	app.use('/lib', express.static(__dirname + '/components/frontend/bower_components'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser({
           keepExtensions: true,

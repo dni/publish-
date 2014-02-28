@@ -1,19 +1,19 @@
 define [
     'marionette'
     'cs!../../Vent'
-    'cs!./model/Settings'
     'cs!./controller/SettingsController'
     "text!./configuration.json"
 ],
-( Marionette, Vent, Settings, Controller, Config ) -> 
+( Marionette, Vent, Controller, Config ) -> 
 
   Vent.on "app:ready", ()-> 
   
-    App.Settings = new Settings
+    Vent.trigger "app:addModule", JSON.parse Config
     
     App.Router.processAppRoutes new Controller,
       "settings": "list"
       "settings/:id": "details"
       
-    Vent.trigger "app:addModule", JSON.parse Config
+    Vent.trigger "settings:ready"
+      
       

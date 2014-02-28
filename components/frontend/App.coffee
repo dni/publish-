@@ -3,15 +3,13 @@ define [
     'lodash',
     'backbone',
     'marionette',
-    'cs!router/AppRouter'
-    'cs!views/WelcomeView',
-    'cs!views/ArticleListView',
-    'cs!views/NavigationView',
+    'cs!/router/FrontendRouter'
+    'cs!views/ListView',
+    'cs!views/DetailView',
     'cs!models/Articles',
-    'cs!models/Magazines',
-    'fileupload',
+    "less!style/frontend"
 ],
-( $, _, Backbone, Marionette, WelcomeView, ArticleListView, NavigationView, Articles, Magazines, FileUpload ) ->
+( $, _, Backbone, Marionette, Router, ListView, DetailView, Articles, Magazines ) ->
 
   App = new Backbone.Marionette.Application();
 
@@ -30,18 +28,10 @@ define [
     Backbone.history.start()
     
     App.articles = new Articles()
-    App.magazines = new Magazines()
     
     App.articles.fetch
       success: ->
-        # onstart show article listview
-        App.navigationRegion.show new ArticleListView model: App.articles
-      error: ->
-        console.log "error fetching articles"
 
-    App.magazines.fetch
-      success: ->
-      error: ->
-         console.log "error fetching magazines"
-
-    new AppRouter()
+    App.Router = new Router()
+    
+  App.start()
