@@ -5,6 +5,8 @@ define (require)->
   Backbone = require 'backbone'
   Marionette = require 'marionette'
   WelcomeView = require 'cs!./views/WelcomeView'
+  Setting = require 'cs!./modules/settings/model/Setting'
+  Settings = require 'cs!./modules/settings/model/Settings'
   NavItems = require 'cs!./models/NavItems'
   NavItem = require 'cs!./models/NavItem'
   NavigationView = require 'cs!./views/NavigationView'
@@ -32,6 +34,8 @@ define (require)->
     listRegion:"#list"
 
   App.navItems = new NavItems
+  App.Settings = new Settings
+  
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
@@ -42,6 +46,12 @@ define (require)->
   Vent.on 'app:addModule', (config)->
     App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
+    
+    if config.settings 
+      setting = new Setting config.settings
+      setting.set "moduleName", config.config.name
+      App.Settings.add setting
+      
     Vent.trigger config.config.namespace+":ready"
 
   Vent.on 'app:updateRegion', (region, view)->
