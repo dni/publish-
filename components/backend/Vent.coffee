@@ -3,4 +3,4 @@ define [
   'wreqr'
 ],
 (Wreqr) ->
-  new Wreqr.Commands
+  new Wreqr.EventAggregator

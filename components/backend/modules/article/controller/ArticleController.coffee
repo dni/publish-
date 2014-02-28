@@ -1,5 +1,5 @@
 define [
-  'cs!../../../Command'
+  'cs!../../../Vent'
   'jquery'
   'lodash'
   'backbone'
@@ -9,24 +9,19 @@ define [
   'cs!../model/Article'
   'cs!../view/ListView' 
 ],
-( Command, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
+( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
 
-    detailsArticle: (id) ->
+    details: (id) ->
       article = App.Articles.where _id: id
-      Command.execute 'app:updateRegion', "contentRegion", new ArticleDetailView model: article[0]
-      # App.uploadHandler '#images', article
+      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleDetailView model: article[0]
 
-    addArticle: ->
+    add: ->
       view = new ArticleDetailView model: new Article
-      Command.execute 'app:updateRegion', 'contentRegion', view
+      Vent.trigger 'app:updateRegion', 'contentRegion', view
       view.toggleEdit()
-      
-      # view = new ArticleDetailView model: model
-      # App.contentRegion.show view
-      # App.uploadHandler '#images', model
 
-    articles: ->
-      Command.execute 'app:updateRegion', 'listTopRegion', new ListView
-      Command.execute 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles
+    list: ->
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
+      Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles

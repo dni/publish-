@@ -1,10 +1,11 @@
-define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _, Backbone, Template) ->
+define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html', 'cs!../model/Article'], ( $, _, Backbone, Template, Article) ->
 
   class ArticleDetailView extends Backbone.Marionette.ItemView
     
     template: Template
 
     initialize: ->
+      # if !@model then @model = new Article
       @model.bind 'change', @render, @    
 
     ui:
@@ -41,14 +42,11 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
         App.Articles.create @model,
           wait: true
           success: (res) ->
-            App.ArticleRouter.navigate 'article/'+res.attributes._id, false
+            App.Router.navigate 'article/'+res.attributes._id, false
       else
         @model.save()
       @toggleEdit()
 
     deleteArticle: ->
-      # TODO, bug: backbone doesnt send the delete request
-      App.Articles.remove @model.cid
       @model.destroy
         success:->
-          App.ArticleRouter.navigate "/articles", true

@@ -3,10 +3,9 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'cs!../Command'
   'tpl!../templates/navItem.html'
 ],
-($, _, Backbone, Marionette, Command, Template) ->
+($, _, Backbone, Marionette, Template) ->
   
   class NavigationItemView extends Backbone.Marionette.ItemView
     template: Template
