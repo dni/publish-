@@ -1,5 +1,5 @@
 define [
-  'cs!../../../Vent'
+  'cs!../../../utilities/Vent'
   'jquery'
   'lodash'
   'backbone'

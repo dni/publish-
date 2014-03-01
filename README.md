@@ -6,17 +6,19 @@ cms, for publishing crossplattform webapps
 * 2.
 * 3.
 
-PROTOTYPE
 
 ## Requirements
 
-nodejs, bower, grunt
+nodejs, bower
 
 ## Installation
 
-git clone https://github.com/dni/publish-.git
-npm install
-bower install
+* git clone https://github.com/dni/publish-.git
+* npm install
+* cd components/backend
+* bower install
+* cd components/frontend
+* bower install
 
 
 ## Starting the App

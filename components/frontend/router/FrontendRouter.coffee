@@ -2,10 +2,10 @@ define [
     'jquery',
     'lodash',
     'backbone',
-    'cs!views/ListView',
-    'cs!views/DetailView',
-    'cs!models/Article',
-    'cs!models/Articles'
+    'cs!view/ListView',
+    'cs!view/DetailView',
+    'cs!model/Article',
+    'cs!model/Articles'
 ],
 ( $, _, Backbone, ListView, DetailView, Article, Articles ) ->
 
