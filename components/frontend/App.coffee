@@ -4,9 +4,9 @@ define [
     'backbone',
     'marionette',
     'cs!/router/FrontendRouter'
-    'cs!views/ListView',
-    'cs!views/DetailView',
-    'cs!models/Articles',
+    'cs!view/ListView',
+    'cs!view/DetailView',
+    'cs!model/Articles',
     "less!style/frontend"
 ],
 ( $, _, Backbone, Marionette, Router, ListView, DetailView, Articles, Magazines ) ->

@@ -4,16 +4,16 @@ define (require)->
   _ = require 'lodash'
   Backbone = require 'backbone'
   Marionette = require 'marionette'
-  WelcomeView = require 'cs!./views/WelcomeView'
+  WelcomeView = require 'cs!./view/WelcomeView'
   Setting = require 'cs!./modules/settings/model/Setting'
   Settings = require 'cs!./modules/settings/model/Settings'
-  NavItems = require 'cs!./models/NavItems'
-  NavItem = require 'cs!./models/NavItem'
-  NavigationView = require 'cs!./views/NavigationView'
+  NavItems = require 'cs!./model/NavItems'
+  NavItem = require 'cs!./model/NavItem'
+  NavigationView = require 'cs!./view/NavigationView'
   AppRouter = require 'cs!./router/AppRouter'
   Less = require 'less!./style/main.less'
   Config = require 'text!./configuration/mainConfiguration.json'
-  Vent = require "cs!./Vent"
+  Vent = require "cs!./utilities/Vent"
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera

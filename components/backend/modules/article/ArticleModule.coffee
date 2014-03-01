@@ -1,6 +1,6 @@
 define [
     'marionette'
-    'cs!../../Vent'
+    'cs!../../utilities/Vent'
     'cs!./model/Articles'
     'cs!./controller/ArticleController'
     "text!./configuration.json"

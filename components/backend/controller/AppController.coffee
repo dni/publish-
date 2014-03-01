@@ -3,8 +3,8 @@ define [
     'lodash'
     'backbone'
     'marionette'
-    'cs!../views/WelcomeView'
-    'cs!../views/LoginView'
+    'cs!../view/WelcomeView'
+    'cs!../view/LoginView'
 ],
 ($, _, Backbone, Marionette, WelcomeView, LoginView ) ->
 
