@@ -6,7 +6,7 @@
     "navigation": {
         "button": 0,
         "route": "magazines",
-        "label": "Artikel",
+        "label": "Magazine",
         "classNames": "magazines"
     },
 

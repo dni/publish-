@@ -13,7 +13,7 @@ define [
   class MagazineController extends Backbone.Marionette.Controller
 
     detailsMagazine: (id) ->
-      magazine = App.magazines.where _id: id
+      magazine = App.Magazines.where _id: id
       Vent.trigger 'app:updateRegion', "contentRegion", new MagazineDetailView model: magazine[0]
       #view = new MagazineDetailView model: magazine[0]
       #App.contentRegion.show view
@@ -26,8 +26,8 @@ define [
 
     magazines: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
-      view = new MagazineListView collection: App.Magazines
-      Vent.trigger 'app:updateRegion', 'listRegion', view
+      console.log new MagazineListView collection: App.Magazines
+      Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines
       #App.sidebarRegion.show view
 
 # define [

@@ -6,7 +6,7 @@ define [
   'tpl!../templates/list.html'
   #'tpl!../templates/filter.html'
 ],
-($, _, Backbone, ItemTemplate, ListTemplate, FilterTemplate) ->
+($, _, Backbone, ItemTemplate, ListTemplate) ->
 
   class MagazineListItemView extends Backbone.Marionette.ItemView
     template: ItemTemplate
