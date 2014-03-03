@@ -1,30 +1,49 @@
 define [
-  'cs!../../../Command'
+  'cs!../../../utilities/Vent'
   'jquery'
   'lodash'
   'backbone'
   'marionette'
-  'cs!../view/MagazineDetailView'
   'cs!../view/MagazineListView'
+  'cs!../view/MagazineDetailView'
   'cs!../model/Magazine'
-],
-( Command, $, _, Backbone, Marionette, MagazineDetailView, MagazineListView, Magazine ) ->
+  'cs!../view/ListView'
+], ( Vent, $, _, Backbone, Marionette, MagazineListView, MagazineDetailView, Magazine, ListView) ->
 
   class MagazineController extends Backbone.Marionette.Controller
 
-    generator: ->
-      $.get "generator", (data) -> console.log data
-
     detailsMagazine: (id) ->
       magazine = App.magazines.where _id: id
-      view = new MagazineDetailView model: magazine[0]
-      App.contentRegion.show view
+      Vent.trigger 'app:updateRegion', "contentRegion", new MagazineDetailView model: magazine[0]
+      #view = new MagazineDetailView model: magazine[0]
+      #App.contentRegion.show view
 
     addMagazine: ->
       view = new MagazineDetailView model: new Magazine()
-      App.contentRegion.show view
-      view.toggleEdit()
+      Vent.trigger 'app:updateRegion', 'contentRegion', view
+      #App.contentRegion.show view
+      #view.toggleEdit()
 
     magazines: ->
-      view = new ArticleListView model: App.magazines
-      App.sidebarRegion.show view
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
+      view = new MagazineListView collection: App.Magazines
+      Vent.trigger 'app:updateRegion', 'listRegion', view
+      #App.sidebarRegion.show view
+
+# define [
+  # 'cs!../../../Command'
+  # 'jquery'
+  # 'lodash'
+  # 'backbone'
+  # 'marionette'
+  # 'cs!../view/MagazineDetailView'
+  # 'cs!../view/MagazineListView'
+  # 'cs!../model/Magazine'
+# ],
+# ( Command, $, _, Backbone, Marionette, MagazineDetailView, MagazineListView, Magazine ) ->
+#
+  # class MagazineController extends Backbone.Marionette.Controller
+#
+    # generator: ->
+      # $.get "generator", (data) -> console.log data
+#
