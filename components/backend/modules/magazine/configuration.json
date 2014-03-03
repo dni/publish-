@@ -1,27 +1,40 @@
 {
-	"navigation": {
-		"button": 0,
-		"route": "magazines",
-		"label": "Magazine",
-		"classNames": "magazines"
-	},
-	"model": {
-		"magazine": {
-			"fields" : {
-				"title": {
-					"type": "text",
-					"label": "Titel",
-					"default": "Hello Titel",
-					"eval": {
-						"maxLength": "100"
-					}
-				},
-				"description": {
-					"type": "text",
-					"label": "Titel",
-					"default": "Hello Description"
-				}
-			}
-		}
-	}
+    "config": {
+        "name": "MagazineModule",
+        "namespace": "magazine"
+    },
+    "navigation": {
+        "button": 0,
+        "route": "magazines",
+        "label": "Artikel",
+        "classNames": "magazines"
+    },
+
+    "settings": {
+        "defaults" : {
+          "title": "Neuer Artikel",
+          "desc": "Hello World!",
+          "author": "dnilabs"
+        }
+    },
+
+    "model": {
+        "magazine": {
+            "fields" : {
+                "title": {
+                    "type": "text",
+                    "label": "Titel",
+                    "default": "Hello Titel",
+                    "eval": {
+                        "maxLength": "100"
+                    }
+                },
+                "description": {
+                    "type": "text",
+                    "label": "Titel",
+                    "default": "Hello Description"
+                }
+            }
+        }
+    }
 }
