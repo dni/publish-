@@ -50,7 +50,9 @@ module.exports.setup = function(app) {
 			a.images = req.body.images;
 			a.privatecode = req.body.privatecode;
 			a.date = new Date();
-			a.save();
+			a.save(function () {
+				res.send(a);
+			});
 	  	});
 	});
 	

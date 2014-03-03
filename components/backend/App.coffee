@@ -34,7 +34,22 @@ define (require)->
     listRegion:"#list"
 
   App.navItems = new NavItems
+  
+  settings = []
   App.Settings = new Settings
+  
+  App.Settings.fetch
+    success:->  
+      for key of settings
+        setting = App.Settings.where name: settings[key].name
+        if setting.length is 0
+          console.log "new"
+          setting = new Setting
+          setting.set "settings", settings[key].settings
+          setting.set "name", settings[key].name
+          App.Settings.create setting
+      
+      
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
@@ -46,15 +61,17 @@ define (require)->
     App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
     
-    if config.settings 
-      setting = new Setting config.settings
-      setting.set "moduleName", config.config.name
-      App.Settings.add setting
-      
+    if config.settings then settings.push 
+      settings:config.settings
+      name:config.config.name
+        
     Vent.trigger config.config.namespace+":ready"
 
   Vent.on 'app:updateRegion', (region, view)->
     App[region].show view
+    
+  Vent.on 'app:closeRegion', (region)->
+    App[region].close()
 
   App.start
     onStart:->

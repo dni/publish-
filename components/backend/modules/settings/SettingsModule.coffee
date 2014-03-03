@@ -13,6 +13,7 @@ define [
     App.Router.processAppRoutes new Controller,
       "settings": "list"
       "setting/:id": "details"
+      "settings/clearCache": "clearCache"
       
     Vent.trigger "settings:ready"
       

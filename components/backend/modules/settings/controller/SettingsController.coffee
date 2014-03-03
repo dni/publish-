@@ -13,7 +13,7 @@ define [
   class SettingsController extends Backbone.Marionette.Controller
 
     details: (id) ->
-      model = App.Settings.where moduleName: id
+      model = App.Settings.where name: id
       console.log model
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
       # App.uploadHandler '#images', article
@@ -21,3 +21,8 @@ define [
     list: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListTopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
+      
+
+    clearCache: ->
+      $.get "/clearCache", ->
+        console.log "cache cleared"
