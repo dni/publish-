@@ -19,10 +19,11 @@ module.exports.setup = function(app) {
 	app.post('/magazines', function(req, res){
 		var a = new db.Magazine();
 		a.title = req.body.title;
-		a.desc = req.body.desc;
-		a.author = req.body.author;
-		a.images = req.body.images;
-		a.privatecode = req.body.privatecode;
+		a.editorial = req.body.editorial;
+		a.impressum = req.body.impressum;
+		a.cover = req.body.cover;
+		a.back = req.body.back;
+		a.pages = req.body.pages;
 		a.date = new Date();
 
 		// upload progress
@@ -45,10 +46,11 @@ module.exports.setup = function(app) {
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
 			a.title = req.body.title;
-			a.desc = req.body.desc;
-			a.author = req.body.author;
-			a.images = req.body.images;
-			a.privatecode = req.body.privatecode;
+			a.editorial = req.body.editorial;
+			a.impressum = req.body.impressum;
+			a.cover = req.body.cover;
+			a.back = req.body.back;
+			a.pages = req.body.pages;
 			a.date = new Date();
 			a.save();
 	  	});
