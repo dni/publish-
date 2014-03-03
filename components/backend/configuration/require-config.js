@@ -15,6 +15,12 @@ require.config({
 		cs: 'require-cs/cs',
 		fileupload: 'lib/blueimp-file-upload/js/jquery.fileupload'
 	},
+	map: {
+	    '*': {
+	        'backbone.wreqr': 'wreqr',
+	        'backbone.babysitter': 'babysitter'
+	    }
+	},
 	packages: [
       {
         name: 'less',
