@@ -13,9 +13,9 @@ define [
     App.Magazines.fetch
       success:->
     App.Router.processAppRoutes new Controller,
-      "magazines": "list"
-      "magazine/:id": "details"
-      "newMagazine": "add"
+      "magazine/new": "addMagazine"
+      "magazine/:id": "detailsMagazine"
+      "magazines": "magazines"
     Vent.trigger "magazine:ready"
 #
   # module = {
