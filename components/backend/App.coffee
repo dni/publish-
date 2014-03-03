@@ -38,19 +38,19 @@ define (require)->
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
-  
+
   App.navigationRegion.show new NavigationView collection: App.navItems
   App.contentRegion.show new WelcomeView
 
   Vent.on 'app:addModule', (config)->
     App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
-    
-    if config.settings 
+
+    if config.settings
       setting = new Setting config.settings
       setting.set "moduleName", config.config.name
       App.Settings.add setting
-      
+
     Vent.trigger config.config.namespace+":ready"
 
   Vent.on 'app:updateRegion', (region, view)->
@@ -59,6 +59,7 @@ define (require)->
   App.start
     onStart:->
       articleModule = require "cs!./modules/article/ArticleModule"
+      magazineModule = require "cs!./modules/magazine/MagazineModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
