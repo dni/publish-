@@ -26,7 +26,7 @@ define [
     render: (eventName) ->
       @$el.html @template
         model:@model.toJSON()
-        magazines: app.magazines.toJSON()
+        magazines: App.Magazines.toJSON()
 
       @$el.find('#pageList').html @pageList.addAll()
       @el
@@ -87,10 +87,10 @@ define [
         pages: @pages
       if @model.isNew()
         self = @;
-        app.magazines.create @model,
+        App.Magazines.create @model,
           wait: true
           success: (res) ->
-            app.navigate 'magazine/'+res.attributes._id, false
+            App.navigate 'magazine/'+res.attributes._id, false
       else
         @model.save()
         @render()
@@ -100,6 +100,6 @@ define [
     deleteMagazine: ->
       @model.destroy
         success: ->
-      app.navigate "/magazines", false
+      App.navigate "/magazines", false
       $("#content").html ""
       false
