@@ -37,7 +37,7 @@ module.exports.setup = function(app) {
 	    // });
 		
 		a.save(function () {
-			res.send(db.Article);
+			res.send(a);
 		});
 		
 	});
@@ -56,7 +56,13 @@ module.exports.setup = function(app) {
 	
 	app.delete('/articles/:id', function(req, res){
 	  	db.Article.findById( req.params.id, function(e, a) {
-			a.remove();
+			return a.remove(function (err) {
+		      if (!err) {
+		        return res.send('');
+		      } else {
+		        console.log(err);
+		      }
+		    });
 	  	});
 	});
 	
