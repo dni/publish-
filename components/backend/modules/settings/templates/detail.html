@@ -1,5 +1,11 @@
-<h1><%= moduleName %></h1>
+<h1><%= name %></h1>
 
+<% for (key in settings) { %>
+	<div class="form-control">
+		<label><%= settings[key].label %></label>
+		<input type="<%= settings[key].type %>" name="<%= key %>" value="<%= settings[key].value %>" />
+	</div>
+<% } %>
 
 <div class="buttons">
 	<button class="save btn btn-success">Save</button>

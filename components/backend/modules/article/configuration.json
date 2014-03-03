@@ -3,6 +3,7 @@
 	    "name": "ArticleModule",
     	"namespace": "article"
     },
+    
 	"navigation": {
 		"button": 0,
 		"route": "articles",
@@ -11,10 +12,15 @@
 	},
 	
 	"settings": {
-		"defaults" : {
-	      "title": "Neuer Artikel",
-	      "desc": "Hello World!",
-	      "author": "dnilabs"
+		"setting1" : {
+	      "label": "Setting1",
+	      "value": "setting1DefaultValue",
+	      "type": "text"
+		},
+		"setting2" : {
+	      "label": "Setting2",
+	      "value": "1",
+	      "type": "checkbox"
 		}
 	},
 	

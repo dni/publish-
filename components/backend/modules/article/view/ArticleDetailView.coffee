@@ -1,4 +1,4 @@
-define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html', 'cs!../model/Article'], ( $, _, Backbone, Template, Article) ->
+define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html', 'cs!../model/Article'], (Vent, $, _, Backbone, Template, Article) ->
 
   class ArticleDetailView extends Backbone.Marionette.ItemView
     
@@ -50,3 +50,6 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html', 'cs!../m
     deleteArticle: ->
       @model.destroy
         success:->
+          
+      console.log "destroy"
+      Vent.trigger 'app:closeRegion', 'contentRegion'
