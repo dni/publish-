@@ -7,9 +7,8 @@ define [
   'cs!../view/ArticleListView'
   'cs!../view/ArticleDetailView'
   'cs!../model/Article'
-  'cs!../view/ListView' 
-],
-( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
+  'cs!../view/ListView'
+], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
 

@@ -19,6 +19,9 @@ define (require)->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
     return ((/iPhone|iPod|iPad|Android|BlackBerry|Opera Mini|IEMobile/).test(userAgent))
 
+  # Global c.l for console.log
+  window.c = console; c.l = c.log
+
   App = new Backbone.Marionette.Application
 
   App.config = JSON.parse Config
@@ -53,18 +56,17 @@ define (require)->
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
-  
+
   App.navigationRegion.show new NavigationView collection: App.navItems
   App.contentRegion.show new WelcomeView
 
   Vent.on 'app:addModule', (config)->
     App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
-    
     if config.settings then settings.push 
       settings:config.settings
       name:config.config.name
-        
+
     Vent.trigger config.config.namespace+":ready"
 
   Vent.on 'app:updateRegion', (region, view)->
@@ -76,6 +78,7 @@ define (require)->
   App.start
     onStart:->
       articleModule = require "cs!./modules/article/ArticleModule"
+      magazineModule = require "cs!./modules/magazine/MagazineModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(

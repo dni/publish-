@@ -1,21 +1,32 @@
 define [
     'marionette'
-    'cs!../../Command'
+    'cs!../../utilities/Vent'
     'cs!./model/Magazines'
-    'cs!./router/MagazineRouter'
+    'cs!./controller/MagazineController'
     "text!./configuration.json"
 ],
-( Marionette, Command, Magazines, Router, Config ) ->
+( Marionette, Vent, Magazines, Controller, Config ) ->
 
-  module = {
-    name: "MagazineModule"
-    namespace: "article"
-    config: JSON.parse Config
-  }
-
-  Command.setHandler "app:ready", ()->
+  Vent.on "app:ready", ()->
+    Vent.trigger "app:addModule", JSON.parse Config
     App.Magazines = new Magazines
     App.Magazines.fetch
       success:->
-    App.MagazineRouter = new Router
-    Command.execute "app:addModule", module
+    App.Router.processAppRoutes new Controller,
+      "magazine/new": "addMagazine"
+      "magazine/:id": "detailsMagazine"
+      "magazines": "magazines"
+    Vent.trigger "magazine:ready"
+#
+  # module = {
+    # name: "MagazineModule"
+    # namespace: "magazine"
+    # config: JSON.parse Config
+  # }
+#
+  # Command.setHandler "app:ready", ()->
+    # App.Magazines = new Magazines
+    # App.Magazines.fetch
+      # success:->
+    # App.MagazineRouter = new Router
+    # Command.execute "app:addModule", module
