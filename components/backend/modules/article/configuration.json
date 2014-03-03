@@ -11,10 +11,10 @@
 	},
 	
 	"settings": {
-		"title" : {
-			"type": "text",
-			"label": "Titel",
-			"default": "Hello Titel"
+		"defaults" : {
+	      "title": "Neuer Artikel",
+	      "desc": "Hello World!",
+	      "author": "dnilabs"
 		}
 	},
 	
