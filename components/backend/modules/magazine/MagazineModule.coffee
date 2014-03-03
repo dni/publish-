@@ -13,7 +13,7 @@ define [
     App.Magazines.fetch
       success:->
     App.Router.processAppRoutes new Controller,
-      "magazine/new": "addMagazine"
+      "newMagazine": "addMagazine"
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
     Vent.trigger "magazine:ready"

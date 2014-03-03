@@ -2,34 +2,35 @@ define [
   'jquery'
   'lodash'
   'backbone'
-  'text!../templates/detail.html'
+  'tpl!../templates/detail.html'
   'cs!../model/Pages'
   'cs!../model/Page'
   'cs!./PageListView'
 ],
 ( $, _, Backbone, Template, Pages, Page, PageListView) ->
 
-  class MagazineDetailView extends Backbone.View
+  class MagazineDetailView extends Backbone.Marionette.ItemView
     # Not required since 'div' is the default if no el or tagName specified
+    template: Template
+    
     initialize: ->
-      @template = _.template Template
-      @pages = new Pages()
-      if @model.get("pages").length > 0
-        pages = []
-        pages[i] = new Page pageJSON for pageJSON, i in @model.get "pages"
-        @pages.reset pages
+      # @pages = new Pages()
+      # if @model.get("pages").length > 0
+        # pages = []
+        # pages[i] = new Page pageJSON for pageJSON, i in @model.get "pages"
+        # @pages.reset pages
+# 
+      # @model.bind "change", @render, @
+      # @pageList = new PageListView model: @pages
 
-      @model.bind "change", @render, @
-      @pageList = new PageListView model: @pages
-
-
-    render: (eventName) ->
-      @$el.html @template
-        model:@model.toJSON()
-        magazines: App.Magazines.toJSON()
-
-      @$el.find('#pageList').html @pageList.addAll()
-      @el
+# 
+    # render: (eventName) ->
+      # @$el.html @template
+        # model:@model.toJSON()
+        # magazines: App.Magazines.toJSON()
+# 
+      # @$el.find('#pageList').html @pageList.addAll()
+      # @el
 
     events:
       "click #edit": "toggleEdit"
@@ -90,7 +91,7 @@ define [
         App.Magazines.create @model,
           wait: true
           success: (res) ->
-            App.navigate 'magazine/'+res.attributes._id, false
+            App.Router.navigate 'magazine/'+res.attributes._id, false
       else
         @model.save()
         @render()
