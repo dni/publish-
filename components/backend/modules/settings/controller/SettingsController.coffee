@@ -13,7 +13,8 @@ define [
   class SettingsController extends Backbone.Marionette.Controller
 
     details: (id) ->
-      model = App.Settings.where _id: id
+      model = App.Settings.where moduleName: id
+      console.log model
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
       # App.uploadHandler '#images', article
 

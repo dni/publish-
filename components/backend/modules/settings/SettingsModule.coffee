@@ -12,7 +12,7 @@ define [
     
     App.Router.processAppRoutes new Controller,
       "settings": "list"
-      "settings/:id": "details"
+      "setting/:id": "details"
       
     Vent.trigger "settings:ready"
       
