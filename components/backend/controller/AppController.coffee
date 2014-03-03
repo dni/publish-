@@ -17,5 +17,4 @@ define [
       App.overlayRegion.show new LoginView
 
     welcome: ->
-      console.log new WelcomeView
       App.contentRegion.show new WelcomeView
