@@ -27,7 +27,7 @@ define [
     magazines: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
       view = new MagazineListView collection: App.Magazines
-      Vent.trigger 'app:updateRegion', 'listTopRegion', view
+      Vent.trigger 'app:updateRegion', 'listRegion', view
       #App.sidebarRegion.show view
 
 # define [
