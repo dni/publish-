@@ -1,23 +1,16 @@
 var express = require('express'),
 	app = express(),
 	mongoose = require("mongoose"),
-	// passport = require('passport'),
-	// LocalStrategy = require('passport-local').Strategy,
-	models = require('./server/models'),
-	routes = require('./server/routes'),
 	ejs = require('ejs'),
-	phantom = require("phantom"),
 	fileServer = require("./server/fileserver.js"),
-	PrintGenerator = require("./server/generators/PrintGenerator");
+	db = mongoose.connect('mongodb://localhost/publish'),
+	fs = require('fs');
 
-
-phantom.create(PrintGenerator.startPhantom);
 
 app.configure(function() {
+	
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
-	app.use('/admin/lib', express.static(__dirname + '/components/backend/bower_components'));
-	app.use('/lib', express.static(__dirname + '/components/frontend/bower_components'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser({
           keepExtensions: true,
@@ -31,7 +24,25 @@ app.configure(function() {
     // app.set('view engine', 'html')
 	// app.use(passport.initialize());
 	// app.use(passport.session());
-	routes.setup(app);
+	
+	// load/setup components
+	var componentsDir = __dirname + '/components/';
+	fs.readdir(componentsDir, function (err, files) {
+	  if (err) throw err;
+	   files.forEach( function (file) {
+	     fs.lstat(componentsDir+file, function(err, stats) {
+	       if (!err && stats.isDirectory()) {
+	         fs.exists(componentsDir+file+'/server.js', function(exists) {
+			    if (exists) {
+			        var component = require(componentsDir+file+'/server.js');
+			        component.setup(app); 
+			    }
+			});
+	       }
+	     });
+	   });
+	});
+
 });
 
 
@@ -49,20 +60,6 @@ app.configure(function() {
     // });
   // }
 // ));
-
-
-
-// web app
-app.get('/', function(req, res){
-  app.use('/', express.static(__dirname + '/components/frontend/'));
-  res.sendfile('./components/frontend/index.html');
-});
-
-app.get('/admin', function(req, res){
-  app.use(express.basicAuth('admin', 'password'));
-  app.use('/admin', express.static(__dirname + '/components/backend/'));
-  res.sendfile('./components/backend/index.html');
-});
 
 // app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 

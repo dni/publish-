@@ -35,11 +35,10 @@ define (require)->
 
   App.navItems = new NavItems
   App.Settings = new Settings
-  
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
-
+  
   App.navigationRegion.show new NavigationView collection: App.navItems
   App.contentRegion.show new WelcomeView
 
