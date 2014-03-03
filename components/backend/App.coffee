@@ -19,6 +19,9 @@ define (require)->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
     return ((/iPhone|iPod|iPad|Android|BlackBerry|Opera Mini|IEMobile/).test(userAgent))
 
+  # Global c.l for console.log
+  window.c = console; c.l = c.log
+
   App = new Backbone.Marionette.Application
 
   App.config = JSON.parse Config
