@@ -7,23 +7,28 @@ define [
   'cs!../view/MagazineListView'
   'cs!../view/MagazineDetailView'
   'cs!../model/Magazine'
-],
-( Vent, $, _, Backbone, Marionette, MagazineListView, MagazineDetailView, Magazine) ->
+  'cs!../view/ListView'
+], ( Vent, $, _, Backbone, Marionette, MagazineListView, MagazineDetailView, Magazine, ListView) ->
 
   class MagazineController extends Backbone.Marionette.Controller
 
-    details: (id) ->
-      magazine = App.Magazines.where _id: id
+    detailsMagazine: (id) ->
+      magazine = App.magazines.where _id: id
       Vent.trigger 'app:updateRegion', "contentRegion", new MagazineDetailView model: magazine[0]
+      #view = new MagazineDetailView model: magazine[0]
+      #App.contentRegion.show view
 
-    add: ->
-      view = new MagazineDetailView model: new Magazine
+    addMagazine: ->
+      view = new MagazineDetailView model: new Magazine()
       Vent.trigger 'app:updateRegion', 'contentRegion', view
-      view.toggleEdit()
+      #App.contentRegion.show view
+      #view.toggleEdit()
 
-    list: ->
-      #Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
-      Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines
+    magazines: ->
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
+      view = new MagazineListView collection: App.Magazines
+      Vent.trigger 'app:updateRegion', 'listTopRegion', view
+      #App.sidebarRegion.show view
 
 # define [
   # 'cs!../../../Command'
@@ -42,16 +47,3 @@ define [
     # generator: ->
       # $.get "generator", (data) -> console.log data
 #
-    # detailsMagazine: (id) ->
-      # magazine = App.magazines.where _id: id
-      # view = new MagazineDetailView model: magazine[0]
-      # App.contentRegion.show view
-#
-    # addMagazine: ->
-      # view = new MagazineDetailView model: new Magazine()
-      # App.contentRegion.show view
-      # view.toggleEdit()
-#
-    # magazines: ->
-      # view = new ArticleListView model: App.magazines
-      # App.sidebarRegion.show view

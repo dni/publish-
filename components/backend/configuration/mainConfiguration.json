@@ -10,6 +10,7 @@
 	"views": "ArticleDetail, ",
 	"entrypoints": "button, overlay",
 	"modules": {
-		"article": "ArticleModule"
+        "article": "ArticleModule",
+        "magazine": "MagazineModule"
 	}
 }
