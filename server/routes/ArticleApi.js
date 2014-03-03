@@ -39,10 +39,10 @@ module.exports.postArticles = function(req, res){
 //         
     // });
 	
-		article.save(function () {
-			res.send(article);
-		});
-	
+	article.save(function () {
+		res.send(article);
+	});
+
 	
 };
 
