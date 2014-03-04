@@ -1,16 +1,16 @@
 <div class="preview">
-	<h1><%-  title %></h1>
-	<h5>by <%-  author %></h5>
-	<p><%-  desc %></p>
+	<h1><%=  title %></h1>
+	<h5>by <%=  author %></h5>
+	<p><%=  desc %></p>
 	<p>Cover</p>
 	<img src="<%=  cover %>" />
 	<p>Back</p>
 	<img src="<%=  back %>" />
 </div>
 <div class="edit">
-	<label>Titel</label><input type="text" name="title" value="<%-  title %>" /> <br/>
-	<label>Impressum</label><textarea name="impressum"><%-  impressum %></textarea> <br/>
-	<label>Editorial</label><textarea name="editorial"><%-  editorial %></textarea> <br/>
+	<label>Titel</label><input type="text" name="title" value="<%=  title %>" /> <br/>
+	<label>Impressum</label><textarea name="impressum"><%=  impressum %></textarea> <br/>
+	<label>Editorial</label><textarea name="editorial"><%=  editorial %></textarea> <br/>
 	<label>Cover</label>
 	<div id="cover">
 		<input type="file" name="cover" />
@@ -30,8 +30,8 @@
 		</output>
 	</div>
 	<label>Seiten</label>
-	<div id="pageList"></div>
 	<a id="addPage" class="btn"><i class="icon-plus"></i>Seite hinzufügen</a>
+	<div id="pageList"></div>
 </div>
 <div class="buttons">
 	<div class="edit">

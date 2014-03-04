@@ -1,17 +1,17 @@
 <div class="page">
-	<span class="number"><%= model.number %></span>
+	<span class="number"><%= number %></span>
 	<select class="article">
 		<% for(var i = 0; i < articles.length; i++) { %>
-			<% if (articles[i]._id == model.article) { %>	
+			<% if (articles[i]._id == article) { %>
 				<option selected="selected" value="<%= articles[i]._id %>"><%= articles[i].title %></option>
 			<% } else { %>
 				<option value="<%= articles[i]._id %>"><%= articles[i].title %></option>
 			<% } %>
 		<% }; %>
 	</select>
-	<select class="layout">		
-		<option <% if (0 == model.layout) { %> selected <% } %> value="0">Layout 1</option>
-		<option <% if (1 == model.layout) { %> selected <% } %> value="1">Layout 2</option>
+	<select class="layout">
+		<option <% if (0 == layout) { %> selected <% } %> value="0">Layout 1</option>
+		<option <% if (1 == layout) { %> selected <% } %> value="1">Layout 2</option>
 	</select>
 	<a class="remove btn"><i class="icon-remove"></i></a>
 
