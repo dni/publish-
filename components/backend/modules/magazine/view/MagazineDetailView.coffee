@@ -12,25 +12,23 @@ define [
   class MagazineDetailView extends Backbone.Marionette.ItemView
     # Not required since 'div' is the default if no el or tagName specified
     template: Template
-    
+
     initialize: ->
-      # @pages = new Pages()
+      @pages = new Pages()
       # if @model.get("pages").length > 0
         # pages = []
         # pages[i] = new Page pageJSON for pageJSON, i in @model.get "pages"
         # @pages.reset pages
-# 
+#
       # @model.bind "change", @render, @
-      # @pageList = new PageListView model: @pages
 
-# 
-    # render: (eventName) ->
+
+   # render: (eventName) ->
       # @$el.html @template
         # model:@model.toJSON()
         # magazines: App.Magazines.toJSON()
-# 
-      # @$el.find('#pageList').html @pageList.addAll()
-      # @el
+     # @$el.find('#pageList').html @pageList.addAll()
+     # @el
 
     events:
       "click #edit": "toggleEdit"
@@ -67,7 +65,12 @@ define [
       , (data) -> console.log data
 
     addPage: ->
-      @pages.add new Page pagecount: @pages.models.length
+      if !@pageList
+        el = @$el.find("#pageList")
+        @pageList = new PageListView collection: @pages, $el: el
+        @pageList.$el = el;
+      page = new Page pagecount: @pages.models.length
+      @pages.add page
 
     toggleEdit: ->
       @$el.find('.edit').toggle();
