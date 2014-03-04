@@ -1,31 +1,31 @@
 <div class="preview">
-	<h1><%- model.title %></h1>
-	<h5>by <%- model.author %></h5>
-	<p><%- model.desc %></p>
+	<h1><%-  title %></h1>
+	<h5>by <%-  author %></h5>
+	<p><%-  desc %></p>
 	<p>Cover</p>
-	<img src="<%= model.cover %>" />
+	<img src="<%=  cover %>" />
 	<p>Back</p>
-	<img src="<%= model.back %>" />
+	<img src="<%=  back %>" />
 </div>
 <div class="edit">
-	<label>Titel</label><input type="text" name="title" value="<%- model.title %>" /> <br/>
-	<label>Impressum</label><textarea name="impressum"><%- model.impressum %></textarea> <br/>
-	<label>Editorial</label><textarea name="editorial"><%- model.editorial %></textarea> <br/>
-	<label>Cover</label> 
+	<label>Titel</label><input type="text" name="title" value="<%-  title %>" /> <br/>
+	<label>Impressum</label><textarea name="impressum"><%-  impressum %></textarea> <br/>
+	<label>Editorial</label><textarea name="editorial"><%-  editorial %></textarea> <br/>
+	<label>Cover</label>
 	<div id="cover">
 		<input type="file" name="cover" />
 		<output>
-			<% if (model.cover) { %>
-				<img width="100" src="<%= model.cover %>" />
+			<% if ( cover) { %>
+				<img width="100" src="<%= cover %>" />
 			<% } %>
 		</output>
 	</div>
-	<label>Back</label> 
+	<label>Back</label>
 	<div id="back">
 		<input type="file" name="back" />
 		<output>
-			<% if (model.back) { %>
-				<img width="100" src="<%= model.back %>" />
+			<% if ( back) { %>
+				<img width="100" src="<%= back %>" />
 			<% } %>
 		</output>
 	</div>
@@ -39,7 +39,7 @@
 		<button class="save btn btn-success">Save</button>
 	</div>
 	<div class="saved">
-		<button class="delete btn btn-danger">Delete</button>	
+		<button class="delete btn btn-danger">Delete</button>
 		<button id="print" class="btn">Print</button>
 		<button id="download" class="btn">Download Print PDF</button>
 		<button id="hpub" class="btn">Generate Hpub</button>

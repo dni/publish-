@@ -3,6 +3,8 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     idAttribute: "_id"
     defaults:
       "title": "Neues Magazine"
+      "author": "default author"
+      "desc": "description ..."
       "editorial": "Hello World!"
       "pages": ""
       "impressum": "dnilabs"

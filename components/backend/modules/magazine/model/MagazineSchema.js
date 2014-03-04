@@ -4,6 +4,8 @@ var mongoose = require('mongoose/'),
 
 var MagazineSchema = new Schema({
   title: String,
+  author: String,
+  desc: String,
   editorial: String,
   impressum: String,
   cover: String,
