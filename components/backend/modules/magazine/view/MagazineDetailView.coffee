@@ -15,8 +15,8 @@ define [
 
     initialize: ->
       @model.on "change", @render
-      
-      
+
+
       # if @model.get("pages").length > 0
         # pages = []
         # pages[i] = new Page pageJSON for pageJSON, i in @model.get "pages"
