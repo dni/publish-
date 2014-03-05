@@ -7,6 +7,7 @@
 	<p>Back</p>
 	<img src="<%=  back %>" />
 </div>
+
 <div class="edit">
 	<label>Titel</label><input type="text" name="title" value="<%=  title %>" /> <br/>
 	<label>Impressum</label><textarea name="impressum"><%=  impressum %></textarea> <br/>
@@ -28,21 +29,5 @@
 				<img width="100" src="<%= back %>" />
 			<% } %>
 		</output>
-	</div>
-	<label>Seiten</label>
-	<a id="addPage" class="btn"><i class="icon-plus"></i>Seite hinzufügen</a>
-	<div id="pageList"></div>
-</div>
-<div class="buttons">
-	<div class="edit">
-		<button class="printsettings btn">Print Settings</button>
-		<button class="save btn btn-success">Save</button>
-	</div>
-	<div class="saved">
-		<button class="delete btn btn-danger">Delete</button>
-		<button id="print" class="btn">Print</button>
-		<button id="download" class="btn">Download Print PDF</button>
-		<button id="hpub" class="btn">Generate Hpub</button>
-		<button id="edit" class="btn btn-primary">Edit</button>
 	</div>
 </div>

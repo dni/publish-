@@ -2,12 +2,11 @@ var mongoose = require("mongoose"),
 	express = require("express"),
 	ejs = require('ejs'),
 	phantom = require("phantom"),
-	// PrintGenerator = require("./server/generators/PrintGenerator"),
 	fs = require('fs');
 
 module.exports.setup = function(app) {
 	
-	// phantom.create(PrintGenerator.startPhantom);
+
 	app.configure(function() {
 		app.use('/admin/lib', express.static(__dirname + '/bower_components'));
 		
