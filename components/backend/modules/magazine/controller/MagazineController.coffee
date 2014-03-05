@@ -6,27 +6,29 @@ define [
   'marionette'
   'cs!../view/MagazineListView'
   'cs!../view/MagazineDetailView'
+  'cs!../view/MagazineParentView'
   'cs!../model/Magazine'
   'cs!../view/ListView'
-], ( Vent, $, _, Backbone, Marionette, MagazineListView, MagazineDetailView, Magazine, ListView) ->
+  'cs!../model/Pages'
+  'cs!../view/PageListView'
+], ( Vent, $, _, Backbone, Marionette, MagazineListView, DetailView, MagazineParentView, Magazine, ListView, Pages, PageListView) ->
 
   class MagazineController extends Backbone.Marionette.Controller
 
     detailsMagazine: (id) ->
       magazine = App.Magazines.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new MagazineDetailView model: magazine[0]
-      #view = new MagazineDetailView model: magazine[0]
-      #App.contentRegion.show view
+      Vent.trigger 'app:updateRegion', "contentRegion", new MagazineParentView model: magazine[0]
+
+
 
     addMagazine: ->
-      view = new MagazineDetailView model: new Magazine()
+      view = new MagazineParentView model: new Magazine()
       Vent.trigger 'app:updateRegion', 'contentRegion', view
       #App.contentRegion.show view
       #view.toggleEdit()
 
     magazines: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
-      console.log new MagazineListView collection: App.Magazines
       Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines
       #App.sidebarRegion.show view
 

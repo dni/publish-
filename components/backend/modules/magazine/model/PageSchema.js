@@ -9,4 +9,4 @@ var PageSchema = new Schema({
 });
 
 
-module.exports.Magazine = mongoose.model('Page', PageSchema);
+module.exports.Page = mongoose.model('Page', PageSchema);

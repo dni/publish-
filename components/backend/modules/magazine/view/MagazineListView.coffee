@@ -9,7 +9,10 @@ define [
 ($, _, Backbone, ItemTemplate, ListTemplate) ->
 
   class MagazineListItemView extends Backbone.Marionette.ItemView
-    template: ItemTemplate
+    template: ItemTemplate  
+    
+    initialize:->
+      @model.on "change", @render
 
   class MagazineListView extends Backbone.Marionette.CollectionView
     itemView: MagazineListItemView

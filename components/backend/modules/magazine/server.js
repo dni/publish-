@@ -1,4 +1,8 @@
-var db = require(__dirname + '/model/MagazineSchema');
+var db = require(__dirname + '/model/MagazineSchema'),
+	phantom = require("phantom")
+	PrintGenerator = require(__dirname + '/generators/PrintGenerator');
+	
+phantom.create(PrintGenerator.startPhantom);
 
 module.exports.setup = function(app) {
 
