@@ -1,10 +1,15 @@
 var db = require(__dirname + '/model/MagazineSchema'),
 	phantom = require("phantom")
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator');
-	
+	Generator = require(__dirname + '/generators/index');
+
 phantom.create(PrintGenerator.startPhantom);
 
 module.exports.setup = function(app) {
+	// generator
+	app.post("/generate", Generator.initialize);
+	app.post("/generatePrint", PrintGenerator.generate);
+	app.post("/downloadPrint", PrintGenerator.download);
 
 	// public Route
 	app.get('/publicMagazines', function(req,res) {
