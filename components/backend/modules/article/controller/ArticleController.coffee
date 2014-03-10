@@ -11,13 +11,16 @@ define [
 ], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
+    
+    settings: ->
+      App.Settings.where({name: "ArticleModule"})[0]
 
     details: (id) ->
       article = App.Articles.where _id: id
       Vent.trigger 'app:updateRegion', "contentRegion", new ArticleDetailView model: article[0]
 
     add: ->
-      view = new ArticleDetailView model: new Article
+      view = new ArticleDetailView model: new Article author: @settings().getValue "defaultAuthor"
       Vent.trigger 'app:updateRegion', 'contentRegion', view
       view.toggleEdit()
 

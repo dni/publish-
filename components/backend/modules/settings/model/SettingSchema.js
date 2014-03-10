@@ -4,8 +4,8 @@ var mongoose = require('mongoose/'),
 var SettingSchema = new Schema({
   name: String,
   settings: {
-      type: Array,
-      'default': []
+      type: Object,
+      'default': {}
     }
 });
 
