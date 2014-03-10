@@ -61,7 +61,9 @@ module.exports.setup = function(app) {
 			a.back = req.body.back;
 			a.pages = req.body.pages;
 			a.date = new Date();
-			a.save();
+			a.save(function () {
+				res.send(a);
+			});
 	  	});
 	});
 

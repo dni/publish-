@@ -16,22 +16,6 @@ define [
     initialize: ->
       @model.on "change", @render
 
-
-      # if @model.get("pages").length > 0
-        # pages = []
-        # pages[i] = new Page pageJSON for pageJSON, i in @model.get "pages"
-        # @pages.reset pages
-#
-      # @model.bind "change", @render, @
-
-#
-    # render: (eventName) ->
-       # @$el.html @template
-         # model:@model.toJSON()
-         # magazines: App.Magazines.toJSON()
-      # @$el.find('#pageList').html @pageList.addAll()
-    # @el
-
     events:
       "click .delete": "deleteMagazine"
       'click #publish': "publishMagazine"
