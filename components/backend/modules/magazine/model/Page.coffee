@@ -5,4 +5,4 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "article": ""
       "layout": ""
     initialize: (attributes, options)->
-      if not @get "number" then @set "number", attributes.pagecount+1
+      #if not @.get("number") then @.set("number", (Math.random()*255)>>0)
