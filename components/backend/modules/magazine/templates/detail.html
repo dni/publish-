@@ -9,25 +9,40 @@
 </div>
 
 <div class="edit">
-	<label>Titel</label><input type="text" name="title" value="<%=  title %>" /> <br/>
-	<label>Impressum</label><textarea name="impressum"><%=  impressum %></textarea> <br/>
-	<label>Editorial</label><textarea name="editorial"><%=  editorial %></textarea> <br/>
-	<label>Cover</label>
-	<div id="cover">
-		<input type="file" name="cover" />
-		<output>
-			<% if ( cover) { %>
-				<img width="100" src="<%= cover %>" />
-			<% } %>
-		</output>
+	<div class="form-group">
+	    <label>Titel</label>
+	    <input type="text" name="title" class="form-control" value="<%= title %>" />
 	</div>
+	<div class="form-group">
+		<label>Impressum</label>
+		<textarea class="form-control" name="impressum"><%= impressum %></textarea>
+	</div>
+	<div class="form-group">
+		<label>Editorial</label>
+		<textarea class="form-control" name="editorial"><%= editorial %></textarea>
+	</div>
+	
+	<div class="form-group">
+		<label>Cover</label>
+		<div id="cover">
+			<input type="file" name="cover" />
+			<output>
+				<% if ( cover) { %>
+					<img width="100" src="<%= cover %>" />
+				<% } %>
+			</output>
+		</div>
+	</div>
+	<div class="form-group">
+		
 	<label>Back</label>
-	<div id="back">
-		<input type="file" name="back" />
-		<output>
-			<% if ( back) { %>
-				<img width="100" src="<%= back %>" />
-			<% } %>
-		</output>
+		<div id="back">
+			<input type="file" name="back" />
+			<output>
+				<% if ( back) { %>
+					<img width="100" src="<%= back %>" />
+				<% } %>
+			</output>
+		</div>
 	</div>
 </div>
