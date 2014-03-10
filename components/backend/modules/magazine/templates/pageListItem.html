@@ -1,4 +1,5 @@
 <div class="page">
+    <% var articles = App.Articles.toJSON() %>
 	<span class="number"><%= number %></span>
 	<select class="article">
 		<% for(var i = 0; i < articles.length; i++) { %>

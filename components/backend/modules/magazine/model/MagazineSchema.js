@@ -10,7 +10,7 @@ var MagazineSchema = new Schema({
   impressum: String,
   cover: String,
   back: String,
-  pages: String,
+  pages: Array,
   date: Date
 });
 

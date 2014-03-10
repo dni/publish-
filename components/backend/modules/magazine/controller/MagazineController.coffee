@@ -19,8 +19,6 @@ define [
       magazine = App.Magazines.where _id: id
       Vent.trigger 'app:updateRegion', "contentRegion", new MagazineParentView model: magazine[0]
 
-
-
     addMagazine: ->
       view = new MagazineParentView model: new Magazine()
       Vent.trigger 'app:updateRegion', 'contentRegion', view
