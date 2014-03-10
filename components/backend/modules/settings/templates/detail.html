@@ -1,13 +1,21 @@
 <h1><%= name %></h1>
 
 <% for (key in settings) { %>
-	<div class="form-control">
-		<label><%= settings[key].label %></label>
-		<input type="<%= settings[key].type %>" name="<%= key %>" value="<%= settings[key].value %>" />
-	</div>
+	<% if (settings[key].type=="checkbox") { %>
+		<div class="form-group checkbox">
+		    <label>
+		      <% if (settings[key].value) { %>
+		      	<input type="checkbox" name="<%= key %>" checked>
+		      <% } else { %>
+				<input type="checkbox" name="<%= key %>">
+		      <% } %>	
+		       <%= settings[key].label %>	
+		    </label>
+		</div>
+	<% } else { %>
+		<div class="form-group">
+		    <label><%= settings[key].label %></label>
+		    <input type="<%= settings[key].type %>" class="form-control" name="<%= key %>" value="<%= settings[key].value %>">
+		 </div>
+	<% } %>
 <% } %>
-
-<div class="buttons">
-	<button class="save btn btn-success">Save</button>
-	<button class="cancel btn btn-danger">Cancel</button>
-</div>

@@ -46,7 +46,6 @@ define (require)->
       for key of settings
         setting = App.Settings.where name: settings[key].name
         if setting.length is 0
-          console.log "new"
           setting = new Setting
           setting.set "settings", settings[key].settings
           setting.set "name", settings[key].name

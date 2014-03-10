@@ -20,7 +20,7 @@ define [
     afterRender:->
       if not @model.get "pages" then @model.set "pages", new Pages()
       @detailRegion.show new DetailView model: @model
-      @pageRegion.show new PageListView collection: new Pages  
+      @pageRegion.show new PageListView collection: new Pages
     
     regions:
       'detailRegion': '#magazine-details'

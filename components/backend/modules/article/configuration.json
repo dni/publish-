@@ -17,6 +17,11 @@
 	      "value": "setting1DefaultValue",
 	      "type": "text"
 		},
+		"defaultAuthor" : {
+	      "label": "Default Author",
+	      "value": "dnilabs e.U",
+	      "type": "text"
+		},
 		"setting2" : {
 	      "label": "Setting2",
 	      "value": "1",

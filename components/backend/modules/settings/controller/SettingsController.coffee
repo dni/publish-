@@ -14,7 +14,6 @@ define [
 
     details: (id) ->
       model = App.Settings.where name: id
-      console.log model
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
       # App.uploadHandler '#images', article
 
@@ -26,3 +25,4 @@ define [
     clearCache: ->
       $.get "/clearCache", ->
         console.log "cache cleared"
+        window.location.reload()
