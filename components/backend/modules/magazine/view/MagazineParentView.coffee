@@ -18,18 +18,12 @@ define [
       @on "render", @afterRender
 
     afterRender:->
-
-
-      # @pages = new Pages(pages)
-
-      # newPageArr=[]
-      # _.each pages, (page) ->
-        # pge = new Page({number: page.number, article: page.article, layout: page.layout})
-        # newPageArr.push(pge)
-      # @pages.add(newPageArr)
-
+      @pages = new Pages()
+      pages = @model.get "pages"
+      self = @
+      _.each pages, (page) -> self.pages.add new Page page
       @detailRegion.show new DetailView model: @model
-      @pageRegion.show new PageListView
+      @pageRegion.show new PageListView collection: @pages
 
     regions:
       'detailRegion': '#magazine-details'
@@ -40,19 +34,13 @@ define [
       "click .save": "saveMagazine"
       "click .delete": "deleteMagazine"
       'click #publish': "publishMagazine"
-      "click #addPage": "addPage"
       "click #hpub": "generateHpub"
       "click #print": "generatePrint"
       "click #download": "downloadPrint"
-
-    pageCount: 0
+      "click #addPage": "addPage"
 
     addPage: ->
-      newPage = new Page({number: @pageCount++})
-      @pages.add newPage
-      c.l @pages
-      #@pageRegion.show new PageListView collection:@pages, articles: "articleAAA"
-
+      @pages.add new Page number: @pages.length
 
     toggleEdit: ->
       @$el.find('.edit').toggle()
@@ -71,7 +59,6 @@ define [
        form.submit();
 
     generateHpub: ->
-      c.l "HBUP"
       $.post "/generate",
         id: @model.get "_id"
         title: @model.get "title"
@@ -82,6 +69,7 @@ define [
         id: @model.get "_id"
         title: @model.get "title"
       , (data) -> console.log data
+      
     saveMagazine: ->
       @model.set
         title: $('input[name=title]').val()
@@ -89,7 +77,8 @@ define [
         editorial: $('textarea[name=editorial]').val()
         cover: $("#cover output img").attr("src")
         back: $("#back output img").attr("src")
-        pages: @pages#.toJSON()
+        pages: @pages.toArray()
+
       if @model.isNew()
         App.Magazines.create @model,
           wait: true
@@ -97,8 +86,6 @@ define [
             App.Router.navigate 'magazine/'+res.attributes._id, false
       else
         @model.save
-
           success:->
       false
-      c.l "model saved.,",@model
 

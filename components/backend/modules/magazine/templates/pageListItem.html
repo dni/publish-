@@ -1,19 +1,26 @@
 <div class="page">
-    <% var articles = App.Articles.toJSON() %>
-	<span class="number"><%= number %></span>
-	<select class="article">
-		<% for(var i = 0; i < articles.length; i++) { %>
-			<% if (articles[i]._id == article) { %>
-				<option selected="selected" value="<%= articles[i]._id %>"><%= articles[i].title %></option>
-			<% } else { %>
-				<option value="<%= articles[i]._id %>"><%= articles[i].title %></option>
+	<form class="form-inline">
+		
+	    <% var articles = App.Articles.toJSON() %>
+	    <% var settings = App.Settings.where({name: "MagazineModule"})[0].getValue("layouts").split(",") %>
+	    
+		<span class="number badge"><%= number %></span>
+		<select class="article form-control">
+			<% for(var i = 0; i < articles.length; i++) { %>
+				<% if (articles[i]._id == article) { %>
+					<option selected="selected" value="<%= articles[i]._id %>"><%= articles[i].title %></option>
+				<% } else { %>
+					<option value="<%= articles[i]._id %>"><%= articles[i].title %></option>
+				<% } %>
+			<% }; %>
+		</select>
+		<select class="layout form-control">
+			<% for(key in settings) { %>
+				<option <% if (layout == settings[key]) { %> selected <% } %> value="<%= settings[key] %>"><%= settings[key] %></option>
 			<% } %>
-		<% }; %>
-	</select>
-	<select class="layout">
-		<option <% if (0 == layout) { %> selected <% } %> value="0">Layout 1</option>
-		<option <% if (1 == layout) { %> selected <% } %> value="1">Layout 2</option>
-	</select>
-	<a class="remove btn"><i class="icon-remove"></i></a>
+		</select>
+		<a class="remove btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
+		<a class="sort btn btn-default"><span class="glyphicon glyphicon-sort"></span></a>
+	</form>
 
 <div>

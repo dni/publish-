@@ -11,12 +11,13 @@
     },
 
     "settings": {
-        "defaults" : {
-          "title": "Neuer Artikel",
-          "desc": "Hello World!",
-          "author": "dnilabs"
-        }
-    },
+		"layouts" : {
+	      "label": "Layouts",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "default",
+	      "type": "text"
+		}
+	},
 
     "model": {
         "magazine": {

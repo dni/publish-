@@ -6,12 +6,12 @@ var fs = require('fs'),
 module.exports.generate = function(res, magazine) {
 
 	//  generate Cover
-	fs.readFile('./hpub_dummy/Book Cover.html', 'utf8', function(err, template){
+	fs.readFile(__dirname + '/hpub_dummy/Book Cover.html', 'utf8', function(err, template){
 		if (err) throw err;
 
 		var html = ejs.render(template, { magazine: magazine[0] });
 
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/Book Cover.html", html, function(err) {
+		fs.writeFile(__dirname + "/public/magazines/" + magazine[0].title + "/hpub/Book Cover.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -21,7 +21,7 @@ module.exports.generate = function(res, magazine) {
 	});
 
 	//  generate Back
-	fs.readFile('./hpub_dummy/Book Back.html', 'utf8', function(err, template){
+	fs.readFile(__dirname + '/hpub_dummy/Book Back.html', 'utf8', function(err, template){
 		if (err) throw err;
 
 		var html = ejs.render(template, { magazine: magazine[0] });
@@ -36,7 +36,7 @@ module.exports.generate = function(res, magazine) {
 	});
 
 	//  generate Impressum
-	fs.readFile('./hpub_dummy/Tail.html', 'utf8', function(err, template){
+	fs.readFile(__dirname + '/hpub_dummy/Tail.html', 'utf8', function(err, template){
 		if (err) throw err;
 
 		var html = ejs.render(template, { magazine: magazine[0] });
@@ -51,7 +51,7 @@ module.exports.generate = function(res, magazine) {
 	});
 
 	// generate Editorial
-	fs.readFile('./server/generators/hpub_dummy/Book Index.html', 'utf8', function(err, template){
+	fs.readFile(__dirname + '/hpub_dummy/Book Index.html', 'utf8', function(err, template){
 		if (err) throw err;
 
 		var html = ejs.render(template, { magazine: magazine[0] });
@@ -69,7 +69,7 @@ module.exports.generate = function(res, magazine) {
 	// TODO: generate index
 
 	// generate Chapters
-	fs.readFile('./server/generators/hpub_dummy/Page.html', 'utf8', function(err, template){
+	fs.readFile(__dirname + '/hpub_dummy/Page.html', 'utf8', function(err, template){
 		if (err) throw err;
 		var pages = magazine[0].pages;
 
