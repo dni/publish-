@@ -2,6 +2,7 @@ var fs = require('fs'),
 	_ = require('underscore'),
 	ejs = require('ejs'),
 	db = require('./../model/MagazineSchema');
+	db2 = require('./../../article/model/ArticleSchema');
 
 module.exports.generate = function(res, magazine) {
 
@@ -75,7 +76,7 @@ module.exports.generate = function(res, magazine) {
 
 		var writePages = function(page) {
 			if (page === undefined) page = pages.pop();
-			db.Article.findOne({_id: page.article}).execFind(function(err, article){
+			db2.Article.findOne({_id: page.article}).execFind(function(err, article){
 
 				if (err) console.log(err);
 
@@ -109,6 +110,7 @@ module.exports.generate = function(res, magazine) {
 
 			return;
 		};
+		
 		writePages();
 
 	});
