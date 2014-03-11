@@ -1,7 +1,6 @@
 var express = require('express'),
 	app = express(),
 	mongoose = require("mongoose"),
-	ejs = require('ejs'),
 	fileServer = require("./server/fileserver.js"),
 	db = mongoose.connect('mongodb://localhost/publish'),
 	fs = require('fs');

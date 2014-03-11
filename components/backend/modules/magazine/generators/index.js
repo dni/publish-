@@ -4,7 +4,7 @@ var hpubGenerator = require('./../generators/HpubGenerator');
 
 
 module.exports.initialize = function(req, res) {
-	console.log("into generator")
+
 	if (fs.existsSync("./public/magazines/" + req.body.title)) {
 		db.Magazine.findOne({_id: req.body.id}).execFind(function (arr,data) {
 			hpubGenerator.generate( res, data );
