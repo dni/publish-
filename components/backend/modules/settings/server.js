@@ -8,6 +8,7 @@ module.exports.setup = function(app) {
 	  	res.send("cache cleared");
 	});
 	
+	
 	app.get('/reset', function(req, res){
 	  	db.Setting.collection.drop();
 	  	res.send("module config reset");
