@@ -32,4 +32,13 @@
 		    <input type="<%= settings[key].type %>" class="form-control" name="<%= key %>" value="<%= settings[key].value %>">
 		 </div>
 	<% } %>
+	
+<% } %>
+
+<% for (key in settings) { %>
+	<div class="btns">
+		<% if (settings[key].type=="button") { %>
+		    <button class="btn btn-default" id="<%= key %>" onclick="$('body').trigger('<%= settings[key].event %>')"><%= settings[key].label %></button>
+		<% } %>
+	</div>
 <% } %>
