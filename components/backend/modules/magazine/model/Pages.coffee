@@ -5,5 +5,5 @@ define [
 ],
 (_, Backbone, Page) ->
   class Pages extends Backbone.Collection
-    model: Pages#
+    model: Pages
     comparator: 'number'
