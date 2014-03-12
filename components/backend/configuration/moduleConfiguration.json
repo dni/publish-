@@ -1,4 +1,5 @@
 {
 	"article": "ArticleModule",
 	"magazine": "MagazineModule"
+	"file": "FileModule"
 }
