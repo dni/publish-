@@ -36,12 +36,12 @@ define [
 
     _sortStop: (event, ui)->
       self = @
-      _.each $(event.target).find('.number'), (el, i)->
-        console.log self.pages
-        model = self.pages.where 'number': el.innerHTML
-        $(el).text(i)
-        model[0].set("number", i)
-
+      elements =
+      $(event.target).find('.number').each (i)->
+        elNumber = $(@).text()
+        model = self.pages.where({number: elNumber})[0]
+        model.attributes.number = (i+1).toString()
+        $(@).text(i+1)
 
     regions:
       'detailRegion': '#magazine-details'
@@ -59,7 +59,7 @@ define [
       "stop .sortable": "sortPages"
 
     addPage: ->
-      @pages.add new Page number: @pages.length+1
+      @pages.add new Page number: (@pages.length+1).toString()
 
     toggleEdit: ->
       @$el.find('.edit').toggle()
