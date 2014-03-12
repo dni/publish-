@@ -66,8 +66,63 @@ module.exports.generate = function(res, magazine) {
 		});
 	});
 
-	// TODO: generate JSON
-	// TODO: generate index
+	// generate JSON	
+	fs.readdir("./public/magazines/" + magazine[0].title + "/hpub/", function(err, files) {
+		if (err) return;
+		var contents = [];
+		for (var key = 0; key < files.length; key++) {
+			if (files[key].match(/.html/g)) {
+				contents.push(files[key]);
+			}
+		}
+		
+		var json = {
+		    "hpub": 1,
+		    "title": magazine[0].title,
+		    "author": [magazine[0].author],
+		    "creator": [magazine[0].author],
+		    "date": new Date(),
+		    "url": "book://localhost:1666/public/magazines/"+magazine[0].title+"/hpub",
+		
+		    "orientation": "both",
+		    "zoomable": false,
+		
+		    "-baker-background": "#000000",
+		    "-baker-vertical-bounce": true,
+		    "-baker-media-autoplay": true,
+		    "-baker-background-image-portrait": "gfx/background-portrait.png",
+		    "-baker-background-image-landscape": "gfx/background-landscape.png",
+		    "-baker-page-numbers-color": "#000000",
+		
+		    "contents": contents
+		};
+		
+		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/book.json", JSON.stringify(json), function(err) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("Index was saved!");
+			}
+		});
+	});
+	
+	
+	
+	//  generate index
+	fs.readFile(__dirname + '/hpub_dummy/index.html', 'utf8', function(err, template){
+		if (err) throw err;
+
+		var html = ejs.render(template, { magazine: magazine[0] });
+
+		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/index.html", html, function(err) {
+			if (err) {
+				console.log(err);
+			} else {
+				console.log("Cover was saved!");
+			}
+		});
+	});
+	
 
 	// generate Chapters
 	fs.readFile(__dirname + '/hpub_dummy/Page.html', 'utf8', function(err, template){
@@ -98,16 +153,10 @@ module.exports.generate = function(res, magazine) {
 				});
 			});
 
-
-
 			var nextPage = pages.pop();
 			if (nextPage) {
 				writePages(nextPage);
 			}
-
-			// generate Index
-
-
 			return;
 		};
 		

@@ -16,7 +16,30 @@
 	      "description": "Comma seperated list of layout keys",
 	      "value": "default",
 	      "type": "text"
+		},
+		"apptype" : {
+	      "label": "Type of the App",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "standalone",
+	      "type": "select",
+	      "options": {
+	      	"standalone": "Standalone App",
+	      	"newsstand": "Newsstand App",
+	      	"paid": "Newsstand App with paid subscriptions"
+	      }
+		},
+		"targetdevice" : {
+	      "label": "Target Device",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "ipad",
+	      "type": "select",
+	      "options": {
+	      	"ipad": "iPad",
+	      	"iphone": "iPhone",
+	      	"ipadiphone": "iPad and iPhone"
+	      }
 		}
+		
 	},
 
     "model": {

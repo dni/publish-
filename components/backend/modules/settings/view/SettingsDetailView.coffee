@@ -13,12 +13,12 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
   
     events:
       "blur input": "save"
+      "change select": "save"
 
     save: ->
       settings = @model.get "settings"
       @$el.find(".form-group").each ()->
-        input = $(@).find "input"
-        console.log input.is(':checked')
+        input = $(@).find ".form-control"
         if input.attr("type") == ("checkbox" or "radio") then val = input.is(':checked')
         else val = input.val()
         settings[input.attr("name")].value = val

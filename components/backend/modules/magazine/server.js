@@ -42,7 +42,20 @@ module.exports.setup = function(app) {
 	        // console.log(req.files);
 	        // res.send("well done");
 	    // });
-
+	    
+	    
+	    
+	    // create folderstructure for hpub
+		fs.mkdir("./public/magazines/" + req.body.title, function() {
+			fs.mkdir("./public/magazines/" + req.body.title + "/hpub", function() {
+				fs.mkdir("./public/magazines/" + req.body.title + "/hpub/images");
+				fs.copy(__dirname + '/generators/hpub_dummy/css', './public/magazines/' + req.body.title + '/hpub/css');
+				fs.copy(__dirname + "/generators/hpub_dummy/js", "./public/magazines/" + req.body.title + "/hpub/js");
+			});
+			fs.mkdir("./public/magazines/" + req.body.title + "/pdf", function() {});
+		});
+		
+		
 		a.save(function () {
 			res.send(a);
 		});

@@ -8,7 +8,12 @@
 <body>
   <div id="index">
       <div class="navigation">
-        <h5>Part I</h5>
+      	
+      	<% for (key in magazine.pages) { %>
+	        <h5>Page <%= magazine.pages["number"] %></h5>
+      		<a href="Part1.html"><h7>title</h7> <small>lol</small></a>
+      	<% } %>
+      	
         <h6>(Being a Reprint from the Reminiscence of John H. Watson, M.D., late of the Army Medical Department)</h6>
         <ol>
           <li class="p1-01"><a href="Part1-01.html"><h7>Holmes</h7> <small>Mr. Sherlock Holmes</small></a></li>
