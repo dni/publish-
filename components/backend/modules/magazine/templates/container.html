@@ -9,15 +9,17 @@
 
 <div class="buttons">
 	<div class="edit">
-		<button class="printsettings btn">Print Settings</button>
 		<button class="save btn btn-success">Save</button>
 	</div>
 	<div class="saved">
+		<button id="download" class="btn btn-default">PDF</button>
+		<% if (published === false) { %>
+			<button class="publish btn btn-success">Publish</button>
+		<% } else { %>
+			<button class="publish btn btn-default">Unpublish</button>
+		<% } %>
+		
 		<button class="delete btn btn-danger">Delete</button>
-		<button id="print" class="btn">Print</button>
-		<button id="downloadApp" class="btn">Download Standalone App</button>
-		<button id="download" class="btn">Download Print PDF</button>
-		<button id="hpub" class="btn">Generate Hpub</button>
 		<button id="edit" class="btn btn-primary">Edit</button>
 	</div>
 </div>

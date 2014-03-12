@@ -1,18 +1,20 @@
 var fs = require('fs'),
 	_ = require('underscore'),
 	ejs = require('ejs'),
-	db = require('./../model/MagazineSchema');
+	PrintGenerator = require(__dirname + '/PrintGenerator'), 
+	db = require('./../model/MagazineSchema'),
 	db2 = require('./../../article/model/ArticleSchema');
 
-module.exports.generate = function(res, magazine) {
 
-	//  generate Cover
+module.exports.generate = function(magazine) {
+
+	// generate Cover
 	fs.readFile(__dirname + '/hpub_dummy/Book Cover.html', 'utf8', function(err, template){
 		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine[0] });
+		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile(__dirname + "/public/magazines/" + magazine[0].title + "/hpub/Book Cover.html", html, function(err) {
+		fs.writeFile(__dirname + "/public/magazines/" + magazine.title + "/hpub/Book Cover.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -25,9 +27,9 @@ module.exports.generate = function(res, magazine) {
 	fs.readFile(__dirname + '/hpub_dummy/Book Back.html', 'utf8', function(err, template){
 		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine[0] });
+		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/Book Back.html", html, function(err) {
+		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Book Back.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -40,9 +42,9 @@ module.exports.generate = function(res, magazine) {
 	fs.readFile(__dirname + '/hpub_dummy/Tail.html', 'utf8', function(err, template){
 		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine[0] });
+		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/Tail.html", html, function(err) {
+		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Tail.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -55,9 +57,9 @@ module.exports.generate = function(res, magazine) {
 	fs.readFile(__dirname + '/hpub_dummy/Book Index.html', 'utf8', function(err, template){
 		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine[0] });
+		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/Book Index.html", html, function(err) {
+		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Book Index.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -67,7 +69,7 @@ module.exports.generate = function(res, magazine) {
 	});
 
 	// generate JSON	
-	fs.readdir("./public/magazines/" + magazine[0].title + "/hpub/", function(err, files) {
+	fs.readdir("./public/magazines/" + magazine.title + "/hpub/", function(err, files) {
 		if (err) return;
 		var contents = [];
 		for (var key = 0; key < files.length; key++) {
@@ -78,11 +80,11 @@ module.exports.generate = function(res, magazine) {
 		
 		var json = {
 		    "hpub": 1,
-		    "title": magazine[0].title,
-		    "author": [magazine[0].author],
-		    "creator": [magazine[0].author],
+		    "title": magazine.title,
+		    "author": [magazine.author],
+		    "creator": [magazine.author],
 		    "date": new Date(),
-		    "url": "book://localhost:1666/public/magazines/"+magazine[0].title+"/hpub",
+		    "url": "book://localhost:1666/public/magazines/"+magazine.title+"/hpub",
 		
 		    "orientation": "both",
 		    "zoomable": false,
@@ -97,7 +99,7 @@ module.exports.generate = function(res, magazine) {
 		    "contents": contents
 		};
 		
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/book.json", JSON.stringify(json), function(err) {
+		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/book.json", JSON.stringify(json), function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -112,9 +114,9 @@ module.exports.generate = function(res, magazine) {
 	fs.readFile(__dirname + '/hpub_dummy/index.html', 'utf8', function(err, template){
 		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine[0] });
+		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/index.html", html, function(err) {
+		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/index.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -127,7 +129,7 @@ module.exports.generate = function(res, magazine) {
 	// generate Chapters
 	fs.readFile(__dirname + '/hpub_dummy/Page.html', 'utf8', function(err, template){
 		if (err) throw err;
-		var pages = magazine[0].pages;
+		var pages = magazine.pages;
 
 		var writePages = function(page) {
 			if (page === undefined) page = pages.pop();
@@ -142,9 +144,9 @@ module.exports.generate = function(res, magazine) {
 					author: "naturtrüb"
 				}];
 
-				var html = ejs.render(template, { magazine: magazine[0], page: page, article: article[0] });
+				var html = ejs.render(template, { magazine: magazine, page: page, article: article[0] });
 
-				fs.writeFile("./public/magazines/" + magazine[0].title + "/hpub/Page" + page.number + ".html", html, function(err) {
+				fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Page" + page.number + ".html", html, function(err) {
 					if (err) {
 						console.log(err);
 					} else {
@@ -163,4 +165,6 @@ module.exports.generate = function(res, magazine) {
 		writePages();
 
 	});
+	
+	PrintGenerator.generate(magazine);
 };

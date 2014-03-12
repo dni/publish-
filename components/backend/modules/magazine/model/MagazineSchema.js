@@ -8,6 +8,7 @@ var MagazineSchema = new Schema({
   desc: String,
   editorial: String,
   impressum: String,
+  published: Boolean,
   cover: String,
   back: String,
   pages: Array,

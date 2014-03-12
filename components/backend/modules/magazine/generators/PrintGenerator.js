@@ -23,14 +23,14 @@ module.exports.download = function(req, res){
 	});
 };
 
-module.exports.generate = function(req, res) {
-	fs.readdir("./public/magazines/" + req.body.title + "/hpub/", function(err, files) {
+module.exports.generate = function(magazine) {
+	fs.readdir("./public/magazines/" + magazine.title + "/hpub/", function(err, files) {
 		if (err) return;
 		var port = 40000;
 		var renderPages = function(file) {
 			phantom.create({port: port++}, function(ph){
 				ph.createPage(function(page) {
-					return page.open("./public/magazines/" + req.body.title + "/hpub/" + file, function(status) {
+					return page.open("./public/magazines/" + magazine.title + "/hpub/" + file, function(status) {
 						if (status !== "success") {
 							console.log("unable to open page");
 							ph.exit();
@@ -45,7 +45,7 @@ module.exports.generate = function(req, res) {
 								margin : '0'
 							});
 							// page.paperSize = { format: "A5", orientation: 'portrait', margin: '1cm' };
-							page.render("./public/magazines/" + req.body.title + "/pdf/" + split.shift() + ".pdf");
+							page.render("./public/magazines/" + magazine.title + "/pdf/" + split.shift() + ".pdf");
 						});
 					});
 				});
@@ -57,7 +57,5 @@ module.exports.generate = function(req, res) {
 				renderPages(files[key]);
 			}
 		}
-		
-		res.send("generating in progress");
 	});
 };

@@ -9,5 +9,9 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "editorial": "Hello World!"
       "pages": ""
       "impressum": "dnilabs"
+      "published": false
       "cover": ""
       "back": ""
+      
+    togglePublish: ->
+      @.set "published", not @.get "published";
