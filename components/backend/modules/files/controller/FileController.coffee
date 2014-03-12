@@ -19,11 +19,11 @@ define [
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: files[0]
 
     addFile: ->
-      c.l "addFile in Controller"
+      c.l "addFileAction from Controller"
       #view = new MagazineParentView model: new Magazine()
       #Vent.trigger 'app:updateRegion', 'contentRegion', view
 
-    magazines: ->
+    list : ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Files
       #App.sidebarRegion.show view

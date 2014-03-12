@@ -2,11 +2,11 @@ var mongoose = require('mongoose/'),
 	Schema = mongoose.Schema;
 
 
-var PageSchema = new Schema({
-  number: Number,
-  article: String,
-  layout: String,
+var fileSchema = new Schema({
+  name: String,
+  link: String,
+  type: String,
 });
 
 
-module.exports.Page = mongoose.model('Page', PageSchema);
+module.exports.File = mongoose.model('File', fileSchema);
