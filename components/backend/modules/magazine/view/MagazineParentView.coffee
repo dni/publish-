@@ -60,7 +60,12 @@ define [
       "click #download": "downloadPrint"
       "click #addPage": "addPage"
       "stop .sortable": "sortPages"
+      "click .publish": "publish"
 
+    publish: ->
+      @model.togglePublish()
+      @model.save()
+    
     addPage: ->
       @pages.add new Page number: (@pages.length+1).toString()
 
