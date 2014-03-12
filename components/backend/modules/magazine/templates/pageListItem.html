@@ -1,9 +1,9 @@
-<div class="page">
+<div class="page ui-state-default">
 	<form class="form-inline">
-		
+
 	    <% var articles = App.Articles.toJSON() %>
 	    <% var settings = App.Settings.where({name: "MagazineModule"})[0].getValue("layouts").split(",") %>
-	    
+
 		<span class="number badge"><%= number %></span>
 		<select class="article form-control">
 			<% for(var i = 0; i < articles.length; i++) { %>
@@ -22,5 +22,4 @@
 		<a class="remove btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>
 		<a class="sort btn btn-default"><span class="glyphicon glyphicon-sort"></span></a>
 	</form>
-
-<div>
+</div>

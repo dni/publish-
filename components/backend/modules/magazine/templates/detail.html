@@ -13,15 +13,22 @@
 	    <label>Titel</label>
 	    <input type="text" name="title" class="form-control" value="<%= title %>" />
 	</div>
+
+    <div class="form-group">
+        <label>Author</label>
+        <input type="text" name="author" class="form-control" value="<%= author %>" />
+    </div>
+
 	<div class="form-group">
 		<label>Impressum</label>
 		<textarea class="form-control" name="impressum"><%= impressum %></textarea>
 	</div>
+
 	<div class="form-group">
 		<label>Editorial</label>
 		<textarea class="form-control" name="editorial"><%= editorial %></textarea>
 	</div>
-	
+
 	<div class="form-group">
 		<label>Cover</label>
 		<div id="cover">
@@ -34,7 +41,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		
+
 	<label>Back</label>
 		<div id="back">
 			<input type="file" name="back" />

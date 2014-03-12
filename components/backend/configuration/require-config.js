@@ -3,6 +3,7 @@ require.config({
 	baseUrl: '/admin/lib',
 	paths: {
 		jquery: "jquery/dist/jquery",
+		"jquery.ui": "jquery-ui/ui/jquery-ui",
 		lodash: "lodash-amd/main",
 		underscore: "underscore-amd/underscore",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
@@ -38,5 +39,6 @@ require.config({
     ],
 	shim: {
 		'jquery.fileupload':['jquery'],
+		'jquery.ui':['jquery'],
 	}
 });

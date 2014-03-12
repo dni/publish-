@@ -23,11 +23,29 @@ define [
       self = @
       _.each pages, (page) -> self.pages.add new Page page
       @detailRegion.show new DetailView model: @model
-      @pageRegion.show new PageListView collection: @pages
+      view = new PageListView collection: @pages
+      @pageRegion.show view
+
+      view.$el.sortable(
+        revert: true
+        axis: "y"
+        cursor: "move"
+        stop: _.bind @_sortStop, @
+      ).disableSelection()
+
+
+    _sortStop: (event, ui)->
+      self = @
+      _.each $(event.target).find('.number'), (el, i)->
+        console.log self.pages
+        model = self.pages.where 'number': el.innerHTML
+        $(el).text(i)
+        model[0].set("number", i)
+
 
     regions:
       'detailRegion': '#magazine-details'
-      'pageRegion': '#page-list'
+      'pageRegion': '.page-list'
 
     events:
       "click #edit": "toggleEdit"
@@ -38,9 +56,10 @@ define [
       "click #print": "generatePrint"
       "click #download": "downloadPrint"
       "click #addPage": "addPage"
+      "stop .sortable": "sortPages"
 
     addPage: ->
-      @pages.add new Page number: @pages.length
+      @pages.add new Page number: @pages.length+1
 
     toggleEdit: ->
       @$el.find('.edit').toggle()
@@ -69,7 +88,7 @@ define [
         id: @model.get "_id"
         title: @model.get "title"
       , (data) -> console.log data
-      
+
     saveMagazine: ->
       @model.set
         title: $('input[name=title]').val()
