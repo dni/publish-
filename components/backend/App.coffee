@@ -27,6 +27,11 @@ define (require)->
   App.config = JSON.parse Config
   App.mobile = isMobile()
   App.Modules = {}
+  
+  settings = []
+  settings.push App.config
+  App.Settings = new Settings
+  
 
   App.addRegions
     navigationRegion:"#navigation"
@@ -38,8 +43,6 @@ define (require)->
 
   App.navItems = new NavItems
   
-  settings = []
-  App.Settings = new Settings
   
   App.Settings.fetch
     success:->  

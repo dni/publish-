@@ -6,14 +6,20 @@ var phantom = require("phantom");
 
 module.exports.download = function(req, res){	
 	var pages = [];
-	fs.readdir("./public/magazines/" + req.body.title + "/pdf/", function(err, files) {
-		if (err) return;
-		for (var key = 0; key < files.length; key++) {
-			if (files[key].match(/.pdf/g)) {
-				pages.push(scissors("./public/magazines/" + req.body.title + "/pdf/" + files[key]));
+	fs.unlink("./public/magazines/" + req.body.title + "/pdf/Print.pdf", function(){
+		fs.readdir("./public/magazines/" + req.body.title + "/pdf/", function(err, files) {
+			if (err) return;
+			for (var key = 0; key < files.length; key++) {
+				if (files[key].match(/.pdf/g)) {
+					pages.push(scissors("./public/magazines/" + req.body.title + "/pdf/" + files[key]));
+				}
 			}
-		}
-		scissors.join.apply(null, pages).pdfStream().pipe(fs.createWriteStream("./public/magazines/" + req.body.title + "/pdf/Print.pdf"));
+			var stream = fs.createWriteStream("./public/magazines/" + req.body.title + "/pdf/Print.pdf");
+			stream.on("end", function(){
+				res.download("./public/magazines/" + req.body.title + "/pdf/Print.pdf");
+			});
+			scissors.join.apply(null, pages).pdfStream().pipe(stream);
+		});
 	});
 };
 
@@ -22,11 +28,8 @@ module.exports.generate = function(req, res) {
 		if (err) return;
 		var port = 40000;
 		var renderPages = function(file) {
-			console.log("file: " + file);
 			phantom.create({port: port++}, function(ph){
-				
 				ph.createPage(function(page) {
-					console.log("./public/magazines/" + req.body.title + "/hpub/" + file);
 					return page.open("./public/magazines/" + req.body.title + "/hpub/" + file, function(status) {
 						if (status !== "success") {
 							console.log("unable to open page");
@@ -45,7 +48,6 @@ module.exports.generate = function(req, res) {
 							page.render("./public/magazines/" + req.body.title + "/pdf/" + split.shift() + ".pdf");
 						});
 					});
-	
 				});
 			});
 			

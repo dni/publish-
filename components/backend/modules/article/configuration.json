@@ -4,6 +4,7 @@
     	"namespace": "article"
     },
     
+    
 	"navigation": {
 		"button": 0,
 		"route": "articles",
