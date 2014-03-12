@@ -13,6 +13,11 @@
 	      "label": "Domain",
 	      "value": "localhost",
 	      "type": "text"
+		},
+		"development" : {
+	      "label": "In Development Mode",
+	      "value": "1",
+	      "type": "checkbox"
 		}
 	},
 	

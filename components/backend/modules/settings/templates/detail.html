@@ -5,9 +5,9 @@
 		<div class="form-group checkbox">
 		    <label>
 		      <% if (settings[key].value) { %>
-		      	<input type="checkbox" name="<%= key %>" checked>
+		      	<input class="setting" type="checkbox" name="<%= key %>" checked>
 		      <% } else { %>
-				<input type="checkbox" name="<%= key %>">
+				<input class="setting" type="checkbox" name="<%= key %>">
 		      <% } %>	
 		       <%= settings[key].label %>	
 		    </label>
@@ -16,7 +16,7 @@
 	<% } if (settings[key].type=="select") { %>
 		<div class="form-group">
 			<label><%= settings[key].label %></label>
-			<select class="form-control" name="<%= key %>" >
+			<select class="setting form-control" name="<%= key %>" >
 				<% for (option in settings[key].options) { %>
 				    <% if (settings[key].value == option) { %>
 				      	<option selected value="<%= option %>"><%= settings[key].options[option] %></option>
@@ -29,9 +29,10 @@
 	<% } if (settings[key].type=="text") { %>
 		<div class="form-group">
 		    <label><%= settings[key].label %></label>
-		    <input type="<%= settings[key].type %>" class="form-control" name="<%= key %>" value="<%= settings[key].value %>">
+		    <input type="<%= settings[key].type %>" class="setting form-control" name="<%= key %>" value="<%= settings[key].value %>">
 		 </div>
 	<% } %>
+	
 	
 <% } %>
 

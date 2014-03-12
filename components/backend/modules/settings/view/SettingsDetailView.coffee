@@ -5,23 +5,22 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
     template: Template
 
     initialize: ->
-      @model.bind 'change', @render, @    
+      # @model.bind 'change', @render, @    
 
     ui:
       save: ".save"
       cancel: ".cancel"
   
     events:
-      "blur input": "save"
-      "change select": "save"
+      "change .setting": "save"
 
     save: ->
       settings = @model.get "settings"
-      @$el.find(".form-group").each ()->
-        input = $(@).find ".form-control"
-        if input.attr("type") == ("checkbox" or "radio") then val = input.is(':checked')
-        else val = input.val()
-        settings[input.attr("name")].value = val
+
+      @$el.find(".setting").each ()->
+        if $(@).attr("type") == ("checkbox" or "radio") then val = $(@).is(':checked')
+        else val = $(@).val()
+        settings[$(@).attr("name")].value = val
         
-      @model.set settings: settings
+      @model.set 'settings', settings
       @model.save()
