@@ -14,7 +14,7 @@ require.config({
 		text: 'requirejs-text/text',
 		tpl: 'requirejs-tpl/tpl',
 		cs: 'require-cs/cs',
-		fileupload: 'lib/blueimp-file-upload/js/jquery.fileupload'
+		'jquery.fileupload': 'blueimp-file-upload/js/jquery.fileupload'
 	},
 	map: {
 	    '*': {
