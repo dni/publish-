@@ -1,139 +1,56 @@
-var db = require(__dirname + '/model/FileSchema');
-	//Filemanager = require(__dirname + '/generators/PrintGenerator')
+var db = require(__dirname + '/model/FileSchema')
+, connect = require("connect")
+, multipart = require("connect-multiparty")
+
+var middleware = multipart();
+//Filemanager = require(__dirname + '/generators/PrintGenerator')
 
 module.exports.setup = function(app) {
 
-	Filemanager = {
-		load: function() {
+	filemanager = {
+		load : function() {
 			console.log("save file to server");
 		},
-		save: function() {
+		save : function() {
 			console.log("load file from server");
 		}
 	}
 
-	app.post("/loadFile", Filemanager.load);
-	app.post("/saveFile", Filemanager.save);
+	app.post("/loadFile", filemanager.load);
+	app.post("/uploadFile", middleware, function(req,res){
+		console.log(req.files, req.body)
 
-	app.get('/files', function(req, res){
-		console.log("try to get files");
-	  	db.Files.find().limit(20).execFind(function (arr,data) {
-	    	res.send(data);
-	  	});
+	});
+
+	//## API
+	app.get('/files', function(req, res) {
+		db.File.find().limit(20).execFind(function(arr, data) {
+			res.send(data);
+		});
+	});
+
+	app.put('/files/:id', function(req, res) {
+		db.File.findById(req.params.id, function(e, a) {
+			a.name = req.body.title;
+			a.link = req.body.editorial;
+			a.type = req.body.impressum;
+			a.save(function() {
+				res.send(a);
+			});
+		});
+	});
+
+	app["delete"]('/files/:id', function(req, res) {
+		db.File.findById(req.params.id, function(e, a) {
+			return a.remove(function(err) {
+				if (!err) {
+					return res.send('');
+				} else {
+					console.log(err);
+				}
+			});
+		});
 	});
 
 };
-	// // public Route
-	// app.get('/publicMagazines', function(req,res) {
-		// db.Magazine.find({ 'privatecode': false }).limit(20).execFind(function (arr,data) {
-	    	// res.send(data);
-		// });
-	// });
-//
-	// // download baker project
-	// app.get('/downloadApp', function(req, res){
-//
-//
-		// var spawn = require('child_process').spawn;
-        // // Options -r recursive -j ignore directory info - redirect to stdout
-        // var zip = spawn('zip', ['-r', '-', 'baker-master'], {cwd:__dirname});
-//
-        // res.contentType('zip');
-//
-        // // Keep writing stdout to res
-        // zip.stdout.on('data', function (data) {
-            // res.write(data);
-        // });
-//
-        // zip.stderr.on('data', function (data) {
-            // // Uncomment to see the files being added
-            // console.log('zip stderr: ' + data);
-        // });
-//
-        // // End the response on zip exit
-        // zip.on('exit', function (code) {
-            // if(code !== 0) {
-                // res.statusCode = 500;
-                // console.log('zip process exited with code ' + code);
-                // res.end();
-            // } else {
-            	// console.log("zip done");
-                // res.end();
-            // }
-        // });
-    // });
-//
-	// // API
-//
-	// app.post('/magazines', function(req, res){
-		// var a = new db.Magazine();
-		// a.title = req.body.title;
-		// a.editorial = req.body.editorial;
-		// a.impressum = req.body.impressum;
-		// a.cover = req.body.cover;
-		// a.back = req.body.back;
-		// a.pages = req.body.pages;
-		// a.date = new Date();
-//
-		// // upload progress
-		// // req.form.on('progress', function(bytesReceived, bytesExpected) {
-	        // // console.log(((bytesReceived / bytesExpected)*100) + "% uploaded");
-	    // // });
-	    // // req.form.on('end', function() {
-	// //
-	    	// // //upload done
-	        // // console.log(req.files);
-	        // // res.send("well done");
-	    // // });
-//
-//
-//
-	    // // create folderstructure for hpub
-		// fs.mkdir("./public/magazines/" + req.body.title, function() {
-			// fs.mkdir("./public/magazines/" + req.body.title + "/hpub", function() {
-				// fs.mkdir("./public/magazines/" + req.body.title + "/hpub/images");
-				// fs.copy(__dirname + '/generators/hpub_dummy/css', './public/magazines/' + req.body.title + '/hpub/css');
-				// fs.copy(__dirname + "/generators/hpub_dummy/js", "./public/magazines/" + req.body.title + "/hpub/js");
-			// });
-			// fs.mkdir("./public/magazines/" + req.body.title + "/pdf", function() {});
-		// });
-//
-//
-		// a.save(function () {
-			// res.send(a);
-		// });
-//
-	// });
-//
-	// app.put('/magazines/:id', function(req, res){
-		// db.Magazine.findById( req.params.id, function(e, a) {
-			// a.title = req.body.title;
-			// a.editorial = req.body.editorial;
-			// a.impressum = req.body.impressum;
-			// a.cover = req.body.cover;
-			// a.back = req.body.back;
-			// a.pages = req.body.pages;
-			// a.date = new Date();
-			// a.save(function () {
-				// res.send(a);
-			// });
-	  	// });
-	// });
-//
-	// app.delete('/magazines/:id', function(req, res){
-	  	// db.Magazine.findById( req.params.id, function(e, a) {
-			// return a.remove(function (err) {
-		      // if (!err) {
-		        // return res.send('');
-		      // } else {
-		        // console.log(err);
-		      // }
-		    // });
-	  	// });
-	// });
-
-
-
-
-
 

@@ -1,29 +1,24 @@
 var express = require('express'),
 	app = express(),
 	mongoose = require("mongoose"),
-	fileServer = require("./server/fileserver.js"),
 	db = mongoose.connect('mongodb://localhost/publish'),
 	fs = require('fs');
 
 
 app.configure(function() {
-	
+
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
 	app.use(express.cookieParser());
-	app.use(express.bodyParser({
-          keepExtensions: true,
-          limit: 15000000, // 10M limit
-          defer: true              
-    }));
-    
+
+
 	app.use(express.session({ secret: 'keyboard cat' }));
 
 	// app.engine('.html', require('uinexpress').__express)
     // app.set('view engine', 'html')
 	// app.use(passport.initialize());
 	// app.use(passport.session());
-	
+
 	// load/setup components
 	var componentsDir = __dirname + '/components/';
 	fs.readdir(componentsDir, function (err, files) {
@@ -34,7 +29,7 @@ app.configure(function() {
 	         fs.exists(componentsDir+file+'/server.js', function(exists) {
 			    if (exists) {
 			        var component = require(componentsDir+file+'/server.js');
-			        component.setup(app); 
+			        component.setup(app);
 			    }
 			});
 	       }

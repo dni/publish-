@@ -3,8 +3,15 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'tpl!../templates/list.html'
-], 
-($, _, Backbone, Marionette, Template) ->   
-  class ListView extends Backbone.Marionette.ItemView    
+  'tpl!../templates/top.html'
+],
+($, _, Backbone, Marionette, Template) ->
+  class TopView extends Backbone.Marionette.ItemView
     template: Template
+
+    events:
+      "change #upload": "uploadFile"
+
+     uploadFile: ->
+       c.l "lol"
+       @$el.find("#uploadFile").submit()

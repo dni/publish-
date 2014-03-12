@@ -15,6 +15,7 @@ define [
       success:->
     App.Router.processAppRoutes new Controller,
       "newFile": "addFile"
+      "files": "list"
 
     #$("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
 

@@ -1,13 +1,13 @@
 {
     "config": {
-        "name": "MagazineModule",
-        "namespace": "magazine"
+        "name": "FileModule",
+        "namespace": "files"
     },
     "navigation": {
         "button": 0,
-        "route": "magazines",
-        "label": "Magazine",
-        "classNames": "magazines"
+        "route": "files",
+        "label": "Files",
+        "classNames": "files"
     },
 
     "settings": {
@@ -48,7 +48,7 @@
 	},
 
     "model": {
-        "magazine": {
+        "file": {
             "fields" : {
                 "title": {
                     "type": "text",

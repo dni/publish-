@@ -81,7 +81,7 @@ define (require)->
       articleModule = require "cs!./modules/article/ArticleModule"
       magazineModule = require "cs!./modules/magazine/MagazineModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
-      #fileModule = require "cs!./modules/files/FileModule"
+      fileModule = require "cs!./modules/files/FileModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
