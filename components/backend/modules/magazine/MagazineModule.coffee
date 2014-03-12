@@ -7,6 +7,7 @@ define [
 ],
 ( Marionette, Vent, Magazines, Controller, Config ) ->
 
+
   Vent.on "app:ready", ()->
     Vent.trigger "app:addModule", JSON.parse Config
     App.Magazines = new Magazines
@@ -16,6 +17,9 @@ define [
       "newMagazine": "addMagazine"
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
+      
+    $("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
+    
     Vent.trigger "magazine:ready"
 #
   # module = {

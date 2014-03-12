@@ -38,8 +38,13 @@
 	      	"iphone": "iPhone",
 	      	"ipadiphone": "iPad and iPhone"
 	      }
+		},
+		"download" : {
+	      "label": "Download App",
+	      "description": "Comma seperated list of layout keys",
+	      "type": "button",
+	      "event": "downloadApp"
 		}
-		
 	},
 
     "model": {
