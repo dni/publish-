@@ -40,7 +40,10 @@ define [
       $(event.target).find('.number').each (i)->
         elNumber = $(@).text()
         model = self.pages.where({number: elNumber})[0]
-        model.attributes.number = (i+1).toString()
+        if model?
+          model.attributes.number = (i+1).toString()
+        else
+          c.l "model nr.#{elNumber} is broken"
         $(@).text(i+1)
 
     regions:

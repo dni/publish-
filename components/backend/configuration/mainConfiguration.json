@@ -2,12 +2,12 @@
 	"name": "cms",
 	"author": "dnilabs e.U",
 	"version":"0.0.1",
-	
+
 	"config": {
 	    "name": "Main",
     	"namespace": "backend"
     },
-    
+
     "settings": {
 		"domain" : {
 	      "label": "Domain",
@@ -15,21 +15,23 @@
 	      "type": "text"
 		}
 	},
-	
-	
+
+
 	"models": {
 		"article": "ArticleModel",
 		"magazine": "MagazineModel",
-		"setting":"SettingModel"
+		"setting":"SettingModel",
+		"file":"FileModel"
 	},
-	
+
 	"views": "ArticleDetail, ",
 	"entrypoints": "button, overlay",
 	"modules": {
+        "file": "FileModule",
         "article": "ArticleModule",
         "magazine": "MagazineModule"
 	}
-	
-	
-	
+
+
+
 }

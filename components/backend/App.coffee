@@ -27,11 +27,11 @@ define (require)->
   App.config = JSON.parse Config
   App.mobile = isMobile()
   App.Modules = {}
-  
+
   settings = []
   settings.push App.config
   App.Settings = new Settings
-  
+
 
   App.addRegions
     navigationRegion:"#navigation"
@@ -42,10 +42,10 @@ define (require)->
     listRegion:"#list"
 
   App.navItems = new NavItems
-  
-  
+
+
   App.Settings.fetch
-    success:->  
+    success:->
       for key of settings
         setting = App.Settings.where name: settings[key].name
         if setting.length is 0
@@ -53,8 +53,7 @@ define (require)->
           setting.set "settings", settings[key].settings
           setting.set "name", settings[key].name
           App.Settings.create setting
-      
-      
+
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
@@ -65,7 +64,7 @@ define (require)->
   Vent.on 'app:addModule', (config)->
     App.Modules[config.config.name] = config.config
     if config.navigation then App.navItems.add new NavItem config.navigation
-    if config.settings then settings.push 
+    if config.settings then settings.push
       settings:config.settings
       name:config.config.name
 
@@ -73,7 +72,7 @@ define (require)->
 
   Vent.on 'app:updateRegion', (region, view)->
     App[region].show view
-    
+
   Vent.on 'app:closeRegion', (region)->
     App[region].close()
 
@@ -82,6 +81,7 @@ define (require)->
       articleModule = require "cs!./modules/article/ArticleModule"
       magazineModule = require "cs!./modules/magazine/MagazineModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
+      #fileModule = require "cs!./modules/files/FileModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
