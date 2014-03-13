@@ -27,3 +27,6 @@ define [
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Files
       #App.sidebarRegion.show view
+      
+      
+    browser: ->

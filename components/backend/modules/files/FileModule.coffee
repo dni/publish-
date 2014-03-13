@@ -14,22 +14,9 @@ define [
     App.Files.fetch
       success:->
     App.Router.processAppRoutes new Controller,
-      "newFile": "addFile"
       "files": "list"
-
-    #$("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
+      "filebrowser": "browser"
 
     Vent.trigger "files:ready"
-#
-  # module = {
-    # name: "MagazineModule"
-    # namespace: "magazine"
-    # config: JSON.parse Config
-  # }
-#
-  # Command.setHandler "app:ready", ()->
-    # App.Magazines = new Magazines
-    # App.Magazines.fetch
-      # success:->
-    # App.MagazineRouter = new Router
-    # Command.execute "app:addModule", module
+    
+    Vent.on "files:browse", -> App.Router.trigger "browser"

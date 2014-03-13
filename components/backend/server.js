@@ -3,13 +3,15 @@ var mongoose = require("mongoose"),
 	ejs = require('ejs'),
 	phantom = require("phantom"),
 	fs = require('fs');
+	// multipart = require("connect-multiparty");
+
 
 module.exports.setup = function(app) {
 	
 
 	app.configure(function() {
 		app.use('/admin/lib', express.static(__dirname + '/bower_components'));
-		
+		app.use(express.bodyParser());
 		// load/setup modules
 		var moduleDir = __dirname + '/modules/';
 		fs.readdir(moduleDir, function (err, files) {
