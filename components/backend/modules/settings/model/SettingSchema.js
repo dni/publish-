@@ -9,4 +9,4 @@ var SettingSchema = new Schema({
     }
 });
 
-module.exports.Setting = mongoose.model('Setting', SettingSchema); 
+module.exports = mongoose.model('Setting', SettingSchema); 

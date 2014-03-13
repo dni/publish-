@@ -100,6 +100,7 @@ define [
     saveMagazine: ->
       @model.set
         title: $('input[name=title]').val()
+        author: $('input[name=author]').val()
         impressum: $('textarea[name=impressum]').val()
         editorial: $('textarea[name=editorial]').val()
         cover: $("#cover output img").attr("src")

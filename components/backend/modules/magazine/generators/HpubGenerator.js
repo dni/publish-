@@ -14,7 +14,7 @@ module.exports.generate = function(magazine) {
 
 		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile(__dirname + "/public/magazines/" + magazine.title + "/hpub/Book Cover.html", html, function(err) {
+		fs.writeFile(__dirname + "/public/books/" + magazine.title + "/hpub/Book Cover.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -29,7 +29,7 @@ module.exports.generate = function(magazine) {
 
 		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Book Back.html", html, function(err) {
+		fs.writeFile("./public/books/" + magazine.title + "/hpub/Book Back.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -44,7 +44,7 @@ module.exports.generate = function(magazine) {
 
 		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Tail.html", html, function(err) {
+		fs.writeFile("./public/books/" + magazine.title + "/hpub/Tail.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -59,7 +59,7 @@ module.exports.generate = function(magazine) {
 
 		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Book Index.html", html, function(err) {
+		fs.writeFile("./public/books/" + magazine.title + "/hpub/Book Index.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -69,7 +69,7 @@ module.exports.generate = function(magazine) {
 	});
 
 	// generate JSON	
-	fs.readdir("./public/magazines/" + magazine.title + "/hpub/", function(err, files) {
+	fs.readdir("./public/books/" + magazine.title + "/hpub/", function(err, files) {
 		if (err) return;
 		var contents = [];
 		for (var key = 0; key < files.length; key++) {
@@ -84,7 +84,7 @@ module.exports.generate = function(magazine) {
 		    "author": [magazine.author],
 		    "creator": [magazine.author],
 		    "date": new Date(),
-		    "url": "book://localhost:1666/public/magazines/"+magazine.title+"/hpub",
+		    "url": "book://localhost:1666/public/books/"+magazine.title+"/hpub",
 		
 		    "orientation": "both",
 		    "zoomable": false,
@@ -99,7 +99,7 @@ module.exports.generate = function(magazine) {
 		    "contents": contents
 		};
 		
-		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/book.json", JSON.stringify(json), function(err) {
+		fs.writeFile("./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify(json), function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -116,7 +116,7 @@ module.exports.generate = function(magazine) {
 
 		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/magazines/" + magazine.title + "/hpub/index.html", html, function(err) {
+		fs.writeFile("./public/books/" + magazine.title + "/hpub/index.html", html, function(err) {
 			if (err) {
 				console.log(err);
 			} else {
@@ -130,7 +130,7 @@ module.exports.generate = function(magazine) {
 	fs.readFile(__dirname + '/hpub_dummy/Page.html', 'utf8', function(err, template){
 		if (err) throw err;
 		var pages = magazine.pages;
-
+		if (!pages) return;
 		var writePages = function(page) {
 			if (page === undefined) page = pages.pop();
 			db2.Article.findOne({_id: page.article}).execFind(function(err, article){
@@ -146,7 +146,7 @@ module.exports.generate = function(magazine) {
 
 				var html = ejs.render(template, { magazine: magazine, page: page, article: article[0] });
 
-				fs.writeFile("./public/magazines/" + magazine.title + "/hpub/Page" + page.number + ".html", html, function(err) {
+				fs.writeFile("./public/books/" + magazine.title + "/hpub/Page" + page.number + ".html", html, function(err) {
 					if (err) {
 						console.log(err);
 					} else {

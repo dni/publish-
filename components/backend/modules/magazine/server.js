@@ -1,5 +1,6 @@
 var db = require(__dirname + '/model/MagazineSchema'),
 	fs = require('fs'),
+	fs_extra = require("fs-extra"),
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator'),
 	BakerGenerator = require(__dirname + '/generators/BakerGenerator'),
 	HpubGenerator = require(__dirname + '/generators/HpubGenerator');
@@ -9,15 +10,6 @@ module.exports.setup = function(app) {
 	// generator
 	app.post("/downloadPrint", PrintGenerator.download);
 	app.get('/downloadApp', BakerGenerator.download);
-	
-
-	// public Route
-	app.get('/publicMagazines', function(req,res) {
-		db.Magazine.find({ 'privatecode': false }).limit(20).execFind(function (arr,data) {
-	    	res.send(data);
-		});
-	});
-	
 
 	// API
 	app.get('/magazines', function(req, res){
@@ -27,13 +19,12 @@ module.exports.setup = function(app) {
 	});
 
 	app.post('/magazines', function(req, res){
-		
-		 
 		var a = new db.Magazine();
 		a.title = req.body.title;
 		a.editorial = req.body.editorial;
 		a.impressum = req.body.impressum;
 		a.cover = req.body.cover;
+		a.author = req.body.author;
 		a.back = req.body.back;
 		a.pages = req.body.pages;
 		a.date = new Date();
@@ -49,17 +40,31 @@ module.exports.setup = function(app) {
 
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
+			if (a.title != req.body.title) {
+				var exec = require('child_process').exec,child;
+				child = exec('rm -rf '+ a.title,function(err,out) { 
+				  console.log(out); err && console.log(err); 
+				});
+			}
+			
 			a.title = req.body.title;
 			a.editorial = req.body.editorial;
 			a.impressum = req.body.impressum;
 			a.cover = req.body.cover;
 			a.back = req.body.back;
+			a.author = req.body.author;
 			a.pages = req.body.pages;
 			a.published = req.body.published;
 			a.date = new Date();
+			
+			HpubGenerator.generate(a);
+			
 			a.save(function () {
 				res.send(a);
 			});
+			
+			
+			
 	  	});
 	});
 
@@ -67,6 +72,11 @@ module.exports.setup = function(app) {
 	  	db.Magazine.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
+		      	
+				var exec = require('child_process').exec,child;
+				child = exec('rm -rf '+ a.title,function(err,out) { 
+				  console.log(out); err && console.log(err); 
+				});
 		        return res.send('');
 		      } else {
 		        console.log(err);
@@ -78,13 +88,13 @@ module.exports.setup = function(app) {
 };
 
 function initialize(folder, cb) {
-	fs.mkdir("./public/magazines/" + folder, function() {
-		fs.mkdir("./public/magazines/" + folder + "/hpub", function() {
-			fs.mkdir("./public/magazines/" + folder + "/hpub/images");
-			fs.copy(__dirname + '/generators/hpub_dummy/css', './public/magazines/' + folder + '/hpub/css');
-			fs.copy(__dirname + "/generators/hpub_dummy/js", "./public/magazines/" + folder + "/hpub/js");
+	fs.mkdir("./public/books/" + folder, function() {
+		fs.mkdir("./public/books/" + folder + "/hpub", function() {
+			fs.mkdir("./public/books/" + folder + "/hpub/images");
+			fs_extra.copy(__dirname + '/generators/hpub_dummy/css', './public/books/' + folder + '/hpub/css');
+			fs_extra.copy(__dirname + "/generators/hpub_dummy/js", "./public/books/" + folder + "/hpub/js");
 		});
-		fs.mkdir("./public/magazines/" + folder + "/pdf", function() {});
+		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
 		cb();
 	});
 }
