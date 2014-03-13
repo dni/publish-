@@ -70,7 +70,6 @@ function buildStandalone(){
 	
 	fs_extra.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
 	
-	
 	var files = fs.readdirSync('./public/books');
 	for (key in files) {
 		var file = files[key];
