@@ -6,19 +6,19 @@ var phantom = require("phantom");
 
 module.exports.download = function(req, res){	
 	var pages = [];
-	fs.unlink("./public/books/" + req.body.title + "/pdf/Print.pdf", function(){
-		fs.readdir("./public/books/" + req.body.title + "/pdf/", function(err, files) {
+	fs.unlink("./public/books/" + req.params.title + "/pdf/Print.pdf", function(){
+		fs.readdir("./public/books/" + req.params.title + "/pdf/", function(err, files) {
 			if (err) return;
 			for (var key = 0; key < files.length; key++) {
 				if (files[key].match(/.pdf/g)) {
-					pages.push(scissors("./public/books/" + req.body.title + "/pdf/" + files[key]));
+					pages.push(scissors("./public/books/" + req.params.title + "/pdf/" + files[key]));
 				}
 			}
-			var stream = fs.createWriteStream("./public/books/" + req.body.title + "/pdf/Print.pdf");
-			scissors.join.apply(null, pages).pdfStream().pipe(stream);
-			stream.on("end", function(){
-				console.log("download");
-				res.download("./public/books/" + req.body.title + "/pdf/Print.pdf");
+			var stream = fs.createWriteStream("./public/books/" + req.params.title + "/pdf/Print.pdf");
+			var pdfStream = scissors.join.apply(null, pages).pdfStream();
+			pdfStream.pipe(stream);
+			pdfStream.on("end", function(){
+				res.download("./public/books/" + req.params.title + "/pdf/Print.pdf");
 			});
 		});
 	});

@@ -13,6 +13,20 @@ define [
     # Not required since 'div' is the default if no el or tagName specified
     template: Template
 
+    regions:
+      'detailRegion': '#magazine-details'
+      'pageRegion': '.page-list'
+
+    events:
+      "click #edit": "toggleEdit"
+      "click .save": "saveMagazine"
+      "click .delete": "deleteMagazine"
+      'click #publish': "publishMagazine"
+      "click #download": "downloadPrint"
+      "click #addPage": "addPage"
+      "stop .sortable": "sortPages"
+      "click .publish": "publish"
+      
     initialize:->
       @model.on "change", @render
       @on "render", @afterRender
@@ -46,21 +60,6 @@ define [
           c.l "model nr.#{elNumber} is broken"
         $(@).text(i+1)
 
-    regions:
-      'detailRegion': '#magazine-details'
-      'pageRegion': '.page-list'
-
-    events:
-      "click #edit": "toggleEdit"
-      "click .save": "saveMagazine"
-      "click .delete": "deleteMagazine"
-      'click #publish': "publishMagazine"
-      "click #hpub": "generateHpub"
-      "click #print": "generatePrint"
-      "click #download": "downloadPrint"
-      "click #addPage": "addPage"
-      "stop .sortable": "sortPages"
-      "click .publish": "publish"
 
     publish: ->
       @model.togglePublish()
@@ -75,27 +74,18 @@ define [
       @$el.find('.saved').toggle()
 
     downloadPrint: ->
-       form = $ '<form>',
-          action: '/downloadPrint'
-          method: 'POST'
-
-       form.append $ '<input>',
-          name: 'title'
-          value: @model.get "title"
-
-       form.submit();
-
-    generateHpub: ->
-      $.post "/generate",
-        id: @model.get "_id"
-        title: @model.get "title"
-      , (data) -> console.log data
-
-    generatePrint: ->
-      $.post "/generatePrint",
-        id: @model.get "_id"
-        title: @model.get "title"
-      , (data) -> console.log data
+      
+       window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
+      
+       # form = $ '<form>',
+          # action: '/downloadPrint'
+          # method: 'POST'
+# 
+       # form.append $ '<input>',
+          # name: 'title'
+          # value: @model.get "title"
+# 
+       # form.submit();
 
     saveMagazine: ->
       @model.set
@@ -116,4 +106,10 @@ define [
         @model.save
           success:->
       false
+      
+    deleteMagazine: ->
+      @model.destroy
+        success:->
+          
+      Vent.trigger 'app:closeRegion', 'contentRegion'
 
