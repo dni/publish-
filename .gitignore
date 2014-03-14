@@ -3,4 +3,5 @@ bower_components
 .project
 public/articles/*
 public/magazines/*
-.DS_Store
+.DS_Storepublic/files
+public/files

@@ -13,7 +13,7 @@ require.config({
 		tpl: '/lib/requirejs-tpl/tpl',
 		cs: '/lib/require-cs/cs',
 		underscore: '/lib/underscore-amd/underscore'
-	}, 
+	},
 	packages: [
       {
         name: 'less',
@@ -29,7 +29,7 @@ require.config({
 	    main: 'index'
 	  }
     ],
-    
+
     map: {
         "*": {
             "backbone.wreqr": "wreqr",

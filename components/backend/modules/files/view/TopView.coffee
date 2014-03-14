@@ -12,6 +12,5 @@ define [
     events:
       "change #upload": "uploadFile"
 
-     uploadFile: ->
-       c.l "lol"
-       @$el.find("#uploadFile").submit()
+    uploadFile: ->
+      @$el.find("#uploadFile").submit()
