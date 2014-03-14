@@ -3,7 +3,7 @@ var express = require('express'),
 	mongoose = require("mongoose"),
 	db = mongoose.connect('mongodb://localhost/publish'),
 	fs = require('fs');
-
+ökljölkjölkj d
 
 app.configure(function() {
 
