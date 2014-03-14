@@ -8,7 +8,7 @@ var db = require(__dirname + '/model/MagazineSchema'),
 module.exports.setup = function(app) {
 	
 	// generator
-	app.post("/downloadPrint", PrintGenerator.download);
+	app.get("/downloadPrint/:title", PrintGenerator.download);
 	app.get('/downloadApp', BakerGenerator.download);
 
 	// API
@@ -62,8 +62,6 @@ module.exports.setup = function(app) {
 			a.save(function () {
 				res.send(a);
 			});
-			
-			
 			
 	  	});
 	});
