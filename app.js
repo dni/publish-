@@ -2,7 +2,8 @@ var express = require('express'),
 	app = express(),
 	mongoose = require("mongoose"),
 	db = mongoose.connect('mongodb://localhost/publish'),
-	fs = require('fs');
+	fs = require('fs'),
+	spawn = require('spawn');
 
 
 app.configure(function() {
