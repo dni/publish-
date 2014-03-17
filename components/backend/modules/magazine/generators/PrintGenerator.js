@@ -1,5 +1,6 @@
 var fs = require('fs');
 var scissors = require('scissors');
+var _ = require("underscore");
 var path = require('path');
 var mime = require('mime');
 var phantom = require("phantom");
@@ -10,17 +11,13 @@ module.exports.download = function(req, res){
 	fs.unlink("./public/books/" + req.params.title + "/pdf/Print.pdf", function(){
 		fs.readdir("./public/books/" + req.params.title + "/pdf/", function(err, files) {
 			if (err) return;
-			for (var key = 0; key < files.length; key++) {
-				if (files[key].match(/.pdf/g)) {
-					pages.push(scissors("./public/books/" + req.params.title + "/pdf/" + files[key]));
+			_.each(files, function(file){
+				if (file.match(/.pdf/g)) {
+					pages.push(scissors("./public/books/" + req.params.title + "/pdf/" + file));
 				}
-			}
-			var stream = fs.createWriteStream("./public/books/" + req.params.title + "/pdf/Print.pdf");
-			var pdfStream = scissors.join.apply(null, pages).pdfStream();
-			pdfStream.pipe(stream);
-			pdfStream.on("end", function(){
-				res.download("./public/books/" + req.params.title + "/pdf/Print.pdf");
 			});
+
+			var pdfStream = scissors.join.apply(null, pages).pdfStream().pipe(res);
 		});
 	});
 };
