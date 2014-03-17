@@ -10,6 +10,7 @@ require.config({
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
 		babysitter: "backbone.babysitter/lib/amd/backbone.babysitter",
 		backbone: "backbone-amd/backbone",
+		bootstrap: "bootstrap/dist/js/bootstrap",
 		marionette: "marionette/lib/core/amd/backbone.marionette",
         localstorage: "backbone-localstorage/backbone-localstorage",
 		text: 'requirejs-text/text',
@@ -40,5 +41,6 @@ require.config({
 	shim: {
 		'jquery.ui':['jquery'],
 		'jquery.form':['jquery'],
+		'bootstrap':['jquery'],
 	}
 });

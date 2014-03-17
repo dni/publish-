@@ -15,11 +15,11 @@ define [
     App.Files.fetch
       success:->
 
+
     App.Router.processAppRoutes new Controller,
       "files": "list"
       "file/:id": "show"
-      "filebrowser": "browser"
+      "filebrowser": "filebrowser"
 
-    Vent.on "files:browse", -> App.Router.trigger "filebrowser"
     Vent.trigger "files:ready"
 

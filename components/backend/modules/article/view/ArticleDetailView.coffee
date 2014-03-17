@@ -24,7 +24,7 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
       'click #publish': "publishArticle"
     
     addFiles:->
-      Vent.trigger "files:browse"
+      App.Router.navigate "filebrowser", true
     
     toggleEdit: ->
       @ui.edit.toggle()

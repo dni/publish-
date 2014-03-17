@@ -44,6 +44,7 @@ module.exports.setup = function(app) {
 			res.send(data);
 		});
 	});
+	
 
 	app.delete('/files/:id', function(req, res) {
 		db.File.findById(req.params.id, function(e, a) {
