@@ -18,43 +18,45 @@ module.exports.setup = function(app) {
 		while(len--){
 			var srcFile = srcFiles[len]
 			var fileModel = new db.File();
-			var targetLink = './public/files/'+srcFile.name;
+			var name = srcFile.name;
+			var targetLink = './public/files/' + name;
+			
 
 			if (fs.existsSync(targetLink)===true){
-				targetLink = './public/files/copy_'+Date.now()+'_'+srcFile.name;
+				name = 'copy_'+Date.now()+'_'+srcFile.name;
+				targetLink = './public/files/' + name;
 			}
 
-			fileModel.name = srcFile.name;
+			fileModel.name = name;
 			fileModel.type = srcFile.type;
-			fileModel.link = targetLink;
+			fileModel.link = './static/files/' + name;
 
 			fs.renameSync(srcFile.path, targetLink);
-			fileModel.save(function () {
-				res.send(fileModel);
-			});
+			fileModel.save();
 
 		}
-		// this is only for lazyness
-		// got no idea to stop redirect ...
-		res.redirect('back');
+		res.send('success');
 	});
 
 	//## API
 	app.get('/files', function(req, res) {
 		db.File.find().limit(20).execFind(function(arr, data) {
-			console.log("data", data)
 			res.send(data);
 		});
 	});
 
-	app["delete"]('/files/:id', function(req, res) {
+	app.delete('/files/:id', function(req, res) {
 		db.File.findById(req.params.id, function(e, a) {
-			return a.remove(function(err) {
-				if (!err) {
-					return res.send('');
-				} else {
-					console.log(err);
-				}
+			
+			if (fs.existsSync("./public/files/" + a.name)===true){
+				fs.unlinkSync("./public/files/" + a.name);
+			}
+			
+			return a.remove(function(err, model) {
+				
+				if (err) return console.log(err);
+				
+				return res.send('');
 			});
 		});
 	});

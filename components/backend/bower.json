@@ -20,7 +20,8 @@
     "requirejs-tpl": "*",
     "backbone.wreqr": "*",
     "backbone.babysitter": "*",
-    "jquery-ui": "~1.10.4"
+    "jquery-ui": "~1.10.4",
+    "jquery-form": "~3.46.0"
   },
   "devDependencies": {
     "requirejs": "latest"

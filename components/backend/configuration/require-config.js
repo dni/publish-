@@ -4,6 +4,7 @@ require.config({
 	paths: {
 		jquery: "jquery/dist/jquery",
 		"jquery.ui": "jquery-ui/ui/jquery-ui",
+		"jquery.form": "jquery-form/jquery.form",
 		lodash: "lodash-amd/main",
 		underscore: "underscore-amd/underscore",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
@@ -38,5 +39,6 @@ require.config({
     ],
 	shim: {
 		'jquery.ui':['jquery'],
+		'jquery.form':['jquery'],
 	}
 });

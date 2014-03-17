@@ -12,20 +12,17 @@ define [
 
 ], ( Vent, $, _, Backbone, Marionette, ListView, DetailView, TopView, File, Files) ->
 
-  class MagazineController extends Backbone.Marionette.Controller
+  class FileController extends Backbone.Marionette.Controller
 
-    detailsFile: (id) ->
+    browser: ->
+      console.log "filebrowser"
+      Vent.trigger 'app:updateRegion', 'overlayRegion', new ListView collection:App.Files
+      
+    show: (id) ->
       file = App.Files.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: files[0]
+      Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
 
     list : ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Files
       #App.sidebarRegion.show view
-
-
-    browser: ->
-      # Vent.trigger 'app:updateRegion', 'overlayRegion', new BrowseView collection:App.Files
-
-    editFile:->
-      # Vent.trigger 'app:updateRegion', 'overlayRegion', new EditFileView collection:App.Files

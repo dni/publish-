@@ -4,5 +4,5 @@ define [
   "cs!./File"
 ], (_, Backbone, File) ->
   class Files extends Backbone.Collection
-    model: Files
+    model: File
     url: "/files/"
