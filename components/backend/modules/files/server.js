@@ -20,9 +20,9 @@ module.exports.setup = function(app) {
 			var fileModel = new db.File();
 			var name = srcFile.name;
 			var targetLink = './public/files/' + name;
-			
 
-			if (fs.existsSync(targetLink)===true){
+
+			if (fs.existsSync(targetLink)===true) {
 				name = 'copy_'+Date.now()+'_'+srcFile.name;
 				targetLink = './public/files/' + name;
 			}
@@ -44,19 +44,36 @@ module.exports.setup = function(app) {
 			res.send(data);
 		});
 	});
-	
+
+	app.put('/files/:id', function(req, res){
+		db.File.findById(req.params.id, function(e, a) {
+			if(a.name!=req.body.name) {
+				link = './public/files/' + a.name;
+				targetLink = './public/files/' + req.body.name;
+				fs.renameSync(link, targetLink);
+				a.link = './static/files/' + req.body.name;
+
+			}
+				a.name = req.body.name
+				a.info = req.body.info
+				a.alt = req.body.alt
+				a.desc = req.body.desc
+
+			a.save(function () { res.send(a); });
+	  	});
+	});
 
 	app.delete('/files/:id', function(req, res) {
 		db.File.findById(req.params.id, function(e, a) {
-			
+
 			if (fs.existsSync("./public/files/" + a.name)===true){
 				fs.unlinkSync("./public/files/" + a.name);
 			}
-			
+
 			return a.remove(function(err, model) {
-				
+
 				if (err) return console.log(err);
-				
+
 				return res.send('');
 			});
 		});
