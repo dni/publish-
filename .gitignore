@@ -7,4 +7,3 @@ public/books/*
 components/backend/modules/magazine/generators/publish-baker
 .DS_Store
 public/files/*
-
