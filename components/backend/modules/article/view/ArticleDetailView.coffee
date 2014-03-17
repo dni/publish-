@@ -19,8 +19,12 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
     events:
       "click #edit": "toggleEdit"
       "click .save": "saveArticle"
+      "click #files": "addFiles"
       "click .delete": "deleteArticle"
       'click #publish': "publishArticle"
+    
+    addFiles:->
+      Vent.trigger "files:browse"
     
     toggleEdit: ->
       @ui.edit.toggle()
@@ -36,7 +40,7 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
       @model.set
         title: @ui.inputTitle.val()
         author: @ui.inputAuthor.val()
-        images: files
+        files: files
         desc: @ui.inputArticle.val()
       if @model.isNew()
         App.Articles.create @model,
@@ -50,6 +54,4 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
     deleteArticle: ->
       @model.destroy
         success:->
-          
-      console.log "destroy"
       Vent.trigger 'app:closeRegion', 'contentRegion'

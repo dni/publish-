@@ -21,17 +21,13 @@
 		<textarea class="form-control" name="article"><%= desc %></textarea>
 	</div>
 	<div class="form-group">
-		<label>Bilder</label>
-		<div id="images" class="btn btn-success fileinput-button">
+		<div id="files" class="btn btn-success fileinput-button">
 	        <i class="glyphicon glyphicon-plus"></i>
 	        <span>Add files...</span>
-			<input id="imageUpload" type="file" name="images[]" multiple />
 		</div>
 	</div>
-	<div id="files">
-		<% if (images) { %>
-			<% for (var i = 0; i < images.length; i++) { %> <img width="150" src="<%= images[i] %>" /> <%  }; %>
-		<% } %>
+	<div id="previewfiles">
+
 	</div>
 </div>
 <div class="buttons">

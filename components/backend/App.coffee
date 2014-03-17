@@ -41,6 +41,9 @@ define (require)->
     listTopRegion: "#list-top"
     listRegion:"#list"
 
+  App.overlayRegion.on "show", ->
+    console.log App.overlayRegion
+
   App.navItems = new NavItems
 
 

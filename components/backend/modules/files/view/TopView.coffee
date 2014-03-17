@@ -4,6 +4,7 @@ define [
   'backbone'
   'marionette'
   'tpl!../templates/top.html'
+  "jquery.form"
 ],
 ($, _, Backbone, Marionette, Template) ->
   class TopView extends Backbone.Marionette.ItemView
@@ -13,4 +14,8 @@ define [
       "change #upload": "uploadFile"
 
     uploadFile: ->
+      
+      @$el.find("#uploadFile").ajaxForm (response) ->
+        App.Files.fetch()
+
       @$el.find("#uploadFile").submit()

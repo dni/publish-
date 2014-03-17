@@ -4,4 +4,4 @@ bower_components
 public/articles/*
 public/magazines/*
 .DS_Storepublic/files
-public/files
+public/files/*
