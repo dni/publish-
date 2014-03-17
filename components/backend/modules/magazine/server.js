@@ -40,11 +40,19 @@ module.exports.setup = function(app) {
 
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
+			
 			if (a.title != req.body.title) {
-				var exec = require('child_process').exec,child;
-				child = exec('rm -rf '+ a.title,function(err,out) { 
-				  console.log(out); err && console.log(err); 
-				});
+				var child_process = require('child_process').spawn;
+			    var spawn = child_process('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'});
+			    spawn.on('exit', function (code) {
+			        if(code !== 0) {
+			            res.statusCode = 500;
+			            console.log('remove files (rm) process exited with code ' + code);
+			        } else {
+			        	console.log("remove files (rm)  done");
+			        }
+			    });
+				
 			}
 			
 			a.title = req.body.title;
@@ -57,9 +65,10 @@ module.exports.setup = function(app) {
 			a.published = req.body.published;
 			a.date = new Date();
 			
-			HpubGenerator.generate(a);
-			
 			a.save(function () {
+				initialize(req.body.title, function(){
+					HpubGenerator.generate(a);
+				});
 				res.send(a);
 			});
 			

@@ -1,7 +1,7 @@
 var fs = require('fs'),
 	_ = require('underscore'),
 	ejs = require('ejs'),
-	PrintGenerator = require(__dirname + '/PrintGenerator'), 
+	PrintGenerator = require(__dirname + '/PrintGenerator'),
 	db = require('./../model/MagazineSchema'),
 	db2 = require('./../../article/model/ArticleSchema');
 
@@ -9,162 +9,80 @@ var fs = require('fs'),
 module.exports.generate = function(magazine) {
 
 	// generate Cover
-	fs.readFile(__dirname + '/hpub_dummy/Book Cover.html', 'utf8', function(err, template){
-		if (err) throw err;
-
-		var html = ejs.render(template, { magazine: magazine });
-
-		fs.writeFile(__dirname + "/public/books/" + magazine.title + "/hpub/Book Cover.html", html, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Cover was saved!");
-			}
-		});
-	});
+	var template = fs.readFileSync(__dirname + '/hpub_dummy/Book Cover.html', 'utf8');
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Cover.html", ejs.render(template, { magazine: magazine }));
+	PrintGenerator.generatePage("Book Cover.html", magazine);
 
 	//  generate Back
-	fs.readFile(__dirname + '/hpub_dummy/Book Back.html', 'utf8', function(err, template){
-		if (err) throw err;
+	template = fs.readFileSync(__dirname + '/hpub_dummy/Book Back.html', 'utf8');
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Back.html", ejs.render(template, { magazine: magazine }));
+	PrintGenerator.generatePage("Book Back.html", magazine);
 
-		var html = ejs.render(template, { magazine: magazine });
+	//  generate index
+	template = fs.readFileSync(__dirname + '/hpub_dummy/index.html', 'utf8');
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/index.html", ejs.render(template, { magazine: magazine }));
+	PrintGenerator.generatePage("index.html", magazine);
 
-		fs.writeFile("./public/books/" + magazine.title + "/hpub/Book Back.html", html, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Cover was saved!");
-			}
-		});
-	});
-
-	//  generate Impressum
-	fs.readFile(__dirname + '/hpub_dummy/Tail.html', 'utf8', function(err, template){
-		if (err) throw err;
-
-		var html = ejs.render(template, { magazine: magazine });
-
-		fs.writeFile("./public/books/" + magazine.title + "/hpub/Tail.html", html, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Tail was saved!");
-			}
-		});
-	});
+	// generate Impressum
+	template = fs.readFileSync(__dirname + '/hpub_dummy/Tail.html', 'utf8');
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Tail.html", ejs.render(template, { magazine: magazine }));
+	PrintGenerator.generatePage("Tail.html", magazine);
 
 	// generate Editorial
-	fs.readFile(__dirname + '/hpub_dummy/Book Index.html', 'utf8', function(err, template){
-		if (err) throw err;
+	template = fs.readFileSync(__dirname + '/hpub_dummy/Book Index.html', 'utf8');
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render(template, { magazine: magazine }));
+	PrintGenerator.generatePage("Book Index.html", magazine);
 
-		var html = ejs.render(template, { magazine: magazine });
+	// generate JSON
+	var files = fs.readdirSync("./public/books/" + magazine.title + "/hpub/");
 
-		fs.writeFile("./public/books/" + magazine.title + "/hpub/Book Index.html", html, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Index was saved!");
-			}
-		});
-	});
-
-	// generate JSON	
-	fs.readdir("./public/books/" + magazine.title + "/hpub/", function(err, files) {
-		if (err) return;
-		var contents = [];
-		for (var key = 0; key < files.length; key++) {
-			if (files[key].match(/.html/g)) {
-				contents.push(files[key]);
-			}
+	var contents = [];
+	for (var key = 0; key < files.length; key++) {
+		if (files[key].match(/.html/g)) {
+			contents.push(files[key]);
 		}
-		
-		var json = {
-		    "hpub": 1,
-		    "title": magazine.title,
-		    "author": [magazine.author],
-		    "creator": [magazine.author],
-		    "date": new Date(),
-		    "url": "book://localhost:1666/public/books/"+magazine.title+"/hpub",
-		
-		    "orientation": "both",
-		    "zoomable": false,
-		
-		    "-baker-background": "#000000",
-		    "-baker-vertical-bounce": true,
-		    "-baker-media-autoplay": true,
-		    "-baker-background-image-portrait": "gfx/background-portrait.png",
-		    "-baker-background-image-landscape": "gfx/background-landscape.png",
-		    "-baker-page-numbers-color": "#000000",
-		
-		    "contents": contents
-		};
-		
-		fs.writeFile("./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify(json), function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Index was saved!");
-			}
+	}
+
+	var json = {
+	    "hpub": 1,
+	    "title": magazine.title,
+	    "author": [magazine.author],
+	    "creator": [magazine.author],
+	    "date": new Date(),
+	    "url": "book://localhost:1666/public/books/"+magazine.title+"/hpub",
+
+	    "orientation": "both",
+	    "zoomable": false,
+
+	    "-baker-background": "#000000",
+	    "-baker-vertical-bounce": true,
+	    "-baker-media-autoplay": true,
+	    "-baker-background-image-portrait": "gfx/background-portrait.png",
+	    "-baker-background-image-landscape": "gfx/background-landscape.png",
+	    "-baker-page-numbers-color": "#000000",
+
+	    "contents": contents
+	};
+
+	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify(json));
+
+	// CHAPTERS
+	template = fs.readFileSync(__dirname + '/hpub_dummy/Page.html', 'utf8');
+	_.each(magazine.pages, function(page){
+		db2.Article.findOne({_id: page.article}).execFind(function(err, article){
+			if (err) console.log(err);
+			if (!article) article = [{
+				title: "KAPUTT!",
+				images: "KAPUUTT!",
+				desc: "KAPUTT",
+				author: "naturtrüb"
+			}];
+			var html = ejs.render(template, { magazine: magazine, page: page, article: article });
+			var file = "Page" + page.number + ".html";
+			fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + file, html);
+			PrintGenerator.generatePage(file, magazine);
 		});
 	});
-	
-	
-	
-	//  generate index
-	fs.readFile(__dirname + '/hpub_dummy/index.html', 'utf8', function(err, template){
-		if (err) throw err;
 
-		var html = ejs.render(template, { magazine: magazine });
 
-		fs.writeFile("./public/books/" + magazine.title + "/hpub/index.html", html, function(err) {
-			if (err) {
-				console.log(err);
-			} else {
-				console.log("Cover was saved!");
-			}
-		});
-	});
-	
-
-	// generate Chapters
-	fs.readFile(__dirname + '/hpub_dummy/Page.html', 'utf8', function(err, template){
-		if (err) throw err;
-		var pages = magazine.pages;
-		if (!pages) return;
-		var writePages = function(page) {
-			if (page === undefined) page = pages.pop();
-			db2.Article.findOne({_id: page.article}).execFind(function(err, article){
-
-				if (err) console.log(err);
-
-				if (!article) article = [{
-					title: "KAPUTT!",
-					images: "KAPUUTT!",
-					desc: "KAPUTT",
-					author: "naturtrüb"
-				}];
-
-				var html = ejs.render(template, { magazine: magazine, page: page, article: article[0] });
-
-				fs.writeFile("./public/books/" + magazine.title + "/hpub/Page" + page.number + ".html", html, function(err) {
-					if (err) {
-						console.log(err);
-					} else {
-						console.log("The file was saved!");
-					}
-				});
-			});
-
-			var nextPage = pages.pop();
-			if (nextPage) {
-				writePages(nextPage);
-			}
-			return;
-		};
-		
-		writePages();
-
-	});
-	
-	PrintGenerator.generate(magazine);
 };
