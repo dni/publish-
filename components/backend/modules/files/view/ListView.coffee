@@ -7,6 +7,9 @@ define [
 
   class ItemView extends Backbone.Marionette.ItemView
     template: Template
+    initialize: ->
+      @model.on "change", @render
+
 
   class ListView extends Backbone.Marionette.CollectionView
     itemView: ItemView
