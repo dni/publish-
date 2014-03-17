@@ -44,6 +44,7 @@ module.exports.setup = function(app) {
 	
 	app.put('/articles/:id', function(req, res){
 		db.Article.findById( req.params.id, function(e, a) {
+			
 			a.title = req.body.title;
 			a.desc = req.body.desc;
 			a.author = req.body.author;

@@ -14,6 +14,7 @@ define (require)->
   Less = require 'less!./style/main.less'
   Config = require 'text!./configuration/mainConfiguration.json'
   Vent = require "cs!./utilities/Vent"
+  Bootstrap = require "bootstrap"
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
@@ -37,12 +38,10 @@ define (require)->
     navigationRegion:"#navigation"
     contentRegion:"#content"
     infoRegion:"#info"
-    overlayRegion: "#overlay"
+    overlayRegion: ".modal-body"
     listTopRegion: "#list-top"
     listRegion:"#list"
 
-  App.overlayRegion.on "show", ->
-    console.log App.overlayRegion
 
   App.navItems = new NavItems
 
