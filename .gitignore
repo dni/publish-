@@ -3,5 +3,8 @@ bower_components
 .project
 public/articles/*
 public/magazines/*
-.DS_Storepublic/files
+public/books/*
+components/backend/modules/magazine/generators/publish-baker
+.DS_Store
 public/files/*
+
