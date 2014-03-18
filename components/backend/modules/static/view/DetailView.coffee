@@ -5,6 +5,7 @@ define [
   'backbone'
   'tpl!../templates/detail.html'
   'cs!../model/StaticBlock'
+
 ], (Vent, $, _, Backbone, Template, StaticBlock) ->
 
   class StaticDetailView extends Backbone.Marionette.ItemView
@@ -22,15 +23,20 @@ define [
       "blur textarea": "saveStatic"
       "change .deleteable": "saveStatic"
       "click .delete": "deleteStatic"
+      "click .revert": "revertStatic"
 
     addFiles:->
       App.Router.navigate "filebrowser", true
+
+
+    revertStatic: ->
+      @model.destroy success: ->
+      window.document.location.reload()
 
     saveStatic: ->
       @model.set
         key: @ui.key.val()
         data: @ui.data.val()
-        deleteable: @ui.deleteable.prop('checked')
       if @model.isNew()
         App.StaticBlocks.create @model,
           wait: true

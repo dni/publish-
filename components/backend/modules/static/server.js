@@ -10,7 +10,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.get('/staticBlocks/:id', function(req, res){
-	  	db.StaticBlock.findById( req.params.id, function(e, a) {
+	  	db.StaticBlock.findOne( {key:req.params.id}, function(e, a) {
 	    	res.send(a.data);
 	  	});
 	});
@@ -43,6 +43,7 @@ module.exports.setup = function(app) {
 
 	app.delete('/staticBlocks/:id', function(req, res){
 	  	db.StaticBlock.findById( req.params.id, function(e, a) {
+
 			return a.remove(function (err) {
 		      if (!err) {
 		        return res.send('');
