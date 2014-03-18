@@ -22,7 +22,7 @@ define [
     add: ->
       view = new DetailView model: new Model
       Vent.trigger 'app:updateRegion', 'contentRegion', view
-      view.toggleEdit()
+      #view.toggleEdit()
 
     list: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView

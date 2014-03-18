@@ -11,6 +11,11 @@ define [
     App.StaticBlocks = new StaticBlocks
     App.StaticBlocks.fetch
       success:->
+        head = App.StaticBlocks.where key: "head"
+        if !head[0]?
+          head = "<title> Undefined - Title </tile>"
+
+        c.l "head", head
 
     App.Router.processAppRoutes new Controller,
       "staticBlocks": "list"

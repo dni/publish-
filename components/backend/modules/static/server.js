@@ -9,22 +9,31 @@ module.exports.setup = function(app) {
 	  	});
 	});
 
+	app.get('/staticBlocks/:id', function(req, res){
+	  	db.StaticBlock.findById( req.params.id, function(e, a) {
+	    	res.send(a.data);
+	  	});
+	});
+
 	app.post('/staticBlocks', function(req, res){
 		var a = new db.StaticBlock();
 		a.title = req.body.title;
 		a.key = req.body.key;
 		a.data = req.body.data;
+		a.deleteable = req.body.deleteable;
 
 		a.save(function () {
 			res.send(a);
 		});
 	});
 
+
 	app.put('/staticBlocks/:id', function(req, res){
 		db.StaticBlock.findById( req.params.id, function(e, a) {
 			a.title = req.body.title;
 			a.key = req.body.key;
 			a.data = req.body.data;
+			a.deleteable = req.body.deleteable;
 
 			a.save(function () {
 				res.send(a);
