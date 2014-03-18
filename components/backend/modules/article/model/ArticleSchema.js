@@ -7,10 +7,10 @@ var ArticleSchema = new Schema({
   desc: String,
   date: Date,
   privatecode: Boolean,
-  images: {
+  files: {
       type: Array,
       'default': []
     }
 });
 
-module.exports.Article = mongoose.model('Article', ArticleSchema); 
+module.exports.Article = mongoose.model('Article', ArticleSchema);

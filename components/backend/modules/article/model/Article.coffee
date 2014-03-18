@@ -5,7 +5,7 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     defaults:
       "title": "Neuer Artikel"
       "desc": "Hello World!"
-      "images": ""
+      "files": []
       "author": "dnilabs"
       "privatecode": true
 

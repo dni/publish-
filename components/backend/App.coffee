@@ -43,6 +43,12 @@ define (require)->
     listRegion:"#list"
 
 
+  Vent.on 'overlay:callback', (cb)->
+    fileIds = []
+
+    $("body").unbind "overlay:ok"
+    $("body").on "overlay:ok", cb(fileIds)
+
   App.navItems = new NavItems
 
 
@@ -72,8 +78,9 @@ define (require)->
 
     Vent.trigger config.config.namespace+":ready"
 
-  Vent.on 'app:updateRegion', (region, view)->
+  Vent.on 'app:updateRegion', (region, view, cb)->
     App[region].show view
+    if cb? then cb()
 
   Vent.on 'app:closeRegion', (region)->
     App[region].close()

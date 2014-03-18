@@ -15,10 +15,14 @@ define [
 
   class FileController extends Backbone.Marionette.Controller
 
-    filebrowser: ->
-      console.log "filebrowser"
-      Vent.trigger 'app:updateRegion', 'overlayRegion', new BrowseView collection:App.Files
-      
+    filebrowser: (collection, id)->
+      view = new BrowseView collection:App.Files
+
+      Vent.trigger 'app:updateRegion', "overlayRegion", view
+
+      App.Router.navigate collection+"/"+id
+
+
     show: (id) ->
       file = App.Files.where _id: id
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]

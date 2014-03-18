@@ -1,12 +1,12 @@
 define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html', 'cs!../model/Article'], (Vent, $, _, Backbone, Template, Article) ->
 
   class ArticleDetailView extends Backbone.Marionette.ItemView
-    
+
     template: Template
 
     initialize: ->
       # if !@model then @model = new Article
-      @model.bind 'change', @render, @    
+      @model.bind 'change', @render, @
 
     ui:
       edit: ".edit"
@@ -15,21 +15,24 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
       inputAuthor: 'input[name=author]'
       inputArticle: 'textarea[name=article]'
       files: '#files'
-  
+
     events:
       "click #edit": "toggleEdit"
       "click .save": "saveArticle"
       "click #files": "addFiles"
       "click .delete": "deleteArticle"
       'click #publish': "publishArticle"
-    
+
     addFiles:->
-      App.Router.navigate "filebrowser", true
-    
+      Vent.trigger 'overlay:callback', (fileIds)->
+        @model.set "files", fileIds
+        @model.save()
+        App.Router.navigate "filebrowser/article/"+@model.get "_id", true
+
     toggleEdit: ->
       @ui.edit.toggle()
       @ui.preview.toggle()
-      
+
     publishArticle: ->
       @model.togglePublish()
       @model.save()
