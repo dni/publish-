@@ -46,6 +46,7 @@ define (require)->
     console.log "empty overlay:action"
 
   Vent.on 'overlay:action', (cb)->
+    console.log('overlayAction');
     overlayAction = cb
 
   Vent.on 'overlay:callback', (cb)->

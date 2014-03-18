@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title>
+	<meta name="viewport" content="height=202;"/>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+  <div id="index">
+      <div class="navigation">
+
+      	<% for (key in magazine.pages) { %>
+	        <h5>Page <%= magazine.pages.number %></h5>
+      		<a href="Page<%= magazine.pages.number %>.html"><h7>title</h7> <small>lol</small></a>
+      	<% } %>
+
+      </div>
+    </div>
+  </div>
+</body>
