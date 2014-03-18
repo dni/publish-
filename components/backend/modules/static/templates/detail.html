@@ -1,6 +1,10 @@
     <div class="form-group">
         <label>Key</label>
-        <input type="text" name="key" class="form-control" value="<%= key %>" />
+        <% if(deleteable){ %>
+            <input type="text" name="key" class="form-control" value="<%= key %>" />
+        <% } else { %>
+            <input type="text" readonly name="key" class="form-control" value="<%= key %>" />
+        <% } %>
     </div>
 
     <div class="form-group">
@@ -8,18 +12,20 @@
         <textarea name="data" class="form-control"><%= data %></textarea>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label>Deleteable</label>
         <% if(deleteable){ %>
            <input class="deleteable" type="checkbox" checked />
         <% } else { %>
            <input class="deleteable" type="checkbox"/>
         <% } %>
-    </div>
+    </div> -->
 
 
 <div class="buttons">
 	<% if(deleteable){ %>
 	   <button class="delete btn btn-danger">Delete</button>
+    <% } else { %>
+       <button class="revert btn btn-danger">Revert Changes</button>
     <% } %>
 </div>

@@ -5,8 +5,8 @@ define [
     'marionette',
     'cs!/router/FrontendRouter'
     'cs!view/ListView',
-    'cs!view/DetailView',
-    'cs!model/Articles',
+    'cs!./view/DetailView',
+    'cs!./model/Articles',
     "less!style/frontend"
 ],
 ( $, _, Backbone, Marionette, Router, ListView, DetailView, Articles, Magazines ) ->
@@ -26,12 +26,20 @@ define [
 
   App.addInitializer ()->
     Backbone.history.start()
-    
+
+    # Fileparser.parse()
+
+    $.get "staticBlocks/header", (data)->
+      $("header").html(data)
+
+    $.get "staticBlocks/logo", (data)->
+      $("logo").html(data)
+
     App.articles = new Articles()
-    
+
     App.articles.fetch
       success: ->
 
     App.Router = new Router()
-    
+
   App.start()
