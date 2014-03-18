@@ -13,24 +13,24 @@ define [
 
     ui:
       edit: ".edit"
+      deleteable: ".deleteable"
       key: 'input[name=key]'
       data: 'textarea[name=data]'
 
     events:
-      "click .save": "saveStatic"
+      "blur input": "saveStatic"
+      "blur textarea": "saveStatic"
+      "change .deleteable": "saveStatic"
       "click .delete": "deleteStatic"
 
     addFiles:->
       App.Router.navigate "filebrowser", true
 
-    toggleEdit: ->
-      #@ui.edit.toggle()
-      #@ui.preview.toggle()
-
     saveStatic: ->
       @model.set
         key: @ui.key.val()
         data: @ui.data.val()
+        deleteable: @ui.deleteable.prop('checked')
       if @model.isNew()
         App.StaticBlocks.create @model,
           wait: true
@@ -38,7 +38,7 @@ define [
             App.Router.navigate 'static/'+res.attributes._id, false
       else
         @model.save()
-      @toggleEdit()
+
 
     deleteStatic: ->
       @model.destroy

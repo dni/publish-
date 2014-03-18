@@ -3,7 +3,8 @@ var mongoose = require('mongoose/'),
 
 var StaticBlockSchema = new Schema({
   key: String,
-  data: String
+  data: String,
+  deleteable: Boolean
 });
 
 module.exports.StaticBlock = mongoose.model('StaticBlock', StaticBlockSchema);

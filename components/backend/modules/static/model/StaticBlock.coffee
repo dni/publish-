@@ -9,6 +9,7 @@ define [
     defaults:
       "key": ""
       "data": ""
+      "deleteable": true
 
 
 
