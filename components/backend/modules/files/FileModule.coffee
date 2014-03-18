@@ -19,7 +19,7 @@ define [
     App.Router.processAppRoutes new Controller,
       "files": "list"
       "file/:id": "show"
-      "filebrowser": "filebrowser"
+      "filebrowser/:collection/:id": "filebrowser"
 
     Vent.trigger "files:ready"
 
