@@ -24,10 +24,9 @@ define ['cs!../../../utilities/Vent', 'jquery', 'lodash', 'backbone', 'tpl!../te
       'click #publish': "publishArticle"
 
     addFiles:->
-      Vent.trigger 'overlay:callback', (fileIds)->
-        @model.set "files", fileIds
-        @model.save()
-        App.Router.navigate "filebrowser/article/"+@model.get "_id", true
+      Vent.trigger 'overlay:callback', (files)->
+        c.l files
+      App.Router.navigate "filebrowser/article/"+@model.get "_id", true
 
     toggleEdit: ->
       @ui.edit.toggle()

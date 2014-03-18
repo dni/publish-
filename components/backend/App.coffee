@@ -42,12 +42,15 @@ define (require)->
     listTopRegion: "#list-top"
     listRegion:"#list"
 
+  overlayAction = ->
+    console.log "empty overlay:action"
+
+  Vent.on 'overlay:action', (cb)->
+    overlayAction = cb
 
   Vent.on 'overlay:callback', (cb)->
-    fileIds = []
-
     $("body").unbind "overlay:ok"
-    $("body").on "overlay:ok", cb(fileIds)
+    $("body").on "overlay:ok", cb(overlayAction())
 
   App.navItems = new NavItems
 

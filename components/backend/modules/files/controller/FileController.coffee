@@ -15,12 +15,27 @@ define [
 
   class FileController extends Backbone.Marionette.Controller
 
-    filebrowser: (collection, id)->
-      view = new BrowseView collection:App.Files
+    filebrowser: (eventname, id)->
 
-      Vent.trigger 'app:updateRegion', "overlayRegion", view
 
-      App.Router.navigate collection+"/"+id
+      files = App.Files.where relation:eventname+":"+id
+      # SET SELECTED
+      _.each files, (file)->
+        files.set "selected", true
+
+      view = new BrowseView collection: App.Files
+
+      Vent.trigger 'overlay:action', ->
+        files = view.collection.where selected:true
+        _.each files, (file)->
+          cloned = file.clone()
+          cloned.set "parent", file.get "_id"
+          cloned.set "relation", eventname+":"+id
+          App.Files.add cloned
+
+
+      Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      # App.Router.navigate collection+"/"+id
 
 
     show: (id) ->
