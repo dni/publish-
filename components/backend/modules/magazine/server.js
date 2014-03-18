@@ -6,7 +6,7 @@ var db = require(__dirname + '/model/MagazineSchema'),
 	HpubGenerator = require(__dirname + '/generators/HpubGenerator');
 
 module.exports.setup = function(app) {
-	
+
 	// generator
 	app.get("/downloadPrint/:title", PrintGenerator.download);
 	app.get('/downloadApp', BakerGenerator.download);
@@ -28,7 +28,7 @@ module.exports.setup = function(app) {
 		a.back = req.body.back;
 		a.pages = req.body.pages;
 		a.date = new Date();
-		
+
 		a.save(function () {
 			initialize(req.body.title, function(){
 				HpubGenerator.generate(a);
@@ -40,7 +40,7 @@ module.exports.setup = function(app) {
 
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
-			
+
 			if (a.title != req.body.title) {
 				var child_process = require('child_process').spawn;
 			    var spawn = child_process('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'});
@@ -52,9 +52,9 @@ module.exports.setup = function(app) {
 			        	console.log("remove files (rm)  done");
 			        }
 			    });
-				
+
 			}
-			
+
 			a.title = req.body.title;
 			a.editorial = req.body.editorial;
 			a.impressum = req.body.impressum;
@@ -64,14 +64,14 @@ module.exports.setup = function(app) {
 			a.pages = req.body.pages;
 			a.published = req.body.published;
 			a.date = new Date();
-			
+
 			a.save(function () {
 				initialize(req.body.title, function(){
 					HpubGenerator.generate(a);
 				});
 				res.send(a);
 			});
-			
+
 	  	});
 	});
 
@@ -79,10 +79,10 @@ module.exports.setup = function(app) {
 	  	db.Magazine.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
-		      	
+
 				var exec = require('child_process').exec,child;
-				child = exec('rm -rf '+ a.title,function(err,out) { 
-				  console.log(out); err && console.log(err); 
+				child = exec('rm -rf '+ a.title,function(err,out) {
+				  console.log(out); err && console.log(err);
 				});
 		        return res.send('');
 		      } else {
@@ -97,9 +97,10 @@ module.exports.setup = function(app) {
 function initialize(folder, cb) {
 	fs.mkdir("./public/books/" + folder, function() {
 		fs.mkdir("./public/books/" + folder + "/hpub", function() {
-			fs.mkdir("./public/books/" + folder + "/hpub/images");
-			fs_extra.copy(__dirname + '/generators/hpub_dummy/css', './public/books/' + folder + '/hpub/css');
-			fs_extra.copy(__dirname + "/generators/hpub_dummy/js", "./public/books/" + folder + "/hpub/js");
+			fs_extra.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx');
+			fs_extra.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
+			fs_extra.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css');
+			fs_extra.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js");
 		});
 		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
 		cb();

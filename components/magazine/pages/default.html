@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8"/>
-	<title>Seite: 3 Magazine Terror</title>
+	<title>Seite: <%= page.number %> <%= magazine.title %></title>
 	<meta name="viewport" content="width=768; initial-scale=1.0;"/>
 	<link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,200' rel='stylesheet' type='text/css'>
 	<style>
@@ -43,8 +43,8 @@
 		</div>
 		
 	  <div id="content" class="chapter">
-		  <h1><div>KAPUTT!</div></h1>
-		  <p>KAPUTT</p>
+		  <h1><div><%= article.title %></div></h1>
+		  <p><%= article.desc %></p>
 
 	  </div>
 	  
