@@ -8,7 +8,8 @@ var fileSchema = new Schema({
   type: String,
   info: String,
   alt: String,
-  desc: String
+  desc: String,
+  relation: String
 });
 
 module.exports.File = mongoose.model('File', fileSchema);
