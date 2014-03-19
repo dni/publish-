@@ -1,4 +1,4 @@
-var fs = require('fs'),
+var fs = require('fs-extra'),
 	_ = require('underscore'),
 	ejs = require('ejs'),
 	PrintGenerator = require(__dirname + '/PrintGenerator'),
