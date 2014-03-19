@@ -1,6 +1,5 @@
-var db = require(__dirname + '/model/FileSchema')
-, fs = require("fs")
-;
+var db = require(__dirname + '/model/FileSchema'),
+	fs = require("fs");
 
 module.exports.setup = function(app) {
 
@@ -45,19 +44,51 @@ module.exports.setup = function(app) {
 		});
 	});
 
+	//## API
+	app.post('/files', function(req, res) {
+
+		file = new db.File();
+		filename = 'copy_'+Date.now()+'_'+ req.body.name;
+		fs.writeFileSync('./public/files/' + filename, fs.readFileSync('./public/files/' + req.body.name));
+
+		file.name = filename;
+		file.type = req.body.type;
+		file.link = './static/files/' + filename;
+		file.info = req.body.info;
+		file.alt = req.body.alt;
+		file.desc = req.body.desc;
+		file.parent = req.body.parent;
+		file.relation = req.body.relation;
+
+		file.save(function(){
+			res.send(file);
+		});
+
+
+	});
+
 	app.put('/files/:id', function(req, res){
 		db.File.findById(req.params.id, function(e, a) {
 			if(a.name!=req.body.name) {
 				link = './public/files/' + a.name;
 				targetLink = './public/files/' + req.body.name;
+
+				if (fs.existsSync(targetLink)===true) {
+					name = 'copy_'+Date.now()+'_'+ req.body.name;
+					targetLink = './public/files/' + name;
+				}
+
 				fs.renameSync(link, targetLink);
 				a.link = './static/files/' + req.body.name;
 
 			}
-				a.name = req.body.name
-				a.info = req.body.info
-				a.alt = req.body.alt
-				a.desc = req.body.desc
+
+			a.name = req.body.name;
+			a.info = req.body.info;
+			a.alt = req.body.alt;
+			a.desc = req.body.desc;
+			a.parent = req.body.parent;
+			a.relation = req.body.relation;
 
 			a.save(function () { res.send(a); });
 	  	});

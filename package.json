@@ -4,6 +4,7 @@
   "description": "crossmedia publishing",
   "main": "app.js",
   "dependencies": {
+  	"bower": "",
     "express": "~3.4.0",
     "connect": "",
     "buffer-crc32": "",
