@@ -28,6 +28,7 @@ module.exports.setup = function(app) {
 		a.pages = req.body.pages;
 		a.papersize = req.body.papersize;
 		a.orientation = req.body.orientation;
+		a.files = req.body.files;
 		a.date = new Date();
 
 		a.save(function () {
@@ -66,6 +67,7 @@ module.exports.setup = function(app) {
 			a.published = req.body.published;
 			a.papersize = req.body.papersize;
 			a.orientation = req.body.orientation;
+			a.files = req.body.files;
 
 			a.date = new Date();
 

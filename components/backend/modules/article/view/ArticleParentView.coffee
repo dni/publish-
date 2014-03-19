@@ -36,7 +36,6 @@ define [
 
       view.$el.sortable(
         revert: true
-        axis: "y"
         cursor: "move"
         # stop: _.bind @_sortStop, @
       ).disableSelection()
