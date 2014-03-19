@@ -23,6 +23,7 @@ module.exports.download = function(req, res){
 };
 
 module.exports.generatePage = function(file, magazine) {
+	console.log (file);
 	phantom.create({port: port++}, function(ph){
 		ph.createPage(function(page) {
 			return page.open("./public/books/" + magazine.title + "/hpub/" + file, function(status) {
@@ -35,8 +36,8 @@ module.exports.generatePage = function(file, magazine) {
 				}, function(result) {
 					var split = file.split(".");
 					page.set('paperSize', {
-						format : "A5",
-						orientation : 'portrait',
+						format : magazine.papersize,
+						orientation : magazine.orientation,
 						margin : '0'
 					});
 					// page.paperSize = { format: "A5", orientation: 'portrait', margin: '1cm' };

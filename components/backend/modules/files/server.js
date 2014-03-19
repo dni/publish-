@@ -59,6 +59,7 @@ module.exports.setup = function(app) {
 		file.desc = req.body.desc;
 		file.parent = req.body.parent;
 		file.relation = req.body.relation;
+		file.key = req.body.key;
 
 		file.save(function(){
 			res.send(file);
@@ -89,6 +90,7 @@ module.exports.setup = function(app) {
 			a.desc = req.body.desc;
 			a.parent = req.body.parent;
 			a.relation = req.body.relation;
+			a.key = req.body.key;
 
 			a.save(function () { res.send(a); });
 	  	});

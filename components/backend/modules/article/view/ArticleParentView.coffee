@@ -45,11 +45,15 @@ define [
     events:
       "blur .form-control": "saveArticle"
       "click #files": "addFiles"
+      "click .preview-item": "showFile"
       "click .delete": "deleteArticle"
       'click #publish': "publishArticle"
 
     addFiles:->
       App.Router.navigate("filebrowser/article/" + @model.get("_id"), {trigger:true})
+
+    showFile: (e)->
+      App.Router.navigate("showfile/" + $(e.target).attr("data-uid"), {trigger:true})
 
     publishArticle: ->
       @model.togglePublish()

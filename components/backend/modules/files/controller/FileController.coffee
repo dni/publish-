@@ -8,15 +8,15 @@ define [
   'cs!../view/BrowseView'
   'cs!../view/DetailView'
   'cs!../view/TopView'
+  'cs!../view/ShowFileView'
   'cs!../model/File'
   'cs!../model/Files'
 
-], ( Vent, $, _, Backbone, Marionette, ListView, BrowseView, DetailView, TopView, File, Files) ->
+], ( Vent, $, _, Backbone, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, File, Files) ->
 
   class FileController extends Backbone.Marionette.Controller
 
     filebrowser: (eventname, id)->
-
 
       files = App.Files.where parent:undefined
       view = new BrowseView collection: new Files files
@@ -47,6 +47,14 @@ define [
 
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
       # App.Router.navigate collection+"/"+id
+
+
+    showfile: (id) ->
+      file = App.Files.where _id: id
+      view = new ShowFileView model: file[0]
+      Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Vent.trigger 'overlay:action', ->
+        $('.modal').modal('hide')
 
 
     show: (id) ->
