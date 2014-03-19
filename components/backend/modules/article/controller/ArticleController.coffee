@@ -5,10 +5,10 @@ define [
   'backbone'
   'marionette'
   'cs!../view/ArticleListView'
-  'cs!../view/ArticleDetailView'
+  'cs!../view/ArticleParentView'
   'cs!../model/Article'
   'cs!../view/TopView'
-], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, TopView ) ->
+], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleParentView, Article, TopView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
 
@@ -17,10 +17,10 @@ define [
 
     details: (id) ->
       article = App.Articles.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleDetailView model: article[0]
+      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleParentView model: article[0]
 
     add: ->
-      view = new ArticleDetailView model: new Article author: @settings().getValue "defaultAuthor"
+      view = new ArticleParentView model:new Article author: @settings().getValue "defaultAuthor"
       Vent.trigger 'app:updateRegion', 'contentRegion', view
       view.toggleEdit()
 

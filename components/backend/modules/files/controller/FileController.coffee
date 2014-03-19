@@ -36,7 +36,7 @@ define [
             parent: file.get "_id"
             relation: eventname+":"+id
             type: file.get "type"
-            name: file.get("name")
+            name: file.get "name"
             info: file.get "info"
             alt: file.get "alt"
             desc: file.get "desc"

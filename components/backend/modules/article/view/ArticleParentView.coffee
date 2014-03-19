@@ -5,12 +5,13 @@ define [
   'backbone'
   'tpl!../templates/container.html'
   'cs!../model/Article'
+  'cs!../../files/model/Files'
   'cs!../../files/model/File'
   'cs!../view/ArticleDetailView'
   'cs!../../files/view/PreviewView'
-], (Vent, $, _, Backbone, Template, Article, File, DetailView, PreviewView) ->
+], (Vent, $, _, Backbone, Template, Article, Files, File, DetailView, PreviewView) ->
 
-  class ArticleParentView extends Backbone.Marionette.ItemView
+  class ArticleParentView extends Backbone.Marionette.Layout
 
     template: Template
 
@@ -27,7 +28,7 @@ define [
       files = App.Files.where relation: "article:"+@model.get "_id"
 
       self = @
-      _.each files, (file) -> self.files.add new File file
+      _.each files, (file) -> self.files.add file
 
       @detailRegion.show new DetailView model: @model
 
@@ -40,6 +41,8 @@ define [
         cursor: "move"
         # stop: _.bind @_sortStop, @
       ).disableSelection()
+
+
 
     ui:
       edit: ".edit"
