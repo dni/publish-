@@ -69,15 +69,11 @@ module.exports.generate = function(magazine) {
 	// CHAPTERS
 	_.each(magazine.pages, function(page){
 		if (!page.layout) return;
+		console.log (magazine.pages);
 		template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
 		db2.Article.findOne({_id: page.article}).execFind(function(err, article){
 			if (err) console.log(err);
-			if (!article) article = [{
-				title: "KAPUTT!",
-				images: "KAPUUTT!",
-				desc: "KAPUTT",
-				author: "naturtrüb"
-			}];
+
 			var html = ejs.render(template, { magazine: magazine, page: page, article: article });
 			var file = "Page" + page.number + ".html";
 			fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + file, html);

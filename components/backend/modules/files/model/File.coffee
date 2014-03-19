@@ -10,3 +10,4 @@ define [
       "info": ""
       "alt": ""
       "desc": ""
+      "key": ""
