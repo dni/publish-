@@ -23,7 +23,7 @@ define [
 
     events:
       "click .delete": "deleteFile"
-      "click .rename": "save"
+      "blur .form-control": "save"
 
     deleteFile: ->
       @model.destroy
