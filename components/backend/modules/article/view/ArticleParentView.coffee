@@ -3,7 +3,7 @@ define [
   'jquery'
   'lodash'
   'backbone'
-  'tpl!../templates/detail.html'
+  'tpl!../templates/container.html'
   'cs!../model/Article'
   'cs!../../files/model/File'
   'cs!../view/ArticleDetailView'
