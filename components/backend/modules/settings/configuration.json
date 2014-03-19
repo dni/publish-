@@ -5,12 +5,12 @@
     },
 
 	"navigation": {
-		"button": 0,
+		"button": "cog",
 		"route": "settings",
 		"label": "Settings",
 		"classNames": ""
 	},
-	
+
 	"model": {
 		"article": {
 			"fields" : {
