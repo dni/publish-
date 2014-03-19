@@ -12,6 +12,8 @@ var MagazineSchema = new Schema({
   cover: String,
   back: String,
   pages: Array,
+  orientation: String,
+  papersize: String,
   date: Date
 });
 
