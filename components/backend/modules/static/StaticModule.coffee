@@ -14,8 +14,8 @@ define [
     App.StaticBlocks = new StaticBlocks
     App.StaticBlocks.fetch
       success:->
+
         head = App.StaticBlocks.where key: "header"
-        c.l "head", head
         if !head[0]?
           sb = new StaticBlock()
           sb.set "key", "header"

@@ -42,16 +42,7 @@ define (require)->
     listTopRegion: "#list-top"
     listRegion:"#list"
 
-  overlayAction = ->
-    console.log "empty overlay:action"
 
-  Vent.on 'overlay:action', (cb)->
-    console.log('overlayAction');
-    overlayAction = cb
-
-  Vent.on 'overlay:callback', (cb)->
-    $("body").unbind "overlay:ok"
-    $("body").on "overlay:ok", cb(overlayAction())
 
   App.navItems = new NavItems
 
@@ -115,6 +106,15 @@ define (require)->
       progressall: (e, data) ->
         progress = parseInt data.loaded / data.total * 100, 10
         $(selector + " output").append "progressALL = "+progress + '%'
+
+    overlayCallback = ->
+    console.log "empty overlay:callback"
+
+
+  Vent.on 'overlay:action', (cb)->
+    $("body").unbind "overlay:ok"
+    $("body").on "overlay:ok", cb
+
 
   window.App = App
   Backbone.history.start()

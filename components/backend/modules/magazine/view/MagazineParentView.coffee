@@ -26,7 +26,7 @@ define [
       "click #addPage": "addPage"
       "stop .sortable": "sortPages"
       "click .publish": "publish"
-      
+
     initialize:->
       @model.on "change", @render
       @on "render", @afterRender
@@ -35,6 +35,7 @@ define [
       @pages = new Pages()
       pages = @model.get "pages"
       self = @
+
       _.each pages, (page) -> self.pages.add new Page page
       @detailRegion.show new DetailView model: @model
       view = new PageListView collection: @pages
@@ -64,7 +65,7 @@ define [
     publish: ->
       @model.togglePublish()
       @model.save()
-    
+
     addPage: ->
       @pages.add new Page number: (@pages.length+1).toString()
 
@@ -74,17 +75,17 @@ define [
       @$el.find('.saved').toggle()
 
     downloadPrint: ->
-      
+
        window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
-      
+
        # form = $ '<form>',
           # action: '/downloadPrint'
           # method: 'POST'
-# 
+#
        # form.append $ '<input>',
           # name: 'title'
           # value: @model.get "title"
-# 
+#
        # form.submit();
 
     saveMagazine: ->
@@ -106,10 +107,10 @@ define [
         @model.save
           success:->
       false
-      
+
     deleteMagazine: ->
       @model.destroy
         success:->
-          
+
       Vent.trigger 'app:closeRegion', 'contentRegion'
 

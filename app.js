@@ -1,10 +1,9 @@
 var express = require('express'),
 	app = express(),
+	port = 1666,
 	mongoose = require("mongoose"),
 	db = mongoose.connect('mongodb://localhost/publish'),
 	fs = require('fs');
-
-
 
 
 app.configure(function() {
@@ -12,14 +11,6 @@ app.configure(function() {
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
 	app.use(express.cookieParser());
-
-
-	app.use(express.session({ secret: 'keyboard cat' }));
-
-	// app.engine('.html', require('uinexpress').__express)
-    // app.set('view engine', 'html')
-	// app.use(passport.initialize());
-	// app.use(passport.session());
 
 	// load/setup components
 	var componentsDir = __dirname + '/components/';
@@ -41,23 +32,5 @@ app.configure(function() {
 
 });
 
-
-// passport.use(new LocalStrategy(
-  // function(username, password, done) {
-   // models.User.findOne({ username: username }, function(err, user) {
-      // if (err) { return done(err); }
-      // if (!user) {
-        // return done(null, false, { message: 'Incorrect username.' });
-      // }
-      // if (!user.validPassword(password)) {
-        // return done(null, false, { message: 'Incorrect password.' });
-      // }
-      // return done(null, user);
-    // });
-  // }
-// ));
-
-// app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
-
-app.listen(1666);
+app.listen(port);
 

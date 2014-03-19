@@ -7,11 +7,11 @@ define [
   'cs!../view/ArticleListView'
   'cs!../view/ArticleDetailView'
   'cs!../model/Article'
-  'cs!../view/ListView'
-], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, ListView ) ->
+  'cs!../view/TopView'
+], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleDetailView, Article, TopView ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
-    
+
     settings: ->
       App.Settings.where({name: "ArticleModule"})[0]
 
@@ -25,5 +25,5 @@ define [
       view.toggleEdit()
 
     list: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles

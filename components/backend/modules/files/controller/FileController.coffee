@@ -18,20 +18,33 @@ define [
     filebrowser: (eventname, id)->
 
 
-      files = App.Files.where relation:eventname+":"+id
+      files = App.Files
+
       # SET SELECTED
-      _.each files, (file)->
-        files.set "selected", true
+      _.each files.models, (file,i)->
+        file.set "selected", true
 
       view = new BrowseView collection: App.Files
 
       Vent.trigger 'overlay:action', ->
-        files = view.collection.where selected:true
+        files = App.Files.where selected:true
+        filesIds = []
         _.each files, (file)->
-          cloned = file.clone()
-          cloned.set "parent", file.get "_id"
-          cloned.set "relation", eventname+":"+id
-          App.Files.add cloned
+
+          cloned = new File()
+          cloned.set
+            parent: file.get "_id"
+            relation: eventname+":"+id
+            type: file.get "type"
+            name: file.get("name")
+            info: file.get "info"
+            alt: file.get "alt"
+            desc: file.get "desc"
+
+          App.Files.create cloned,
+            wait:true
+            success: (res) ->
+
 
 
       Vent.trigger 'app:updateRegion', 'overlayRegion', view

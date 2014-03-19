@@ -1,6 +1,6 @@
 node_modules
 bower_components
 .project
-components/backend/modules/magazine/generators/publish-baker
 .DS_Store
 public
+components/backend/modules/magazine/generators/publish-baker
