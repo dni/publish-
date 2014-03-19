@@ -11,9 +11,6 @@ define [
 
     template: Template
 
-    initialize: ->
-      @model.on "change", @render
-
     ui:
       name: 'input[name=name]'
       info: 'textarea[name=info]'
