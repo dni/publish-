@@ -96,6 +96,8 @@ define [
         editorial: $('textarea[name=editorial]').val()
         cover: $("#cover output img").attr("src")
         back: $("#back output img").attr("src")
+        papersize: $(".papersize").val()
+        orientation: $(".orientation").val()
         pages: @pages.toArray()
 
       if @model.isNew()

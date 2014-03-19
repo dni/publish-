@@ -12,18 +12,25 @@
 
     <div class="form-group">
       <label>Select Papersize</label>
-      <select>
-        <option>A4</option>
-        <option>A3</option>
-        <option>A5</option>
-        <option>A6</option>
-        <option>letter</option>
+      <select class="papersize">
+        <% _.each(["A4","A5","A6","letter"], function(ps){%>
+            <% if(papersize==ps) { %>
+                <option selected value="<%= ps %>"> <%= ps %> </option>
+            <% } else { %>
+                <option value="<%= ps %>"> <%= ps %> </option>
+            <% } %>
+        <% }) %>
       </select>
 
       <label>Select Orientation</label>
-      <select>
-        <option>Horizontal</option>
-        <option>Vertical</option>
+      <select class="orientation">
+        <% _.each(["horizontal","vertical"], function(or){%>
+            <% if(orientation==or) { %>
+                <option selected value="<%= or %>"> <%= or %> </option>
+            <% } else { %>
+                <option value="<%= or %>"> <%= or %> </option>
+            <% } %>
+        <% }) %>
       </select>
     </div>
 
