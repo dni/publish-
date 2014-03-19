@@ -18,13 +18,8 @@ define [
     filebrowser: (eventname, id)->
 
 
-      files = App.Files
-
-      # SET SELECTED
-      _.each files.models, (file,i)->
-        file.set "selected", true
-
-      view = new BrowseView collection: App.Files
+      files = App.Files.where parent:undefined
+      view = new BrowseView collection: new Files files
 
       Vent.trigger 'overlay:action', ->
         files = App.Files.where selected:true
@@ -44,7 +39,10 @@ define [
           App.Files.create cloned,
             wait:true
             success: (res) ->
+              App.contentRegion.currentView.render()
 
+        $('.modal').modal('hide')
+        Vent.trigger 'app:closeRegion', 'overlayRegion'
 
 
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
@@ -57,5 +55,5 @@ define [
 
     list : ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Files
+      Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
       #App.sidebarRegion.show view

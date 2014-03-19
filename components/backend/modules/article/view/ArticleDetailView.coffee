@@ -8,6 +8,4 @@ define [
   class ArticleDetailView extends Backbone.Marionette.ItemView
 
     template: Template
-    initialize: ->
-      @model.bind 'change', @render, @
 
