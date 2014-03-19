@@ -1,6 +1,5 @@
 var db = require(__dirname + '/model/MagazineSchema'),
 	fs = require('fs-extra'),
-	//fs_extra = require("fs-extra"),
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator'),
 	BakerGenerator = require(__dirname + '/generators/BakerGenerator'),
 	HpubGenerator = require(__dirname + '/generators/HpubGenerator');
@@ -102,10 +101,10 @@ module.exports.setup = function(app) {
 function initialize(folder, cb) {
 	fs.mkdir("./public/books/" + folder, function() {
 		fs.mkdir("./public/books/" + folder + "/hpub", function() {
-			fs_extra.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx');
-			fs_extra.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
-			fs_extra.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css');
-			fs_extra.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js");
+			fs.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx');
+			fs.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
+			fs.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css');
+			fs.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js");
 		});
 		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
 		cb();
