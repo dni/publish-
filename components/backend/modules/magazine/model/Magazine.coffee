@@ -3,6 +3,7 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     idAttribute: "_id"
     urlRoot: "magazines"
     defaults:
+      "_id": undefined
       "title": "Neues Magazine"
       "author": "default author"
       "desc": "description ..."
@@ -14,6 +15,8 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "back": ""
       "papersize": "A4"
       "orientation": "horizontal"
+      "files": []
+
 
     togglePublish: ->
       @.set "published", not @.get "published";

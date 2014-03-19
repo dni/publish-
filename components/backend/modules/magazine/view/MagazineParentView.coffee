@@ -7,7 +7,11 @@ define [
   'cs!../model/Page'
   'cs!./PageListView'
   'cs!./MagazineDetailView'
-], ( $, _, Backbone, Template, Pages, Page, PageListView, DetailView) ->
+  'cs!../../files/model/Files'
+  'cs!../../files/model/File'
+  'cs!../../files/view/PreviewView'
+
+], ( $, _, Backbone, Template, Pages, Page, PageListView, DetailView, Files, File, PreviewView) ->
 
   class MagazineParentView extends Backbone.Marionette.Layout
     # Not required since 'div' is the default if no el or tagName specified
@@ -16,6 +20,8 @@ define [
     regions:
       'detailRegion': '#magazine-details'
       'pageRegion': '.page-list'
+      'fileRegion': '.file-list'
+
 
     events:
       "click #edit": "toggleEdit"
@@ -26,6 +32,8 @@ define [
       "click #addPage": "addPage"
       "stop .sortable": "sortPages"
       "click .publish": "publish"
+      "click #files": "addFiles"
+
 
     initialize:->
       @model.on "change", @render
@@ -45,9 +53,25 @@ define [
         revert: true
         axis: "y"
         cursor: "move"
-        stop: _.bind @_sortStop, @
       ).disableSelection()
 
+      @files = new Files()
+      files = App.Files.where relation: "magazine:"+@model.get "_id"
+
+      _.each files, (file) -> self.files.add file
+
+      @detailRegion.show new DetailView model: @model
+
+      view = new PreviewView collection: @files
+      @fileRegion.show view
+
+      view.$el.sortable(
+        revert: true
+        cursor: "move"
+      ).disableSelection()
+
+    addFiles:->
+      App.Router.navigate("filebrowser/magazine/" + @model.get("_id"), {trigger:true})
 
     _sortStop: (event, ui)->
       self = @

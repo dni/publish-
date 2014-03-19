@@ -3,6 +3,6 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     defaults:
       "number": "0"
       "article": ""
-      "layout": ""
+      "layout": "default"
     initialize: (attributes, options)->
       #if not @.get("number") then @.set("number", (Math.random()*255)>>0)

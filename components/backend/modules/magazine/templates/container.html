@@ -7,6 +7,18 @@
 
 <div id="magazine-details"></div>
 
+<% if( _id !== undefined) { %>
+
+    <div class="files">
+        <h2>Files</h2>
+        <div class="file-list sortable"></div>
+        <a id="files" href="#filebrowser/magazine/<%= _id %>" class="btn btn-primary" data-toggle="modal" data-target="#overlay">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+        </a>
+    </div>
+<% } %>
+
 <div class="buttons">
 	<div class="edit">
 		<button class="save btn btn-success">Save</button>
@@ -18,7 +30,7 @@
 		<% } else { %>
 			<button class="publish btn btn-default">Unpublish</button>
 		<% } %>
-		
+
 		<button class="delete btn btn-danger">Delete</button>
 		<button id="edit" class="btn btn-primary">Edit</button>
 	</div>
