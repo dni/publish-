@@ -12,6 +12,8 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "published": false
       "cover": ""
       "back": ""
-      
+      "papersize": "A4"
+      "orientation": "horizontal"
+
     togglePublish: ->
       @.set "published", not @.get "published";
