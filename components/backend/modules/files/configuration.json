@@ -4,7 +4,7 @@
         "namespace": "files"
     },
     "navigation": {
-        "button": 0,
+        "button": "cloud-upload",
         "route": "files",
         "label": "Files",
         "classNames": "files"
