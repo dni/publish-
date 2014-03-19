@@ -20,7 +20,6 @@ define [
       'fileRegion': '.file-list'
 
     initialize: ->
-      @model.bind 'change', @render, @
       @on "render", @afterRender
 
     afterRender:->
@@ -43,18 +42,8 @@ define [
       ).disableSelection()
 
 
-
-    ui:
-      edit: ".edit"
-      preview: ".preview"
-      inputTitle: 'input[name=title]'
-      inputAuthor: 'input[name=author]'
-      inputArticle: 'textarea[name=article]'
-      files: '#files'
-
     events:
-      "click #edit": "toggleEdit"
-      "click .save": "saveArticle"
+      "blur .form-control": "saveArticle"
       "click #files": "addFiles"
       "click .delete": "deleteArticle"
       'click #publish': "publishArticle"
@@ -62,22 +51,15 @@ define [
     addFiles:->
       App.Router.navigate("filebrowser/article/" + @model.get("_id"), {trigger:true})
 
-    toggleEdit: ->
-      @ui.edit.toggle()
-      @ui.preview.toggle()
-
     publishArticle: ->
       @model.togglePublish()
       @model.save()
 
     saveArticle: ->
-      files = []
-      @ui.files.children().each -> files.push $(this).attr('src')
       @model.set
-        title: @ui.inputTitle.val()
-        author: @ui.inputAuthor.val()
-        files: files
-        desc: @ui.inputArticle.val()
+        title: $("input[name=title]").val()
+        author: $("input[name=author]").val()
+        desc: $("textarea[name=article]").val()
       if @model.isNew()
         App.Articles.create @model,
           wait: true
@@ -85,7 +67,6 @@ define [
             App.Router.navigate 'article/'+res.attributes._id, false
       else
         @model.save()
-      @toggleEdit()
 
     deleteArticle: ->
       @model.destroy

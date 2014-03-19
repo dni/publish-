@@ -22,7 +22,6 @@ define [
     add: ->
       view = new ArticleParentView model:new Article author: @settings().getValue "defaultAuthor"
       Vent.trigger 'app:updateRegion', 'contentRegion', view
-      view.toggleEdit()
 
     list: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView

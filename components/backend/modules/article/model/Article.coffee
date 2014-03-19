@@ -3,6 +3,7 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     idAttribute: "_id"
     urlRoot: "articles"
     defaults:
+      "_id": undefined
       "title": "Neuer Artikel"
       "desc": "Hello World!"
       "files": []

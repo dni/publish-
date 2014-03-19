@@ -9,7 +9,9 @@ var fileSchema = new Schema({
   info: String,
   alt: String,
   desc: String,
-  relation: String
+  relation: String,
+  parent: String,
+  key: String
 });
 
 module.exports.File = mongoose.model('File', fileSchema);
