@@ -1,6 +1,6 @@
 var db = require(__dirname + '/model/MagazineSchema'),
-	fs = require('fs'),
-	fs_extra = require("fs-extra"),
+	fs = require('fs-extra'),
+	//fs_extra = require("fs-extra"),
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator'),
 	BakerGenerator = require(__dirname + '/generators/BakerGenerator'),
 	HpubGenerator = require(__dirname + '/generators/HpubGenerator');
@@ -27,6 +27,8 @@ module.exports.setup = function(app) {
 		a.author = req.body.author;
 		a.back = req.body.back;
 		a.pages = req.body.pages;
+		a.papersize = req.body.papersize;
+		a.orientation = req.body.orientation;
 		a.date = new Date();
 
 		a.save(function () {
@@ -63,6 +65,9 @@ module.exports.setup = function(app) {
 			a.author = req.body.author;
 			a.pages = req.body.pages;
 			a.published = req.body.published;
+			a.papersize = req.body.papersize;
+			a.orientation = req.body.orientation;
+
 			a.date = new Date();
 
 			a.save(function () {
