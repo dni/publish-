@@ -33,6 +33,8 @@ define [
       "stop .sortable": "sortPages"
       "click .publish": "publish"
       "click #files": "addFiles"
+      "click .preview-item": "showFile"
+
 
 
     initialize:->
@@ -53,6 +55,7 @@ define [
         revert: true
         axis: "y"
         cursor: "move"
+        stop: _.bind @_sortStop, @
       ).disableSelection()
 
       @files = new Files()
@@ -72,6 +75,9 @@ define [
 
     addFiles:->
       App.Router.navigate("filebrowser/magazine/" + @model.get("_id"), {trigger:true})
+
+    showFile: (e)->
+      App.Router.navigate("showfile/" + $(e.target).attr("data-uid"), {trigger:true})
 
     _sortStop: (event, ui)->
       self = @
