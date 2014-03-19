@@ -22,28 +22,8 @@ define [
     addMagazine: ->
       view = new MagazineParentView model: new Magazine()
       Vent.trigger 'app:updateRegion', 'contentRegion', view
-      #App.contentRegion.show view
-      #view.toggleEdit()
+      view.toggleEdit()
 
     magazines: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
       Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines
-      #App.sidebarRegion.show view
-
-# define [
-  # 'cs!../../../Command'
-  # 'jquery'
-  # 'lodash'
-  # 'backbone'
-  # 'marionette'
-  # 'cs!../view/MagazineDetailView'
-  # 'cs!../view/MagazineListView'
-  # 'cs!../model/Magazine'
-# ],
-# ( Command, $, _, Backbone, Marionette, MagazineDetailView, MagazineListView, Magazine ) ->
-#
-  # class MagazineController extends Backbone.Marionette.Controller
-#
-    # generator: ->
-      # $.get "generator", (data) -> console.log data
-#

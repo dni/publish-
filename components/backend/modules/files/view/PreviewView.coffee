@@ -7,6 +7,7 @@ define [
 
   class ItemView extends Backbone.Marionette.ItemView
     template: Template
+    className: "preview-item"
 
   class PreviewView extends Backbone.Marionette.CollectionView
     itemView: ItemView
