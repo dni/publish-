@@ -62,6 +62,9 @@ define [
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
 
     list : ->
+      App.Files.on 'sync', ->
+        Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
+
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
       #App.sidebarRegion.show view
