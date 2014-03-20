@@ -21,7 +21,8 @@
     "backbone.wreqr": "*",
     "backbone.babysitter": "*",
     "jquery-ui": "~1.10.4",
-    "jquery-form": "~3.46.0"
+    "jquery-form": "~3.46.0",
+    "d3": "~3.4.3"
   },
   "devDependencies": {
     "requirejs": "latest"

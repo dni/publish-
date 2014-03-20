@@ -3,7 +3,10 @@ define [
   'lodash'
   'backbone'
   'tpl!../templates/previewItem.html'
-], ($, _, Backbone, Template) ->
+  'd3'
+], ($, _, Backbone, Template, d3) ->
+
+  window.d3 = d3
 
   class ItemView extends Backbone.Marionette.ItemView
     template: Template
