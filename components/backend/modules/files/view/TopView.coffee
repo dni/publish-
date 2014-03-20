@@ -14,8 +14,8 @@ define [
       "change #upload": "uploadFile"
 
     uploadFile: ->
-      
       @$el.find("#uploadFile").ajaxForm (response) ->
         App.Files.fetch()
 
       @$el.find("#uploadFile").submit()
+

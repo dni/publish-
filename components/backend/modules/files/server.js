@@ -5,17 +5,18 @@ module.exports.setup = function(app) {
 
 	app.post("/uploadFile", function(req,res){
 
-		srcFiles = []
+		srcFiles = [];
 
 		if (req.files.files[0][0]===undefined){
-			srcFiles[0] = req.files.files[0]
+			srcFiles[0] = req.files.files[0];
 		} else {
-			srcFiles = req.files.files[0]
+			srcFiles = req.files.files[0];
 		}
 
-		len = srcFiles.length
+		len = srcFiles.length;
 		while(len--){
-			var srcFile = srcFiles[len]
+
+			var srcFile = srcFiles[len];
 			var fileModel = new db.File();
 			var name = srcFile.name;
 			var targetLink = './public/files/' + name;
@@ -29,7 +30,6 @@ module.exports.setup = function(app) {
 			fileModel.name = name;
 			fileModel.type = srcFile.type;
 			fileModel.link = './static/files/' + name;
-
 			fs.renameSync(srcFile.path, targetLink);
 			fileModel.save();
 

@@ -1,4 +1,5 @@
 define [
+  'cs!../../../utilities/Vent'
   'jquery'
   'lodash'
   'backbone'
@@ -11,7 +12,7 @@ define [
   'cs!../../files/model/File'
   'cs!../../files/view/PreviewView'
 
-], ( $, _, Backbone, Template, Pages, Page, PageListView, DetailView, Files, File, PreviewView) ->
+], (Vent, $, _, Backbone, Template, Pages, Page, PageListView, DetailView, Files, File, PreviewView) ->
 
   class MagazineParentView extends Backbone.Marionette.Layout
     # Not required since 'div' is the default if no el or tagName specified
@@ -105,18 +106,7 @@ define [
       @$el.find('.saved').toggle()
 
     downloadPrint: ->
-
        window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
-
-       # form = $ '<form>',
-          # action: '/downloadPrint'
-          # method: 'POST'
-#
-       # form.append $ '<input>',
-          # name: 'title'
-          # value: @model.get "title"
-#
-       # form.submit();
 
     saveMagazine: ->
       @model.set
