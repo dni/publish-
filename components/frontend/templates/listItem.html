@@ -1,6 +1,15 @@
-
-<h3><a href='#article/<%- _id %>'><%- title %></a></h3>
 <div class="row">
-	<p class="col-md-9"><%= desc.slice(0, 250) %> ...</p>
+
+	<% if (files['teaser']) { %>
+		<div class="col-md-4">
+			<img src="<%= files['teaser'].link %>" alt="<%= files['teaser'].alt %>" />
+		</div>
+	<% } %>
+
+
+	<div class="col-md-8">
+		<h3><a href='#article/<%= _id %>'><%= title %></a></h3>
+		<p><%= desc.slice(0, 250) %> ...</p>
+		<p><a class="btn btn-default" href='#article/<%= _id %>'>mehr lesen</a></p>
+	</div>
 </div>
-<p><a href='#article/<%- _id %>'>>> mehr lesen</a></p>

@@ -7,10 +7,7 @@ var ArticleSchema = new Schema({
   desc: String,
   date: Date,
   privatecode: Boolean,
-  files: {
-      type: Array,
-      'default': []
-    }
+  files: Object
 });
 
 module.exports.Article = mongoose.model('Article', ArticleSchema);
