@@ -34,7 +34,7 @@ module.exports.setup = function(app) {
 			fileModel.save();
 
 		}
-		res.send('success');
+		res.send("success");
 	});
 
 	//## API
