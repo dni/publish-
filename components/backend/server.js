@@ -7,7 +7,7 @@ var mongoose = require("mongoose"),
 
 
 module.exports.setup = function(app) {
-	
+
 
 	app.configure(function() {
 		app.use('/admin/lib', express.static(__dirname + '/bower_components'));
@@ -22,7 +22,7 @@ module.exports.setup = function(app) {
 		         fs.exists(moduleDir+file+'/server.js', function(exists) {
 				    if (exists) {
 				        var module = require(moduleDir+file+'/server.js');
-				        module.setup(app); 
+				        module.setup(app);
 				    }
 				});
 		       }
@@ -32,6 +32,12 @@ module.exports.setup = function(app) {
 	});
 
 	app.get('/admin', function(req, res){
+	 // db.User.find({
+	 	// username: req.body.username,
+	 	// password: req.body.password
+	 // });
+
+
 	  app.use(express.basicAuth('admin', 'password'));
 	  app.use('/admin', express.static(__dirname));
 	  res.sendfile(__dirname+'/index.html');
