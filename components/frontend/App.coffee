@@ -29,8 +29,8 @@ define [
 
     # Fileparser.parse()
 
-    $.get "staticBlocks/header", (data)->
-      $("header").html(data)
+    # $.get "staticBlocks/header", (data)->
+      # $("header").html(data)
 
     $.get "staticBlocks/logo", (data)->
       $("logo").html(data)
