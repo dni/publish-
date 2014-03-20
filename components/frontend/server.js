@@ -22,6 +22,8 @@ module.exports.setup = function(app) {
 		db.Article.find({ 'privatecode': false }).execFind(function (arr,data) {
 			var calls = [];
 			data.forEach(function(article){
+
+				article.files = {};
 			    calls.push(function(callback) {
 					db2.File.find({ 'relation': 'article:'+article._id}).execFind(function (arr,data) {
 
@@ -30,8 +32,6 @@ module.exports.setup = function(app) {
 						data.forEach(function(file){
 
 							if (!file.key) file.key = "file"+ i++
-
-							article.files = {};
 							article.files[file.key] = {
 								link: file.link,
 								alt: file.alt,
