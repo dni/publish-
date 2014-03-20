@@ -16,16 +16,66 @@
 	</head>
 
 	<body>
-	    <staticblock key="header" el="header" class="lolol"></staticblock>
-
-        <header></header>
-        <hr />
-        <logo></logo>
-        <hr />
+	    <!-- <staticblock key="header" el="header" class="lolol"></staticblock> -->
 		<div id="app">
-			<h1>Simple Publish Frontend</h1>
-			<div id="list" class="content"></div>
+			<header>
+				<div class="container">
+			        <logo></logo>
+					<div class="nav">
+						<a href="link">HOME</a>
+						<a href="link">HOME</a>
+						<a href="link">HOME</a>
+						<a href="link">HOME</a>
+						<a href="link">HOME</a>
+					</div>
+				</div>
+			</header>
+
+			<div class="headerende"></div>
+
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div id="list" class="articles content container"></div>
+					</div>
+					<div class="col-md-4">
+						<aside id="sidebar">
+							<ul>
+							<li><h5>blindtext</h5></li>
+							<li>Dies ist ein Blindtext. Ein blinder Text hatt keine Augen im Kopft
+							und läuft gegen alles und jeden. Man kann dieses Phänomen als stur bezeichnen.
+							Oder als Durchaltevermögen oder als konsequent oder aber
+							er spürt einfach nichts wenn er wo gegenläuft....</li>
+							</ul>
+						</aside>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="container">
+				<div class="musik">
+					<h4>TEXT</h4><p>musik</p>
+					<audio controls>
+				  		<source src="horse.mp3" type="audio/mpeg">
+				  		<source src="horse.ogg" type="audio/ogg">
+				  		<embed height="50" width="100" src="horse.mp3">
+					</audio>
+
+				</div>
+			</div>
+
+			<div style="background: none repeat scroll 0% 0% rgb(244, 240, 236); padding: 5px 8px; text-align: center;">
+				<div style="text-align: center;">
+				<span style="font-size: large;"><b>Dies ist ein Blindtext</b></span>
+			</div>
+
+
+			<input type="button" class="btn btn-warning" value="wosiwü">
 		</div>
+
+
 		<script type="text/javascript" data-main="config" src="/lib/requirejs/require.js"></script>
 	</body>
 </html>
