@@ -4,7 +4,7 @@
   "description": "crossmedia publishing",
   "main": "app.js",
   "dependencies": {
-  	"bower": "",
+    "bower": "",
     "express": "~3.4.0",
     "connect": "",
     "buffer-crc32": "",
@@ -25,7 +25,8 @@
     "formidable": "~1.0.14",
     "node-static": "~0.7.3",
     "imagemagick": "~0.1.3",
-    "connect-multiparty": "~1.0.3"
+    "connect-multiparty": "~1.0.3",
+    "async": "~0.2.10"
   },
   "devDependencies": {},
   "scripts": {

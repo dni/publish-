@@ -1,7 +1,15 @@
-<h1><%- model.title %></h1>
-<h5>by <%- model.author %></h5>
-<p><%- model.desc %></p>
+<h1><%= title %></h1>
+<h5>by <%= author %></h5>
+<p><%= desc %></p>
+
+<div class="row">
+	<% _.each(files, function(file) { %>
+		<div class="file col-md-3">
+			<img src="<%= file.link %>" alt="<%= file.alt %>" />
+		</div>
+	<% }); %>
+</div>
 
 <div class="buttons">
-	<a href="#" class="back btn">Zurück</a>
+	<a href="#" class="back btn btn-default">Zurück</a>
 </div>
