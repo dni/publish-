@@ -1,0 +1,11 @@
+{
+    "config": {
+        "name": "ReportModule",
+        "namespace": "reports"
+    },
+    "navigation": {
+        "button": "comment",
+        "route": "messages",
+        "label": "Messages"
+    }
+}
