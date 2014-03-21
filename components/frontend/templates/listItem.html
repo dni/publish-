@@ -1,12 +1,31 @@
 
 <% if (fileKeyExists('teaser')) { %>
 	<div class="article-image">
-		<%= renderImage('teaser') %>
+		<a href='#article/<%= _id %>'>
+			<%= renderImage('teaser') %>
+		</a>
 	</div>
 <% } %>
 
 <div class="article-content">
-	<h1><a href='#article/<%= _id %>'><%= title %></a></h1>
-	<p><%= desc.slice(0, 250) %> ...</p>
-	<p><a class="btn btn-default" href='#article/<%= _id %>'>mehr lesen</a></p>
+	<div class="entry-date">
+		<div class="number">23</div>
+		<div class="month">JAN</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<div class="inner">
+				<h1><a href='#article/<%= _id %>'><%= title %></a></h1>
+				<p><%= desc.slice(0, 250) %> ...</p>
+			</div>
+		</div>
+		<div class="col-md-4 infos">
+			<ul>
+				<li><span class="glyphicon glyphicon-comment"></span> Kommentare</li>
+				<li><span class="glyphicon glyphicon-tag"></span> Tags</li>
+				<li><span class="glyphicon glyphicon-user"></span> by <%= author %></li>
+				<li><span class="glyphicon glyphicon-asterisk"></span> Kategorie</li>
+			</ul>
+		</div>
+	</div>
 </div>

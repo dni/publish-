@@ -1,8 +1,34 @@
-<h1><%= title %></h1>
-<h5>by <%= author %></h5>
-<p><%= desc %></p>
+<article>
 
-<%= renderImages() %>
+	<% if (fileKeyExists('teaser')) { %>
+		<div class="article-image">
+			<%= renderImage('teaser') %>
+		</div>
+	<% } %>
+
+	<div class="article-content">
+		<div class="entry-date">
+			<div class="number">23</div>
+			<div class="month">JAN</div>
+		</div>
+		<div class="inner">
+			<h1><%= title %></h1>
+			<p><%= desc %></p>
+		</div>
+	</div>
+	<div class="infos">
+		<ul>
+			<li><span class="glyphicon glyphicon-comment"></span> Kommentare</li>
+			<li><span class="glyphicon glyphicon-tag"></span> Tags</li>
+			<li><span class="glyphicon glyphicon-user"></span> by <%= author %></li>
+			<li><span class="glyphicon glyphicon-asterisk"></span> Kategorie</li>
+		</ul>
+	</div>
+</article>
+
+<div class="images">
+	<%= renderImages() %>
+</div>
 
 <div class="buttons">
 	<a href="#" class="back btn btn-default">Zurück</a>

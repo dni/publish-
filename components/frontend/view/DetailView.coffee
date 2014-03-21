@@ -10,3 +10,4 @@ define [
   class DetailView extends Backbone.Marionette.ItemView
     template: Template
     templateHelpers: Viewhelpers
+    className: "details"
