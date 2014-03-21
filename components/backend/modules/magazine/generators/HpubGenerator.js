@@ -4,9 +4,18 @@ var fs = require('fs-extra'),
 	PrintGenerator = require(__dirname + '/PrintGenerator'),
 	db = require('./../model/MagazineSchema'),
 	db2 = require('./../../article/model/ArticleSchema');
+	dbFile = require('./../../files/model/FileSchema');
 
 
 module.exports.generate = function(magazine) {
+
+	dbFile.File.findOne({key: 'cover'}).execFind(function(err, file){
+		magazine.cover = file.link
+	});
+
+	dbFile.File.findOne({key: 'back'}).execFind(function(err, file){
+		magazine.back = file.link
+	});
 
 	// generate Cover
 	var template = fs.readFileSync('./components/magazine/Book Cover.html', 'utf8');
@@ -73,11 +82,13 @@ module.exports.generate = function(magazine) {
 		template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
 		db2.Article.findOne({_id: page.article}).execFind(function(err, article){
 			if (err) console.log(err);
-
-			var html = ejs.render(template, { magazine: magazine, page: page, article: article });
-			var file = "Page" + page.number + ".html";
-			fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + file, html);
-			PrintGenerator.generatePage(file, magazine);
+			dbFile.File.findOne({key: 'back'}).execFind(function(err, file){
+				magazine.back = file.link
+				var html = ejs.render(template, { magazine: magazine, page: page, article: article });
+				var file = "Page" + page.number + ".html";
+				fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + file, html);
+				PrintGenerator.generatePage(file, article);
+			});
 		});
 	});
 

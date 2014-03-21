@@ -10,13 +10,11 @@ define [], () ->
       _.filter @files, (file)->
        file.type == 'image/png' or 'image/jpeg'
 
-
     renderImage: (key) ->
       if typeof key is 'string'
         image = @getFile key
       else
         image = key
-
       '<img src="'+ image.link + '" alt="'+image.alt+'"/>'
 
     renderImages: ->
