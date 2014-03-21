@@ -28,5 +28,4 @@ define [], () ->
       str += '</div>'
 
     fileKeyExists: (key) ->
-      console.log(!!@getFile(key))
       !!@getFile(key)

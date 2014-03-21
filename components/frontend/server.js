@@ -2,6 +2,7 @@ var express = require('express');
 var _ = require('underscore');
 var db = require(process.cwd() + '/components/backend/modules/article/model/ArticleSchema');
 var db2 = require(process.cwd() + '/components/backend/modules/files/model/FileSchema');
+var blocks = require(process.cwd() + '/components/backend/modules/static/model/StaticBlockSchema');
 var async = require('async');
 
 module.exports.setup = function(app) {
@@ -14,6 +15,12 @@ module.exports.setup = function(app) {
 	app.get('/', function(req, res){
 	  app.use('/', express.static(__dirname));
 	  res.sendfile(__dirname+'/index.html');
+	});
+
+	app.get('/blocks', function(req,res) {
+		blocks.StaticBlock.find({ 'key': { $in: req.query.blocks}}).execFind(function (arr,data) {
+			res.send(data);
+		});
 	});
 
 
