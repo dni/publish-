@@ -85,6 +85,7 @@ define (require)->
       staticModule = require "cs!./modules/static/StaticModule"
       reportModule = require "cs!./modules/reports/ReportModule"
       messageModule = require "cs!./modules/messages/MessageModule"
+      userModule = require "cs!./modules/user/UserModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
