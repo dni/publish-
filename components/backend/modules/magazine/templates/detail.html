@@ -1,59 +1,54 @@
-<div class="preview">
-	<h1><%=  title %></h1>
-	<h5>by <%=  author %></h5>
-	<p><%=  desc %></p>
-	<p>Cover</p>
-	<img src="<%=  cover %>" />
-	<p>Back</p>
-	<img src="<%=  back %>" />
+
+
+<div class="form-group">
+    <label>Titel</label>
+    <input type="text" name="title" class="form-control" value="<%= title %>" />
 </div>
 
-<div class="edit">
-
-    <div class="form-group">
-      <label>Select Papersize</label>
-      <select class="papersize form-control">
-        <% _.each(["A4","A5","A6","letter"], function(ps){%>
-            <% if(papersize==ps) { %>
-                <option selected value="<%= ps %>"> <%= ps %> </option>
-            <% } else { %>
-                <option value="<%= ps %>"> <%= ps %> </option>
-            <% } %>
-        <% }) %>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Select Orientation</label>
-      <select class="orientation form-control">
-        <% _.each(["horizontal","vertical"], function(or){%>
-            <% if(orientation==or) { %>
-                <option selected value="<%= or %>"> <%= or %> </option>
-            <% } else { %>
-                <option value="<%= or %>"> <%= or %> </option>
-            <% } %>
-        <% }) %>
-      </select>
-    </div>
-
-	<div class="form-group">
-	    <label>Titel</label>
-	    <input type="text" name="title" class="form-control" value="<%= title %>" />
-	</div>
-
-    <div class="form-group">
-        <label>Author</label>
-        <input type="text" name="author" class="form-control" value="<%= author %>" />
-    </div>
-
-	<div class="form-group">
-		<label>Impressum</label>
-		<textarea class="form-control" name="impressum"><%= impressum %></textarea>
-	</div>
-
-	<div class="form-group">
-		<label>Editorial</label>
-		<textarea class="form-control" name="editorial"><%= editorial %></textarea>
-	</div>
-
+<div class="form-group">
+    <label>Author</label>
+    <input type="text" name="author" class="form-control" value="<%= author %>" />
 </div>
+
+<div class="form-group">
+	<label>Impressum</label>
+	<textarea rows="9" class="form-control" name="impressum"><%= impressum %></textarea>
+</div>
+
+<div class="form-group">
+	<label>Editorial</label>
+	<textarea rows="9" class="form-control" name="editorial"><%= editorial %></textarea>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+		  <label>Select Papersize</label>
+		  <select class="papersize form-control">
+		    <% _.each(["A4","A5","A6","letter"], function(ps){%>
+		        <% if(papersize==ps) { %>
+		            <option selected value="<%= ps %>"> <%= ps %> </option>
+		        <% } else { %>
+		            <option value="<%= ps %>"> <%= ps %> </option>
+		        <% } %>
+		    <% }) %>
+		  </select>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+		  <label>Select Orientation</label>
+		  <select class="orientation form-control">
+		    <% _.each(["horizontal","vertical"], function(or){%>
+		        <% if(orientation==or) { %>
+		            <option selected value="<%= or %>"> <%= or %> </option>
+		        <% } else { %>
+		            <option value="<%= or %>"> <%= or %> </option>
+		        <% } %>
+		    <% }) %>
+		  </select>
+		</div>
+	</div>
+</div>
+
+
