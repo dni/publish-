@@ -2,13 +2,7 @@
 <h5>by <%= author %></h5>
 <p><%= desc %></p>
 
-<div class="row">
-	<% _.each(files, function(file) { %>
-		<div class="file col-md-3">
-			<img src="<%= file.link %>" alt="<%= file.alt %>" />
-		</div>
-	<% }); %>
-</div>
+<%= renderImages() %>
 
 <div class="buttons">
 	<a href="#" class="back btn btn-default">Zurück</a>

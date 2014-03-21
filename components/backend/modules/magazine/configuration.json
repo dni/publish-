@@ -17,6 +17,11 @@
 	      "value": "default",
 	      "type": "text"
 		},
+		"print" : {
+	      "label": "Enable Print PDF",
+	      "value": "1",
+	      "type": "checkbox"
+		},
 		"apptype" : {
 	      "label": "Type of the App",
 	      "description": "Comma seperated list of layout keys",

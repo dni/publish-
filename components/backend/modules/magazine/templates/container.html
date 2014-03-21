@@ -1,9 +1,4 @@
 
-<div id="pages" class="edit">
-	<h2>Seiten</h2>
-    <div class="page-list sortable"></div>
-    <button id="addPage" class="btn"><span class="glyphicon glyphicon-plus"></span> Add Page</button>
-</div>
 
 <div id="magazine-details"></div>
 
@@ -19,19 +14,21 @@
     </div>
 <% } %>
 
-<div class="buttons">
-	<div class="edit">
-		<button class="save btn btn-success">Save</button>
-	</div>
-	<div class="saved">
-		<button id="download" class="btn btn-default">PDF</button>
-		<% if (published === false) { %>
-			<button class="publish btn btn-success">Publish</button>
-		<% } else { %>
-			<button class="publish btn btn-default">Unpublish</button>
-		<% } %>
+<div id="pages">
+	<h2>Seiten</h2>
+    <div class="page-list sortable"></div>
+    <button id="addPage" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Page</button>
+</div>
 
-		<button class="delete btn btn-danger">Delete</button>
-		<button id="edit" class="btn btn-primary">Edit</button>
-	</div>
+<div class="buttons">
+
+	<button id="download" class="btn btn-default">PDF</button>
+
+	<% if (published === false) { %>
+		<button class="publish btn btn-success">Publish</button>
+	<% } else { %>
+		<button class="publish btn btn-default">Unpublish</button>
+	<% } %>
+
+	<button class="delete btn btn-danger">Delete</button>
 </div>

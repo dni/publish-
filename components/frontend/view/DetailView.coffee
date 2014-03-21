@@ -4,7 +4,9 @@ define [
   'backbone'
   'marionette'
   'tpl!templates/detail.html'
-], ( $, _, Backbone, Marionette, Template) ->
+  'cs!view/Viewhelpers'
+], ( $, _, Backbone, Marionette, Template, Viewhelpers) ->
 
   class DetailView extends Backbone.Marionette.ItemView
     template: Template
+    templateHelpers: Viewhelpers
