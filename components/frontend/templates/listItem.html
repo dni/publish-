@@ -1,15 +1,12 @@
-<div class="row">
 
-
-	<% if (fileKeyExists('teaser')) { %>
-		<div class="col-md-4">
-			<%= renderImage('teaser') %>
-		</div>
-	<% } %>
-
-	<div class="col-md-8">
-		<h3><a href='#article/<%= _id %>'><%= title %></a></h3>
-		<p><%= desc.slice(0, 250) %> ...</p>
-		<p><a class="btn btn-default" href='#article/<%= _id %>'>mehr lesen</a></p>
+<% if (fileKeyExists('teaser')) { %>
+	<div class="article-image">
+		<%= renderImage('teaser') %>
 	</div>
+<% } %>
+
+<div class="article-content">
+	<h1><a href='#article/<%= _id %>'><%= title %></a></h1>
+	<p><%= desc.slice(0, 250) %> ...</p>
+	<p><a class="btn btn-default" href='#article/<%= _id %>'>mehr lesen</a></p>
 </div>
