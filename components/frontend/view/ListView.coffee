@@ -10,6 +10,7 @@ define [
     template: Template
     templateHelpers: Viewhelpers
     className: 'list-item'
+    tagName: 'article'
 
   class ListView extends Backbone.Marionette.CollectionView
     itemView: ListItemView
