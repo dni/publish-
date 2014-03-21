@@ -4,7 +4,6 @@ define (require)->
   _ = require 'lodash'
   Backbone = require 'backbone'
   Marionette = require 'marionette'
-  WelcomeView = require 'cs!./view/WelcomeView'
   Setting = require 'cs!./modules/settings/model/Setting'
   Settings = require 'cs!./modules/settings/model/Settings'
   NavItems = require 'cs!./model/NavItems'
@@ -43,9 +42,7 @@ define (require)->
     listRegion:"#list"
 
 
-
   App.navItems = new NavItems
-
 
   App.Settings.fetch
     success:->
@@ -62,7 +59,6 @@ define (require)->
   # App.addInitializer = ()->
 
   App.navigationRegion.show new NavigationView collection: App.navItems
-  App.contentRegion.show new WelcomeView
 
   Vent.on 'app:addModule', (config)->
     App.Modules[config.config.name] = config.config
@@ -87,6 +83,7 @@ define (require)->
       settingsModule = require "cs!./modules/settings/SettingsModule"
       fileModule = require "cs!./modules/files/FileModule"
       staticModule = require "cs!./modules/static/StaticModule"
+      reportModule = require "cs!./modules/reports/ReportModule"
       # for moduleKey, moduleName of App.config.modules
         # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"

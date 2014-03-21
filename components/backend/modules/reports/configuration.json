@@ -1,0 +1,12 @@
+{
+    "config": {
+        "name": "ReportModule",
+        "namespace": "reports"
+    },
+    "navigation": {
+        "button": "",
+        "route": "reports",
+        "label": "Reports",
+        "classNames": "reports"
+    }
+}

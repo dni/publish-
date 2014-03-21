@@ -3,18 +3,8 @@ define [
     'lodash'
     'backbone'
     'marionette'
-    'cs!../view/WelcomeView'
-    'cs!../view/LoginView'
 ],
-($, _, Backbone, Marionette, WelcomeView, LoginView ) ->
+($, _, Backbone, Marionette) ->
 
   class AppController extends Backbone.Marionette.Controller
 
-    generator: ->
-      $.get "generator", (data) -> console.log data
-
-    settings: ->
-      App.overlayRegion.show new LoginView
-
-    welcome: ->
-      App.contentRegion.show new WelcomeView
