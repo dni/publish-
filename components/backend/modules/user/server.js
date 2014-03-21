@@ -1,7 +1,23 @@
-var db = require(__dirname + '/model/UserSchema');
+var db = require(__dirname + '/model/UserSchema'),
+	express = require('express');
 
 module.exports.setup = function(app) {
 
+
+	app.get('/admin', function(req, res){
+
+	 // db.User.find({
+	 	// username: req.body.username,
+	 	// password: req.body.password
+	 // });
+
+
+	  app.use(express.basicAuth('admin', 'password'));
+	  app.use('/admin', express.static(process.cwd()+'/components/backend'));
+	  res.sendfile(process.cwd()+'/components/backend/index.html');
+
+
+	});
 
 	// API
 	app.get('/users', function(req, res){

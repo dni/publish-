@@ -1,13 +1,8 @@
-var mongoose = require("mongoose"),
-	express = require("express"),
-	ejs = require('ejs'),
-	phantom = require("phantom"),
-	fs = require('fs');
-	// multipart = require("connect-multiparty");
+var fs = require('fs'),
+	express = require("express");
 
 
 module.exports.setup = function(app) {
-
 
 	app.configure(function() {
 		app.use('/admin/lib', express.static(__dirname + '/bower_components'));
@@ -31,16 +26,5 @@ module.exports.setup = function(app) {
 		});
 	});
 
-	app.get('/admin', function(req, res){
-	 // db.User.find({
-	 	// username: req.body.username,
-	 	// password: req.body.password
-	 // });
-
-
-	  app.use(express.basicAuth('admin', 'password'));
-	  app.use('/admin', express.static(__dirname));
-	  res.sendfile(__dirname+'/index.html');
-	});
 
 };
