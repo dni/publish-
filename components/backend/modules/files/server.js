@@ -1,4 +1,5 @@
 var db = require(__dirname + '/model/FileSchema'),
+	mongoose = require("mongoose");
 	fs = require("fs");
 
 module.exports.setup = function(app) {
@@ -44,26 +45,28 @@ module.exports.setup = function(app) {
 		});
 	});
 
-	//## API
 	app.post('/files', function(req, res) {
+		newfile = req.body;
 
 		file = new db.File();
-		filename = 'copy_'+Date.now()+'_'+ req.body.name;
-		fs.writeFileSync('./public/files/' + filename, fs.readFileSync('./public/files/' + req.body.name));
+		filename = 'copy_'+Date.now()+'_'+ newfile.name;
+		fs.writeFileSync('./public/files/' + filename, fs.readFileSync('./public/files/' + newfile.name));
 
 		file.name = filename;
-		file.type = req.body.type;
+		file.type = newfile.type;
 		file.link = './static/files/' + filename;
-		file.info = req.body.info;
-		file.alt = req.body.alt;
-		file.desc = req.body.desc;
-		file.parent = req.body.parent;
-		file.relation = req.body.relation;
-		file.key = req.body.key;
+		file.info = newfile.info;
+		file.alt = newfile.alt;
+		file.desc = newfile.desc;
+		file.parent = newfile.parent;
+		file.relation = newfile.relation;
+		file.key = newfile.key;
 
 		file.save(function(){
 			res.send(file);
 		});
+
+
 
 
 	});

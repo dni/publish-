@@ -93,7 +93,9 @@ define [
         $(@).text(i+1)
 
 
-    publish: ->
+    publish: (e)->
+      $btn = $(e.target)
+      if @model.get("privatecode") then $btn.removeClass("btn-success").text('Unpublish') else $btn.addClass("btn-success").text('Publish!')
       @model.togglePublish()
       @model.save()
 

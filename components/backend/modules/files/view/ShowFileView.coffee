@@ -20,13 +20,15 @@ define [
 
 
     events:
-      "click .delete": "deleteFile"
+      "click .deleteFile": "deleteFile"
       "blur .form-control": "save"
 
     deleteFile: ->
       @model.destroy
         success:->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+
+      $('.modal').modal('hide')
+
 
     save: ->
       @model.set
