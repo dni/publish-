@@ -40,9 +40,16 @@ module.exports.setup = function(app) {
 
 	//## API
 	app.get('/files', function(req, res) {
-		db.File.find().limit(20).execFind(function(arr, data) {
+		var send = function(arr, data) {
 			res.send(data);
-		});
+		};
+
+		if (req.query.parents) {
+			db.File.find({'parent':undefined}).execFind(send);
+		} else {
+			db.File.find().execFind(send);
+		}
+
 	});
 
 	app.post('/files', function(req, res) {

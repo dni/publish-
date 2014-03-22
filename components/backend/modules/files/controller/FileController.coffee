@@ -19,15 +19,15 @@ define [
     filebrowser: (eventname, id)->
 
       files = App.Files.where parent:undefined
-
       files.forEach (model)->
-          model.set 'selected', false
+        model.set 'selected', false
 
       view = new BrowseView collection: new Files files
 
       Vent.trigger 'overlay:action', ->
 
         files = view.collection.where selected:true
+        if !files.length then return $('.modal').modal('hide')
 
         # filecollection of fileRegion
         fileView = App.contentRegion.currentView.fileRegion.currentView
@@ -42,11 +42,15 @@ define [
             info: file.attributes.info
             alt: file.attributes.alt
             desc: file.attributes.desc
+            key: 'default'
 
           fileView.collection.create newfile,
             wait:true
             success: (res) ->
-              if files.length then eachFile files.pop() else $('.modal').modal('hide')
+              App.Files.fetch
+                success:->
+                  if files.length then eachFile files.pop() else $('.modal').modal('hide')
+
 
         eachFile(files.pop())
 
@@ -67,11 +71,6 @@ define [
       Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
 
     list : ->
-
-      App.Files.on 'sync', ->
-        c.l "filesync" # keep for future debugging
-        Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
-
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
       #App.sidebarRegion.show view
