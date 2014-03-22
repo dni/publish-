@@ -14,3 +14,9 @@ define [
 
   class PreviewView extends Backbone.Marionette.CollectionView
     itemView: ItemView
+    initialize:->
+      @$el.sortable(
+        revert: true
+        cursor: "move"
+        # stop: _.bind @_sortStop, @
+      ).disableSelection()

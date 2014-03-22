@@ -23,18 +23,8 @@ define [
       @on "render", @afterRender
 
     afterRender:->
-      files = new Files App.Files.where relation: "article:"+@model.get "_id"
-
-      @fileRegion.show new PreviewView collection: files
+      @fileRegion.show new PreviewView collection: new Files App.Files.where relation: "article:"+@model.get "_id"
       @detailRegion.show new DetailView model: @model
-
-
-      view.$el.sortable(
-        revert: true
-        cursor: "move"
-        # stop: _.bind @_sortStop, @
-      ).disableSelection()
-
 
     events:
       "blur .form-control": "saveArticle"

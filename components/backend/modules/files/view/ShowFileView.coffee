@@ -18,7 +18,6 @@ define [
       key: 'input[name=key]'
       alt: 'input[name=alt]'
 
-
     events:
       "click .deleteFile": "deleteFile"
       "blur .form-control": "save"
