@@ -11,10 +11,10 @@ define [
   Vent.on "app:ready", ()->
 
     Vent.trigger "app:addModule", JSON.parse Config
+
     App.Files = new Files
     App.Files.fetch
       success:->
-
 
     App.Router.processAppRoutes new Controller,
       "files": "list"

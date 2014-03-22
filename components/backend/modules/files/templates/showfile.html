@@ -1,25 +1,32 @@
-<img height="450" src="<%= link %>" alt="<%= name %>" />
-<p><%= type %></p>
+<div class="row">
+	<div class="col-md-6">
+		<div class="form-group">
+		    <label>Name</label>
+		    <input type="text" name="name" class="form-control" value="<%= name %>" />
+		</div>
+		<div class="form-group">
+		    <label>Template Key</label>
+		    <input type="text" name="key" class="form-control" value="<%= key %>" />
+		</div>
+		<div class="form-group">
+		    <label>Info</label>
+		    <textarea class="form-control" name="info"><%= info %></textarea>
+		</div>
+		<div class="form-group">
+		    <label>Description</label>
+		    <textarea class="form-control" name="desc"><%= desc %></textarea>
+		</div>
+		<div class="form-group">
+		    <label>Alt</label>
+		    <input class="form-control" type="text" name="alt" value="<%= alt %>" />
+		</div>
 
-<div class="form-group">
-    <label>Name</label>
-    <input type="text" name="name" class="form-control" value="<%= name %>" />
-</div>
-<div class="form-group">
-    <label>Template Key</label>
-    <input type="text" name="key" class="form-control" value="<%= key %>" />
-</div>
-<div class="form-group">
-    <label>Info</label>
-    <textarea class="form-control" name="info"><%= info %></textarea>
-</div>
-<div class="form-group">
-    <label>Description</label>
-    <textarea class="form-control" name="desc"><%= desc %></textarea>
-</div>
-<div class="form-group">
-    <label>Alt</label>
-    <input class="form-control" type="text" name="alt" value="<%= alt %>" />
+	</div>
+	<div class="col-md-6">
+		<img src="<%= link %>" alt="<%= name %>" />
+		<p><%= type %></p>
+	</div>
 </div>
 
-<button class="delete btn btn-danger">Delete</button>
+
+<button class="deleteFile btn btn-danger">Delete</button>

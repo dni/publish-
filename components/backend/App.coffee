@@ -41,6 +41,8 @@ define (require)->
     listTopRegion: "#list-top"
     listRegion:"#list"
 
+  App.listRegion.on "show", ->
+    if App.contentRegion.currentView? then App.contentRegion.currentView.close()
 
   App.navItems = new NavItems
 

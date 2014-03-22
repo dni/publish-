@@ -23,16 +23,11 @@ define [
       @on "render", @afterRender
 
     afterRender:->
-      @files = new Files()
-      files = App.Files.where relation: "article:"+@model.get "_id"
+      files = new Files App.Files.where relation: "article:"+@model.get "_id"
 
-      self = @
-      _.each files, (file) -> self.files.add file
-
+      @fileRegion.show new PreviewView collection: files
       @detailRegion.show new DetailView model: @model
 
-      view = new PreviewView collection: @files
-      @fileRegion.show view
 
       view.$el.sortable(
         revert: true
@@ -54,15 +49,17 @@ define [
     showFile: (e)->
       App.Router.navigate("showfile/" + $(e.target).attr("data-uid"), {trigger:true})
 
-    publishArticle: ->
+    publishArticle: (e)->
+      $btn = $(e.target)
+      if @model.get("privatecode") then $btn.removeClass("btn-success").text('Unpublish') else $btn.addClass("btn-success").text('Publish!')
       @model.togglePublish()
       @model.save()
 
     saveArticle: ->
       @model.set
-        title: $("input[name=title]").val()
-        author: $("input[name=author]").val()
-        desc: $("textarea[name=article]").val()
+        title: @$el.find("[name=title]").val()
+        author: @$el.find("[name=author]").val()
+        desc: @$el.find("[name=article]").val()
       if @model.isNew()
         App.Articles.create @model,
           wait: true

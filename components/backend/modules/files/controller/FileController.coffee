@@ -19,31 +19,36 @@ define [
     filebrowser: (eventname, id)->
 
       files = App.Files.where parent:undefined
+
+      files.forEach (model)->
+          model.set 'selected', false
+
       view = new BrowseView collection: new Files files
 
       Vent.trigger 'overlay:action', ->
-        files = App.Files.where selected:true
-        filesIds = []
-        _.each files, (file)->
 
-          cloned = new File()
-          cloned.set
-            parent: file.get "_id"
+        files = view.collection.where selected:true
+
+        # filecollection of fileRegion
+        fileView = App.contentRegion.currentView.fileRegion.currentView
+
+        eachFile = (file)->
+          newfile = new File()
+          newfile.attributes =
+            parent: file.attributes._id
             relation: eventname+":"+id
-            type: file.get "type"
-            name: file.get "name"
-            info: file.get "info"
-            alt: file.get "alt"
-            desc: file.get "desc"
+            type: file.attributes.type
+            name: file.attributes.name
+            info: file.attributes.info
+            alt: file.attributes.alt
+            desc: file.attributes.desc
 
-          App.Files.create cloned,
+          fileView.collection.create newfile,
             wait:true
             success: (res) ->
-              App.contentRegion.currentView.render()
+              if files.length then eachFile files.pop() else $('.modal').modal('hide')
 
-        $('.modal').modal('hide')
-        Vent.trigger 'app:closeRegion', 'overlayRegion'
-
+        eachFile(files.pop())
 
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
       # App.Router.navigate collection+"/"+id
