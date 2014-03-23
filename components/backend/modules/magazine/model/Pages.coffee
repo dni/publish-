@@ -7,4 +7,4 @@ define [
   class Pages extends Backbone.Collection
     url: "/pages/"
     model: Page
-    comparator: 'number'
+    comparator: (item) -> item.get "number"
