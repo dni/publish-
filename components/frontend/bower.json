@@ -18,7 +18,8 @@
     "lodash-amd": "~2.4.1",
     "requirejs-tpl": "*",
     "backbone.wreqr": "*",
-    "backbone.babysitter": "*"
+    "backbone.babysitter": "*",
+    "fancybox": "~2.1.5"
   },
   "devDependencies": {
     "requirejs": "latest"

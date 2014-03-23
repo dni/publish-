@@ -38,10 +38,11 @@ define [
 
     App.Router = new Router()
 
-  App.on "initialize:after", (options)->
-    Backbone.history.start()
     App.contentRegion.show new ListView collection: App.Articles
     App.BlockView = new BlockView collection: App.Blocks
+
+  App.on "initialize:after", (options)->
+    Backbone.history.start()
 
 
   App.start()

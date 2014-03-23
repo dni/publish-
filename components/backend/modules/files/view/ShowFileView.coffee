@@ -28,7 +28,6 @@ define [
 
       $('.modal').modal('hide')
 
-
     save: ->
       @model.set
         name: @ui.name.val()

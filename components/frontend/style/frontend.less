@@ -1,4 +1,5 @@
 @import "/lib/bootstrap/less/bootstrap.less";
+@import "/lib/fancybox/source/jquery.fancybox.css";
 @import url('http://fonts.googleapis.com/css?family=Voltaire');
 
 @highlight:#cb5432;
@@ -39,12 +40,6 @@ article {
   .box-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
 }
 
-.images img {
-  background:white;
-  padding:5px;
-  .box-shadow(0px 0px 2px rgba(0, 0, 0, 0.2));
-}
-
 article h1 a {
   color: #444444;
 
@@ -61,9 +56,15 @@ article h1 a:hover {
   text-decoration:none;
 }
 
+
+
 .article-content {
   position: relative;
   padding-left: 40px;
+}
+
+.details .article-content {
+  padding-right: 40px;
 }
 
 .article-content .inner {
@@ -152,12 +153,15 @@ header h1 {
   margin: 25px 0;
   color: #dcd2be;
 }
-aside h4 {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 25px;
-  padding-bottom: 15px;
+aside {
+
+  h4 {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+  }
+  .block {margin-bottom:48px;}
 }
-.block {margin-bottom:48px;}
 
 .nav {
       text-decoration: none;

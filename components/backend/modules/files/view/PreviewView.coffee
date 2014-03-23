@@ -15,7 +15,6 @@ define [
     className: "preview-item"
 
     initialize:->
-      c.l 'listenToDestroy', @model
       @listenTo @model, 'destroy', @close
 
     events:
