@@ -89,7 +89,7 @@ module.exports.setup = function(app) {
 				child = exec('rm -rf '+ a.title,function(err,out) {
 				  console.log(out); err && console.log(err);
 				});
-		        return res.send('');
+		        return res.send('deleted');
 		      } else {
 		        console.log(err);
 		      }

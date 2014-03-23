@@ -16,11 +16,15 @@ define [
   class MagazineController extends Backbone.Marionette.Controller
 
     detailsMagazine: (id) ->
-      c.l App.Magazines.findWhere _id: id
+      pages = new Pages
+      pages.fetch
+        data:
+          magazine:id
       Vent.trigger 'app:updateRegion', "contentRegion", new MagazineLayout
         model: App.Magazines.findWhere _id: id
         files: new Files App.Files.where relation: "magazine:"+id
-        pages: new Pages()
+        pages: pages
+
 
     addMagazine: ->
       Vent.trigger 'app:updateRegion', 'contentRegion', new MagazineLayout

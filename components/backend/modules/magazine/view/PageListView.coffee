@@ -11,8 +11,11 @@ define [
 
   class PageListItemView extends Backbone.Marionette.ItemView
     template: ItemTemplate
-    initialize:->
-      @model.on "change", @render, @
+
+    ui:
+      number: '.number'
+      layout: '.layout'
+      article: '.article'
 
     events:
       "click .remove": "deletePage"
@@ -20,10 +23,10 @@ define [
 
     updatePage: ->
       @model.set
-        "number": @$el.find(".number").text()
-        "layout": @$el.find(".layout").val()
-        "article": @$el.find(".article").val()
-      @model.save
+        "number": @ui.number.text()
+        "layout": @ui.layout.val()
+        "article": @ui.article.val()
+      @model.save()
 
     deletePage: ->
       @model.destroy
@@ -39,27 +42,43 @@ define [
       "click #addPage": 'addPage'
 
     addPage: ->
-      page = new Page number: @collection.length+1
+      page = new Page
+        number: @collection.length+1
+        magazine: @magazine
       @collection.create page,
         success:->
 
-    initialize:->
-      @$el.sortable(
-          revert: true
-          axis: "y"
-          cursor: "move"
-          stop: _.bind @_sortStop, @
-       ).disableSelection()
+#
+    # appendHtml: (collectionView, itemView, index) ->
+      # if collectionView.itemViewContainer then childrenContainer = collectionView.$(collectionView.itemViewContainer) else childrenContainer = collectionView.$el
+      # children = childrenContainer.children()
+      # if (children.size() <= index)
+        # childrenContainer.append(itemView.el)
+      # else
+        # children.eq(index).before(itemView.el)
+#
+
+    initialize:(args)->
+      @magazine = args['magazine']
+      @listenTo @collection, 'reset', @render
+      @listenTo @, "render", @_sortAble
+
+
+    _sortAble:->
+      @$el.find(".page-list").sortable(
+         revert: true
+         axis: "y"
+         cursor: "move"
+         stop: _.bind @_sortStop, @
+      ).disableSelection()
 
     _sortStop: (event, ui)->
+      that = @
       $(event.target).find('.number').each (i)->
         elNumber = $(@).text()
-        model = @collection.where({number: elNumber})[0]
-        if model?
-          model.attributes.number = (i+1).toString()
-        else
-          c.l "model nr.#{elNumber} is broken"
-
+        model = that.collection.findWhere number: parseInt elNumber
+        model.set "number", i+1
+        model.save()
         $(@).text(i+1)
 
 

@@ -35,17 +35,19 @@ define [
 
     afterRender:->
       @detailRegion.show new DetailView model: @model
-      @pageRegion.show new PageListView collection: @pages
 
-      # dont create files if model is new and there no _id for the relationx
+      # dont create files, pages if model is new and there no _id for the relationx
       that = @
-      fileAction = ->
+      modelNotNewAction = ->
+        that.pageRegion.show new PageListView
+          collection: that.pages
+          magazine: that.model.get "_id"
         that.fileRegion.show new PreviewView
           collection: that.files
           namespace: 'magazine'
           modelId: that.model.get "_id"
 
-      if !@model.isNew() then fileAction() else @model.on "sync", fileAction
+      if !@model.isNew() then modelNotNewAction() else @model.on "sync", modelNotNewAction
 
 
     publish:->
