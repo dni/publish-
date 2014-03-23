@@ -14,7 +14,7 @@
 		"layouts" : {
 	      "label": "Layouts",
 	      "description": "Comma seperated list of layout keys",
-	      "value": "default",
+	      "value": "default, fullsize",
 	      "type": "text"
 		},
 		"print" : {

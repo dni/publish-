@@ -16,8 +16,7 @@ define [
 
   class FileController extends Backbone.Marionette.Controller
 
-    filebrowser: (eventname, id)->
-
+    filebrowser: (namespace, id)->
       files = App.Files.where parent:undefined
       files.forEach (model)->
         model.set 'selected', false
@@ -36,7 +35,7 @@ define [
           newfile = new File()
           newfile.attributes =
             parent: file.attributes._id
-            relation: eventname+":"+id
+            relation: namespace+":"+id
             type: file.attributes.type
             name: file.attributes.name
             info: file.attributes.info
@@ -47,20 +46,18 @@ define [
           fileView.collection.create newfile,
             wait:true
             success: (res) ->
-              App.Files.fetch
-                success:->
-                  if files.length then eachFile files.pop() else $('.modal').modal('hide')
+              if files.length then eachFile files.pop() else $('.modal').modal('hide')
 
 
         eachFile(files.pop())
 
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
-      # App.Router.navigate collection+"/"+id
-
 
     showfile: (id) ->
-      file = App.Files.where _id: id
-      view = new ShowFileView model: file[0]
+
+      fileView = App.contentRegion.currentView.fileRegion.currentView
+      view = new ShowFileView model: fileView.collection.findWhere _id: id
+
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
       Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')

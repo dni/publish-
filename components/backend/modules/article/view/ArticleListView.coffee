@@ -2,7 +2,7 @@ define [
   'jquery'
   'lodash'
   'backbone'
-  'tpl!../templates/listItem.html'
+  'tpl!../templates/list-item.html'
 ], ($, _, Backbone, Template) ->
 
   class ArticleListItemView extends Backbone.Marionette.ItemView

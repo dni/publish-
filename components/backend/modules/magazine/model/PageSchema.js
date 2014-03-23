@@ -4,9 +4,9 @@ var mongoose = require('mongoose/'),
 
 var PageSchema = new Schema({
   number: Number,
+  magazine: String,
   article: String,
   layout: String,
 });
 
-
-module.exports.Page = mongoose.model('Page', PageSchema);
+module.exports = mongoose.model('Page', PageSchema);

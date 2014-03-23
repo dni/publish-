@@ -5,5 +5,6 @@ define [
 ],
 (_, Backbone, Page) ->
   class Pages extends Backbone.Collection
-    model: Pages
+    url: "/pages/"
+    model: Page
     comparator: 'number'
