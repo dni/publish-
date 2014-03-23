@@ -19,17 +19,6 @@ module.exports.setup = function(app) {
 		a.privatecode = req.body.privatecode;
 		a.date = new Date();
 
-		// upload progress
-		// req.form.on('progress', function(bytesReceived, bytesExpected) {
-	        // console.log(((bytesReceived / bytesExpected)*100) + "% uploaded");
-	    // });
-	    // req.form.on('end', function() {
-	//
-	    	// //upload done
-	        // console.log(req.files);
-	        // res.send("well done");
-	    // });
-
 		a.save(function () {
 			res.send(a);
 		});

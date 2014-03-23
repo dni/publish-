@@ -5,23 +5,26 @@ define [
   'backbone'
   'marionette'
   'cs!../view/ArticleListView'
-  'cs!../view/ArticleParentView'
-  'cs!../model/Article'
+  'cs!../view/ArticleLayout'
   'cs!../view/TopView'
-], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleParentView, Article, TopView ) ->
+  'cs!../model/Article'
+  'cs!../../files/model/Files'
+], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
 
   class ArticleController extends Backbone.Marionette.Controller
 
-    settings: ->
-      App.Settings.where({name: "ArticleModule"})[0]
+    settings: (attr)->
+      (App.Settings.findWhere name: "ArticleModule").getValue(attr)
 
     details: (id) ->
-      article = App.Articles.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleParentView model: article[0]
+      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout
+        model: App.Articles.findWhere _id: id
+        files: new Files App.Files.where relation: "article:"+id
 
     add: ->
-      view = new ArticleParentView model:new Article author: @settings().getValue "defaultAuthor"
-      Vent.trigger 'app:updateRegion', 'contentRegion', view
+      Vent.trigger 'app:updateRegion', 'contentRegion', new ArticleLayout
+        model: new Article author: @settings("defaultAuthor")
+        files: new Files
 
     list: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView

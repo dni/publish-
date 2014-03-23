@@ -4,26 +4,30 @@ define [
   'lodash'
   'backbone'
   'marionette'
+  'cs!../view/MagazineLayout'
   'cs!../view/MagazineListView'
-  'cs!../view/MagazineDetailView'
-  'cs!../view/MagazineParentView'
+  'cs!../view/TopView'
   'cs!../model/Magazine'
-  'cs!../view/ListView'
+  'cs!../model/Magazines'
   'cs!../model/Pages'
-  'cs!../view/PageListView'
-], ( Vent, $, _, Backbone, Marionette, MagazineListView, DetailView, MagazineParentView, Magazine, ListView, Pages, PageListView) ->
+  'cs!../../files/model/Files'
+], ( Vent, $, _, Backbone, Marionette, MagazineLayout, MagazineListView, TopView, Magazine, Magazines, Pages, Files) ->
 
   class MagazineController extends Backbone.Marionette.Controller
 
     detailsMagazine: (id) ->
-      magazine = App.Magazines.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new MagazineParentView model: magazine[0]
+      c.l App.Magazines.findWhere _id: id
+      Vent.trigger 'app:updateRegion', "contentRegion", new MagazineLayout
+        model: App.Magazines.findWhere _id: id
+        files: new Files App.Files.where relation: "magazine:"+id
+        pages: new Pages()
 
     addMagazine: ->
-      view = new MagazineParentView model: new Magazine()
-      Vent.trigger 'app:updateRegion', 'contentRegion', view
-      view.toggleEdit()
+      Vent.trigger 'app:updateRegion', 'contentRegion', new MagazineLayout
+        model: new Magazine
+        files: new Files()
+        pages: new Pages()
 
     magazines: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new ListView
+      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
       Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines

@@ -8,14 +8,10 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "author": "default author"
       "desc": "description ..."
       "editorial": "Hello World!"
-      "pages": ""
       "impressum": "dnilabs"
       "published": false
-      "cover": ""
-      "back": ""
       "papersize": "A4"
       "orientation": "horizontal"
-      "files": []
 
 
     togglePublish: ->

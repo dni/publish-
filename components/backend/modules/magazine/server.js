@@ -1,4 +1,5 @@
 var db = require(__dirname + '/model/MagazineSchema'),
+	Page = require(__dirname + '/model/PageSchema'),
 	fs = require('fs-extra'),
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator'),
 	BakerGenerator = require(__dirname + '/generators/BakerGenerator'),
@@ -95,6 +96,52 @@ module.exports.setup = function(app) {
 		    });
 	  	});
 	});
+
+
+	// API Pages
+	app.get('/pages', function(req, res){
+		if (!req.query.magazine) res.send("no magazine id");
+	  	Page.find({magazine: req.query.magazine}).execFind(function (arr,data) {
+	    	res.send(data);
+	  	});
+	});
+
+	app.post('/pages', function(req, res){
+		var a = new Page();
+		a.magazine = req.body.magazine;
+		a.article = req.body.article;
+		a.number = req.body.number;
+		a.layout = req.body.layout;
+		a.save(function () {
+			res.send(a);
+		});
+	});
+
+	app.put('/pages/:id', function(req, res){
+		Page.findById( req.params.id, function(e, a) {
+			a.magazine = req.body.magazine;
+			a.article = req.body.article;
+			a.number = req.body.number;
+			a.layout = req.body.layout;
+			a.save(function () {
+				res.send(a);
+			});
+
+	  	});
+	});
+
+	app.delete('/pages/:id', function(req, res){
+	  	Page.findById( req.params.id, function(e, model) {
+			return model.remove(function (err) {
+		      if (!err) {
+		        return res.send('');
+		      } else {
+		        console.log(err);
+		      }
+		    });
+	  	});
+	});
+
 
 };
 

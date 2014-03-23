@@ -9,9 +9,6 @@ var MagazineSchema = new Schema({
   editorial: String,
   impressum: String,
   published: Boolean,
-  cover: String,
-  back: String,
-  pages: Array,
   orientation: String,
   papersize: String,
   date: Date

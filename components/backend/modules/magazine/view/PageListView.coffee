@@ -3,15 +3,14 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'cs!../model/Page'
-  'cs!../model/Pages'
-  'tpl!../templates/pageListItem.html',
+  'tpl!../templates/page.html',
+  'tpl!../templates/page-item.html',
+  'cs!../model/Page',
   'jquery.ui'
-], ($, _, Backbone, Marionette, Page, Pages, Template, jqueryui) ->
+], ($, _, Backbone, Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
   class PageListItemView extends Backbone.Marionette.ItemView
-    template: Template
-
+    template: ItemTemplate
     initialize:->
       @model.on "change", @render, @
 
@@ -30,8 +29,39 @@ define [
       @model.destroy
         success: ->
 
-  class PageListView extends Backbone.Marionette.CollectionView
-    tagName: "div"
-    className:"sortable"
+  class PageListView extends Backbone.Marionette.CompositeView
+
+    template: Template
     itemView: PageListItemView
+    itemViewContainer: ".page-list"
+
+    events:
+      "click #addPage": 'addPage'
+
+    addPage: ->
+      page = new Page number: @collection.length+1
+      @collection.create page,
+        success:->
+
+    initialize:->
+      @$el.sortable(
+          revert: true
+          axis: "y"
+          cursor: "move"
+          stop: _.bind @_sortStop, @
+       ).disableSelection()
+
+    _sortStop: (event, ui)->
+      $(event.target).find('.number').each (i)->
+        elNumber = $(@).text()
+        model = @collection.where({number: elNumber})[0]
+        if model?
+          model.attributes.number = (i+1).toString()
+        else
+          c.l "model nr.#{elNumber} is broken"
+
+        $(@).text(i+1)
+
+
+
 

@@ -1,5 +1,7 @@
 define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
   class Page extends Backbone.Model
+    idAttribute: "_id"
+    urlRoot: "magazines"
     defaults:
       "number": "0"
       "article": ""

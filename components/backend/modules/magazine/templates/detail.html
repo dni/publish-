@@ -1,58 +1,61 @@
+<h1>Details</h1>
+<div id="details">
 
-
-<div class="form-group">
-    <label>Titel</label>
-    <input type="text" name="title" class="form-control" value="<%= title %>" />
-</div>
-
-<div class="form-group">
-    <label>Author</label>
-    <input type="text" name="author" class="form-control" value="<%= author %>" />
-</div>
-
-<div class="form-group">
-	<label>Impressum</label>
-	<textarea rows="9" class="form-control" name="impressum"><%= impressum %></textarea>
-</div>
-
-<div class="form-group">
-	<label>Editorial</label>
-	<textarea rows="9" class="form-control" name="editorial"><%= editorial %></textarea>
-</div>
-<%
-var setting = App.Settings.where({name:'MagazineModule'});
-if (setting[0].getValue('print')) {
-%>
-	<div class="row">
-		<div class="col-md-6">
-			<div class="form-group">
-			  <label>Select Papersize (Print)</label>
-			  <select class="papersize form-control">
-			    <% _.each(["A4","A5","A6","letter"], function(ps){%>
-			        <% if(papersize==ps) { %>
-			            <option selected value="<%= ps %>"> <%= ps %> </option>
-			        <% } else { %>
-			            <option value="<%= ps %>"> <%= ps %> </option>
-			        <% } %>
-			    <% }) %>
-			  </select>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="form-group">
-			  <label>Select Orientation (Print)</label>
-			  <select class="orientation form-control">
-			    <% _.each(["horizontal","vertical"], function(or){%>
-			        <% if(orientation==or) { %>
-			            <option selected value="<%= or %>"> <%= or %> </option>
-			        <% } else { %>
-			            <option value="<%= or %>"> <%= or %> </option>
-			        <% } %>
-			    <% }) %>
-			  </select>
-			</div>
-		</div>
+	<div class="form-group">
+	    <label>Titel</label>
+	    <input type="text" name="title" class="form-control" value="<%= title %>" />
 	</div>
-<%}%>
+
+	<div class="form-group">
+	    <label>Author</label>
+	    <input type="text" name="author" class="form-control" value="<%= author %>" />
+	</div>
+
+	<div class="form-group">
+		<label>Impressum</label>
+		<textarea rows="5" class="form-control" name="impressum"><%= impressum %></textarea>
+	</div>
+
+	<div class="form-group">
+		<label>Editorial</label>
+		<textarea rows="5" class="form-control" name="editorial"><%= editorial %></textarea>
+	</div>
+	<%
+	var setting = App.Settings.where({name:'MagazineModule'});
+	if (setting[0].getValue('print')) {
+	%>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group">
+				  <label>Select Papersize (Print)</label>
+				  <select name="papersize" class="form-control">
+				    <% _.each(["A4","A5","A6","letter"], function(ps){%>
+				        <% if(papersize==ps) { %>
+				            <option selected value="<%= ps %>"> <%= ps %> </option>
+				        <% } else { %>
+				            <option value="<%= ps %>"> <%= ps %> </option>
+				        <% } %>
+				    <% }) %>
+				  </select>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+				  <label>Select Orientation (Print)</label>
+				  <select name="orientation" class="form-control">
+				    <% _.each(["horizontal","vertical"], function(or){%>
+				        <% if(orientation==or) { %>
+				            <option selected value="<%= or %>"> <%= or %> </option>
+				        <% } else { %>
+				            <option value="<%= or %>"> <%= or %> </option>
+				        <% } %>
+				    <% }) %>
+				  </select>
+				</div>
+			</div>
+		</div>
+	<%}%>
+
+</div>
 
 

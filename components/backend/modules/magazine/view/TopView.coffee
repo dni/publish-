@@ -3,8 +3,8 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'tpl!../templates/list.html'
+  'tpl!../templates/top.html'
 ],
 ($, _, Backbone, Marionette, Template) ->
-  class ListView extends Backbone.Marionette.ItemView
+  class TopView extends Backbone.Marionette.ItemView
     template: Template
