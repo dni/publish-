@@ -14,6 +14,8 @@ define (require)->
   Config = require 'text!./configuration/mainConfiguration.json'
   Vent = require "cs!./utilities/Vent"
   Bootstrap = require "bootstrap"
+  tinyMCE = require "tinymce"
+  tinyMCEjquery = require "jquery.tinymce"
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
@@ -43,6 +45,18 @@ define (require)->
 
   App.listRegion.on "show", ->
     if App.contentRegion.currentView? then App.contentRegion.currentView.close()
+
+  App.contentRegion.on "show", ->
+    App.contentRegion.currentView.$el.find(".wysiwyg").tinymce
+      theme: "modern"
+      menubar : false
+      plugins: [
+          "advlist autolink lists link charmap print preview hr anchor pagebreak",
+          "searchreplace wordcount code fullscreen",
+          "insertdatetime nonbreaking table contextmenu directionality",
+          "paste"
+      ]
+      toolbar1: "insertfile undo redo | table | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code"
 
   App.navItems = new NavItems
 
@@ -109,7 +123,7 @@ define (require)->
         $(selector + " output").append "progressALL = "+progress + '%'
 
     overlayCallback = ->
-    console.log "empty overlay:callback"
+      console.log "empty overlay:callback"
 
 
   Vent.on 'overlay:action', (cb)->

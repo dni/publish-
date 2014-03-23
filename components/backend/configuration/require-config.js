@@ -4,6 +4,8 @@ require.config({
 	paths: {
 		jquery: "jquery/dist/jquery",
 		"jquery.ui": "jquery-ui/ui/jquery-ui",
+		"jquery.tinymce": "tinymce/js/tinymce/jquery.tinymce.min",
+		tinymce: "tinymce/js/tinymce/tinymce",
 		"jquery.form": "jquery-form/jquery.form",
 		lodash: "lodash-amd/main",
 		underscore: "underscore-amd/underscore",
@@ -41,6 +43,7 @@ require.config({
     ],
 	shim: {
 		'jquery.ui':['jquery'],
+		'jquery.tinymce':['jquery'],
 		'jquery.form':['jquery'],
 		'bootstrap':['jquery'],
 	}

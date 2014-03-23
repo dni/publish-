@@ -2,6 +2,7 @@ require.config({
 	deps: ["cs!./App"],
 	paths: {
 		jquery: "/lib/jquery/dist/jquery",
+		fancybox: "lib/fancybox/source/jquery.fancybox",
 		lodash: "/lib/lodash-amd/main",
 		backbone: "/lib/backbone-amd/backbone",
 		marionette: "/lib/marionette/lib/core/amd/backbone.marionette",
@@ -29,6 +30,10 @@ require.config({
 	    main: 'index'
 	  }
     ],
+
+    shim: {
+		'jquery.fancybox':['jquery']
+	},
 
     map: {
         "*": {
