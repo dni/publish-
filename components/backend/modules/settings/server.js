@@ -1,41 +1,40 @@
 var Setting = require(__dirname + '/model/SettingSchema'),
 	mongoose = require("mongoose");
-	
-	
+
+
 module.exports.setup = function(app) {
-	
+
 	app.get('/clearCache', function(req, res){
 	  	Setting.collection.drop();
 	  	res.send("cache cleared");
 	});
-	
-	
+
+
 	app.get('/reset', function(req, res){
 	  	Setting.collection.drop();
 	  	res.send("module config reset");
 	});
-	
+
 	// API
 	app.get('/settings', function(req, res){
 	  	Setting.find().execFind(function (arr,data) {
 	    	res.send(data);
 	  	});
 	});
-	
+
 	app.post('/settings', function(req, res){
 		var s = new Setting();
-		
+
 		s.name = req.body.name;
 		s.settings = req.body.settings;
 
 		s.save(function () {
 			res.send(s);
 		});
-		
+
 	});
-	
+
 	app.put('/settings/:id', function(req, res){
-		console.log(req.params, req.body);
 		Setting.findById( req.params.id, function(e, s) {
 			s.name = req.body.name;
 			s.settings = req.body.settings;
@@ -44,7 +43,7 @@ module.exports.setup = function(app) {
 			});
 	  	});
 	});
-	
+
 	app.delete('/settings/:id', function(req, res){
 	  	db.Setting.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
@@ -56,7 +55,7 @@ module.exports.setup = function(app) {
 		    });
 	  	});
 	});
-	
+
 };
 
 
