@@ -1,13 +1,21 @@
 
 @import url('http://fonts.googleapis.com/css?family=Titillium+Web:400,200,700,900');
 
-body { 
+body {
+
+
+  overflow:hidden;
   color: #333;
   font-size: 12pt;
   font-family: "Titillium Web",Arial,Verdana;
   line-height: 1.45em;
-  margin-top: 30px;
   position:relative;
+
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-position:center;
+	background-size:cover;
+
 }
 
 h1, h2 {font-weight:200;}

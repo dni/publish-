@@ -149,9 +149,9 @@ function initialize(folder, cb) {
 	fs.mkdir("./public/books/" + folder, function() {
 		fs.mkdir("./public/books/" + folder + "/hpub", function() {
 			fs.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx');
-			fs.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
 			fs.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css');
 			fs.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js");
+			fs.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
 		});
 		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
 		cb();
