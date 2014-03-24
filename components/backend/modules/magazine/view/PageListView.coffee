@@ -48,7 +48,8 @@ define [
       @collection.create page,
         success:->
 
-#
+# should be fix, but not working
+
     # appendHtml: (collectionView, itemView, index) ->
       # if collectionView.itemViewContainer then childrenContainer = collectionView.$(collectionView.itemViewContainer) else childrenContainer = collectionView.$el
       # children = childrenContainer.children()
@@ -56,7 +57,6 @@ define [
         # childrenContainer.append(itemView.el)
       # else
         # children.eq(index).before(itemView.el)
-#
 
     initialize:(args)->
       @magazine = args['magazine']

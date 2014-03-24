@@ -19,6 +19,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.post('/magazines', function(req, res){
+
 		var a = new db.Magazine();
 		a.title = req.body.title;
 		a.editorial = req.body.editorial;
@@ -27,7 +28,6 @@ module.exports.setup = function(app) {
 		a.pages = req.body.pages;
 		a.papersize = req.body.papersize;
 		a.orientation = req.body.orientation;
-		a.files = req.body.files;
 		a.date = new Date();
 
 		a.save(function () {
@@ -87,7 +87,7 @@ module.exports.setup = function(app) {
 
 				var exec = require('child_process').exec,child;
 				child = exec('rm -rf '+ a.title,function(err,out) {
-				  console.log(out); err && console.log(err);
+				  // console.log(out); err && console.log(err);
 				});
 		        return res.send('deleted');
 		      } else {

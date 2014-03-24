@@ -5,11 +5,12 @@ var fs = require('fs-extra'),
 	db = require('./../model/MagazineSchema'),
 	db2 = require('./../../article/model/ArticleSchema');
 	dbFile = require('./../../files/model/FileSchema');
-	dbSettings = require('./../../settings/model/SettingSchema');
+	Settings = require('./../../settings/model/SettingSchema');
+	Page = require('./../model/PageSchema');
 
 module.exports.generate = function(magazine) {
-	var printable = false;
-	dbFile.File.findOne({key: 'cover'}).execFind(function(err, file){
+
+	dbFile.File.findOne({key: 'cover', relation: 'magazine:'+magazine._id}).execFind(function(err, file){
 		magazine.cover = file.link
 	});
 
@@ -17,12 +18,6 @@ module.exports.generate = function(magazine) {
 		magazine.back = file.link
 	});
 
-	dbSettings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
-		var file = file.pop();
-		if (file.settings.print.value) {
-			printable = true;
-		}
-	});
 
 	// generate Cover
 	var template = fs.readFileSync('./components/magazine/Book Cover.html', 'utf8');
@@ -44,15 +39,6 @@ module.exports.generate = function(magazine) {
 	template = fs.readFileSync('./components/magazine/Book Index.html', 'utf8');
 	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render(template, { magazine: magazine }));
 
-
-	if (printable) {
-		console.log("printable");
-		PrintGenerator.generatePage("Book Cover.html", magazine);
-		PrintGenerator.generatePage("Book Back.html", magazine);
-		PrintGenerator.generatePage("index.html", magazine);
-		PrintGenerator.generatePage("Tail.html", magazine);
-		PrintGenerator.generatePage("Book Index.html", magazine);
-	}
 
 	// generate JSON
 	var files = fs.readdirSync("./public/books/" + magazine.title + "/hpub/");
@@ -88,22 +74,42 @@ module.exports.generate = function(magazine) {
 	fs.writeFileSync("./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify(json));
 
 	// CHAPTERS
-	_.each(magazine.pages, function(page){
-		if (!page.layout) return;
-		console.log (magazine.pages);
-		template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
-		db2.Article.findOne({_id: page.article}).execFind(function(err, article){
-			if (err) console.log(err);
-			dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
-				// TODO only serve key => value
-				article.files = files
-				var html = ejs.render(template, { magazine: magazine, page: page, article: article });
-				var file = "Page" + page.number + ".html";
-				fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + file, html);
-				if (printable) PrintGenerator.generatePage(file, article);
+	Page.find({magazine: magazine._id}).exec(function(err, pages){
+		_.each(pages, function(page){
+			if (!page.layout) return;
+			template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
+			db2.Article.findOne({_id: page.article}).execFind(function(err, article){
+				if (err) console.log(err);
+
+				dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
+					// TODO only serve key => value
+					article.files = files
+					var html = ejs.render(template, { magazine: magazine, page: page, article: article });
+					var filename = "Page" + page.number + ".html";
+					fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + filename, html);
+
+					Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+						var file = file.pop();
+						if (file.settings.print.value) {
+							PrintGenerator.generatePage(filename, magazine);
+						}
+					});
+				});
 			});
 		});
 	});
+
+	Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+		var file = file.pop();
+		if (file.settings.print.value) {
+			PrintGenerator.generatePage("Book Cover.html", magazine);
+			PrintGenerator.generatePage("Book Back.html", magazine);
+			PrintGenerator.generatePage("index.html", magazine);
+			PrintGenerator.generatePage("Tail.html", magazine);
+			PrintGenerator.generatePage("Book Index.html", magazine);
+		}
+	});
+
 
 
 };

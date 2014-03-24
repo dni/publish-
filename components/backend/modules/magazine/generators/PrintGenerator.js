@@ -23,7 +23,6 @@ module.exports.download = function(req, res){
 };
 
 module.exports.generatePage = function(file, magazine) {
-	console.log (file);
 	phantom.create({port: port++}, function(ph){
 		ph.createPage(function(page) {
 			return page.open("./public/books/" + magazine.title + "/hpub/" + file, function(status) {

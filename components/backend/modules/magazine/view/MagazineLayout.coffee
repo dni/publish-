@@ -52,7 +52,7 @@ define [
 
     publish:->
       # before model is toggled
-      if @model.get("published") then @ui.publish.removeClass("btn-success").text('Unpublish') else @ui.publish.addClass("btn-success").text('Publish!')
+      if @model.get("published") then @ui.publish.addClass("btn-success").text('Publish') else @ui.publish.removeClass("btn-success").text('Unpublish')
       @model.togglePublish()
       @model.save()
 
