@@ -2,5 +2,6 @@ node_modules
 bower_components
 .project
 .DS_Store
-public
+public/books/*
+public/files/*
 components/backend/modules/magazine/generators/publish-baker
