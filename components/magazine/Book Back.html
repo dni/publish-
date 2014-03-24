@@ -4,18 +4,16 @@
 	<meta charset="utf-8"/>
 	<title>Back: <%= magazine.title %></title>
 	<meta name="viewport" content="width=768; initial-scale=1.0;"/>
-	<style>
-		body {
-			background:url(/static/files/simplin.jpg);
-			background-repeat:no-repeat;
-			background-attachment:fixed;
-			background-position:center;
-		}
-	</style>
 	<link rel="stylesheet" type="text/css" href="css/book.css">
 	<link rel="stylesheet" media="print" type="text/css" href="css/print.css">
+	<style>
+		body {
+			background-image:url('images/<%= back %>');
+		}
+	</style>
 </head>
 <body>
-	<h1>BACK</h1>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

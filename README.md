@@ -14,6 +14,8 @@ Publish your data on all channels!
 * npm install -g bower
 * cd components/backend
 * bower install
+* cd components/backend/bower_components/tinymce
+* jake
 * cd components/frontend
 * bower install
 

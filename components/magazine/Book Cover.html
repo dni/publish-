@@ -5,28 +5,18 @@
 	<title>Cover: <%= magazine.title %></title>
 
 	<link rel="stylesheet" type="text/css" href="css/book.css">
+	<link rel="stylesheet" media="print" type="text/css" href="css/print.css">
 	<style>
 		body {
-			background:url(<%= magazine.files[0].link %>);
-			background-repeat:no-repeat;
-			background-attachment:fixed;
-			background-position:center;
-			background-size:100%;
-		}
-		.print {
-			width:14.8cm;
-			height:21cm;
+			background-image:url('images/<%= cover %>');
 		}
 	</style>
-	<link rel="stylesheet" media="print" type="text/css" href="css/print.css">
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-	<h1>COVER</h1>
-	<script>console.log(<%= magazine %>);</script>
-</body>
-<script>
+	<h1><%= magazine.title %></h1>
 
-</script>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
 </html>

@@ -12,18 +12,57 @@ module.exports.generate = function(magazine) {
 
 	dbFile.File.find({relation: 'magazine:'+magazine._id}).execFind(function(err, files){
 
+		magazinefiles = {}
+
+		_.each(files, function(file){
+			fs.copy(process.cwd() + '/public/files/'+file.name, process.cwd()+"/public/books/" + magazine.title + "/hpub/images/" + file.name );
+			magazinefiles[file.key] = file.name;
+		});
+
+
+		// generage INDEX
+		Page.find({magazine: magazine._id}).exec(function(err, pages){
+			var articleIds = []
+			_.each(pages, function(page){
+				articleIds.push(page.article);
+			});
+
+
+			db2.Article.find({_id: { $in: articleIds}}).execFind(function(err, articles){
+				var newarticles = {}
+				_.each(articles, function(article){
+					newarticles[article._id] = article.title;
+				});
+
+				var template = fs.readFileSync('./components/magazine/index.html', 'utf8');
+
+				var html = ejs.render(template, {
+					magazine: magazine,
+					pages: pages,
+					articles:newarticles
+				});
+
+				fs.writeFileSync("./public/books/" + magazine.title + "/hpub/index.html", html);
+
+				Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+					var file = file.pop();
+					if (file.settings.print.value) {
+						PrintGenerator.generatePage("index.html", magazine);
+					}
+				});
+
+
+			});
+		});
+
 
 		// generate Cover
 		var template = fs.readFileSync('./components/magazine/Book Cover.html', 'utf8');
-		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Cover.html", ejs.render(template, { magazine: magazine }));
+		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Cover.html", ejs.render(template, { magazine: magazine, cover: magazinefiles['cover'] }));
 
 		//  generate Back
 		template = fs.readFileSync('./components/magazine/Book Back.html', 'utf8');
-		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Back.html", ejs.render(template, { magazine: magazine }));
-
-		//  generate index
-		template = fs.readFileSync('./components/magazine/index.html', 'utf8');
-		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/index.html", ejs.render(template, { magazine: magazine }));
+		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Back.html", ejs.render(template, { magazine: magazine, back: magazinefiles['back'] }));
 
 		// generate Impressum
 		template = fs.readFileSync('./components/magazine/Tail.html', 'utf8');
@@ -31,7 +70,7 @@ module.exports.generate = function(magazine) {
 
 		// generate Editorial
 		template = fs.readFileSync('./components/magazine/Book Index.html', 'utf8');
-		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render(template, { magazine: magazine }));
+		fs.writeFileSync("./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render(template, { magazine: magazine}));
 
 
 		// generate JSON
@@ -69,16 +108,33 @@ module.exports.generate = function(magazine) {
 
 		// CHAPTERS
 		Page.find({magazine: magazine._id}).exec(function(err, pages){
+
+
 			_.each(pages, function(page){
 				if (!page.layout) return;
 				template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
-				db2.Article.findOne({_id: page.article}).execFind(function(err, article){
+				db2.Article.find({_id: page.article}).execFind(function(err, article){
 					if (err) console.log(err);
+					article = article.pop();
 
 					dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
-						// TODO only serve key => value
-						article.files = files
-						var html = ejs.render(template, { magazine: magazine, page: page, article: article });
+
+						var articlefiles = {};
+
+						_.each(files, function(file){
+							fs.copy(process.cwd() + '/public/files/'+file.name, process.cwd()+"/public/books/" + magazine.title + "/hpub/images/" + file.name );
+							articlefiles[file.key] = file.name;
+						});
+
+
+						var html = ejs.render(template, {
+							magazine: magazine,
+							page: page,
+							article: article,
+							files: articlefiles
+						});
+
+
 						var filename = "Page" + page.number + ".html";
 						fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + filename, html);
 
@@ -91,6 +147,7 @@ module.exports.generate = function(magazine) {
 					});
 				});
 			});
+
 		});
 
 		Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
@@ -98,7 +155,6 @@ module.exports.generate = function(magazine) {
 			if (file.settings.print.value) {
 				PrintGenerator.generatePage("Book Cover.html", magazine);
 				PrintGenerator.generatePage("Book Back.html", magazine);
-				PrintGenerator.generatePage("index.html", magazine);
 				PrintGenerator.generatePage("Tail.html", magazine);
 				PrintGenerator.generatePage("Book Index.html", magazine);
 			}
