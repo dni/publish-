@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/book.css">
 	<style>
 		body {
-			background:url(<%= magazine.cover %>);
+			background:url(<%= magazine.files[0].link %>);
 			background-repeat:no-repeat;
 			background-attachment:fixed;
 			background-position:center;
@@ -23,7 +23,8 @@
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
-	<h1>COVER lol</h1>
+	<h1>COVER</h1>
+	<script>console.log(<%= magazine %>);</script>
 </body>
 <script>
 

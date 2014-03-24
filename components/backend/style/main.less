@@ -7,6 +7,8 @@
 // http://twitter.github.com/bootstrap/less.html
 @import "../bower_components/bootstrap/less/bootstrap.less";
 
+@highlight:purple;
+
 .navbar {margin-bottom:0;}
 .navbar-inner {border-radius:0px;}
 
@@ -44,6 +46,21 @@ height: auto;
   box-sizing:border-box;
 }
 
+#sidebar #list h3 {
+  font-size: 18px;
+  a:hover {text-decoration:none; color:@highlight;}
+}
+
+#sidebar #list div div {
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #ddd;
+}
+#sidebar #list div :last-child  {
+  margin:0;
+  border-bottom: 0;
+}
+
 #list-top {
   margin-bottom:12px;
 }
@@ -65,6 +82,8 @@ margin-right: 0;
   background: linear-gradient(135deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* W3C */
 
 }
+
+
 
 
 .navbar-nav {float:none;}
@@ -96,8 +115,8 @@ margin-right: 0;
 
 #sidebar h3 a {
   text-decoration:none;color:#000;
-  -webkit-transition:color 1s ease;
-  -moz-transition:color 1s ease;
+  -webkit-transition:color .3s ease;
+  -moz-transition:color .3s ease;
 }
 
 #sidebar h3 a:hover {
