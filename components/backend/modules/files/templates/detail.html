@@ -26,18 +26,13 @@
     <div class="col-md-8">
         <% var extGroup = type.split("/")[0], ext = type.split("/")[1];
           if (extGroup=="image") { %>
-            <img height="450" src="<%= link %>" alt="<%= name %>" />
+            <img height="450" src="./static/files/<%= link %>" alt="<%= name %>" />
         <% } else if (extGroup=="text") { %>
             <div class="htmlData"></div>
-            <% $.get(link, function(respons) { $(".htmlData").html(respons); console.log(respons)} ) %>
+            <% $.get('./static/files/'+link, function(respons) { $(".htmlData").html(respons); console.log(respons)} ) %>
         <% } else if (ext=="json"){ %>
             <h3>Yes it's a JSON file</h3>
-            <% $.get(link, function(respons) {
-                data = respons;
-                _.each(data, function(dataE1){
-                    $(".htmlData").append("div").html(dataE1);
-                });
-            } ) %>
+
         <% } else { %>
             <h3>Publish can't use this kind of file!</h3>
         <% } %>

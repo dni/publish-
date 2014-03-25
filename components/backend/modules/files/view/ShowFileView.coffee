@@ -20,12 +20,15 @@ define [
 
     events:
       "click .deleteFile": "deleteFile"
+      "click .editFile": "editFile"
       "blur .form-control": "save"
 
     deleteFile: ->
+      $('.modal').modal('hide')
       @model.destroy
         success:->
 
+    editFile: ->
       $('.modal').modal('hide')
 
     save: ->

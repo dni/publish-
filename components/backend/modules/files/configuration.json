@@ -1,12 +1,35 @@
 {
+
     "config": {
         "name": "FileModule",
         "namespace": "files"
     },
+
     "navigation": {
         "button": "cloud-upload",
         "route": "files",
         "label": "Files",
         "classNames": "files"
+    },
+
+    "settings": {
+        "thumbnail" : {
+          "label": "Thumbnail max. size",
+          "description": "very small picture",
+          "value": "200",
+          "type": "text"
+        },
+        "smallPic" : {
+          "label": "Small picture max. size",
+          "description": "very small picture",
+          "value": "800",
+          "type": "text"
+        },
+        "bigPic" : {
+          "label": "Big picture max. size",
+          "description": "very small picture",
+          "value": "1800",
+          "type": "text"
+        }
     }
 }
