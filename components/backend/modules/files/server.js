@@ -1,5 +1,7 @@
 var db = require(__dirname + '/model/FileSchema'),
-	mongoose = require("mongoose");
+	im = require('imagemagick'),
+	mongoose = require("mongoose"),
+	cfg = require("./configuration.json"),
 	fs = require("fs");
 
 module.exports.setup = function(app) {
@@ -30,7 +32,7 @@ module.exports.setup = function(app) {
 
 			fileModel.name = name;
 			fileModel.type = srcFile.type;
-			fileModel.link = './static/files/' + name;
+			fileModel.link = name;
 			fs.renameSync(srcFile.path, targetLink);
 			fileModel.save();
 
@@ -61,7 +63,7 @@ module.exports.setup = function(app) {
 
 		file.name = filename;
 		file.type = newfile.type;
-		file.link = './static/files/' + filename;
+		file.link = filename;
 		file.info = newfile.info;
 		file.alt = newfile.alt;
 		file.desc = newfile.desc;
@@ -69,14 +71,45 @@ module.exports.setup = function(app) {
 		file.relation = newfile.relation;
 		file.key = newfile.key;
 
+		file.thumbnail = createWebPic(filename, "thumbnail");
+		file.smallPic = createWebPic(filename, "smallPic");
+		file.bigPic = createWebPic(filename, "bigPic");
+
 		file.save(function(){
 			res.send(file);
 		});
 
-
-
-
 	});
+
+	function createWebPic(filename, type){
+		var maxSize = cfg.settings[type].value;
+		var targetName = type + "_shrink_" + filename;
+
+		im.identify('./public/files/'+ filename, function(err, features){
+		  if (err) throw err;
+		  return shrinkPic(features); // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
+		});
+
+		function shrinkPic(features){
+			var args = [
+				'./public/files/'+ filename,
+				"-resize",
+				"", // maxsize
+				'./public/files/'+ targetName
+			];
+
+			if (features.width>features.height){
+				args[2] = maxSize+"x";
+			} else {
+				args[2] = "x"+maxSize;
+			}
+
+			im.convert(args, function(err) {
+				if(err) { throw err; }
+			});
+		}
+		return targetName;
+	}
 
 	app.put('/files/:id', function(req, res){
 		db.File.findById(req.params.id, function(e, a) {
@@ -101,22 +134,31 @@ module.exports.setup = function(app) {
 			a.parent = req.body.parent;
 			a.relation = req.body.relation;
 			a.key = req.body.key;
-
-			a.save(function () { res.send(a); });
+			// a.thumbnail = req.body.thumbnail;
+			// a.smallPic = req.body.smallPic;
+			// a.bigPic = req.body.bigPic;
+			a.save(function () {
+				res.send(a);
+			});
 	  	});
 	});
 
 	app.delete('/files/:id', function(req, res) {
 		db.File.findById(req.params.id, function(e, a) {
-
 			if (fs.existsSync("./public/files/" + a.name)===true){
-				fs.unlinkSync("./public/files/" + a.name);
+				fs.unlink("./public/files/" + a.name);
+			}
+
+			for (var index in cfg.settings) {
+			    if (cfg.settings.hasOwnProperty(index)) {
+					if (fs.existsSync("./public/files/" + a[index])===true){
+						fs.unlink("./public/files/" + a[index]);
+					}
+			    }
 			}
 
 			return a.remove(function(err, model) {
-
 				if (err) return console.log(err);
-
 				return res.send('');
 			});
 		});

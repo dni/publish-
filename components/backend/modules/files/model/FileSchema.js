@@ -11,7 +11,10 @@ var fileSchema = new Schema({
   desc: String,
   relation: String,
   parent: String,
-  key: String
+  key: String,
+  thumbnail: String,
+  smallPic: String,
+  bigPic: String
 });
 
 module.exports.File = mongoose.model('File', fileSchema);
