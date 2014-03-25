@@ -9,10 +9,11 @@ define [
   'cs!../view/DetailView'
   'cs!../view/TopView'
   'cs!../view/ShowFileView'
+  'cs!../view/CropFileView'
   'cs!../model/File'
   'cs!../model/Files'
 
-], ( Vent, $, _, Backbone, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, File, Files) ->
+], ( Vent, $, _, Backbone, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, CropFileView,File, Files) ->
 
   class FileController extends Backbone.Marionette.Controller
 
@@ -54,7 +55,6 @@ define [
       Vent.trigger 'app:updateRegion', 'overlayRegion', view
 
     showfile: (id) ->
-
       fileView = App.contentRegion.currentView.fileRegion.currentView
       view = new ShowFileView model: fileView.collection.findWhere _id: id
 
@@ -62,6 +62,14 @@ define [
       Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')
 
+    cropfile: (id) ->
+      c.l "cropfile .. controller"
+      fileView = App.contentRegion.currentView.fileRegion.currentView
+      view = new CropFileView model: fileView.collection.findWhere _id: id
+
+      Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Vent.trigger 'overlay:action', ->
+        $('.modal').modal('hide')
 
     show: (id) ->
       file = App.Files.where _id: id

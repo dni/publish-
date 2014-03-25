@@ -4,11 +4,9 @@ define [
   'backbone'
   'tpl!../templates/preview.html'
   'tpl!../templates/preview-item.html'
-  'd3'
   'jquery.ui'
-], ($, _, Backbone, Template, ItemTemplate, d3) ->
+], ($, _, Backbone, Template, ItemTemplate) ->
 
-  window.d3 = d3
 
   class ItemView extends Backbone.Marionette.ItemView
     template: ItemTemplate
@@ -18,7 +16,7 @@ define [
       @listenTo @model, 'destroy', @close
 
     events:
-      "click img": "showFile"
+      "click p": "showFile"
 
     showFile: ->
       App.Router.navigate("showfile/"+@model.get('_id'), {trigger:true})
