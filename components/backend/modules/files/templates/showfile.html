@@ -23,10 +23,14 @@
 
 	</div>
 	<div class="col-md-6">
-		<img src="./static/files/<%= thumbnail %>" alt="<%= name %>" />
+		<% if(type.split("/")[0]=="image") { %>
+			<img src="./static/files/<%= smallPic %>" alt="<%= name %>" />
+		<% } else { %>
+			<p width="100"><%= name %><p>
+		<% } %>
 		<p><%= type %></p>
 	</div>
 </div>
 
-<button class="deleteFile btn btn-primary">Edit</button>
+<button class="editFile btn btn-primary">Edit</button>
 <button class="deleteFile btn btn-danger">Delete</button>

@@ -71,9 +71,11 @@ module.exports.setup = function(app) {
 		file.relation = newfile.relation;
 		file.key = newfile.key;
 
-		file.thumbnail = createWebPic(filename, "thumbnail");
-		file.smallPic = createWebPic(filename, "smallPic");
-		file.bigPic = createWebPic(filename, "bigPic");
+		if (newfile.type.split("/")[0]=="image") {
+			file.thumbnail = createWebPic(filename, "thumbnail");
+			file.smallPic = createWebPic(filename, "smallPic");
+			file.bigPic = createWebPic(filename, "bigPic");
+		}
 
 		file.save(function(){
 			res.send(file);

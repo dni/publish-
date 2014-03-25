@@ -29,6 +29,8 @@ define [
         success:->
 
     editFile: ->
+      c.l "cropfile in showfileview"
+      App.Router.navigate("cropfile/"+@model.get('_id'), {trigger:true})
       $('.modal').modal('hide')
 
     save: ->
