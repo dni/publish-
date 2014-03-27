@@ -3,15 +3,14 @@
 	    "name": "ArticleModule",
     	"namespace": "article"
     },
-    
-    
+
 	"navigation": {
 		"button": 0,
 		"route": "articles",
 		"label": "Artikel",
 		"classNames": "articles"
 	},
-	
+
 	"settings": {
 		"setting1" : {
 	      "label": "Setting1",
@@ -29,7 +28,7 @@
 	      "type": "checkbox"
 		}
 	},
-	
+
 	"model": {
 		"article": {
 			"fields" : {

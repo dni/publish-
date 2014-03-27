@@ -18,7 +18,8 @@ require.config({
 		text: 'requirejs-text/text',
 		tpl: 'requirejs-tpl/tpl',
 		cs: 'require-cs/cs',
-		d3: 'd3/d3'
+		d3: 'd3/d3',
+		gm: 'gm/index'
 	},
 	map: {
 	    '*': {
