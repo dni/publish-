@@ -16,7 +16,7 @@ define [
       @listenTo @model, 'destroy', @close
 
     events:
-      "click p": "showFile"
+      "click": "showFile"
 
     showFile: ->
       App.Router.navigate("showfile/"+@model.get('_id'), {trigger:true})

@@ -30,7 +30,8 @@
     "glob": "~3.2.9",
     "less": "~1.7.0",
     "amdlc": "~0.1.2",
-    "uglify-js": "~2.4.13"
+    "uglify-js": "~2.4.13",
+    "gm": "~1.14.2"
   },
   "devDependencies": {},
   "scripts": {

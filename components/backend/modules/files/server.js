@@ -70,6 +70,9 @@ module.exports.setup = function(app) {
 		file.parent = newfile.parent;
 		file.relation = newfile.relation;
 		file.key = newfile.key;
+		file.thumbnail = '.static/files/uploading.gif';
+		file.smallPic = '.static/files/uploading.gif';
+		file.bigPic = '.static/files/uploading.gif';
 
 		if (newfile.type.split("/")[0]=="image") {
 			file.thumbnail = createWebPic(filename, "thumbnail");
@@ -80,7 +83,6 @@ module.exports.setup = function(app) {
 		file.save(function(){
 			res.send(file);
 		});
-
 	});
 
 	function createWebPic(filename, type){
@@ -91,7 +93,6 @@ module.exports.setup = function(app) {
 		  if (err) throw err;
 		  return shrinkPic(features); // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
 		});
-
 		function shrinkPic(features){
 			var args = [
 				'./public/files/'+ filename,
@@ -99,7 +100,6 @@ module.exports.setup = function(app) {
 				"", // maxsize
 				'./public/files/'+ targetName
 			];
-
 			if (features.width>features.height){
 				args[2] = maxSize+"x";
 			} else {

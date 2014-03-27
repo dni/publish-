@@ -11,6 +11,7 @@
     },
 
     "settings": {
+    	"fileView" : true,
 		"layouts" : {
 	      "label": "Layouts",
 	      "description": "Comma seperated list of layout keys",
@@ -44,6 +45,74 @@
 	      	"ipadiphone": "iPad and iPhone"
 	      }
 		},
+
+		"backerColorset-coverBg" : {
+	      "label": "Cover Background Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#ffffff",
+	      "type": "text"
+		},
+		"backerColorset-titleColor" : {
+	      "label": "Title Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#000000",
+	      "type": "text"
+		},
+		"backerColorset-infoColor" : {
+	      "label": "Info Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#929292",
+	      "type": "text"
+		},
+		"backerColorset-priceColor" : {
+	      "label": "Price Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#bc242a",
+	      "type": "text"
+		},
+		"backerColorset-actionButtonBg" : {
+	      "label": "Action Button Background Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#bc242a",
+	      "type": "text"
+		},
+		"backerColorset-actionButtonColor" : {
+	      "label": "Action Button Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#ffffff",
+	      "type": "text"
+		},
+		"backerColorset-archiveButtonBg" : {
+	      "label": "Archive Button Background Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#bc242a",
+	      "type": "text"
+		},
+		"backerColorset-archiveButtonColor" : {
+	      "label": "Archive Button Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#ffffff",
+	      "type": "text"
+		},
+		"backerColorset-loadingLabelColor" : {
+	      "label": "Loading Label Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#bc242a",
+	      "type": "text"
+		},
+		"backerColorset-loadingSpinnerColor" : {
+	      "label": "Loading Spinner Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#929292",
+	      "type": "text"
+		},
+		"backerColorset-progressbarTintColor" : {
+	      "label": "Progressbar Tint Color",
+	      "description": "Comma seperated list of layout keys",
+	      "value": "#bc242a",
+	      "type": "text"
+		},
+
 		"download" : {
 	      "label": "Download App",
 	      "description": "Comma seperated list of layout keys",
