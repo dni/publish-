@@ -59,15 +59,18 @@ function prepareDownload(cb){
 			while(len--){
 				Files.File.findOne({relation: 'setting:'+setting._id, key: formats[len]}).exec(function(err, file){
 					if (file!==null) { createIconSet(file.name, formats[len]); }
-					else {console.log("uh uhh", err)}
+					else {console.log("some went wrong with startGenIconssets in BakerGenerator, err=", err)}
 				});
 			}
 		}
 
 		createBakerUiConstants()
+		// rewrite text file
+		fileToEdit = __dirname+'/baker-master/BakerShelf/BakerIssue.h'
+		changes = { from:'#import "Constants.h"', to: '@imort staender2000' }
+		replaceInTextFile(fileToEdit, changes);
 
 		var action = setting.settings.apptype.value;
-//
 		switch (action) {
 			case "standalone":
 				buildStandalone(); break;
@@ -193,21 +196,42 @@ var sizeList = {
 	]
 }
 
-function genUiConstantsTempl(){
-	var txt = '#ifndef Baker_UIConstants_h \n #define Baker_UIConstants_h'
-	txt += '\t #define ISSUES_COVER_BACKGROUND_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_TITLE_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_INFO_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_PRICE_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_ACTION_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_ACTION_BUTTON_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorset-coverBg+'"'
-	txt += '\t #define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorset-coverBg+'"'
+function createBakerUiConstants(){
+	Settings.findOne({name:'MagazineModule'}).exec(function(err, setting){
+		if (err) { return console.log(err); }
+		else {
+			var settings = setting.settings;
+			var txt = '#ifndef Baker_UIConstants_h\n#define Baker_UIConstants_h';
+			txt += '\n\t#define ISSUES_COVER_BACKGROUND_COLOR @"'+settings.backerColorsetCoverBg.value+'"';
+			txt += '\n\t#define ISSUES_TITLE_COLOR @"'+settings.backerColorsetTitleColor.value+'"';
+			txt += '\n\t#define ISSUES_INFO_COLOR @"'+settings.backerColorsetInfoColor.value+'"';
+			txt += '\n\t#define ISSUES_PRICE_COLOR @"'+settings.backerColorsetPriceColor.value+'"';
+			txt += '\n\t#define ISSUES_ACTION_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetActionButtonBg.value+'"';
+			txt += '\n\t#define ISSUES_ACTION_BUTTON_COLOR @"'+settings.backerColorsetActionButtonColor.value+'"';
+			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorsetArchiveButtonBg.value+'"';
+			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetArchiveButtonColor.value+'"';
+			txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
+			txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
+			txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
+			txt += '\n#endif'
 
-	console.log(UIConstantsTEXT);
-
-
+			fs.writeFile(__dirname+'/baker-master/BakerShelf/UIConstants.h.edited', txt, function(err) {
+			    if(err) { console.log("Baker_UIConstants_h save error: ",err); }
+			    else { console.log("Baker_UIConstants_h was saved!"); }
+			});
+		}
+	});
 }
+
+function replaceInTextFile(fileToEdit, changes) {
+	fs.readFile(fileToEdit, function(err, res) {
+	    if(err) { console.log("BakerGenerator replaceInTextFile readFile error: ",err); }
+	    else {
+	    	txt = res.toString();
+	    	txt = txt.replace(changes.from, changes.to);
+			fs.writeFile(fileToEdit+".edited" , txt, function(err) {
+			    if(err) { console.log("save error: ",err); }
+			});
+	    }
+	});
+};

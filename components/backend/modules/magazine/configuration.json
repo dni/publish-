@@ -46,67 +46,67 @@
 	      }
 		},
 
-		"backerColorset-coverBg" : {
+		"backerColorsetCoverBg" : {
 	      "label": "Cover Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorset-titleColor" : {
+		"backerColorsetTitleColor" : {
 	      "label": "Title Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#000000",
 	      "type": "text"
 		},
-		"backerColorset-infoColor" : {
+		"backerColorsetInfoColor" : {
 	      "label": "Info Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "text"
 		},
-		"backerColorset-priceColor" : {
+		"backerColorsetPriceColor" : {
 	      "label": "Price Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorset-actionButtonBg" : {
+		"backerColorsetActionButtonBg" : {
 	      "label": "Action Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorset-actionButtonColor" : {
+		"backerColorsetActionButtonColor" : {
 	      "label": "Action Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorset-archiveButtonBg" : {
+		"backerColorsetArchiveButtonBg" : {
 	      "label": "Archive Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorset-archiveButtonColor" : {
+		"backerColorsetArchiveButtonColor" : {
 	      "label": "Archive Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorset-loadingLabelColor" : {
+		"backerColorsetLoadingLabelColor" : {
 	      "label": "Loading Label Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorset-loadingSpinnerColor" : {
+		"backerColorsetLoadingSpinnerColor" : {
 	      "label": "Loading Spinner Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "text"
 		},
-		"backerColorset-progressbarTintColor" : {
+		"backerColorsetProgressbarTintColor" : {
 	      "label": "Progressbar Tint Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
