@@ -43,7 +43,7 @@ function prepareDownload(cb){
 
 
 		fs.remove('./public/files/iconset', function(err){
-			if (err) {return console.error(err) }
+			if (err) { return console.error(err); }
 			fs.mkdirs('./public/files/iconset', function(err){
 				if (err) {return console.error(err);}
 				else {
@@ -59,16 +59,13 @@ function prepareDownload(cb){
 			while(len--){
 				Files.File.findOne({relation: 'setting:'+setting._id, key: formats[len]}).exec(function(err, file){
 					if (file!==null) { createIconSet(file.name, formats[len]); }
-					else {console.log("some went wrong with startGenIconssets in BakerGenerator, err=", err)}
+					else {console.log("some went wrong with startGenIconssets in BakerGenerator, err=", err);}
 				});
 			}
 		}
 
-		createBakerUiConstants()
-		// rewrite text file
-		fileToEdit = __dirname+'/baker-master/BakerShelf/BakerIssue.h'
-		changes = { from:'#import "Constants.h"', to: '@imort staender2000' }
-		replaceInTextFile(fileToEdit, changes);
+		createBakerUiConstants();
+
 
 		var action = setting.settings.apptype.value;
 		switch (action) {
@@ -80,16 +77,17 @@ function prepareDownload(cb){
 				buildNewsstandpaid(); break;
 		}
 
-		var exec = require("child_process").exec;
-		var child = exec('rm ./publish-baker -r',
-		  function (error, stdout, stderr) {
-		    console.log('stdout: ' + stdout);
-		    console.log('stderr: ' + stderr);
-		    if (error !== null) {
-		      console.log('exec error: ' + error);
-		    }
-			cb();
-		}, {cwd:__dirname});
+		// var exec = require("child_process").exec;
+		// var child = exec('rm ./publish-baker -r',
+		  // function (error, stdout, stderr) {
+		    // console.log('stdout: ' + stdout);
+		    // console.log('stderr: ' + stderr);
+		    // if (error !== null) {
+		      // console.log('exec error: ' + error);
+		    // }
+			// cb();
+		// }, {cwd:__dirname});
+
 	});
 }
 
@@ -98,22 +96,22 @@ function createIconSet(filename, type) {
 	var len = sizeList[type].length;
 	// obtain the size of an image
 	gm('./public/files/'+ filename).size(function (err, size) {
-	  if (err) { return console.log(err) }
+	  if (err) { return console.log(err); }
 	  return generateIcons(size);
 	});
 	function generateIcons(size){
 		while(len--){
-			console.log("icon nr. ", len, " size ", size)
+			console.log("icon nr. ", len, " size ", size);
 
-			var icon = sizeList[type][len]
-			var image = gm('./public/files/'+ filename)
+			var icon = sizeList[type][len];
+			var image = gm('./public/files/'+ filename);
 
 			if (type==="launch") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2)
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
 			} else if (type=="shelf") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0)
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
 			} else if (type=="icon") {
-				image.resize(icon.w, icon.h)
+				image.resize(icon.w, icon.h);
 			} else if (type=="newsstand") {
 				if (icon.w!==480) {
 					if (icon.w < icon.h) {
@@ -126,7 +124,7 @@ function createIconSet(filename, type) {
 			}
 			image.write('./public/files/iconset/'+ icon.n +"-"+ filename, function (err) {
 			  if (err) { return console.log(err); }
-			})
+			});
 		}
 	}
 }
@@ -136,6 +134,8 @@ function buildStandalone(){
 
 	fs.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
 
+	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/BakerIssue.h', { from:'#define BAKER_NEWSSTAND', to: '//#define BAKER_NEWSSTAND' });
+
 	var files = fs.readdirSync('./public/books');
 	for (key in files) {
 		var file = files[key];
@@ -144,13 +144,20 @@ function buildStandalone(){
 	}
 
 
-}
-function buildNewstand(){
+};
 
-}
+function buildNewstand(){
+	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
+		replaceInTextFile(__dirname+'/publish-baker/BakerShelf/Constants.h', {
+			from:'#define NEWSSTAND_MANIFEST_URL @"http://bakerframework.com/demo/shelf.json"',
+			to: '#define NEWSSTAND_MANIFEST_URL @"http://'+setting.settings.domain.value+'/books/shelf.json"'
+		});
+	});
+};
+
 function buildNewstandpaid(){
 
-}
+};
 
 var sizeList = {
 	launch : [
@@ -194,7 +201,7 @@ var sizeList = {
 		{ n: "shelf-bg-portrait~ipad", w: 768, h: 960},
 		{ n: "shelf-bg-portrait~iphone", w: 320, h: 416}
 	]
-}
+};
 
 function createBakerUiConstants(){
 	Settings.findOne({name:'MagazineModule'}).exec(function(err, setting){
@@ -213,7 +220,7 @@ function createBakerUiConstants(){
 			txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
 			txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
 			txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
-			txt += '\n#endif'
+			txt += '\n#endif';
 
 			fs.writeFile(__dirname+'/baker-master/BakerShelf/UIConstants.h.edited', txt, function(err) {
 			    if(err) { console.log("Baker_UIConstants_h save error: ",err); }
@@ -221,7 +228,7 @@ function createBakerUiConstants(){
 			});
 		}
 	});
-}
+};
 
 function replaceInTextFile(fileToEdit, changes) {
 	fs.readFile(fileToEdit, function(err, res) {
