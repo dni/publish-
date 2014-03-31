@@ -1,5 +1,5 @@
 var db = require(__dirname + '/model/FileSchema'),
-	im = require('imagemagick'),
+	gm = require('gm').subClass({ imageMagick: true }),
 	mongoose = require("mongoose"),
 	cfg = require("./configuration.json"),
 	fs = require("fs");
@@ -70,44 +70,43 @@ module.exports.setup = function(app) {
 		file.parent = newfile.parent;
 		file.relation = newfile.relation;
 		file.key = newfile.key;
-		file.thumbnail = '.static/files/uploading.gif';
-		file.smallPic = '.static/files/uploading.gif';
-		file.bigPic = '.static/files/uploading.gif';
+		file.thumbnail = './static/files/uploading.gif';
+		file.smallPic = './static/files/uploading.gif';
+		file.bigPic = './static/files/uploading.gif';
 
 		if (newfile.type.split("/")[0]=="image") {
 			file.thumbnail = createWebPic(filename, "thumbnail");
 			file.smallPic = createWebPic(filename, "smallPic");
 			file.bigPic = createWebPic(filename, "bigPic");
 		}
-
 		file.save(function(){
 			res.send(file);
 		});
+
 	});
 
 	function createWebPic(filename, type){
 		var maxSize = cfg.settings[type].value;
-		var targetName = type + "_shrink_" + filename;
+		var targetName = type + "_thumb_" + filename;
+		var image = gm('./public/files/'+ filename);
 
-		im.identify('./public/files/'+ filename, function(err, features){
-		  if (err) throw err;
-		  return shrinkPic(features); // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
+		image.size(function (err, size) {
+		  if (err) { return console.error("createWebPic getSize err=",err); }
+		  return shrinkPic(size);
 		});
+
 		function shrinkPic(features){
-			var args = [
-				'./public/files/'+ filename,
-				"-resize",
-				"", // maxsize
-				'./public/files/'+ targetName
-			];
+			var targetLink = './public/files/'+ targetName;
+			image.quality(5);
+
 			if (features.width>features.height){
-				args[2] = maxSize+"x";
+				image.resize(maxSize);
 			} else {
-				args[2] = "x"+maxSize;
+				image.resize(null, maxSize);
 			}
 
-			im.convert(args, function(err) {
-				if(err) { throw err; }
+			image.write(targetLink , function (err) {
+			  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
 			});
 		}
 		return targetName;
