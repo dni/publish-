@@ -1,6 +1,6 @@
 var db = require(__dirname + '/model/FileSchema'),
 	im = require('imagemagick'),
-	gm = require('gm')
+	gm = require('gm'),
 	mongoose = require("mongoose"),
 	cfg = require("./configuration.json"),
 	fs = require("fs");
@@ -71,19 +71,19 @@ module.exports.setup = function(app) {
 		file.parent = newfile.parent;
 		file.relation = newfile.relation;
 		file.key = newfile.key;
-		file.thumbnail = '.static/files/uploading.gif';
-		file.smallPic = '.static/files/uploading.gif';
-		file.bigPic = '.static/files/uploading.gif';
+		file.thumbnail = './static/files/uploading.gif';
+		file.smallPic = './static/files/uploading.gif';
+		file.bigPic = './static/files/uploading.gif';
 
 		if (newfile.type.split("/")[0]=="image") {
 			file.thumbnail = createWebPic(filename, "thumbnail");
 			file.smallPic = createWebPic(filename, "smallPic");
 			file.bigPic = createWebPic(filename, "bigPic");
 		}
-
 		file.save(function(){
 			res.send(file);
 		});
+
 	});
 
 
