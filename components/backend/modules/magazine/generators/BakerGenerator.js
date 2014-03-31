@@ -33,7 +33,6 @@ module.exports.download = function(req, res){
 	        }
 	    });
 	});
-
 };
 
 function prepareDownload(cb){
@@ -159,16 +158,15 @@ var sizeList = {
 
 function createIconSet(filename, format) {
 	var len = sizeList[format].length;
+	var image = gm('./public/files/'+ filename);
 	// obtain the size of an image
-	gm('./public/files/'+ filename).size(function (err, size) {
+	image.size(function (err, size) {
 	  if (err) { return console.log("createIconSet getSize err=",err); }
 	  return generateIcons(size);
 	});
 	function generateIcons(size){
 		while(len--){
 			var icon = sizeList[format][len];
-			var image = gm('./public/files/'+ filename);
-
 			if (format==="launch") {
 				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
 			} else if (format==="shelf") {
