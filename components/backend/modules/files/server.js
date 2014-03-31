@@ -1,6 +1,5 @@
 var db = require(__dirname + '/model/FileSchema'),
-	im = require('imagemagick'),
-	gm = require('gm'),
+	gm = require('gm').subClass({ imageMagick: true }),
 	mongoose = require("mongoose"),
 	cfg = require("./configuration.json"),
 	fs = require("fs");
@@ -86,36 +85,7 @@ module.exports.setup = function(app) {
 
 	});
 
-
 	function createWebPic(filename, type){
-		var maxSize = cfg.settings[type].value;
-		var targetName = type + "_shrink_" + filename;
-
-		im.identify('./public/files/'+ filename, function(err, features){
-		  if (err) throw err;
-		  return shrinkPic(features); // { format: 'JPEG', width: 3904, height: 2622, depth: 8 }
-		});
-		function shrinkPic(features){
-			var args = [
-				'./public/files/'+ filename,
-				"-resize",
-				"", // maxsize
-				'./public/files/'+ targetName
-			];
-			if (features.width>features.height){
-				args[2] = maxSize+"x";
-			} else {
-				args[2] = "x"+maxSize;
-			}
-
-			im.convert(args, function(err) {
-				if(err) { throw err; }
-			});
-		}
-		return targetName;
-	}
-
-	function createWebPicGM(filename, type){
 		var maxSize = cfg.settings[type].value;
 		var targetName = type + "_thumb_" + filename;
 		var image = gm('./public/files/'+ filename);
@@ -127,11 +97,12 @@ module.exports.setup = function(app) {
 
 		function shrinkPic(features){
 			var targetLink = './public/files/'+ targetName;
+			image.quality(5);
 
 			if (features.width>features.height){
-				args[2] = maxSize+"x";
+				image.resize(maxSize);
 			} else {
-				args[2] = "x"+maxSize;
+				image.resize(null, maxSize);
 			}
 
 			image.write(targetLink , function (err) {
