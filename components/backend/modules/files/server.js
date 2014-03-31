@@ -1,5 +1,6 @@
 var db = require(__dirname + '/model/FileSchema'),
 	im = require('imagemagick'),
+	gm = require('gm')
 	mongoose = require("mongoose"),
 	cfg = require("./configuration.json"),
 	fs = require("fs");
@@ -85,6 +86,7 @@ module.exports.setup = function(app) {
 		});
 	});
 
+
 	function createWebPic(filename, type){
 		var maxSize = cfg.settings[type].value;
 		var targetName = type + "_shrink_" + filename;
@@ -108,6 +110,32 @@ module.exports.setup = function(app) {
 
 			im.convert(args, function(err) {
 				if(err) { throw err; }
+			});
+		}
+		return targetName;
+	}
+
+	function createWebPicGM(filename, type){
+		var maxSize = cfg.settings[type].value;
+		var targetName = type + "_thumb_" + filename;
+		var image = gm('./public/files/'+ filename);
+
+		image.size(function (err, size) {
+		  if (err) { return console.error("createWebPic getSize err=",err); }
+		  return shrinkPic(size);
+		});
+
+		function shrinkPic(features){
+			var targetLink = './public/files/'+ targetName;
+
+			if (features.width>features.height){
+				args[2] = maxSize+"x";
+			} else {
+				args[2] = "x"+maxSize;
+			}
+
+			image.write(targetLink , function (err) {
+			  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
 			});
 		}
 		return targetName;
