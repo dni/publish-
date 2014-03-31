@@ -4,7 +4,6 @@ var fs = require('fs-extra'),
 	Settings = require('./../../settings/model/SettingSchema');
 
 module.exports.download = function(req, res){
-
 	prepareDownload(function(){
 		var spawn = require('child_process').spawn;
 	    // Options -r recursive -j ignore directory info - redirect to stdout
@@ -39,27 +38,24 @@ module.exports.download = function(req, res){
 
 function prepareDownload(cb){
 	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
-		if (error) return console.log('err', error);
+		if (error) return console.log('prepareDownload err=', error);
 
+		// Needed sizes .... TODO show demo pics im magazine config
+		// icon 152x152 // newsstand 480x268 // shelf 2048x1920 // lauch 2048x2048
 
 		fs.remove('./public/files/iconset', function(err){
 			if (err) {return console.error(err) }
-			fs.mkdirs('./public/files/iconset', function(err){
-				if (err) {return console.error(err);}
-				else {
-					console.log("iconset directory is clean, start with generating icons");
-					startGenIconssets();
-				}
-			});
+			fs.mkdirs('./public/files/iconset', function(err){ if (!err) { startGenIconssets(); } });
 		});
 
 		function startGenIconssets(){
 			var formats = ["icon", "newsstand", "shelf", "launch"];
 			var len = formats.length;
-			while(len--){
-				Files.File.findOne({relation: 'setting:'+setting._id, key: formats[len]}).exec(function(err, file){
-					if (file!==null) { createIconSet(file.name, formats[len]); }
-					else {console.log("some went wrong with startGenIconssets in BakerGenerator, err=", err)}
+			while(len--) {
+				var format = formats[len];
+				Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
+					if (file!==null) { createIconSet(file.name, file.key); }
+					else {return console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err)}
 				});
 			}
 		}
@@ -83,8 +79,8 @@ function prepareDownload(cb){
 		var exec = require("child_process").exec;
 		var child = exec('rm ./publish-baker -r',
 		  function (error, stdout, stderr) {
-		    console.log('stdout: ' + stdout);
-		    console.log('stderr: ' + stderr);
+		    //console.log('stdout: ' + stdout);
+		    //console.log('stderr: ' + stderr);
 		    if (error !== null) {
 		      console.log('exec error: ' + error);
 		    }
@@ -94,43 +90,6 @@ function prepareDownload(cb){
 }
 
 
-function createIconSet(filename, type) {
-	var len = sizeList[type].length;
-	// obtain the size of an image
-	gm('./public/files/'+ filename).size(function (err, size) {
-	  if (err) { return console.log(err) }
-	  return generateIcons(size);
-	});
-	function generateIcons(size){
-		while(len--){
-			console.log("icon nr. ", len, " size ", size)
-
-			var icon = sizeList[type][len]
-			var image = gm('./public/files/'+ filename)
-
-			if (type==="launch") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2)
-			} else if (type=="shelf") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0)
-			} else if (type=="icon") {
-				image.resize(icon.w, icon.h)
-			} else if (type=="newsstand") {
-				if (icon.w!==480) {
-					if (icon.w < icon.h) {
-						image.resize(0, icon.h);
-					} else {
-						image.resize(icon.w, 0);
-					}
-					image.crop(icon.w, icon.h, icon.w/2, 0);
-				}
-			}
-			image.write('./public/files/iconset/'+ icon.n +"-"+ filename, function (err) {
-			  if (err) { return console.log(err); }
-			})
-		}
-	}
-}
-
 
 function buildStandalone(){
 
@@ -138,9 +97,11 @@ function buildStandalone(){
 
 	var files = fs.readdirSync('./public/books');
 	for (key in files) {
-		var file = files[key];
-		if(file == '.DS_Store') continue;
-		fs.copySync('./public/books/'+file+'/hpub', __dirname+'/publish-baker/books/'+file);
+		if(files.hasOwnProperty(key)){
+			var file = files[key];
+			if(file === '.DS_Store') continue;
+			fs.copySync('./public/books/'+file+'/hpub', __dirname+'/publish-baker/books/'+file);
+		}
 	}
 
 
@@ -164,7 +125,7 @@ var sizeList = {
 		{ n: "iPad Portrait iOS7", w: 768, h: 1024},
 		{ n: "iPad Portrait iOS7@2x", w: 1536, h: 2048},
 		{ n: "iPhone Portrait iOS7 R4", w: 640, h: 1136},
-		{ n: "iPhone Portrait iOS7@2x ", w: 640, h: 960},
+		{ n: "iPhone Portrait iOS7@2x ", w: 640, h: 960}
 	],
 	icon : [
 		// app iconset
@@ -174,13 +135,13 @@ var sizeList = {
 		{ n: "iPad App iOS7@2x", w: 152, h: 152},
 		{ n: "iPhone App iOS6", w: 57, h: 57},
 		{ n: "iPhone App iOS6@2x", w: 114, h: 114},
-		{ n: "iPhone App iOS7@2x", w: 120, h: 120},
+		{ n: "iPhone App iOS7@2x", w: 120, h: 120}
 	],
 	newsstand : [
 		// Newsstand icons
 		{ n: "newsstand-app-icon", w: 112, h: 126},
 		{ n: "newsstand-app-icon@2x", w: 224, h: 252},
-		{ n: "shelf-bg-landscape~iphone", w: 480, h: 268},
+		{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}
 	],
 	shelf: [
 		// Shelf Bg
@@ -194,11 +155,46 @@ var sizeList = {
 		{ n: "shelf-bg-portrait~ipad", w: 768, h: 960},
 		{ n: "shelf-bg-portrait~iphone", w: 320, h: 416}
 	]
+};
+
+function createIconSet(filename, format) {
+	var len = sizeList[format].length;
+	// obtain the size of an image
+	gm('./public/files/'+ filename).size(function (err, size) {
+	  if (err) { return console.log("createIconSet getSize err=",err); }
+	  return generateIcons(size);
+	});
+	function generateIcons(size){
+		while(len--){
+			var icon = sizeList[format][len];
+			var image = gm('./public/files/'+ filename);
+
+			if (format==="launch") {
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
+			} else if (format==="shelf") {
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
+			} else if (format==="icon") {
+				image.resize(icon.w, icon.h);
+			} else if (format==="newsstand") {
+				if (icon.w!==480) {
+					if (icon.w < icon.h) {
+						image.resize(0, icon.h);
+					} else {
+						image.resize(icon.w, 0);
+					}
+					image.crop(icon.w, icon.h, icon.w/2, 0);
+				}
+			}
+			image.write('./public/files/iconset/'+ icon.n , function (err) {
+			  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
+			});
+		}
+	}
 }
 
 function createBakerUiConstants(){
 	Settings.findOne({name:'MagazineModule'}).exec(function(err, setting){
-		if (err) { return console.log(err); }
+		if (err) { return console.error("createBakerUiConstants findOne err=", err); }
 		else {
 			var settings = setting.settings;
 			var txt = '#ifndef Baker_UIConstants_h\n#define Baker_UIConstants_h';
@@ -211,12 +207,12 @@ function createBakerUiConstants(){
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorsetArchiveButtonBg.value+'"';
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetArchiveButtonColor.value+'"';
 			txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
-			txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
+			txt += '\n\t#define ISS0UES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
 			txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
-			txt += '\n#endif'
+			txt += '\n#endif';
 
 			fs.writeFile(__dirname+'/baker-master/BakerShelf/UIConstants.h.edited', txt, function(err) {
-			    if(err) { console.log("Baker_UIConstants_h save error: ",err); }
+			    if(err) { console.error("Baker_UIConstants_h save error: ",err); }
 			    else { console.log("Baker_UIConstants_h was saved!"); }
 			});
 		}
@@ -225,13 +221,13 @@ function createBakerUiConstants(){
 
 function replaceInTextFile(fileToEdit, changes) {
 	fs.readFile(fileToEdit, function(err, res) {
-	    if(err) { console.log("BakerGenerator replaceInTextFile readFile error: ",err); }
-	    else {
-	    	txt = res.toString();
-	    	txt = txt.replace(changes.from, changes.to);
+		if(err) { console.log("BakerGenerator replaceInTextFile readFile error: ",err); }
+		else {
+			var txt = res.toString();
+			txt = txt.replace(changes.from, changes.to);
 			fs.writeFile(fileToEdit+".edited" , txt, function(err) {
-			    if(err) { console.log("save error: ",err); }
+			    if(err) { console.error("BakerGenerator replaceInTextFile save error: ",err); }
 			});
-	    }
+		}
 	});
-};
+}

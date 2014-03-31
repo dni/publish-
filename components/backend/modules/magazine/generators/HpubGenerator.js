@@ -12,7 +12,7 @@ module.exports.generate = function(magazine) {
 
 	dbFile.File.find({relation: 'magazine:'+magazine._id}).execFind(function(err, files){
 
-		magazinefiles = {}
+		magazinefiles = {};
 
 		_.each(files, function(file){
 			fs.copy(process.cwd() + '/public/files/'+file.name, process.cwd()+"/public/books/" + magazine.title + "/hpub/images/" + file.name );
@@ -22,14 +22,14 @@ module.exports.generate = function(magazine) {
 
 		// generage INDEX
 		Page.find({magazine: magazine._id}).exec(function(err, pages){
-			var articleIds = []
+			var articleIds = [];
 			_.each(pages, function(page){
 				articleIds.push(page.article);
 			});
 
 
 			db2.Article.find({_id: { $in: articleIds}}).execFind(function(err, articles){
-				var newarticles = {}
+				var newarticles = {};
 				_.each(articles, function(article){
 					newarticles[article._id] = article.title;
 				});
@@ -45,13 +45,11 @@ module.exports.generate = function(magazine) {
 				fs.writeFileSync("./public/books/" + magazine.title + "/hpub/index.html", html);
 
 				Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
-					var file = file.pop();
+					file = file.pop();
 					if (file.settings.print.value) {
 						PrintGenerator.generatePage("index.html", magazine);
 					}
 				});
-
-
 			});
 		});
 
@@ -76,8 +74,8 @@ module.exports.generate = function(magazine) {
 		// generate JSON
 		var files = fs.readdirSync("./public/books/" + magazine.title + "/hpub/");
 
-		var contents = [];
-		for (var key = 0; key < files.length; key++) {
+		var contents = [], key;
+		for (key = 0; key < files.length; key++) {
 			if (files[key].match(/.html/g)) {
 				contents.push(files[key]);
 			}
@@ -111,10 +109,10 @@ module.exports.generate = function(magazine) {
 
 
 			_.each(pages, function(page){
-				if (!page.layout) return;
+				if (!page.layout) { return; }
 				template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
 				db2.Article.find({_id: page.article}).execFind(function(err, article){
-					if (err) console.log(err);
+					if (err) { console.log(err); }
 					article = article.pop();
 
 					dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
@@ -139,7 +137,7 @@ module.exports.generate = function(magazine) {
 						fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + filename, html);
 
 						Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
-							var file = file.pop();
+							file = file.pop();
 							if (file.settings.print.value) {
 								PrintGenerator.generatePage(filename, magazine);
 							}
@@ -151,7 +149,7 @@ module.exports.generate = function(magazine) {
 		});
 
 		Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
-			var file = file.pop();
+			file = file.pop();
 			if (file.settings.print.value) {
 				PrintGenerator.generatePage("Book Cover.html", magazine);
 				PrintGenerator.generatePage("Book Back.html", magazine);
