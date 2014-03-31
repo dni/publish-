@@ -18,6 +18,11 @@
 	      "value": "default, fullsize",
 	      "type": "text"
 		},
+		"appid" : {
+	      "label": "Bundle Identifier for App",
+	      "value": "org.publish.com.magazines",
+	      "type": "text"
+		},
 		"print" : {
 	      "label": "Enable Print PDF",
 	      "value": "1",

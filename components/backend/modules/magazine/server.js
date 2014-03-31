@@ -56,6 +56,7 @@ module.exports.setup = function(app) {
 
 			}
 
+
 			a.title = req.body.title;
 			a.editorial = req.body.editorial;
 			a.impressum = req.body.impressum;
@@ -74,6 +75,11 @@ module.exports.setup = function(app) {
 				initialize(req.body.title, function(){
 					HpubGenerator.generate(a);
 				});
+
+				if (a.published != req.body.published) {
+					buildShelfJson();
+				}
+
 				res.send(a);
 			});
 
@@ -156,7 +162,30 @@ function initialize(folder, cb) {
 		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
 		cb();
 	});
-}
+};
+
+
+function buildShelfJson() {
+
+	db.Magazine.find({published:1}).execFind(function (arr, magazines) {
+		var json = [];
+		_.each(magazines, function(magazine){
+			json.push({
+			    "name": magazine.title,
+			    "title": magazine.title,
+			    "info": "The original masterpiece by Sir A. Conan Doyle",
+			    "date": "1887-10-10 10:10:10",
+			    "cover": "http://bakerframework.com/newsstand-books/a-study-in-scarlet.png",
+			    "url": "http://bakerframework.com/newsstand-books/a-study-in-scarlet.hpub",
+			    "product_id": "com.example.Baker.issues.january2013"
+		 	});
+		});
+		fs.writeFileSync("./public/books/shelf.json", JSON.stringify(json));
+  	});
+
+};
+
+
 
 
 
