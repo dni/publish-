@@ -99,31 +99,18 @@ define (require)->
       settingsModule = require "cs!./modules/settings/SettingsModule"
       fileModule = require "cs!./modules/files/FileModule"
       staticModule = require "cs!./modules/static/StaticModule"
-      reportModule = require "cs!./modules/reports/ReportModule"
-      messageModule = require "cs!./modules/messages/MessageModule"
-      userModule = require "cs!./modules/user/UserModule"
+
+      # coming soon in 2.0
+      # messageModule = require "cs!./modules/messages/MessageModule"
+      # userModule = require "cs!./modules/user/UserModule"
+      # reportModule = require "cs!./modules/reports/ReportModule"
+
+      # NOT Working :(
       # for moduleKey, moduleName of App.config.modules
-        # NOT Working :(
         # str "cs!./modules/#{moduleKey}/#{moduleName}"
         # require str
         #require "cs!./modules/magazine/MagazineModule"
 
-
-  App.uploadHandler = (selector, model) ->
-    xhr = $(selector).FileUpload
-      dataType: 'json'
-      url: 'http://localhost:8888'
-
-      done: (e, data) ->
-        $.each data.result.files, (index, file) ->
-          $('#files').append '<img src="static/articles/' + file.name + '" />'
-
-      progressall: (e, data) ->
-        progress = parseInt data.loaded / data.total * 100, 10
-        $(selector + " output").append "progressALL = "+progress + '%'
-
-    overlayCallback = ->
-      console.log "empty overlay:callback"
 
 
   Vent.on 'overlay:action', (cb)->
