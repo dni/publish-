@@ -2,6 +2,14 @@ var db = require(__dirname + '/model/StaticBlockSchema');
 
 module.exports.setup = function(app) {
 
+	// Insert Frontend Layout Data
+	db.StaticBlock.count({},function(count) {
+		if (count == 0) {
+			// TODO
+			// import ./data/staticblocks.bson
+		}
+	});
+
 	// API
 	app.get('/staticBlocks', function(req, res){
 	  	db.StaticBlock.find().limit(20).execFind(function (arr,data) {

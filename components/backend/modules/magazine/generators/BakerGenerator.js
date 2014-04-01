@@ -219,7 +219,7 @@ function createBakerUiConstants(){
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorsetArchiveButtonBg.value+'"';
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetArchiveButtonColor.value+'"';
 			txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
-			txt += '\n\t#define ISS0UES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
+			txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
 			txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
 			txt += '\n#endif';
 
