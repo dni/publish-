@@ -39,42 +39,16 @@ function prepareDownload(cb){
 	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
 		if (error) return console.log('prepareDownload err=', error);
 
-		// Needed sizes .... TODO show demo pics im magazine config
-		// icon 152x152 // newsstand 480x268 // shelf 2048x1920 // lauch 2048x2048
-
-		fs.remove('./public/files/iconset', function(err){
-			if (err) { return console.error(err); }
-			fs.mkdirs('./public/files/iconset', function(err){
-				if (err) {return console.error(err);}
-				else {
-					console.log("iconset directory is clean, start with generating icons");
-					startGenIconssets();
-				}
-			});
-
-		});
-
-		function startGenIconssets(){
-			var formats = ["icon", "newsstand", "shelf", "launch"];
-			var len = formats.length;
-			while(len--) {
-				var format = formats[len];
-				Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
-					if (file!==null) { createIconSet(file.name, file.key); }
-					else {return console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);}
-				});
-			}
-		}
+		startGenIconssets(setting);
 
 		createBakerUiConstants();
-
 
 		var action = setting.settings.apptype.value;
 		switch (action) {
 			case "standalone":
 				buildStandalone(); break;
 			case "newsstand":
-				buildNewstand(); break;
+				buildNewstand(settings); break;
 			case "newsstandpaid":
 				buildNewsstandpaid(); break;
 		}
@@ -92,10 +66,7 @@ function prepareDownload(cb){
 	});
 }
 
-
-
 function buildStandalone(){
-
 	fs.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
 
 	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/BakerIssue.h', { from:'#define BAKER_NEWSSTAND', to: '//#define BAKER_NEWSSTAND' });
@@ -108,22 +79,16 @@ function buildStandalone(){
 			fs.copySync('./public/books/'+file+'/hpub', __dirname+'/publish-baker/books/'+file);
 		}
 	}
-
-
 };
 
-function buildNewstand(){
-	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
-		replaceInTextFile(__dirname+'/publish-baker/BakerShelf/Constants.h', {
-			from:'#define NEWSSTAND_MANIFEST_URL @"http://bakerframework.com/demo/shelf.json"',
-			to: '#define NEWSSTAND_MANIFEST_URL @"http://'+setting.settings.domain.value+'/books/shelf.json"'
-		});
+function buildNewstand(settings){
+	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/Constants.h', {
+		from:'#define NEWSSTAND_MANIFEST_URL @"http://bakerframework.com/demo/shelf.json"',
+		to: '#define NEWSSTAND_MANIFEST_URL @"http://'+setting.settings.domain.value+'/books/shelf.json"'
 	});
 };
 
-function buildNewstandpaid(){
-
-};
+function buildNewstandpaid(){};
 
 var sizeList = {
 	launch : [
@@ -131,13 +96,13 @@ var sizeList = {
 		{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
 		{ n: "iPad Landscape iOS6 no status bar@2x-1", w: 2048, h: 1496},
 		{ n: "iPad Landscape iOS7", w: 1024, h: 768},
-		{ n: "iPad Landscape iOS7 2x", w: 2048, h: 1536},
+		{ n: "iPad Landscape iOS7@2x", w: 2048, h: 1536},
 		{ n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004},
 		{ n: "iPad Portrait iOS6 no status bar@2x", w: 1536, h: 2008},
 		{ n: "iPad Portrait iOS7", w: 768, h: 1024},
 		{ n: "iPad Portrait iOS7@2x", w: 1536, h: 2048},
 		{ n: "iPhone Portrait iOS7 R4", w: 640, h: 1136},
-		{ n: "iPhone Portrait iOS7@2x ", w: 640, h: 960}
+		{ n: "iPhone Portrait iOS7@2x", w: 640, h: 960}
 	],
 	icon : [
 		// app iconset
@@ -157,7 +122,7 @@ var sizeList = {
 	],
 	shelf: [
 		// Shelf Bg
-		{ n: "shelf-bg-landscapel-568h", w: 1136, h: 536},
+		{ n: "shelf-bg-landscape-568h", w: 1136, h: 536},
 		{ n: "shelf-bg-landscape@2x~ipad", w: 2048, h: 1407},
 		{ n: "shelf-bg-landscape@2x~iphone", w: 960, h: 536},
 		{ n: "shelf-bg-landscape~ipad", w: 1024, h: 704},
@@ -169,38 +134,55 @@ var sizeList = {
 	]
 };
 
+function startGenIconssets(setting){
+	var formats = ["icon", "newsstand", "shelf", "launch"];
+	var len = formats.length;
+	while(len--) {
+		var format = formats[len];
+		Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
+			if (file!==null) { createIconSet(file.name, file.key); }
+			else {return console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);}
+		});
+	}
+}
 function createIconSet(filename, format) {
 	var len = sizeList[format].length;
 	var image = gm('./public/files/'+ filename);
+	function generateIcons(size){
+		while(len--){
+			var icon = sizeList[format][len];
+			var targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/'
+			if (format==="launch") {
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
+				targetDir += "LaunchImage.launchimage"
+			} else if (format==="shelf") {
+				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
+				if (icon.n.indexOf("portrait")>8) { targetDir += "shelf-bg-portrait.imageset"; }
+				else { targetDir += "shelf-bg-landscape.imageset"; }
+			} else if (format==="icon") {
+				image.resize(icon.w, icon.h);
+				targetDir += "AppIcon.appiconset"
+			} else if (format==="newsstand") {
+				if (icon.w!==480) {
+					if (icon.w < icon.h) { image.resize(0, icon.h); }
+					else { image.resize(icon.w, 0);	}
+					image.crop(icon.w, icon.h, icon.w/2, 0);
+				}
+				if (icon.n.indexOf("landscape")>8) { targetDir += "shelf-bg-landscape.imageset"; }
+				else { targetDir += "newsstand-app-icon.imageset"; }
+			}
+			filetype = filename.split(".");
+			filetype = filetype[filetype.length-1];
+			image.write(targetDir +"/"+ icon.n +"."+ filetype, function (err) {
+			  if (err) { return console.error("icon.write err=", err); }
+			});
+		}
+	};
 	// obtain the size of an image
 	image.size(function (err, size) {
 	  if (err) { return console.log("createIconSet getSize err=",err); }
 	  return generateIcons(size);
 	});
-	function generateIcons(size){
-		while(len--){
-			var icon = sizeList[format][len];
-			if (format==="launch") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
-			} else if (format==="shelf") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
-			} else if (format==="icon") {
-				image.resize(icon.w, icon.h);
-			} else if (format==="newsstand") {
-				if (icon.w!==480) {
-					if (icon.w < icon.h) {
-						image.resize(0, icon.h);
-					} else {
-						image.resize(icon.w, 0);
-					}
-					image.crop(icon.w, icon.h, icon.w/2, 0);
-				}
-			}
-			image.write('./public/files/iconset/'+ icon.n , function (err) {
-			  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
-			});
-		}
-	};
 };
 
 
@@ -219,11 +201,11 @@ function createBakerUiConstants(){
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorsetArchiveButtonBg.value+'"';
 			txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetArchiveButtonColor.value+'"';
 			txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
-			txt += '\n\t#define ISS0UES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
+			txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
 			txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
 			txt += '\n#endif';
 
-			fs.writeFile(__dirname+'/baker-master/BakerShelf/UIConstants.h.edited', txt, function(err) {
+			fs.writeFile(__dirname+'/publish-baker/BakerShelf/UIConstants.h', txt, function(err) {
 			    if(err) { console.error("Baker_UIConstants_h save error: ",err); }
 			    else { console.log("Baker_UIConstants_h was saved!"); }
 			});
