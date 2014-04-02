@@ -1,6 +1,6 @@
 var fs = require('fs-extra'),
-	gm = require('gm').subClass({ imageMagick: true }),
-	Files = require('./../../files/model/FileSchema');
+	gm = require('gm'),
+	Files = require('./../../files/model/FileSchema'),
 	Settings = require('./../../settings/model/SettingSchema');
 
 module.exports.download = function(req, res){
@@ -39,35 +39,41 @@ function prepareDownload(cb){
 	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
 		if (error) return console.log('prepareDownload err=', error);
 
-		startGenIconssets(setting);
+		var child_process = require('child_process').spawn;
+	    var spawn = child_process('rm', ['-rf', '-', 'publish-baker'], {cwd:__dirname});
 
-		createBakerUiConstants();
+	    spawn.on('exit', function (code) {
+	        if(code !== 0) {
+	            res.statusCode = 500;
+	            console.log('remove files (rm) process exited with code ' + code);
+	        } else {
+	        	console.log("remove files (rm)  done");
 
-		var action = setting.settings.apptype.value;
-		switch (action) {
-			case "standalone":
-				buildStandalone(); break;
-			case "newsstand":
-				buildNewstand(settings); break;
-			case "newsstandpaid":
-				buildNewsstandpaid(); break;
-		}
+				fs.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
 
-		var exec = require("child_process").exec;
-		var child = exec('rm ./publish-baker -r',
-		  function (error, stdout, stderr) {
-		    //console.log('stdout: ' + stdout);
-		    //console.log('stderr: ' + stderr);
-		    if (error !== null) {
-		      console.log('exec error: ' + error);
-		    }
-			cb();
-		}, {cwd:__dirname});
+				startGenIconssets(setting);
+
+				createBakerUiConstants();
+
+				var action = setting.settings.apptype.value;
+				switch (action) {
+					case "standalone":
+						buildStandalone(); break;
+					case "newsstand":
+						buildNewstand(settings); break;
+					case "newsstandpaid":
+						buildNewsstandpaid(); break;
+				}
+
+					// cb();
+	        }
+
+	    });
+
 	});
 }
 
 function buildStandalone(){
-	fs.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
 
 	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/BakerIssue.h', { from:'#define BAKER_NEWSSTAND', to: '//#define BAKER_NEWSSTAND' });
 
@@ -94,7 +100,7 @@ var sizeList = {
 	launch : [
 		// launch images
 		{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
-		{ n: "iPad Landscape iOS6 no status bar@2x-1", w: 2048, h: 1496},
+		{ n: "iPad Landscape iOS6 no status bar@2x", w: 2048, h: 1496},
 		{ n: "iPad Landscape iOS7", w: 1024, h: 768},
 		{ n: "iPad Landscape iOS7@2x", w: 2048, h: 1536},
 		{ n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004},
@@ -140,46 +146,51 @@ function startGenIconssets(setting){
 	while(len--) {
 		var format = formats[len];
 		Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
-			if (file!==null) { createIconSet(file.name, file.key); }
+			if (file!==null) {
+				createIconSet(file.name, file.key); }
 			else {return console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);}
 		});
 	}
 }
 function createIconSet(filename, format) {
-	var len = sizeList[format].length;
-	var image = gm('./public/files/'+ filename);
+	var len = sizeList[format].length-1,
+	filetype, targetImageLink, icon, targetDir, size;
 	function generateIcons(size){
-		while(len--){
-			var icon = sizeList[format][len];
-			var targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/'
-			if (format==="launch") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
-				targetDir += "LaunchImage.launchimage"
-			} else if (format==="shelf") {
-				image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
-				if (icon.n.indexOf("portrait")>8) { targetDir += "shelf-bg-portrait.imageset"; }
-				else { targetDir += "shelf-bg-landscape.imageset"; }
-			} else if (format==="icon") {
-				image.resize(icon.w, icon.h);
-				targetDir += "AppIcon.appiconset"
-			} else if (format==="newsstand") {
-				if (icon.w!==480) {
-					if (icon.w < icon.h) { image.resize(0, icon.h); }
-					else { image.resize(icon.w, 0);	}
-					image.crop(icon.w, icon.h, icon.w/2, 0);
-				}
-				if (icon.n.indexOf("landscape")>8) { targetDir += "shelf-bg-landscape.imageset"; }
-				else { targetDir += "newsstand-app-icon.imageset"; }
+		var image = gm('./public/files/'+ filename);
+		icon = sizeList[format][len];
+		targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/'
+		filetype = filename.split(".");
+		filetype = filetype[filetype.length-1];
+		if (format==="launch") {
+			image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
+			targetDir += "LaunchImage.launchimage"
+		} else if (format==="shelf") {
+			image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
+			if (icon.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
+			else { targetDir += "shelf-bg-landscape.imageset"; }
+		} else if (format==="icon") {
+			image.resize(icon.w, icon.h);
+			targetDir += "AppIcon.appiconset"
+		} else if (format==="newsstand") {
+			if (icon.w!==480) {
+				if (icon.w < icon.h) { image.resize(0, icon.h); }
+				else { image.resize(icon.w, 0);	}
+				image.crop(icon.w, icon.h, icon.w/2, 0);
 			}
-			filetype = filename.split(".");
-			filetype = filetype[filetype.length-1];
-			image.write(targetDir +"/"+ icon.n +"."+ filetype, function (err) {
-			  if (err) { return console.error("icon.write err=", err); }
-			});
+			if (icon.n.indexOf("landscape")>1) { targetDir += "shelf-bg-landscape.imageset";}
+			else { targetDir += "newsstand-app-icon.imageset";}
 		}
+
+		targetImageLink = targetDir +"/"+ icon.n +"."+ filetype;
+
+		image.write(targetImageLink, function (err) {
+		  if (err) { return console.error("icon.write err=", err); }
+		  len--;
+		  if (len>=0) { generateIcons(size); }
+		});
 	};
 	// obtain the size of an image
-	image.size(function (err, size) {
+	gm('./public/files/'+ filename).size(function (err, size) {
 	  if (err) { return console.log("createIconSet getSize err=",err); }
 	  return generateIcons(size);
 	});
