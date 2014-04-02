@@ -5,7 +5,7 @@ Publish your data on all channels!
 
 ## Requirements
 
-* apt-get npm phantomjs mongo (or use Homebrew on macosx)
+* apt-get npm phantomjs mongo imagemagick graphicsmagick (or use Homebrew on macosx)
 
 ## Installation
 
