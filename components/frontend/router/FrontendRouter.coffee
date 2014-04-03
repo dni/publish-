@@ -2,8 +2,8 @@ define [
     'jquery',
     'lodash',
     'backbone',
-    'cs!view/ListView',
-    'cs!view/DetailView',
+    'cs!./../view/ListView',
+    'cs!./../view/DetailView',
 ],
 ( $, _, Backbone, ListView, DetailView ) ->
   class FrontendRouter extends Backbone.Router

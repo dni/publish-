@@ -5,7 +5,6 @@ var fs = require('fs'),
 module.exports.setup = function(app) {
 
 	app.configure(function() {
-		app.use('/admin/lib', express.static(__dirname + '/bower_components'));
 		app.use(express.bodyParser());
 		// load/setup modules
 		var moduleDir = __dirname + '/modules/';

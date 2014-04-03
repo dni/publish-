@@ -7,13 +7,10 @@ var async = require('async');
 
 module.exports.setup = function(app) {
 
-	app.configure(function() {
-		app.use('/lib', express.static(__dirname + '/bower_components'));
-	});
+	app.use('/', express.static(__dirname));
 
 	// web app
 	app.get('/', function(req, res){
-	  app.use('/', express.static(__dirname));
 	  res.sendfile(__dirname+'/index.html');
 	});
 
