@@ -2,19 +2,18 @@ var fs = require('fs-extra'),
 	gm = require('gm'),
 	Files = require('./../../files/model/FileSchema'),
 	emitter = require('events').EventEmitter,
+	ejs = require("ejs"),
 	EE = new emitter(),
 	Settings = require('./../../settings/model/SettingSchema');
 
 
 module.exports.download = function(req, res){
 
+	// when every task is ready, send zip
 	var tasks = ['icon', 'build'];
-
-	EE.once("ready", function(task){
-
+	EE.on("ready", function(task){
 
 		tasks.splice(tasks.indexOf(task), 1);
-
 		if (!tasks.length) {
 			var spawn = require('child_process').spawn;
 		    // Options -r recursive -j ignore directory info - redirect to stdout
@@ -47,43 +46,54 @@ module.exports.download = function(req, res){
 
 	});
 
-
 	prepareDownload();
 };
 
 
 
 function prepareDownload(){
-	Settings.findOne({name:'MagazineModule'}).exec(function(error, setting){
-		if (error) return console.log('prepareDownload err=', error);
+	Settings.findOne({name:'Baker'}).exec(function(error, setting){
 
+		// delete dirty baker project
 		var child_process = require('child_process').spawn;
-	    var spawn = child_process('rm', ['-rf', '-', 'publish-baker'], {cwd:__dirname});
+	    var spawn = child_process('rm', ['-rf', '-', 'publish-baker'], {cwd:process.cwd() + "/cache"});
 
 	    spawn.on('exit', function (code) {
 	        if(code !== 0) {
 	            res.statusCode = 500;
-	            console.log('remove files (rm) process exited with code ' + code);
+	            console.log('remove cache/publish-baker (rm) process exited with code ' + code);
 	        } else {
 
-	        	console.log("remove files (rm)  done");
-
-				fs.copySync(__dirname+'/baker-master', __dirname+'/publish-baker');
-
+				var dirname = process.cwd()+"/cache/publish-baker";
+				fs.copySync(__dirname+'/baker-master', dirname);
 
 				startGenIconssets(setting);
-				createBakerUiConstants(setting.settings);
 
+				// Constants
+				template = fs.readFileSync(__dirname+'/templates/Constants.h', 'utf-8');
+				fs.writeFileSync(dirname+'/BakerShelf/Constants.h', ejs.render(template, { settings: setting.settings}));
+
+				// Ui constants
+				template = fs.readFileSync(__dirname+'/templates/UIConstants.h', 'utf-8');
+				fs.writeFileSync(dirname+'/BakerShelf/UIConstants.h', ejs.render(template, { settings: setting.settings}));
+
+				// Baker-Info.plist
+				template = fs.readFileSync(__dirname+'/templates/Baker-Info.plist', 'utf-8');
+				fs.writeFileSync(dirname+'/Baker/Baker-Info.plist', ejs.render(template, { settings: setting.settings}));
 				var action = setting.settings.apptype.value;
+				if (action == "standalone") {
+					var files = fs.readdirSync('./public/books');
+					for (key in files) {
+						if(files.hasOwnProperty(key)){
+							var file = files[key];
+							if(file === '.DS_Store') continue;
+							fs.copySync('./public/books/'+file+'/hpub', dirname+'/books/'+file);
+						}
+					}
 
-				switch (action) {
-					case "standalone":
-						buildStandalone(setting.settings); break;
-					case "newsstand":
-						buildNewstand(setting.settings); break;
-					case "newsstandpaid":
-						buildNewsstandpaid(setting.settings); break;
 				}
+
+				EE.emit('ready', 'build');
 
 	        }
 
@@ -92,103 +102,96 @@ function prepareDownload(){
 	});
 }
 
-function buildStandalone(setting){
 
-	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/Constants.h', { from:'#define BAKER_NEWSSTAND', to: '//#define BAKER_NEWSSTAND' });
-
-	var plist = fs.readFileSync(__dirname+'/baker-templates/Baker-Info-Standalone.plist').toString();
-
-
-	plist.replace('com.yourcompany.${PRODUCT_NAME:rfc1034identifier}', setting.appid.value);
-	fs.writeFileSync(__dirname+'/publish-baker/Baker/Baker-Info.plist', plist);
-
-	var files = fs.readdirSync('./public/books');
-	for (key in files) {
-		if(files.hasOwnProperty(key)){
-			var file = files[key];
-			if(file === '.DS_Store') continue;
-			fs.copySync('./public/books/'+file+'/hpub', __dirname+'/publish-baker/books/'+file);
-		}
-	}
-
-	EE.emit('ready', 'build');
-
-
-};
-
-function buildNewstand(setting){
-	replaceInTextFile(__dirname+'/publish-baker/BakerShelf/Constants.h', {
-		from:'#define NEWSSTAND_MANIFEST_URL @"http://bakerframework.com/demo/shelf.json"',
-		to: '#define NEWSSTAND_MANIFEST_URL @"http://'+setting.domain.value+'/books/shelf.json"'
-	});
-	EE.emit('ready', 'build');
-};
-
-function buildNewstandpaid(setting){
-	EE.emit('ready', 'build');
-};
-
-function startGenIconssets(setting, cb){
+function startGenIconssets(setting){
 
 	var formats = ["icon", "newsstand", "shelf", "launch"];
 
-	function createIcon(format) {
+	function createIcons(format) {
 		Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
-			if (file!==null) {
-				var filename = file.name;
-				var format = file.key
-				var len = sizeList[format].length-1,
-				filetype, targetImageLink, icon, targetDir, size;
-								// obtain the size of an image
+			if (file) {
+				var filename = file.name, targetImageLink, icon, targetDir, size;
+				var image = gm('./public/files/'+ filename);
+				var filetype = filename.split(".").shift();
+
+
+				// obtain the size of an image
 				gm('./public/files/'+ filename).size(function (err, size) {
 
 					if (err) { return console.log("createIconSet getSize err=",err); }
 
-					var image = gm('./public/files/'+ filename);
-					icon = sizeList[format][len];
-					targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/'
-					filetype = filename.split(".");
-					filetype = filetype[filetype.length-1];
-					if (format==="launch") {
-						image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
-						targetDir += "LaunchImage.launchimage"
-					} else if (format==="shelf") {
-						image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
-						if (icon.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
-						else { targetDir += "shelf-bg-landscape.imageset"; }
-					} else if (format==="icon") {
-						image.resize(icon.w, icon.h);
-						targetDir += "AppIcon.appiconset"
-					} else if (format==="newsstand") {
-						if (icon.w!==480) {
-							if (icon.w < icon.h) { image.resize(0, icon.h); }
-							else { image.resize(icon.w, 0);	}
-							image.crop(icon.w, icon.h, icon.w/2, 0);
+					var iconInfos = sizeList[format];
+
+					function createIcon(icon) {
+
+						targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/';
+
+						console.log(format, icon);
+
+						if (format==="launch") {
+							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
+							targetDir += "LaunchImage.launchimage";
+
+						} else if (format==="shelf") {
+							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
+							if (icon.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
+							else { targetDir += "shelf-bg-landscape.imageset"; }
+
+						} else if (format==="icon") {
+							image.resize(icon.w, icon.h);
+							targetDir += "AppIcon.appiconset";
+
+						} else if (format==="newsstand") {
+							if (icon.w!==480) {
+								if (icon.w < icon.h) { image.resize(0, icon.h); }
+								else { image.resize(icon.w, 0);	}
+								image.crop(icon.w, icon.h, icon.w/2, 0);
+							}
+							if (icon.n.indexOf("landscape")>1) { targetDir += "shelf-bg-landscape.imageset";}
+							else { targetDir += "newsstand-app-icon.imageset";}
 						}
-						if (icon.n.indexOf("landscape")>1) { targetDir += "shelf-bg-landscape.imageset";}
-						else { targetDir += "newsstand-app-icon.imageset";}
-					}
 
-					targetImageLink = targetDir +"/"+ icon.n +"."+ filetype;
+						targetImageLink = targetDir +"/"+ icon.n +"."+ filetype;
 
-					image.write(targetImageLink, function (err) {
-					  if (err) { return console.error("icon.write err=", err); }
+						image.write(targetImageLink, function (err) {
+						  if (err) { return console.error("icon.write err=", err); }
+							if (iconInfos.length > 0) {
+								// next icon for format
+								createIcon(iconInfos.pop());
+							}
+							else {
+								if (formats.length > 0) {
+									// next format
+									createIcons(formats.pop());
+								} else {
+									// done with image generation
+									EE.emit('ready', 'icon');
+								}
+							}
+						});
 
-						if (formats.length > 0) {
-							createIcon(formats.pop());
-						} else {
-							cb();
-						}
-					});
-
+					};
+					createIcon(iconInfos.pop());
 
 				});
 
 			}
-			else {return console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);}
+			else {
+				// no file for format found
+				if (formats.length > 0) {
+					// next format
+					createIcons(formats.pop());
+				} else {
+					// done with image generation
+					EE.emit('ready', 'icon');
+				}
+
+				console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);
+			}
 		});
-	}
-	createIcon(formats.pop());
+	};
+
+	createIcons(formats.pop());
 }
 
 function createBakerUiConstants(settings){
@@ -210,20 +213,6 @@ function createBakerUiConstants(settings){
 	fs.writeFileSync(__dirname+'/publish-baker/BakerShelf/UIConstants.h', txt);
 
 };
-
-function replaceInTextFile(fileToEdit, changes) {
-	fs.readFile(fileToEdit, function(err, res) {
-		if(err) { console.log("BakerGenerator replaceInTextFile readFile error: ",err); }
-		else {
-			var txt = res.toString();
-			txt = txt.replace(changes.from, changes.to);
-			fs.writeFile(fileToEdit+".edited" , txt, function(err) {
-			    if(err) { console.error("BakerGenerator replaceInTextFile save error: ",err); }
-			});
-		}
-	});
-};
-
 
 var sizeList = {
 	launch : [

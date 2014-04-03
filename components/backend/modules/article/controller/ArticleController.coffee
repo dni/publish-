@@ -14,7 +14,7 @@ define [
   class ArticleController extends Backbone.Marionette.Controller
 
     settings: (attr)->
-      (App.Settings.findWhere name: "ArticleModule").getValue(attr)
+      (App.Settings.findWhere name: "Articles").getValue(attr)
 
     details: (id) ->
       Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout

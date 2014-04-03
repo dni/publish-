@@ -1,6 +1,6 @@
 {
     "config": {
-        "name": "MagazineModule",
+        "name": "Magazines",
         "namespace": "magazine"
     },
     "navigation": {
@@ -11,138 +11,16 @@
     },
 
     "settings": {
-    	"fileView" : true,
 		"layouts" : {
 	      "label": "Layouts",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "default, fullsize",
 	      "type": "text"
 		},
-		"appid" : {
-	      "label": "Bundle Identifier for App",
-	      "value": "org.publish.com.magazines",
-	      "type": "text"
-		},
 		"print" : {
 	      "label": "Enable Print PDF",
 	      "value": "1",
 	      "type": "checkbox"
-		},
-		"apptype" : {
-	      "label": "Type of the App",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "standalone",
-	      "type": "select",
-	      "options": {
-	      	"standalone": "Standalone App",
-	      	"newsstand": "Newsstand App",
-	      	"paid": "Newsstand App with paid subscriptions"
-	      }
-		},
-		"targetdevice" : {
-	      "label": "Target Device",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "ipad",
-	      "type": "select",
-	      "options": {
-	      	"ipad": "iPad",
-	      	"iphone": "iPhone",
-	      	"ipadiphone": "iPad and iPhone"
-	      }
-		},
-
-		"backerColorsetCoverBg" : {
-	      "label": "Cover Background Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#ffffff",
-	      "type": "text"
-		},
-		"backerColorsetTitleColor" : {
-	      "label": "Title Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#000000",
-	      "type": "text"
-		},
-		"backerColorsetInfoColor" : {
-	      "label": "Info Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#929292",
-	      "type": "text"
-		},
-		"backerColorsetPriceColor" : {
-	      "label": "Price Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#bc242a",
-	      "type": "text"
-		},
-		"backerColorsetActionButtonBg" : {
-	      "label": "Action Button Background Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#bc242a",
-	      "type": "text"
-		},
-		"backerColorsetActionButtonColor" : {
-	      "label": "Action Button Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#ffffff",
-	      "type": "text"
-		},
-		"backerColorsetArchiveButtonBg" : {
-	      "label": "Archive Button Background Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#bc242a",
-	      "type": "text"
-		},
-		"backerColorsetArchiveButtonColor" : {
-	      "label": "Archive Button Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#ffffff",
-	      "type": "text"
-		},
-		"backerColorsetLoadingLabelColor" : {
-	      "label": "Loading Label Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#bc242a",
-	      "type": "text"
-		},
-		"backerColorsetLoadingSpinnerColor" : {
-	      "label": "Loading Spinner Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#929292",
-	      "type": "text"
-		},
-		"backerColorsetProgressbarTintColor" : {
-	      "label": "Progressbar Tint Color",
-	      "description": "Comma seperated list of layout keys",
-	      "value": "#bc242a",
-	      "type": "text"
-		},
-
-		"download" : {
-	      "label": "Download App",
-	      "description": "Comma seperated list of layout keys",
-	      "type": "button",
-	      "event": "downloadApp"
 		}
-	},
-
-    "model": {
-        "magazine": {
-            "fields" : {
-                "title": {
-                    "type": "text",
-                    "label": "Titel",
-                    "default": "Hello Titel",
-                    "eval": {
-                        "maxLength": "100"
-                    }
-                },
-                "description": {
-                    "type": "text",
-                    "label": "Titel",
-                    "default": "Hello Description"
-                }
-            }
-        }
-    }
+	}
 }

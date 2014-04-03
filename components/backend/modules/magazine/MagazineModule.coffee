@@ -20,6 +20,4 @@ define [
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
 
-    $("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
-
     Vent.trigger "magazine:ready"

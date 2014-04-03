@@ -44,7 +44,7 @@ module.exports.generate = function(magazine) {
 
 				fs.writeFileSync("./public/books/" + magazine.title + "/hpub/index.html", html);
 
-				Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+				Settings.findOne({name: 'Magazines'}).execFind(function(err, file){
 					file = file.pop();
 					if (file.settings.print.value) {
 						PrintGenerator.generatePage("index.html", magazine);
@@ -136,7 +136,7 @@ module.exports.generate = function(magazine) {
 						var filename = "Page" + page.number + ".html";
 						fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + filename, html);
 
-						Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+						Settings.findOne({name: 'Magazines'}).execFind(function(err, file){
 							file = file.pop();
 							if (file.settings.print.value) {
 								PrintGenerator.generatePage(filename, magazine);
@@ -148,7 +148,7 @@ module.exports.generate = function(magazine) {
 
 		});
 
-		Settings.findOne({name: 'MagazineModule'}).execFind(function(err, file){
+		Settings.findOne({name: 'Magazines'}).execFind(function(err, file){
 			file = file.pop();
 			if (file.settings.print.value) {
 				PrintGenerator.generatePage("Book Cover.html", magazine);
