@@ -13,11 +13,11 @@ define [
 
   class SettingsController extends Backbone.Marionette.Controller
 
-    details: (id) ->
-      model = App.Settings.where name: id
+    details: (moduleName) ->
+      model = App.Settings.where name: moduleName
       Vent.trigger 'app:updateRegion', "contentRegion", new Layout
         model: model[0]
-        files: new Files App.Files.where relation: "setting:"+id
+        files: new Files App.Files.where relation: "setting:"+model[0].get "_id"
 
     list: ->
       Vent.trigger 'app:updateRegion', 'listTopRegion', new ListTopView

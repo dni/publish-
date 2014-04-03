@@ -1,5 +1,5 @@
 var db = require(__dirname + '/model/FileSchema'),
-	gm = require('gm').subClass({ imageMagick: true }),
+	gm = require('gm'),
 	mongoose = require("mongoose"),
 	cfg = require("./configuration.json"),
 	fs = require("fs");
@@ -70,47 +70,63 @@ module.exports.setup = function(app) {
 		file.parent = newfile.parent;
 		file.relation = newfile.relation;
 		file.key = newfile.key;
-		file.thumbnail = './static/files/uploading.gif';
-		file.smallPic = './static/files/uploading.gif';
-		file.bigPic = './static/files/uploading.gif';
 
 		if (newfile.type.split("/")[0]=="image") {
-			file.thumbnail = createWebPic(filename, "thumbnail");
-			file.smallPic = createWebPic(filename, "smallPic");
-			file.bigPic = createWebPic(filename, "bigPic");
+			createImages(file, filename, res);
+		} else {
+			file.save(function(){
+				res.send(file);
+			});
 		}
-		file.save(function(){
-			res.send(file);
-		});
 
 	});
 
-	function createWebPic(filename, type){
-		var maxSize = cfg.settings[type].value;
-		var targetName = type + "_thumb_" + filename;
+	function createImages(file, filename, res) {
+
+		var types = ["thumbnail", "smallPic", "bigPic"];
 		var image = gm('./public/files/'+ filename);
 
+
 		image.size(function (err, size) {
-		  if (err) { return console.error("createWebPic getSize err=",err); }
-		  return shrinkPic(size);
+
+			if (err) { return console.error("createWebPic getSize err=",err); }
+
+			function shrinkPic(type) {
+
+				var maxSize = cfg.settings[type].value;
+				var targetName = type + "_thumb_" + filename;
+				var targetLink = './public/files/'+ targetName;
+
+
+				image.quality(5);
+
+				if (size.width>size.height){
+					image.resize(maxSize);
+				} else {
+					image.resize(null, maxSize);
+				}
+
+				image.write(targetLink , function (err) {
+				  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
+					file[type] = targetName;
+
+				  if (types.length > 0) {
+				  	shrinkPic(types.pop());
+				  } else {
+					file.save(function(){
+						res.send(file);
+					});
+				  }
+
+				});
+			};
+
+			shrinkPic(types.pop());
+
+
 		});
 
-		function shrinkPic(features){
-			var targetLink = './public/files/'+ targetName;
-			image.quality(5);
-
-			if (features.width>features.height){
-				image.resize(maxSize);
-			} else {
-				image.resize(null, maxSize);
-			}
-
-			image.write(targetLink , function (err) {
-			  if (err) { return console.error("image.write('./public/files/iconset/ err=", err); }
-			});
-		}
-		return targetName;
-	}
+	};
 
 	app.put('/files/:id', function(req, res){
 		db.File.findById(req.params.id, function(e, a) {

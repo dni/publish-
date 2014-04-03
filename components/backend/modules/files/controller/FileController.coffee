@@ -47,7 +47,11 @@ define [
           fileView.collection.create newfile,
             wait:true
             success: (res) ->
-              if files.length then eachFile files.pop() else $('.modal').modal('hide')
+              if files.length
+                eachFile files.pop()
+              else
+                App.Files.fetch()
+                $('.modal').modal('hide')
 
 
         eachFile(files.pop())

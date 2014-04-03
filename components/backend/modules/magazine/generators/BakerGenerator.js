@@ -64,8 +64,7 @@ function prepareDownload(cb){
 					case "newsstandpaid":
 						buildNewsstandpaid(); break;
 				}
-
-					// cb();
+				cb();
 	        }
 
 	    });
