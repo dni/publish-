@@ -97,7 +97,10 @@ module.exports.setup = function(app) {
 				var targetName = type + "_thumb_" + filename;
 				var targetLink = './public/files/'+ targetName;
 
+<<<<<<< HEAD
 				image.quality(parseInt(cfg.settings.quality.value));
+=======
+>>>>>>> FETCH_HEAD
 
 				if (size.width>size.height){
 					image.resize(maxSize);
