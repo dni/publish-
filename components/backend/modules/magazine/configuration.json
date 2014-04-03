@@ -50,6 +50,10 @@
 	      	"ipadiphone": "iPad and iPhone"
 	      }
 		},
+		"headerUiconstants" : {
+	      "label": "UI-Constants",
+	      "type": "header"
+		},
 
 		"backerColorsetCoverBg" : {
 	      "label": "Cover Background Color",
