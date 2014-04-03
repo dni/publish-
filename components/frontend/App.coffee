@@ -3,13 +3,13 @@ define [
     'lodash'
     'backbone'
     'marionette'
-    'cs!router/FrontendRouter'
-    'cs!view/BlockView'
-    'cs!view/ListView'
-    'cs!view/DetailView'
-    'cs!model/Articles'
-    'cs!model/StaticBlocks'
-    "less!style/frontend"
+    'cs!./router/FrontendRouter'
+    'cs!./view/BlockView'
+    'cs!./view/ListView'
+    'cs!./view/DetailView'
+    'cs!./model/Articles'
+    'cs!./model/StaticBlocks'
+    "less!./style/frontend"
 ],
 ( $, _, Backbone, Marionette, Router, BlockView, ListView, DetailView, Articles, Blocks ) ->
 

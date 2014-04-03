@@ -3,8 +3,8 @@ define [
   'lodash',
   'backbone',
   'marionette',
-  'tpl!templates/listItem.html'
-  'cs!view/Viewhelpers'
+  'tpl!./../templates/listItem.html'
+  'cs!./../view/Viewhelpers'
 ], ($, _, Backbone, Marionette, Template, Viewhelpers) ->
   class ListItemView extends Backbone.Marionette.ItemView
     template: Template

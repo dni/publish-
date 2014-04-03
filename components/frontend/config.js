@@ -1,31 +1,32 @@
 require.config({
-	deps: ["cs!./App"],
+	deps: ["cs!/App"],
+	baseUrl: '/lib',
 	paths: {
-		jquery: "/lib/jquery/dist/jquery",
-		fancybox: "lib/fancybox/source/jquery.fancybox",
-		lodash: "/lib/lodash-amd/main",
-		backbone: "/lib/backbone-amd/backbone",
-		marionette: "/lib/marionette/lib/core/amd/backbone.marionette",
-		wreqr: "/lib/backbone.babysitter/lib/amd/backbone.babysitter",
-		babysitter: "/lib/backbone.wreqr/lib/amd/backbone.wreqr",
-		text: '/lib/requirejs-text/text',
-		cs: '/lib/require-cs/cs',
-		text: '/lib/requirejs-text/text',
-		tpl: '/lib/requirejs-tpl/tpl',
-		cs: '/lib/require-cs/cs',
-		underscore: '/lib/underscore-amd/underscore'
+		jquery: "jquery/dist/jquery",
+		fancybox: "fancybox/source/jquery.fancybox",
+		lodash: "lodash-amd/main",
+		backbone: "backbone-amd/backbone",
+		marionette: "marionette/lib/core/amd/backbone.marionette",
+		wreqr: "backbone.babysitter/lib/amd/backbone.babysitter",
+		babysitter: "backbone.wreqr/lib/amd/backbone.wreqr",
+		text: 'requirejs-text/text',
+		cs: 'require-cs/cs',
+		text: 'requirejs-text/text',
+		tpl: 'requirejs-tpl/tpl',
+		cs: 'require-cs/cs',
+		underscore: 'underscore-amd/underscore'
 	},
 	packages: [
       {
         name: 'less',
-        location: '/lib/require-less',
+        location: 'require-less',
         main: 'less'
       },{
 	    name: 'cs',
-	    location: '/lib/require-cs',
+	    location: 'require-cs',
 	    main: 'cs'
 	  },{
-	  	location: '/lib/coffee-script',
+	  	location: 'coffee-script',
 	    name: 'coffee-script',
 	    main: 'index'
 	  }

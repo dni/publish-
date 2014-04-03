@@ -3,7 +3,7 @@ define [
   'lodash',
   'backbone',
   'marionette',
-  'tpl!templates/block.html'
+  'tpl!./../templates/block.html'
 ], ($, _, Backbone, Marionette, Template) ->
   class ItemView extends Backbone.Marionette.ItemView
     template: Template

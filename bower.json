@@ -8,8 +8,10 @@
   "license": "MIT",
   "dependencies": {
     "jquery": "*",
+    "ace": "*",
     "backbone-amd": "~1.1.0",
     "underscore-amd": "latest",
+    "backbone-localstorage": "~0.3.1",
     "requirejs-text": "~2.0.10",
     "require-cs": "~0.4.4",
     "bootstrap": "~3.1.0",
@@ -19,6 +21,10 @@
     "requirejs-tpl": "*",
     "backbone.wreqr": "*",
     "backbone.babysitter": "*",
+    "jquery-ui": "~1.10.4",
+    "jquery-form": "~3.46.0",
+    "d3": "~3.4.3",
+    "tinymce": "~4.0.20",
     "fancybox": "~2.1.5"
   },
   "devDependencies": {

@@ -3,8 +3,8 @@ define [
   'lodash'
   'backbone'
   'marionette'
-  'tpl!templates/detail.html'
-  'cs!view/Viewhelpers'
+  'tpl!./../templates/detail.html'
+  'cs!./../view/Viewhelpers'
   'fancybox'
 ], ( $, _, Backbone, Marionette, Template, Viewhelpers, fancybox) ->
 

@@ -10,6 +10,7 @@ app.configure(function() {
 
 	app.use(express.static('public'));
 	app.use('/static', express.static(__dirname + '/public'));
+	app.use('/lib', express.static(__dirname + '/bower_components'));
 	app.use(express.cookieParser());
 
 	// load/setup components

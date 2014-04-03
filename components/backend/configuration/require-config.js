@@ -1,6 +1,6 @@
 require.config({
 	deps: ["cs!/admin/App"],
-	baseUrl: '/admin/lib',
+	baseUrl: '/lib',
 	paths: {
 		jquery: "jquery/dist/jquery",
 		"jquery.ui": "jquery-ui/ui/jquery-ui",
