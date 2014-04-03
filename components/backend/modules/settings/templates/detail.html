@@ -8,11 +8,11 @@
 		      	<input class="setting" type="checkbox" name="<%= key %>" checked>
 		      <% } else { %>
 				<input class="setting" type="checkbox" name="<%= key %>">
-		      <% } %>	
-		       <%= settings[key].label %>	
+		      <% } %>
+		       <%= settings[key].label %>
 		    </label>
 		</div>
-		
+
 	<% } if (settings[key].type=="select") { %>
 		<div class="form-group">
 			<label><%= settings[key].label %></label>
@@ -22,7 +22,7 @@
 				      	<option selected value="<%= option %>"><%= settings[key].options[option] %></option>
 				    <% } else { %>
 						<option value="<%= option %>"><%= settings[key].options[option] %></option>
-				    <% } %>	
+				    <% } %>
 		    	<% } %>
 			</select>
 		</div>
@@ -32,8 +32,17 @@
 		    <input type="<%= settings[key].type %>" class="setting form-control" name="<%= key %>" value="<%= settings[key].value %>">
 		 </div>
 	<% } %>
-	
-	
+
+	<% if (settings[key].type=="header") { %>
+        <h2><%= settings[key].label %></h2>
+    <% } %>
+
+    <% if (settings[key].type=="range") { %>
+        <label><%= settings[key].label %></label>
+            <input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
+    <% } %>
+
+
 <% } %>
 
 <% for (key in settings) { %>
