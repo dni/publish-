@@ -21,7 +21,7 @@
         },
         "smallPic" : {
           "label": "Small picture max. size",
-          "description": "very small picture",
+          "description": "not so small picture",
           "value": "800",
           "type": "text"
         },
@@ -29,6 +29,12 @@
           "label": "Big picture max. size",
           "description": "very small picture",
           "value": "1800",
+          "type": "text"
+        },
+        "quality" : {
+          "label": "Image quality",
+          "description": "Change image quality",
+          "value": "85",
           "type": "text"
         }
     }
