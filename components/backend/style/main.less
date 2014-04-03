@@ -7,6 +7,26 @@
 // http://twitter.github.com/bootstrap/less.html
 @import "../bower_components/bootstrap/less/bootstrap.less";
 
+@keyframes "animation" {.labs-animation();}
+@-webkit-keyframes "animation" {.labs-animation();}
+
+@keyframes "sidebar" {.sidebar-animation();}
+@-webkit-keyframes "sidebar" {.sidebar-animation();}
+
+.labs-animation() {
+  0%   {background:blue;}
+  25%  {background:red;}
+  75%  {background:green;}
+  100% {background:blue;}
+}
+
+.sidebar-animation() {
+  0%   {transform: translate(0px, 0px);}
+  25%  {transform: translate(80px, 50px);}
+  100% {transform: translate(160px, 300px);}
+}
+
+
 @highlight:purple;
 
 .navbar {margin-bottom:0;}
@@ -24,8 +44,13 @@ html {
 body {margin:0;padding:0;height:100%;background:#b3b3b3;
 
 
+// .animation(animation 3s infinite);
 
+}
 
+#sidebar {
+  position:absolute;
+ // .animation(sidebar 3s infinite);
 }
 
 img {
