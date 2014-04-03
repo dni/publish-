@@ -1,10 +1,10 @@
 {
-	"name": "cms",
+	"name": "General",
 	"author": "dnilabs e.U",
 	"version":"0.0.1",
 
 	"config": {
-	    "name": "Main",
+	    "name": "General",
     	"namespace": "backend"
     },
 
@@ -19,22 +19,6 @@
 	      "value": "1",
 	      "type": "checkbox"
 		}
-	},
-
-
-	"models": {
-		"article": "ArticleModel",
-		"magazine": "MagazineModel",
-		"setting":"SettingModel",
-		"file":"FileModel"
-	},
-
-	"views": "ArticleDetail, ",
-	"entrypoints": "button, overlay",
-	"modules": {
-        "file": "FileModule",
-        "article": "ArticleModule",
-        "magazine": "MagazineModule"
 	}
 
 

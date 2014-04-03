@@ -21,7 +21,7 @@
 		<textarea rows="5" class="wysiwyg form-control" name="editorial"><%= editorial %></textarea>
 	</div>
 	<%
-	var setting = App.Settings.where({name:'MagazineModule'});
+	var setting = App.Settings.where({name:'Magazines'});
 	if (setting[0].getValue('print')) {
 	%>
 		<div class="row">

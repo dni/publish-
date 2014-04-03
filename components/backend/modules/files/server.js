@@ -1,6 +1,7 @@
 var db = require(__dirname + '/model/FileSchema'),
 	gm = require('gm'),
 	mongoose = require("mongoose"),
+	///// TODO: !!!!! :D not from config from DB !!
 	cfg = require("./configuration.json"),
 	fs = require("fs");
 
@@ -97,10 +98,7 @@ module.exports.setup = function(app) {
 				var targetName = type + "_thumb_" + filename;
 				var targetLink = './public/files/'+ targetName;
 
-<<<<<<< HEAD
 				image.quality(parseInt(cfg.settings.quality.value));
-=======
->>>>>>> FETCH_HEAD
 
 				if (size.width>size.height){
 					image.resize(maxSize);

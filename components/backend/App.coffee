@@ -32,8 +32,8 @@ define (require)->
 
   settings = []
   settings.push App.config
-  App.Settings = new Settings
 
+  App.Settings = new Settings
 
   App.addRegions
     navigationRegion:"#navigation"
@@ -43,9 +43,11 @@ define (require)->
     listTopRegion: "#list-top"
     listRegion:"#list"
 
+  # close detailview if now listview is shown
   App.listRegion.on "show", ->
     if App.contentRegion.currentView? then App.contentRegion.currentView.close()
 
+  # init tinymce
   App.contentRegion.on "show", ->
     App.contentRegion.currentView.$el.find(".wysiwyg").tinymce
       theme: "modern"
@@ -96,6 +98,7 @@ define (require)->
     onStart:->
       articleModule = require "cs!./modules/article/ArticleModule"
       magazineModule = require "cs!./modules/magazine/MagazineModule"
+      bakerModule = require "cs!./modules/baker/BakerModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
       fileModule = require "cs!./modules/files/FileModule"
       staticModule = require "cs!./modules/static/StaticModule"
@@ -116,7 +119,6 @@ define (require)->
   Vent.on 'overlay:action', (cb)->
     $("body").unbind "overlay:ok"
     $("body").on "overlay:ok", cb
-
 
   window.App = App
   Backbone.history.start()
