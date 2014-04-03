@@ -98,8 +98,6 @@ module.exports.setup = function(app) {
 				var targetLink = './public/files/'+ targetName;
 
 
-				image.quality(5);
-
 				if (size.width>size.height){
 					image.resize(maxSize);
 				} else {
