@@ -17,7 +17,6 @@
     "bootstrap": "~3.1.0",
     "require-less": "~0.1.1",
     "marionette": "~1.6.2",
-    "lodash-amd": "~2.4.1",
     "requirejs-tpl": "*",
     "backbone.wreqr": "*",
     "backbone.babysitter": "*",

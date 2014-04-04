@@ -6,14 +6,11 @@ Publish your data on all channels!
 
 ## Installation
 * git clone https://github.com/dni/publish-.git
+* npm install -g bower jake
 * npm install
-* npm install -g bower
-* cd components/backend
 * bower install
-* cd components/backend/bower_components/tinymce
-* jake
-* cd components/frontend
-* bower install
+* cd bower_components/tinymce && jake
+
 
 ## Starting the App
 * make sure mongod process is running, start it with mongod

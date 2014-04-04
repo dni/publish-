@@ -7,7 +7,7 @@ require.config({
 		"jquery.tinymce": "tinymce/js/tinymce/jquery.tinymce.min",
 		tinymce: "tinymce/js/tinymce/tinymce",
 		"jquery.form": "jquery-form/jquery.form",
-		lodash: "lodash-amd/main",
+		lodash: "underscore-amd/underscore",
 		underscore: "underscore-amd/underscore",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
 		babysitter: "backbone.babysitter/lib/amd/backbone.babysitter",

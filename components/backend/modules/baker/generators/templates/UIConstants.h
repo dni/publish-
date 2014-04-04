@@ -35,37 +35,37 @@
 #define Baker_UIConstants_h
 
     // Background color for issues cover (before downloading the actual cover)
-    #define ISSUES_COVER_BACKGROUND_COLOR @"<%= settings.backerColorsetCoverBg.value %>"
+    #define ISSUES_COVER_BACKGROUND_COLOR @"<%= settings.bakerColorsetCoverBg.value %>"
 
     // Title for issues in the shelf
     // #define ISSUES_TITLE_FONT @"Helvetica"
     // #define ISSUES_TITLE_FONT_SIZE 15
-    #define ISSUES_TITLE_COLOR @"#000000"
+    #define ISSUES_TITLE_COLOR @"<%= settings.bakerColorsetTitleColor.value %>"
 
     // Info text for issues in the shelf
     // #define ISSUES_INFO_FONT @"Helvetica"
     // #define ISSUES_INFO_FONT_SIZE 15
-    #define ISSUES_INFO_COLOR @"#929292"
+    #define ISSUES_INFO_COLOR @"<%= settings.bakerColorsetInfoColor.value %>"
 
-    #define ISSUES_PRICE_COLOR @"#bc242a"
+    #define ISSUES_PRICE_COLOR @"<%= settings.bakerColorsetPriceColor.value %>"
 
     // Download/read button for issues in the shelf
     // #define ISSUES_ACTION_BUTTON_FONT @"Helvetica-Bold"
     // #define ISSUES_ACTION_BUTTON_FONT_SIZE 11
-    #define ISSUES_ACTION_BUTTON_BACKGROUND_COLOR @"#bc242a"
-    #define ISSUES_ACTION_BUTTON_COLOR @"#ffffff"
+    #define ISSUES_ACTION_BUTTON_BACKGROUND_COLOR @"<%= settings.bakerColorsetActionButtonBg.value %>"
+    #define ISSUES_ACTION_BUTTON_COLOR @"<%= settings.bakerColorsetActionButtonColor.value %>"
 
     // Archive button for issues in the shelf
     // #define ISSUES_ARCHIVE_BUTTON_FONT @"Helvetica-Bold"
     // #define ISSUES_ARCHIVE_BUTTON_FONT_SIZE 11
-    #define ISSUES_ARCHIVE_BUTTON_COLOR @"#bc242a"
-    #define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"#ffffff"
+    #define ISSUES_ARCHIVE_BUTTON_COLOR @"<%= settings.bakerColorsetArchiveButtonBg.value %>"
+    #define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"<%= settings.bakerColorsetArchiveButtonColor.value %>"
 
     // Text and spinner for issues that are being loaded in the shelf
-    #define ISSUES_LOADING_LABEL_COLOR @"#bc242a"
-    #define ISSUES_LOADING_SPINNER_COLOR @"#929292"
+    #define ISSUES_LOADING_LABEL_COLOR @"<%= settings.bakerColorsetLoadingLabelColor.value %>"
+    #define ISSUES_LOADING_SPINNER_COLOR @"<%= settings.bakerColorsetLoadingSpinnerColor.value %>"
 
     // Progress bar for issues that are being downloaded in the shelf
-    #define ISSUES_PROGRESSBAR_TINT_COLOR @"#bc242a"
+    #define ISSUES_PROGRESSBAR_TINT_COLOR @"<%= settings.bakerColorsetProgressbarTintColor.value %>"
 
 #endif

@@ -9,7 +9,8 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.${PRODUCT_NAME:rfc1034identifier}</string>
+
+	<string><%= settings.appid.value %>${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -30,17 +31,17 @@
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<% if(settings.orPortrait.value==true) { %><string>UIInterfaceOrientationPortrait</string><% } %>
+		<% if(settings.orUpsidedown.value==true) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
+		<% if(settings.orLandscapeleft.value==true) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
+		<% if(settings.orLandscaperight.value==true) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
+		<% if(settings.orPortrait.value===true) { %><string>UIInterfaceOrientationPortrait</string><% } %>
+		<% if(settings.orUpsidedown.value===true) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
+		<% if(settings.orLandscapeleft.value===true) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
+		<% if(settings.orLandscaperight.value===true) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
 	</array>
 </dict>
 </plist>
