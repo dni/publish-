@@ -44,8 +44,6 @@ module.exports.setup = function(app) {
 
 	});
 
-
-
 	app.post('/post_apns_token', function(req, res){
 
 		var token = new ApnToken();

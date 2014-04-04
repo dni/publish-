@@ -10,14 +10,14 @@ var fs = require('fs-extra'),
 module.exports.download = function(req, res){
 
 	// when every task is ready, send zip
-	var tasks = ['icon', 'build'];
+	var tasks = ['icon', 'build', 'constants'];
 	EE.on("ready", function(task){
 
 		tasks.splice(tasks.indexOf(task), 1);
 		if (!tasks.length) {
 			var spawn = require('child_process').spawn;
 		    // Options -r recursive -j ignore directory info - redirect to stdout
-		    var zip = spawn('zip', ['-r', '-', 'publish-baker'], {cwd:__dirname});
+		    var zip = spawn('zip', ['-r', '-', 'publish-baker'], {cwd:'./cache'});
 
 		    res.contentType('zip');
 
@@ -68,18 +68,23 @@ function prepareDownload(){
 				fs.copySync(__dirname+'/baker-master', dirname);
 
 				startGenIconssets(setting);
+				Settings.findOne({name:'General'}).exec(function(error, generalsetting){
 
-				// Constants
-				template = fs.readFileSync(__dirname+'/templates/Constants.h', 'utf-8');
-				fs.writeFileSync(dirname+'/BakerShelf/Constants.h', ejs.render(template, { settings: setting.settings}));
+					// Constants
+					template = fs.readFileSync(__dirname+'/templates/Constants.h', 'utf-8');
+					fs.writeFileSync(dirname+'/BakerShelf/Constants.h', ejs.render(template, { settings: setting.settings, domain:generalsetting.settings.domain.value}));
 
-				// Ui constants
-				template = fs.readFileSync(__dirname+'/templates/UIConstants.h', 'utf-8');
-				fs.writeFileSync(dirname+'/BakerShelf/UIConstants.h', ejs.render(template, { settings: setting.settings}));
+					// Ui constants
+					template = fs.readFileSync(__dirname+'/templates/UIConstants.h', 'utf-8');
+					fs.writeFileSync(dirname+'/BakerShelf/UIConstants.h', ejs.render(template, { settings: setting.settings}));
+					EE.emit("ready", "constants");
 
-				// Baker-Info.plist
-				template = fs.readFileSync(__dirname+'/templates/Baker-Info.plist', 'utf-8');
-				fs.writeFileSync(dirname+'/Baker/Baker-Info.plist', ejs.render(template, { settings: setting.settings}));
+	console.log(setting.settings);
+
+					// Baker-Info.plist
+					template = fs.readFileSync(__dirname+'/templates/Baker-Info.plist', 'utf-8');
+					fs.writeFileSync(dirname+'/Baker/Baker-Info.plist', ejs.render(template, { settings: setting.settings, domain:generalsetting.settings.domain.value}));
+				});
 				var action = setting.settings.apptype.value;
 				if (action == "standalone") {
 					var files = fs.readdirSync('./public/books');
@@ -112,7 +117,7 @@ function startGenIconssets(setting){
 			if (file) {
 				var filename = file.name, targetImageLink, icon, targetDir, size;
 				var image = gm('./public/files/'+ filename);
-				var filetype = filename.split(".").shift();
+				var filetype = filename.split(".").pop();
 
 
 				// obtain the size of an image
@@ -124,9 +129,8 @@ function startGenIconssets(setting){
 
 					function createIcon(icon) {
 
-						targetDir = __dirname+'/publish-baker/Baker/BakerAssets.xcassets/';
+						targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/';
 
-						console.log(format, icon);
 
 						if (format==="launch") {
 							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
@@ -152,6 +156,8 @@ function startGenIconssets(setting){
 						}
 
 						targetImageLink = targetDir +"/"+ icon.n +"."+ filetype;
+
+						console.log(format, icon, icon.n +"."+ filetype);
 
 						image.write(targetImageLink, function (err) {
 						  if (err) { return console.error("icon.write err=", err); }
@@ -193,26 +199,6 @@ function startGenIconssets(setting){
 
 	createIcons(formats.pop());
 }
-
-function createBakerUiConstants(settings){
-
-	var txt = '#ifndef Baker_UIConstants_h\n#define Baker_UIConstants_h';
-	txt += '\n\t#define ISSUES_COVER_BACKGROUND_COLOR @"'+settings.backerColorsetCoverBg.value+'"';
-	txt += '\n\t#define ISSUES_TITLE_COLOR @"'+settings.backerColorsetTitleColor.value+'"';
-	txt += '\n\t#define ISSUES_INFO_COLOR @"'+settings.backerColorsetInfoColor.value+'"';
-	txt += '\n\t#define ISSUES_PRICE_COLOR @"'+settings.backerColorsetPriceColor.value+'"';
-	txt += '\n\t#define ISSUES_ACTION_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetActionButtonBg.value+'"';
-	txt += '\n\t#define ISSUES_ACTION_BUTTON_COLOR @"'+settings.backerColorsetActionButtonColor.value+'"';
-	txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_COLOR @"'+settings.backerColorsetArchiveButtonBg.value+'"';
-	txt += '\n\t#define ISSUES_ARCHIVE_BUTTON_BACKGROUND_COLOR @"'+settings.backerColorsetArchiveButtonColor.value+'"';
-	txt += '\n\t#define ISSUES_LOADING_LABEL_COLOR @"'+settings.backerColorsetLoadingLabelColor.value+'"';
-	txt += '\n\t#define ISSUES_LOADING_SPINNER_COLOR @"'+settings.backerColorsetLoadingSpinnerColor.value+'"';
-	txt += '\n\t#define ISSUES_PROGRESSBAR_TINT_COLOR @"'+settings.backerColorsetProgressbarTintColor.value+'"';
-	txt += '\n#endif';
-
-	fs.writeFileSync(__dirname+'/publish-baker/BakerShelf/UIConstants.h', txt);
-
-};
 
 var sizeList = {
 	launch : [

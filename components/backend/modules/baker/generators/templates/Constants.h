@@ -47,25 +47,25 @@
         // Mandatory - This constant defines where the JSON file containing all the publications is located.
         // For more information on this file, see: https://github.com/Simbul/baker/wiki/Newsstand-shelf-JSON
         // E.g. @"http://example.com/shelf.json"
-        #define NEWSSTAND_MANIFEST_URL @"http://bakerframework.com/demo/shelf.json"
+        #define NEWSSTAND_MANIFEST_URL @"http://<%= domain %>/shelf"
 
         // ----------------------------------------------------------------------------------------------------
         // Optional - This constant specifies the URL to ping back when a user purchases an issue or a subscription.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/purchased"
-        #define PURCHASE_CONFIRMATION_URL @""
+        #define PURCHASE_CONFIRMATION_URL @"http://<%= domain %>/purchased"
 
         // ----------------------------------------------------------------------------------------------------
         // Optional - This constant specifies a URL that will be used to retrieve the list of purchased issues.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/purchases"
-        #define PURCHASES_URL @""
+        #define PURCHASES_URL @"http://<%= domain %>/purchases"
 
         // ----------------------------------------------------------------------------------------------------
         // Optional - This constant specifies the URL to ping back when a user enables push notifications.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/post_apns_token"
-        #define POST_APNS_TOKEN_URL @""
+        #define POST_APNS_TOKEN_URL @"http://<%= domain %>/post_apns_token"
 
         // ----------------------------------------------------------------------------------------------------
         // Mandatory - The following two constants identify the subscriptions you set up in iTunesConnect.
@@ -74,7 +74,7 @@
 
         // This constant identifies a free subscription.
         // E.g. @"com.example.MyBook.subscription.free"
-        #define FREE_SUBSCRIPTION_PRODUCT_ID @""
+        #define FREE_SUBSCRIPTION_PRODUCT_ID @"<%= settings.appid.value %>.subscriptions.free"
 
         // This constant identifies one or more auto-renewable subscriptions.
         // E.g.:

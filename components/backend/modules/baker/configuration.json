@@ -34,67 +34,93 @@
 	      }
 		},
 
-		"backerColorsetCoverBg" : {
+		"orientation" : {
+	      "label": "Device Orientation",
+	      "type": "header"
+		},
+
+		"orPortrait" : {
+	      "label": "Portrait",
+	      "value": "1",
+	      "type": "checkbox"
+		},
+		"orUpsidedown" : {
+	      "label": "Upside Down",
+	      "value": "1",
+	      "type": "checkbox"
+		},
+		"orLandscapeleft" : {
+	      "label": "Landscape Left",
+	      "value": "1",
+	      "type": "checkbox"
+		},
+		"orLandscaperight" : {
+	      "label": "Landscape Right",
+	      "value": "1",
+	      "type": "checkbox"
+		},
+
+		"bakerColorsetCoverBg" : {
 	      "label": "Cover Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorsetTitleColor" : {
+		"bakerColorsetTitleColor" : {
 	      "label": "Title Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#000000",
 	      "type": "text"
 		},
-		"backerColorsetInfoColor" : {
+		"bakerColorsetInfoColor" : {
 	      "label": "Info Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "text"
 		},
-		"backerColorsetPriceColor" : {
+		"bakerColorsetPriceColor" : {
 	      "label": "Price Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorsetActionButtonBg" : {
+		"bakerColorsetActionButtonBg" : {
 	      "label": "Action Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorsetActionButtonColor" : {
+		"bakerColorsetActionButtonColor" : {
 	      "label": "Action Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorsetArchiveButtonBg" : {
+		"bakerColorsetArchiveButtonBg" : {
 	      "label": "Archive Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorsetArchiveButtonColor" : {
+		"bakerColorsetArchiveButtonColor" : {
 	      "label": "Archive Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "text"
 		},
-		"backerColorsetLoadingLabelColor" : {
+		"bakerColorsetLoadingLabelColor" : {
 	      "label": "Loading Label Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "text"
 		},
-		"backerColorsetLoadingSpinnerColor" : {
+		"bakerColorsetLoadingSpinnerColor" : {
 	      "label": "Loading Spinner Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "text"
 		},
-		"backerColorsetProgressbarTintColor" : {
+		"bakerColorsetProgressbarTintColor" : {
 	      "label": "Progressbar Tint Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",

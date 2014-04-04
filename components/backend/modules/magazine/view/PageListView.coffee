@@ -69,7 +69,7 @@ define [
          revert: true
          axis: "y"
          cursor: "move"
-         stop: _.bind @_sortStop, @
+         stop: @_sortStop.bind(@)
       ).disableSelection()
 
     _sortStop: (event, ui)->
@@ -77,6 +77,7 @@ define [
       $(event.target).find('.number').each (i)->
         elNumber = $(@).text()
         model = that.collection.findWhere number: parseInt elNumber
+        if !model? then return c.l "its broken nr.", elNumber
         model.set "number", i+1
         model.save()
         $(@).text(i+1)
