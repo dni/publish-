@@ -31,17 +31,17 @@
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<% if(settings.orPortrait.value==true) { %><string>UIInterfaceOrientationPortrait</string><% } %>
-		<% if(settings.orUpsidedown.value==true) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
-		<% if(settings.orLandscapeleft.value==true) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
-		<% if(settings.orLandscaperight.value==true) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
+		<% if(settings.orPortrait.value) { %><string>UIInterfaceOrientationPortrait</string><% } %>
+		<% if(settings.orUpsidedown.value) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
+		<% if(settings.orLandscapeleft.value) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
+		<% if(settings.orLandscaperight.value) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
-		<% if(settings.orPortrait.value===true) { %><string>UIInterfaceOrientationPortrait</string><% } %>
-		<% if(settings.orUpsidedown.value===true) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
-		<% if(settings.orLandscapeleft.value===true) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
-		<% if(settings.orLandscaperight.value===true) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
+		<% if(settings.orPortrait.value) { %><string>UIInterfaceOrientationPortrait</string><% } %>
+		<% if(settings.orUpsidedown.value) { %><string>UIInterfaceOrientationPortraitUpsideDown</string><% } %>
+		<% if(settings.orLandscapeleft.value) { %><string>UIInterfaceOrientationLandscapeLeft</string><% } %>
+		<% if(settings.orLandscaperight.value) { %><string>UIInterfaceOrientationLandscapeRight</string><% } %>
 	</array>
 </dict>
 </plist>
