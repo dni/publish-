@@ -10,7 +10,7 @@ Publish your data on all channels!
 * npm install -g bower jake
 * npm install
 * bower install
-* git clone https://github.com/bakerframework/baker.git
+* git clone https://github.com/bakerframework/baker.git baker-master
 * cd bower_components/tinymce && jake
 
 ## Starting the App
