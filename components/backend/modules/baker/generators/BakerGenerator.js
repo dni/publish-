@@ -38,7 +38,7 @@ module.exports.download = function(req, res){
 		            console.log('zip process exited with code ' + code);
 		            res.end();
 		        } else {
-		        	console.log("zip done");
+		        	console.log("download app zip done");
 		            res.end();
 		        }
 		    });
@@ -65,9 +65,10 @@ function prepareDownload(){
 	        } else {
 
 				var dirname = process.cwd()+"/cache/publish-baker";
-				fs.copySync(__dirname+'/baker-master', dirname);
+				fs.copySync(process.cwd()+'/baker-master', dirname);
 
 				startGenIconssets(setting);
+
 				Settings.findOne({name:'General'}).exec(function(error, generalsetting){
 
 					// Constants
@@ -77,13 +78,13 @@ function prepareDownload(){
 					// Ui constants
 					template = fs.readFileSync(__dirname+'/templates/UIConstants.h', 'utf-8');
 					fs.writeFileSync(dirname+'/BakerShelf/UIConstants.h', ejs.render(template, { settings: setting.settings}));
-					EE.emit("ready", "constants");
 
-	console.log(setting.settings);
 
 					// Baker-Info.plist
 					template = fs.readFileSync(__dirname+'/templates/Baker-Info.plist', 'utf-8');
 					fs.writeFileSync(dirname+'/Baker/Baker-Info.plist', ejs.render(template, { settings: setting.settings, domain:generalsetting.settings.domain.value}));
+
+					EE.emit("ready", "constants");
 				});
 				var action = setting.settings.apptype.value;
 				if (action == "standalone") {
@@ -118,7 +119,6 @@ function startGenIconssets(setting){
 				var filename = file.name, targetImageLink, icon, targetDir, size;
 				var image = gm('./public/files/'+ filename);
 				var filetype = filename.split(".").pop();
-
 
 				// obtain the size of an image
 				gm('./public/files/'+ filename).size(function (err, size) {
