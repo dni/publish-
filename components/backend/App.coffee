@@ -60,16 +60,12 @@ define (require)->
           "paste"
       ]
       toolbar1: "insertfile undo redo | table | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code"
+
     App.contentRegion.currentView.$el.find(".colorpicker").minicolors(
       control: $(this).attr('data-control') || 'hue'
       inline: $(this).attr('data-inline') == 'true'
       position: $(this).attr('data-position') || 'top left'
-      change: (hex, opacity)->
-        if !hex  then return
-        if opacity then hex += ', ' + opacity
-        try
-          console.log(hex);
-        catch e then e
+      change: (hex, opacity)-> true
       theme: 'bootstrap'
     );
 
