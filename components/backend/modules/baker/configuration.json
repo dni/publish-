@@ -41,22 +41,22 @@
 
 		"orPortrait" : {
 	      "label": "Portrait",
-	      "value": "1",
+	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orUpsidedown" : {
 	      "label": "Upside Down",
-	      "value": "1",
+	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orLandscapeleft" : {
 	      "label": "Landscape Left",
-	      "value": "1",
+	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orLandscaperight" : {
 	      "label": "Landscape Right",
-	      "value": "1",
+	      "value": "true",
 	      "type": "checkbox"
 		},
 

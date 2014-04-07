@@ -11,8 +11,9 @@ Publish your data on all channels!
 * npm install
 * bower install
 * git clone https://github.com/bakerframework/baker.git baker-master
-* cd bower_components/tinymce && jake
-
+* cd bower_components/tinymce && jake && cd ../..
+* TEMP!! should be fixed with gitgnore >>
+* mkdir cache && mkdir cache/publish-baker && mkdir public/files && mkdir public/books
 ## Starting the App
 * make sure mongod process is running, start it with mongod
 * node app
