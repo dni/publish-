@@ -16,6 +16,7 @@ define (require)->
   Bootstrap = require "bootstrap"
   tinyMCE = require "tinymce"
   tinyMCEjquery = require "jquery.tinymce"
+  minicolor = require "minicolors"
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
@@ -59,6 +60,19 @@ define (require)->
           "paste"
       ]
       toolbar1: "insertfile undo redo | table | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link code"
+    App.contentRegion.currentView.$el.find(".colorpicker").minicolors(
+      control: $(this).attr('data-control') || 'hue'
+      inline: $(this).attr('data-inline') == 'true'
+      position: $(this).attr('data-position') || 'top left'
+      change: (hex, opacity)->
+        if !hex  then return
+        if opacity then hex += ', ' + opacity
+        try
+          console.log(hex);
+        catch e then e
+      theme: 'bootstrap'
+    );
+
 
   App.navItems = new NavItems
 

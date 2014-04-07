@@ -70,61 +70,61 @@
 	      "label": "Title Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#000000",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetInfoColor" : {
 	      "label": "Info Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetPriceColor" : {
 	      "label": "Price Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetActionButtonBg" : {
 	      "label": "Action Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetActionButtonColor" : {
 	      "label": "Action Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetArchiveButtonBg" : {
 	      "label": "Archive Button Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetArchiveButtonColor" : {
 	      "label": "Archive Button Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetLoadingLabelColor" : {
 	      "label": "Loading Label Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetLoadingSpinnerColor" : {
 	      "label": "Loading Spinner Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetProgressbarTintColor" : {
 	      "label": "Progressbar Tint Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
-	      "type": "text"
+	      "type": "color"
 		},
 
 		"download" : {
