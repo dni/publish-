@@ -18,11 +18,14 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       settings = @model.get "settings"
 
       @$el.find(".setting").each ()->
-        if $(@).attr("type") == ("checkbox" or "radio") then val = $(@).is(':checked')
+        type = $(@).attr("type")
+        if type == ("checkbox" or "radio") then val = $(@).is(':checked')
         else val = $(@).val()
         settings[$(@).attr("name")].value = val
 
-
+      @$el.find(".colorpicker").each ()->
+        settings[$(@).attr("name")].value = $(@).val()
+        c.l settings[$(@).attr("name")]
 
       @model.set 'settings', settings
       @model.save()

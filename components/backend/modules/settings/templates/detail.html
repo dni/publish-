@@ -43,7 +43,7 @@
     <% } %>
     <% if (settings[key].type=="color") { %>
         <label><%= settings[key].label %></label>
-        <input type="text" class="form-control colorpicker <%= key %>" value="<%= settings[key].value %>" >
+        <input type="text" class="setting form-control colorpicker <%= key %>" value="<%= settings[key].value %>"  name="<%= key %>" >
     <% } %>
 
 <% } %>
