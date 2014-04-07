@@ -19,7 +19,8 @@ require.config({
 		tpl: 'requirejs-tpl/tpl',
 		cs: 'require-cs/cs',
 		d3: 'd3/d3',
-		gm: 'gm/index'
+		gm: 'gm/index',
+		minicolors: 'jquery-minicolors/jquery.minicolors'
 	},
 	map: {
 	    '*': {
@@ -47,5 +48,6 @@ require.config({
 		'jquery.tinymce':['jquery'],
 		'jquery.form':['jquery'],
 		'bootstrap':['jquery'],
+		'minicolors':['jquery'],
 	}
 });
