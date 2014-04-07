@@ -39,9 +39,12 @@
 
     <% if (settings[key].type=="range") { %>
         <label><%= settings[key].label %></label>
-            <input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
+        <input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
     <% } %>
-
+    <% if (settings[key].type=="color") { %>
+        <label><%= settings[key].label %></label>
+        <input type="text" class="form-control colorpicker <%= key %>" value="<%= settings[key].value %>" >
+    <% } %>
 
 <% } %>
 
