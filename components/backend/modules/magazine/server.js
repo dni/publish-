@@ -146,14 +146,14 @@ module.exports.setup = function(app) {
 };
 
 function initialize(folder, cb) {
-	fs.mkdir("./public/books/" + folder, function() {
-		fs.mkdir("./public/books/" + folder + "/hpub", function() {
-			fs.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx');
-			fs.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css');
-			fs.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js");
-			fs.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images');
+	fs.mkdir("./public/books/" + folder, function(err, log) {
+		fs.mkdir("./public/books/" + folder + "/hpub", function(err) { if(err){throw err;};
+			fs.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx', function(err){if(err){throw err;}});
+			fs.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css', function(err){if(err){throw err;}});
+			fs.copy('./components/magazine/js', "./public/books/" + folder + "/hpub/js", function(err){if(err){throw err;}});
+			fs.copy('./components/magazine/images', './public/books/' + folder + '/hpub/images', function(err){if(err){throw err;}});
 		});
-		fs.mkdir("./public/books/" + folder + "/pdf", function() {});
+		fs.mkdir("./public/books/" + folder + "/pdf", function(err) {if(err){throw err;}});
 		cb();
 	});
 };
