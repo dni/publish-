@@ -4,3 +4,7 @@ baker-master
 
 .project
 .DS_Store
+
+public/books/*
+public/files/*
+cache/publish-baker/*
