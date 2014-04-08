@@ -14,6 +14,7 @@ Publish your data on all channels!
 * cd bower_components/tinymce && jake && cd ../..
 * TEMP!! should be fixed with gitgnore >>
 * mkdir cache && mkdir cache/publish-baker && mkdir public/files && mkdir public/books && mkdir components/magazine/images
+
 ## Starting the App
 * make sure mongod process is running, start it with mongod
 * node app
