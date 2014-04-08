@@ -7,4 +7,4 @@ baker-master
 
 public/books/*
 public/files/*
-cache/*
+cache/publish-baker/*
