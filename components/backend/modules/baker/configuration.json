@@ -64,7 +64,7 @@
 	      "label": "Cover Background Color",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
-	      "type": "text"
+	      "type": "color"
 		},
 		"bakerColorsetTitleColor" : {
 	      "label": "Title Color",
