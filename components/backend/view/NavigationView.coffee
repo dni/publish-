@@ -1,19 +1,17 @@
 define [
   'jquery'
-  'lodash'
-  'backbone'
   'marionette'
   'tpl!../templates/navItem.html'
 ],
-($, _, Backbone, Marionette, Template) ->
+($, Marionette, Template) ->
 
-  class NavigationItemView extends Backbone.Marionette.ItemView
+  class NavigationItemView extends Marionette.ItemView
     template: Template
     tagName: 'li'
     initialize:->
       if @model.get("button") then @$el.addClass "pull-right"
 
-  class NavigationView extends Backbone.Marionette.CollectionView
+  class NavigationView extends Marionette.CollectionView
     el: "#navigation"
     itemView: NavigationItemView
 
