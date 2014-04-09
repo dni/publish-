@@ -8,6 +8,15 @@
     	"namespace": "backend"
     },
 
+    "modules": {
+    	"settings": "SettingsModule",
+    	"article": "ArticleModule",
+      	"magazine": "MagazineModule",
+      	"baker": "BakerModule",
+		"files": "FileModule",
+      	"static": "StaticModule"
+    },
+
     "settings": {
 		"domain" : {
 	      "label": "Domain",
