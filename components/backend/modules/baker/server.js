@@ -71,7 +71,7 @@ module.exports.setup = function(app) {
 				    "info": "The original masterpiece by Sir A. Conan Doyle",
 				    "date": "1887-10-10 10:10:10",
 				    "cover": "http://bakerframework.com/newsstand-books/a-study-in-scarlet.png",
-				    "url": "http://bakerframework.com/newsstand-books/a-study-in-scarlet.hpub",
+				    "url": "http://bakerframework.com/public/books/a-study-in-scarlet.hpub",
 				    "product_id": "com.example.Baker.issues.january2013"
 			 	});
 			});
