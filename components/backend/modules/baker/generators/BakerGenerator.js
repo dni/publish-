@@ -96,15 +96,11 @@ function prepareDownload(){
 							fs.copySync('./public/books/'+file+'/hpub', dirname+'/books/'+file);
 						}
 					}
-
 				}
 
 				EE.emit('ready', 'build');
-
 	        }
-
 	    });
-
 	});
 }
 

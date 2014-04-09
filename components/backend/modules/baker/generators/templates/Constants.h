@@ -39,7 +39,10 @@
     // The following line, together with other settings, enables Newsstand mode.
     // Remove this, remove the NewsstandKit.framework and the Newsstand entries in Baker-Info.plist to disable it.
     // See: https://github.com/Simbul/baker/wiki/Newsstand-vs-Bundled-publications-support-in-Baker-4.0
-    #define BAKER_NEWSSTAND
+    
+    <% if(settings.standalone){ %>
+    	#define BAKER_NEWSSTAND
+    <% } %>
 
     #ifdef BAKER_NEWSSTAND
 
