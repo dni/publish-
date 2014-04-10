@@ -26,6 +26,11 @@ define [
       "click #download": "downloadPrint"
       "click .deleteMagazine": "deleteMagazine"
       "click .publish": "publish"
+      "click .save": "save"
+      "click .cancel": "close"
+
+    save: -> @detailRegion.currentView.save()
+    close: -> @remove()
 
     initialize: (args) ->
       # custom arguments dont get passed automatically
@@ -54,7 +59,7 @@ define [
       # before model is toggled
       if @model.get("published") then @ui.publish.addClass("btn-success").text('Publish') else @ui.publish.removeClass("btn-success").text('Unpublish')
       @model.togglePublish()
-      @model.save()
+      @save()
 
     downloadPrint: ->
        window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
