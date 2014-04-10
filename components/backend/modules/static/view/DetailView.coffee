@@ -23,7 +23,7 @@ define [
       "click .save": "saveStatic"
       "click .cancel": "close"
 
-    close: -> @remove()
+    close: -> @remove(); App.Router.navigate('static/')
 
     addFiles:->
       App.Router.navigate "filebrowser", true

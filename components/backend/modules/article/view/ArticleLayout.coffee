@@ -43,7 +43,7 @@ define [
       "click .cancel": "close"
 
     save: -> @detailRegion.currentView.save()
-    close: -> @remove()
+    close: -> @remove(); App.Router.navigate 'article/'
 
     publish: ->
       if @model.get("privatecode") then @ui.publish.removeClass("btn-success").text('Unpublish') else @ui.publish.addClass("btn-success").text('Publish!')
