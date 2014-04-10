@@ -146,28 +146,31 @@ module.exports.setup = function(app) {
 };
 
 function initialize(folder, cb) {
-	fs.stat("./public/books/" + folder, function(err, stat){
-		if(err){
-			fs.mkdir("./public/books/" + folder, function(err, log) {throw(err);});
-			if(err){throw(err); return false;}
-			else { return dirCheckHpub(folder)}
+	fs.stat("./public/books/" + folder, function(error, stat){
+		if(error){
+			fs.mkdir("./public/books/" + folder, function(err, log) {
+				if(err){throw(err); return false;}
+				else { return dirCheckHpub(folder)}
+			});
 		} else { return dirCheckHpub(folder)}
 	});
 	function dirCheckHpub(folder){
-		fs.stat("./public/books/" + folder + "/hpub", function(err, stat){
-			if(err){
-				fs.mkdir("./public/books/" + folder + "/hpub", function(err, log) {throw(err);});
-				if(err){throw(err); return false;}
-				else { return dirCheckPdf(folder)}
+		fs.stat("./public/books/" + folder + "/hpub", function(error, stat){
+			if(error){
+				fs.mkdir("./public/books/" + folder + "/hpub", function(err, log) {
+					if(err){throw(err); return false;}
+					else { return dirCheckPdf(folder)}
+				});
 			} else { return dirCheckPdf(folder) }
 		});
 	};
 	function dirCheckPdf(folder){
-		fs.stat("./public/books/" + folder + "/pdf", function(err, stat){
-			if(err){
-				fs.mkdir("./public/books/" + folder + "/pdf", function(err, log) {throw(err);});
-				if(err){throw(err); return false;}
-				else { return copyIt()}
+		fs.stat("./public/books/" + folder + "/pdf", function(error, stat){
+			if(error){
+				fs.mkdir("./public/books/" + folder + "/pdf", function(err, log) {
+					if(err){throw(err); return false;}
+					else { return copyIt()}
+				});
 			} else { return copyIt() }
 		});
 	};
