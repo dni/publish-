@@ -19,15 +19,14 @@ define [
       data: 'textarea[name=data]'
 
     events:
-      "blur input": "saveStatic"
-      "blur textarea": "saveStatic"
-      "change .deleteable": "saveStatic"
-      "click .delete": "deleteStatic"
       "click .revert": "revertStatic"
+      "click .save": "saveStatic"
+      "click .cancel": "close"
+
+    close: -> @remove(); App.Router.navigate('static/')
 
     addFiles:->
       App.Router.navigate "filebrowser", true
-
 
     revertStatic: ->
       @model.destroy success: ->

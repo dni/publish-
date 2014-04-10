@@ -7,6 +7,8 @@ var ArticleSchema = new Schema({
   desc: String,
   date: Date,
   privatecode: Boolean,
+  category: String,
+  tags: String,
   files: Object
 });
 

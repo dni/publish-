@@ -48,6 +48,9 @@ define (require)->
   App.listRegion.on "show", ->
     if App.contentRegion.currentView? then App.contentRegion.currentView.close()
 
+  App.contentRegion.on "close", ->
+    clearInterval()
+
   # init tinymce
   App.contentRegion.on "show", ->
     App.contentRegion.currentView.$el.find(".wysiwyg").tinymce
@@ -117,12 +120,6 @@ define (require)->
       # messageModule = require "cs!./modules/messages/MessageModule"
       # userModule = require "cs!./modules/user/UserModule"
       # reportModule = require "cs!./modules/reports/ReportModule"
-
-      # NOT Working :(
-      # for moduleKey, moduleName of App.config.modules
-        # str "cs!./modules/#{moduleKey}/#{moduleName}"
-        # require str
-        #require "cs!./modules/magazine/MagazineModule"
 
 
 

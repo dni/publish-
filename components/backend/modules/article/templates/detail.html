@@ -11,3 +11,22 @@
 	<label>Artikel</label>
 	<textarea class="wysiwyg form-control" rows="9" name="article"><%= desc %></textarea>
 </div>
+
+<div class="form-group">
+	<label>Category</label>
+	<select class="form-control" name="category" value="<%= category %>">
+		<option></option>
+		<%
+		var cats =_.find(App.Settings.models, function(model){if(model.attributes.name=="Articles"){return model;}});
+		cats = cats.attributes.settings.categories.value.split(",");
+		_.each(cats, function(cat ,i){
+		%>
+			<option><%= cat.replace(" ", "") %></option>
+		<% }); %>
+	</select>
+</div>
+
+<div class="form-group">
+	<label>Tags</label>
+	<input class="form-control" type="text" name="tags" value="<%= tags %>" />
+</div>
