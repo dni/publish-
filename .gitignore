@@ -4,7 +4,3 @@ baker-master
 
 .project
 .DS_Store
-
-
-public/files/*
-cache/publish-baker/*
