@@ -17,7 +17,7 @@ define [
       "click .cancel": "close"
 
     save: -> @detailRegion.currentView.save()
-    close: -> @remove()
+    close: -> @remove(); App.Router.navigate('settings/')
 
     regions:
       'detailRegion': '#setting-details'
