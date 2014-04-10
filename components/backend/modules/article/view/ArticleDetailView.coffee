@@ -9,19 +9,22 @@ define [
 
     template: Template
 
-    events:
-      "blur input": "save"
-
     ui:
       title: '[name=title]'
       author: '[name=author]'
       article: '[name=article]'
+      category: '[name=category]'
+      tags: '[name=tags]'
+
 
     save: ->
+      c.l "article save"
       @model.set
         title: @ui.title.val()
         author: @ui.author.val()
         desc: @ui.article.val()
+        category: @ui.category.val()
+        tags: @ui.tags.val()
 
       if @model.isNew()
         App.Articles.create @model,
