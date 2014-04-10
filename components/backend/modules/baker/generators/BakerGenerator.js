@@ -50,7 +50,6 @@ module.exports.download = function(req, res){
 };
 
 
-
 function prepareDownload(){
 	Settings.findOne({name:'Baker'}).exec(function(error, setting){
 
@@ -86,6 +85,7 @@ function prepareDownload(){
 
 					EE.emit("ready", "constants");
 				});
+
 				var action = setting.settings.apptype.value;
 				if (action == "standalone") {
 					var files = fs.readdirSync('./public/books');

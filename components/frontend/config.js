@@ -4,7 +4,7 @@ require.config({
 	paths: {
 		jquery: "jquery/dist/jquery",
 		fancybox: "fancybox/source/jquery.fancybox",
-		lodash: "lodash-amd/main",
+		lodash: "underscore-amd/underscore",
 		backbone: "backbone-amd/backbone",
 		marionette: "marionette/lib/core/amd/backbone.marionette",
 		wreqr: "backbone.babysitter/lib/amd/backbone.babysitter",

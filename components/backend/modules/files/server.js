@@ -27,7 +27,7 @@ module.exports.setup = function(app) {
 
 
 			if (fs.existsSync(targetLink)===true) {
-				name = 'copy_'+Date.now()+'_'+srcFile.name;
+				name = 'copy_'+Date.now()+'_'+name;
 				targetLink = './public/files/' + name;
 			}
 
@@ -35,6 +35,8 @@ module.exports.setup = function(app) {
 			fileModel.type = srcFile.type;
 			fileModel.link = name;
 			fs.renameSync(srcFile.path, targetLink);
+			// fs.unlinkSync(srcFile.path);
+
 			fileModel.save();
 
 		}
@@ -140,7 +142,7 @@ module.exports.setup = function(app) {
 				}
 
 				fs.renameSync(link, targetLink);
-				a.link = './static/files/' + req.body.name;
+				a.link = req.body.name;
 
 			}
 
