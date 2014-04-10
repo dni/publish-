@@ -13,7 +13,7 @@ Publish your data on all channels!
 * git clone https://github.com/bakerframework/baker.git baker-master
 * cd bower_components/tinymce && jake && cd ../..
 * TEMP!! should be fixed with gitgnore >>
-* mkdir public/files && mkdir public/books
+* mkdir public/books
 
 ## Starting the App
 * make sure mongod process is running, start it with mongod
