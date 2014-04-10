@@ -2,7 +2,7 @@
 	<form class="form-inline">
 
 	    <% var articles = App.Articles.toJSON() %>
-	    <% var settings = App.Settings.where({name: "MagazineModule"})[0].getValue("layouts").split(",") %>
+	    <% var settings = App.Settings.where({name: "Magazines"})[0].getValue("layouts").split(",") %>
 		<span class="number badge"><%= number %></span>
 		<select class="article form-control">
 			<% for(var i = 0; i < articles.length; i++) { %>
