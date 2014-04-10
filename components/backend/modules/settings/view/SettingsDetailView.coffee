@@ -11,9 +11,6 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       save: ".save"
       cancel: ".cancel"
 
-    events:
-      "change .setting": "save"
-
     save: ->
       settings = @model.get "settings"
 
@@ -22,10 +19,6 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
         if type == ("checkbox" or "radio") then val = $(@).is(':checked')
         else val = $(@).val()
         settings[$(@).attr("name")].value = val
-
-      @$el.find(".colorpicker").each ()->
-        settings[$(@).attr("name")].value = $(@).val()
-        c.l settings[$(@).attr("name")]
 
       @model.set 'settings', settings
       @model.save()
