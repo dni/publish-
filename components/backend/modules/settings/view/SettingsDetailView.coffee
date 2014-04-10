@@ -11,9 +11,6 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
       save: ".save"
       cancel: ".cancel"
 
-    events:
-      "change .setting": "save"
-
     save: ->
       settings = @model.get "settings"
 
@@ -23,6 +20,5 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
         else val = $(@).val()
         settings[$(@).attr("name")].value = val
 
-
-      @model.set 'settings', settings
-      @model.save()
+        @model.set 'settings', settings
+        @model.save()

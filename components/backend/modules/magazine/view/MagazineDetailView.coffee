@@ -10,10 +10,6 @@ define [
 
     template: Template
 
-    events:
-      "blur input": "save"
-      "change select": "save"
-
     ui:
       title: '[name=title]'
       author: '[name=author]'
