@@ -12,6 +12,13 @@ define [
 
     template: Template
 
+    events:
+      "click .save": "save"
+      "click .cancel": "close"
+
+    save: -> @detailRegion.currentView.save()
+    close: -> @remove()
+
     regions:
       'detailRegion': '#setting-details'
       'fileRegion': '.files'
