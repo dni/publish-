@@ -19,7 +19,6 @@ module.exports.generate = function(magazine) {
 			magazinefiles[file.key] = file.name;
 		});
 
-
 		// generage INDEX
 		Page.find({magazine: magazine._id}).exec(function(err, pages){
 			var articleIds = [];
@@ -112,7 +111,7 @@ module.exports.generate = function(magazine) {
 				if (!page.layout) { return; }
 				template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
 				db2.Article.find({_id: page.article}).execFind(function(err, article){
-					if (err) { console.log(err); }
+					if (err) { return console.log(err, "no article found in pages !?"); }
 					article = article.pop();
 
 					dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
@@ -124,14 +123,12 @@ module.exports.generate = function(magazine) {
 							articlefiles[file.key] = file.name;
 						});
 
-
 						var html = ejs.render(template, {
 							magazine: magazine,
 							page: page,
 							article: article,
 							files: articlefiles
 						});
-
 
 						var filename = "Page" + page.number + ".html";
 						fs.writeFileSync("./public/books/" + magazine.title + "/hpub/" + filename, html);

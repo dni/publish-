@@ -3,7 +3,6 @@ bower_components
 baker-master
 
 public/books/*
-public/files/*
 
 .project
 .DS_Store
