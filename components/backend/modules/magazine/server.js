@@ -17,7 +17,6 @@ module.exports.setup = function(app) {
 	});
 
 	app.post('/magazines', function(req, res){
-
 		var a = new db.Magazine();
 		a.title = req.body.title;
 		a.editorial = req.body.editorial;
@@ -28,34 +27,23 @@ module.exports.setup = function(app) {
 		a.orientation = req.body.orientation;
 		a.date = new Date();
 
-		a.save(function () {
-			initialize(req.body.title, function(){
-				HpubGenerator.generate(a);
-			});
-			res.send(a);
-		});
+		// a.save(function () {
+			// initialize(req.body.title, function(){
+				// HpubGenerator.generate(a);
+			// });
+			// res.send(a);
+		// });
 
 	});
 
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
 
-			if (a.title != req.body.title) {
-				var child_process = require('child_process').spawn;
-			    var spawn = child_process('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'});
-			    spawn.on('exit', function (code) {
-			        if(code !== 0) {
-			            res.statusCode = 500;
-			            console.log('remove files (rm) process exited with code ' + code);
-			        } else {
-			        	console.log("remove files (rm)  done");
-			        }
-			    });
+			// db.Magazine.find({'title': req.body.title}, function(err, data){
+				// if(err){null;}
+				// else { req.body.title += "__name-exists"; }
+			// });
 
-			}
-
-
-			a.title = req.body.title;
 			a.editorial = req.body.editorial;
 			a.impressum = req.body.impressum;
 			a.cover = req.body.cover;
@@ -66,16 +54,38 @@ module.exports.setup = function(app) {
 			a.papersize = req.body.papersize;
 			a.orientation = req.body.orientation;
 			a.files = req.body.files;
-
 			a.date = new Date();
 
-			a.save(function () {
-				initialize(req.body.title, function(){
-					HpubGenerator.generate(a);
-				});
-
-				res.send(a);
+			fs.exists("./public/books", function(exist){
+				if (exist) {
+					var child_process = require('child_process').spawn;
+					console.log(process.cwd()+'/public/books/');
+				    var spawn = child_process('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'});
+				    spawn.on('exit', function (code) {
+				        if(code !== 0) {
+				            res.statusCode = 500;
+				            console.log('remove files (rm) process exited with code ' + code);
+				        } else {
+				        	console.log("remove files (rm)  done");
+				        	saveIt();
+				        }
+				    });
+				} else {
+					console.log("./public/books doesnt exist, i create it for you");
+					fs.mkdir("./public/books/", function(err, log) {if(err){throw(err); return false;}
+						else { saveIt(); }
+					});
+				}
 			});
+
+
+			function saveIt(){
+				a.title = req.body.title;
+				a.save(function () {
+					initialize(req.body.title, function(){ HpubGenerator.generate(a); });
+					res.send(a);
+				});
+			};
 
 	  	});
 	});
@@ -84,12 +94,14 @@ module.exports.setup = function(app) {
 	  	db.Magazine.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
-
-				var exec = require('child_process').exec,child;
-				child = exec('rm -rf '+ a.title,function(err,out) {
-				  // console.log(out); err && console.log(err);
+		      	var child_process = require('child_process').spawn;
+				var spawn = child_process('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'});
+			    spawn.on('exit', function (code) {
+			        if(code !== 0) {
+			            res.statusCode = 500;
+			            console.log('remove book/yourmagazine (rm) process exited with code ' + code);
+			        } else {return res.send('deleted');}
 				});
-		        return res.send('deleted');
 		      } else {
 		        console.log(err);
 		      }
@@ -146,34 +158,29 @@ module.exports.setup = function(app) {
 };
 
 function initialize(folder, cb) {
-	fs.stat("./public/books/" + folder, function(error, stat){
-		if(error){
+	fs.exists("./public/books/" + folder, function(exist){
+		if(!exist){
 			fs.mkdir("./public/books/" + folder, function(err, log) {
 				if(err){throw(err); return false;}
 				else { return dirCheckHpub(folder)}
 			});
 		} else { return dirCheckHpub(folder)}
 	});
+
 	function dirCheckHpub(folder){
-		fs.stat("./public/books/" + folder + "/hpub", function(error, stat){
-			if(error){
-				fs.mkdir("./public/books/" + folder + "/hpub", function(err, log) {
-					if(err){throw(err); return false;}
-					else { return dirCheckPdf(folder)}
-				});
-			} else { return dirCheckPdf(folder) }
+		fs.mkdir("./public/books/" + folder + "/hpub", function(err, log) {
+			if(err){throw(err); return false;}
+			else { return dirCheckPdf(folder)}
 		});
 	};
+
 	function dirCheckPdf(folder){
-		fs.stat("./public/books/" + folder + "/pdf", function(error, stat){
-			if(error){
-				fs.mkdir("./public/books/" + folder + "/pdf", function(err, log) {
-					if(err){throw(err); return false;}
-					else { return copyIt()}
-				});
-			} else { return copyIt() }
+		fs.mkdir("./public/books/" + folder + "/pdf", function(err, log) {
+			if(err){throw(err); return false;}
+			else { return copyIt()}
 		});
 	};
+
 	function copyIt(){
 		fs.copy('./components/magazine/gfx', './public/books/' + folder + '/hpub/gfx', function(err){if(err){throw err;}});
 		fs.copy('./components/magazine/css', './public/books/' + folder + '/hpub/css', function(err){if(err){throw err;}});
