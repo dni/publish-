@@ -2,6 +2,7 @@ node_modules
 bower_components
 baker-master
 
+public/files/*
 
 .project
 .DS_Store
