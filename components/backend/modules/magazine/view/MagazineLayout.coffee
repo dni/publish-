@@ -21,6 +21,7 @@ define [
 
     ui:
       publish: ".publish"
+      title: "[name=title]"
 
     events:
       "click #download": "downloadPrint"
@@ -29,7 +30,11 @@ define [
       "click .save": "save"
       "click .cancel": "close"
 
-    save: -> @detailRegion.currentView.save()
+    save: ->
+      title = $(@el).find("[name=title]")
+      $("#list a").each (i)-> if $(@).html()==title.val() then title.val(title.val()+"_DUPLICATE")
+      @detailRegion.currentView.save()
+
     close: -> @remove(); App.Router.navigate 'magazines/'
 
     initialize: (args) ->
