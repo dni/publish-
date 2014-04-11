@@ -1,8 +1,0 @@
-node_modules
-bower_components
-baker-master
-
-public/books/*
-
-.project
-.DS_Store
