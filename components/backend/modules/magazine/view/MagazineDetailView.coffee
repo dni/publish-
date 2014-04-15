@@ -18,7 +18,6 @@ define [
       papersize: '[name=papersize]'
       orientation: '[name=orientation]'
 
-
     save: ->
       @model.set
         title: @ui.title.val()
@@ -32,6 +31,7 @@ define [
         App.Magazines.create @model,
           wait: true
           success: (res) ->
+            c.l "success save magazine", res
             App.Router.navigate 'magazine/'+res.attributes._id, false
       else
         @model.save
