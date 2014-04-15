@@ -24,8 +24,6 @@ define [
         category: @ui.category.val()
         tags: @ui.tags.val()
 
-      c.l @model.get "category"
-
       if @model.isNew()
         App.Articles.create @model,
           wait: true

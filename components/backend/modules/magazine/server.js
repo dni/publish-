@@ -27,22 +27,17 @@ module.exports.setup = function(app) {
 		a.orientation = req.body.orientation;
 		a.date = new Date();
 
-		// a.save(function () {
-			// initialize(req.body.title, function(){
-				// HpubGenerator.generate(a);
-			// });
-			// res.send(a);
-		// });
+		a.save(function () {
+			initialize(req.body.title, function(){
+				HpubGenerator.generate(a);
+			});
+			res.send(a);
+		});
 
 	});
 
 	app.put('/magazines/:id', function(req, res){
 		db.Magazine.findById( req.params.id, function(e, a) {
-
-			// db.Magazine.find({'title': req.body.title}, function(err, data){
-				// if(err){null;}
-				// else { req.body.title += "__name-exists"; }
-			// });
 
 			a.editorial = req.body.editorial;
 			a.impressum = req.body.impressum;
@@ -78,7 +73,6 @@ module.exports.setup = function(app) {
 				}
 			});
 
-
 			function saveIt(){
 				a.title = req.body.title;
 				a.save(function () {
@@ -102,13 +96,10 @@ module.exports.setup = function(app) {
 			            console.log('remove book/yourmagazine (rm) process exited with code ' + code);
 			        } else {return res.send('deleted');}
 				});
-		      } else {
-		        console.log(err);
-		      }
+		      } else { console.log(err); }
 		    });
 	  	});
 	});
-
 
 	// API Pages
 	app.get('/pages', function(req, res){
@@ -153,8 +144,6 @@ module.exports.setup = function(app) {
 		    });
 	  	});
 	});
-
-
 };
 
 function initialize(folder, cb) {

@@ -7,18 +7,14 @@ define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _,
     initialize: ->
       # @model.bind 'change', @render, @
 
-    ui:
-      save: ".save"
-      cancel: ".cancel"
-
     save: ->
       settings = @model.get "settings"
 
       @$el.find(".setting").each ()->
         type = $(@).attr("type")
-        if type == "checkbox" or type == "radio" then val = $(@).is(':checked'); c.l $(@).attr("name")
+        if type=="checkbox" or type=="radio" then val = $(@).is(':checked')
         else val = $(@).val()
         settings[$(@).attr("name")].value = val
 
-        @model.set 'settings', settings
-        @model.save()
+      @model.set 'settings', settings
+      @model.save()
