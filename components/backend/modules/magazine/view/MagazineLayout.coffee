@@ -33,11 +33,10 @@ define [
     save: ->
       title = $(@el).find("[name=title]")
       $("#list a").each (i)->
-        hrefItem = $("#list a").prop("href").split("/").pop()
-        locDetail = document.location.hash.split("/").pop()
-        c.l href, loc
+        hrefItem = $(@).prop("href").split("/").pop()
+        locDetail = Backbone.history.fragment.split("/").pop()#document.location.hash.split("/").pop()
         if $(@).html()==title.val() && hrefItem!=locDetail
-          title.val(title.val()+"--no_double_names_allowed")
+          title.val(title.val()+"-no_double_names_allowed")
       @detailRegion.currentView.save()
 
     close: ->
