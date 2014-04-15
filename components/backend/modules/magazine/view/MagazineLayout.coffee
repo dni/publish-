@@ -32,10 +32,17 @@ define [
 
     save: ->
       title = $(@el).find("[name=title]")
-      $("#list a").each (i)-> if $(@).html()==title.val() then title.val(title.val()+"_DUPLICATE")
+      $("#list a").each (i)->
+        hrefItem = $("#list a").prop("href").split("/").pop()
+        locDetail = document.location.hash.split("/").pop()
+        c.l href, loc
+        if $(@).html()==title.val() && hrefItem!=locDetail
+          title.val(title.val()+"--no_double_names_allowed")
       @detailRegion.currentView.save()
 
-    close: -> @remove(); App.Router.navigate 'magazines/'
+    close: ->
+      @remove()
+      App.Router.navigate 'magazines/'
 
     initialize: (args) ->
       # custom arguments dont get passed automatically
