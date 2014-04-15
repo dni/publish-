@@ -66,7 +66,7 @@ module.exports.setup = function(app) {
 				        }
 				    });
 				} else {
-					console.log("./public/books doesnt exist, i create it for you");
+					console.log("./public/books doesnt exist, i created it for you");
 					fs.mkdir("./public/books/", function(err, log) {if(err){throw(err); return false;}
 						else { saveIt(); }
 					});

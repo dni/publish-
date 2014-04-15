@@ -111,7 +111,7 @@ module.exports.generate = function(magazine) {
 				if (!page.layout) { return; }
 				template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
 				db2.Article.find({_id: page.article}).execFind(function(err, article){
-					if (err) { return console.log(err, "no article found in pages !?"); }
+					if (err) { return console.log(err, "no article found in pages with id", page.article); }
 					article = article.pop();
 
 					dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){

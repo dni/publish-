@@ -14,7 +14,7 @@
 
 <div class="form-group">
 	<label>Category</label>
-	<select class="form-control" name="category" value="<%= category %>">
+	<select class="form-control" name="category" value=" <%= category %>">
 		<option></option>
 		<%
 		var cats =_.find(App.Settings.models, function(model){if(model.attributes.name=="Articles"){return model;}});
