@@ -17,6 +17,8 @@ module.exports.setup = function(app) {
 		a.author = req.body.author;
 		a.images = req.body.images;
 		a.privatecode = req.body.privatecode;
+		a.category = req.body.category;
+		a.tags = req.body.tags;
 		a.date = new Date();
 
 		a.save(function () {
@@ -33,6 +35,8 @@ module.exports.setup = function(app) {
 			a.author = req.body.author;
 			a.images = req.body.images;
 			a.privatecode = req.body.privatecode;
+			a.category = req.body.category;
+			a.tags = req.body.tags;
 			a.date = new Date();
 			a.save(function () {
 				res.send(a);
