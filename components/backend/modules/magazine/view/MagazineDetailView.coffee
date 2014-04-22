@@ -18,8 +18,16 @@ define [
       papersize: '[name=papersize]'
       orientation: '[name=orientation]'
 
+    events:
+      "change [name=title]": 'save'
 
     save: ->
+
+      # check duplicate
+      if @model.isNew() then check = 0 else check = 1
+      if (App.Magazines.where title:@ui.title.val()).length > check then @ui.title.val @ui.title.val() + '_kopie'
+
+      # set model
       @model.set
         title: @ui.title.val()
         author: @ui.author.val()
