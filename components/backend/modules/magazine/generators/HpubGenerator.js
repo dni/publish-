@@ -106,20 +106,21 @@ module.exports.generate = function(magazine) {
 		// CHAPTERS
 		Page.find({magazine: magazine._id}).exec(function(err, pages){
 
-
 			_.each(pages, function(page){
 				if (!page.layout) { return; }
+
 				template = fs.readFileSync('./components/magazine/pages/'+(page.layout).trim()+'.html', 'utf8');
-				db2.Article.find({_id: page.article}).execFind(function(err, article){
+				db2.Article.findOne({_id: page.article}).execFind(function(err, article){
+
+					// shouldnt happen again was bug in save page, without article value
 					if (err) { return console.log(err, "no article found in pages !?"); }
-					article = article.pop();
 
 					dbFile.File.find({ 'relation': 'article:'+article._id}).execFind(function(err, files){
 
 						var articlefiles = {};
 
 						_.each(files, function(file){
-							fs.copy(process.cwd() + '/public/files/'+file.name, process.cwd()+"/public/books/" + magazine.title + "/hpub/images/" + file.name );
+							fs.copySync(process.cwd() + '/public/files/'+file.name, process.cwd()+"/public/books/" + magazine.title + "/hpub/images/" + file.name );
 							articlefiles[file.key] = file.name;
 						});
 

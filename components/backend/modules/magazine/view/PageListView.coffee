@@ -21,6 +21,10 @@ define [
       "click .remove": "deletePage"
       "change select": "updatePage"
 
+    #save page onrender for initial article + layout
+    initialize:->
+      @on 'render', @updatePage
+
     updatePage: ->
       @model.set
         "number": @ui.number.text()
