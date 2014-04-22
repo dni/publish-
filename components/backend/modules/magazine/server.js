@@ -29,7 +29,11 @@ module.exports.setup = function(app) {
 		a.date = new Date();
 
 		a.save(function () {
+<<<<<<< HEAD
 			createMagazineFiles(req.body.title, function(){
+=======
+			initialize(req.body.title, function(){
+>>>>>>> FETCH_HEAD
 				HpubGenerator.generate(a);
 			});
 			res.send(a);
@@ -48,6 +52,7 @@ module.exports.setup = function(app) {
 		        if(code !== 0) {
 					res.send(a);
 		            console.log('remove Magazine '+ a.title +' exited with code ' + code);
+
 		        } else {
 		        	console.log("removed Magazine Files: " + req.body.title);
 
@@ -87,13 +92,10 @@ module.exports.setup = function(app) {
 			            console.log('remove book/yourmagazine (rm) process exited with code ' + code);
 			        } else {return res.send('deleted');}
 				});
-		      } else {
-		        console.log(err);
-		      }
+		      } else { console.log(err); }
 		    });
 	  	});
 	});
-
 
 	// API Pages
 	app.get('/pages', function(req, res){
@@ -138,8 +140,6 @@ module.exports.setup = function(app) {
 		    });
 	  	});
 	});
-
-
 };
 
 

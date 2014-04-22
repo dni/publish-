@@ -33,7 +33,9 @@ define [
     save: ->
       @detailRegion.currentView.save()
 
-    close: -> @remove(); App.Router.navigate 'magazines/'
+    close: ->
+      @remove()
+      App.Router.navigate 'magazines/'
 
     initialize: (args) ->
       # custom arguments dont get passed automatically
