@@ -28,14 +28,14 @@ define [
       "click .deleteMagazine": "deleteMagazine"
       "click .publish": "publish"
       "click .save": "save"
-      "click .cancel": "close"
+      "click .cancel": "cancel"
 
     save: ->
       @detailRegion.currentView.save()
 
-    close: ->
-      @remove()
-      App.Router.navigate 'magazines/'
+    cancel: ->
+      Vent.trigger 'app:closeRegion', 'contentRegion'
+      App.Router.navigate 'magazines'
 
     initialize: (args) ->
       # custom arguments dont get passed automatically

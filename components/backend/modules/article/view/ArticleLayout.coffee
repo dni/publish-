@@ -40,10 +40,13 @@ define [
       "click .delete": "deleteArticle"
       'click #publish': "publish"
       "click .save": "save"
-      "click .cancel": "close"
+      "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()
-    close: -> @remove(); App.Router.navigate 'article/'
+
+    cancel: ->
+      Vent.trigger 'app:closeRegion', 'contentRegion'
+      App.Router.navigate 'articles'
 
     publish: ->
       if @model.get("privatecode") then @ui.publish.removeClass("btn-success").text('Unpublish') else @ui.publish.addClass("btn-success").text('Publish!')
