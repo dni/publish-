@@ -25,6 +25,7 @@ define [
 
       # check duplicate
       if @model.isNew() then check = 0 else check = 1
+      c.l (App.Magazines.where title:@ui.title.val()).length
       if (App.Magazines.where title:@ui.title.val()).length > check then @ui.title.val @ui.title.val() + '_kopie'
 
       # set model

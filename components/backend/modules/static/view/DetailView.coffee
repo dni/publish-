@@ -21,9 +21,11 @@ define [
     events:
       "click .revert": "revertStatic"
       "click .save": "saveStatic"
-      "click .cancel": "close"
+      "click .cancel": "cancel"
 
-    close: -> @remove(); App.Router.navigate('static/')
+    cancel: ->
+      Vent.trigger 'app:closeRegion', 'contentRegion'
+      App.Router.navigate 'articles'
 
     addFiles:->
       App.Router.navigate "filebrowser", true

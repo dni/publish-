@@ -29,11 +29,7 @@ module.exports.setup = function(app) {
 		a.date = new Date();
 
 		a.save(function () {
-<<<<<<< HEAD
 			createMagazineFiles(req.body.title, function(){
-=======
-			initialize(req.body.title, function(){
->>>>>>> FETCH_HEAD
 				HpubGenerator.generate(a);
 			});
 			res.send(a);

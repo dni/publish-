@@ -14,10 +14,12 @@ define [
 
     events:
       "click .save": "save"
-      "click .cancel": "close"
+      "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()
-    close: -> @remove(); App.Router.navigate('settings/')
+    cancel: ->
+      Vent.trigger 'app:closeRegion', 'contentRegion'
+      App.Router.navigate 'settings'
 
     regions:
       'detailRegion': '#setting-details'
