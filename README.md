@@ -5,10 +5,11 @@ Publish your data on all channels!
 * apt-get npm phantomjs git mongo imagemagick graphicsmagick zip (or use Homebrew on macosx)
 
 ## Installation
+* npm install -g bower jake
 * git clone https://github.com/dni/publish-.git
 * cd publish-
-* node install
+* node install.js
 
 ## Starting the App
 * make sure mongod process is running, start it with mongod
-* node app
+* node app.js
