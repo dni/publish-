@@ -17,6 +17,8 @@ define (require)->
   tinyMCE = require "tinymce"
   tinyMCEjquery = require "jquery.tinymce"
   minicolor = require "minicolors"
+  # language = require "i18n!./nls/language.js"
+
 
   isMobile = ()->
     userAgent = navigator.userAgent or navigator.vendor or window.opera
