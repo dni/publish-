@@ -1,32 +1,37 @@
 
 <div class="form-group">
-    <label>Titel</label>
+    <label><%= t.title %></label>
     <input type="text" name="title" class="form-control" value="<%= title %>" />
 </div>
 <div class="form-group">
-	<label>Autor</label>
+	<label><%= t.author %></label>
 	<input class="form-control" type="text" name="author" value="<%= author %>" />
 </div>
 <div class="form-group">
-	<label>Artikel</label>
+	<label><%= t.article %></label>
 	<textarea class="wysiwyg form-control" rows="9" name="article"><%= desc %></textarea>
 </div>
 
 <div class="form-group">
-	<label>Category</label>
-	<select class="form-control" name="category" value="<%= category %>">
+	<label><%= t.category %></label>
+	<select class="form-control" name="category">
 		<option></option>
 		<%
 		var cats =_.find(App.Settings.models, function(model){if(model.attributes.name=="Articles"){return model;}});
 		cats = cats.attributes.settings.categories.value.split(",");
 		_.each(cats, function(cat ,i){
+			var cat = cat.replace(" ", "");
 		%>
-			<option><%= cat.replace(" ", "") %></option>
+			<% if (category == cat) { %>
+				<option selected="selected" value="<%= cat %>"><%= cat %></option>
+			<%} else { %>
+				<option value="<%= cat %>"><%= cat %></option>
+			<%}%>
 		<% }); %>
 	</select>
 </div>
 
 <div class="form-group">
-	<label>Tags</label>
+	<label><%= t.tags %></label>
 	<input class="form-control" type="text" name="tags" value="<%= tags %>" />
 </div>

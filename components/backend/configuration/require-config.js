@@ -41,6 +41,10 @@ require.config({
 	  	location: 'coffee-script',
 	    name: 'coffee-script',
 	    main: 'index'
+	  },{
+	    name: 'i18n',
+	  	location: 'requirejs-i18n',
+	    main: 'i18n'
 	  }
     ],
 	shim: {
