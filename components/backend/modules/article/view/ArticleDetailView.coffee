@@ -1,13 +1,15 @@
 define [
-  'jquery',
-  'lodash',
-  'backbone',
-  'tpl!../templates/detail.html',
-], ($, _, Backbone, Template) ->
+  'jquery'
+  'lodash'
+  'backbone'
+  'tpl!../templates/detail.html'
+  'i18n!../nls/language.js'
+], ($, _, Backbone, Template, i18n) ->
 
   class ArticleDetailView extends Backbone.Marionette.ItemView
 
     template: Template
+    templateHelpers: t: i18n
 
     ui:
       title: '[name=title]'

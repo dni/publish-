@@ -10,15 +10,14 @@ var fs = require('fs-extra'),
 module.exports.download = function(req, res){
 
 	// when every task is ready, send zip
+	EE.removeAllListeners('ready');
 	var tasks = ['icon', 'build', 'constants'];
-	EE.on("ready", function(task){
-
+	EE.on("ready", function(task) {
 		tasks.splice(tasks.indexOf(task), 1);
 		if (!tasks.length) {
 			var spawn = require('child_process').spawn;
 		    // Options -r recursive -j ignore directory info - redirect to stdout
 		    var zip = spawn('zip', ['-r', '-', 'publish-baker'], {cwd:'./cache'});
-
 		    res.contentType('zip');
 
 		    // Keep writing stdout to res
@@ -32,9 +31,9 @@ module.exports.download = function(req, res){
 		    });
 
 		    // End the response on zip exit
-		    zip.on('exit', function (code) {
+		    zip.on('close', function (code) {
 		        if(code !== 0) {
-		            res.statusCode = 500;
+		            // res.statusCode = 500;
 		            console.log('zip process exited with code ' + code);
 		            res.end();
 		        } else {
@@ -59,7 +58,7 @@ function prepareDownload(){
 
 	    spawn.on('exit', function (code) {
 	        if(code !== 0) {
-	            res.statusCode = 500;
+	            // res.statusCode = 500;
 	            console.log('remove cache/publish-baker (rm) process exited with code ' + code);
 	        } else {
 
@@ -93,6 +92,7 @@ function prepareDownload(){
 						if(files.hasOwnProperty(key)){
 							var file = files[key];
 							if(file === '.DS_Store') continue;
+							if(file === '.gitignore') continue;
 							fs.copySync('./public/books/'+file+'/hpub', dirname+'/books/'+file);
 						}
 					}
@@ -108,6 +108,7 @@ function prepareDownload(){
 function startGenIconssets(setting){
 
 	var formats = ["icon", "newsstand", "shelf", "launch"];
+	var sizeList = getSizeList();
 
 	function createIcons(format) {
 		Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
@@ -151,7 +152,8 @@ function startGenIconssets(setting){
 							else { targetDir += "newsstand-app-icon.imageset";}
 						}
 
-						targetImageLink = targetDir +"/"+ icon.n +"."+ filetype;
+						targetImageLink = targetDir +"/"+ icon.n +".png";
+
 
 						console.log(format, icon, icon.n +"."+ filetype);
 
@@ -195,48 +197,49 @@ function startGenIconssets(setting){
 
 	createIcons(formats.pop());
 }
-
-var sizeList = {
-	launch : [
-		// launch images
-		{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
-		{ n: "iPad Landscape iOS6 no status bar@2x", w: 2048, h: 1496},
-		{ n: "iPad Landscape iOS7", w: 1024, h: 768},
-		{ n: "iPad Landscape iOS7@2x", w: 2048, h: 1536},
-		{ n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004},
-		{ n: "iPad Portrait iOS6 no status bar@2x", w: 1536, h: 2008},
-		{ n: "iPad Portrait iOS7", w: 768, h: 1024},
-		{ n: "iPad Portrait iOS7@2x", w: 1536, h: 2048},
-		{ n: "iPhone Portrait iOS7 R4", w: 640, h: 1136},
-		{ n: "iPhone Portrait iOS7@2x", w: 640, h: 960}
-	],
-	icon : [
-		// app iconset
-		{ n: "iPad App iOS6", w: 72, h: 72},
-		{ n: "iPad App iOS6@2x", w: 144, h: 144},
-		{ n: "iPad App iOS7", w: 76, h: 76},
-		{ n: "iPad App iOS7@2x", w: 152, h: 152},
-		{ n: "iPhone App iOS6", w: 57, h: 57},
-		{ n: "iPhone App iOS6@2x", w: 114, h: 114},
-		{ n: "iPhone App iOS7@2x", w: 120, h: 120}
-	],
-	newsstand : [
-		// Newsstand icons
-		{ n: "newsstand-app-icon", w: 112, h: 126},
-		{ n: "newsstand-app-icon@2x", w: 224, h: 252},
-		{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}
-	],
-	shelf: [
-		// Shelf Bg
-		{ n: "shelf-bg-landscape-568h", w: 1136, h: 536},
-		{ n: "shelf-bg-landscape@2x~ipad", w: 2048, h: 1407},
-		{ n: "shelf-bg-landscape@2x~iphone", w: 960, h: 536},
-		{ n: "shelf-bg-landscape~ipad", w: 1024, h: 704},
-		{ n: "shelf-bg-portrait-568h", w: 640, h: 1008},
-		{ n: "shelf-bg-portrait@2x~ipad", w: 1536, h: 1920},
-		{ n: "shelf-bg-portrait@2x~iphone", w: 640, h: 832},
-		{ n: "shelf-bg-portrait~ipad", w: 768, h: 960},
-		{ n: "shelf-bg-portrait~iphone", w: 320, h: 416}
-	]
-};
+function getSizeList() {
+	return {
+		launch : [
+			// launch images
+			{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
+			{ n: "iPad Landscape iOS6 no status bar@2x", w: 2048, h: 1496},
+			{ n: "iPad Landscape iOS7", w: 1024, h: 768},
+			{ n: "iPad Landscape iOS7@2x", w: 2048, h: 1536},
+			{ n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004},
+			{ n: "iPad Portrait iOS6 no status bar@2x", w: 1536, h: 2008},
+			{ n: "iPad Portrait iOS7", w: 768, h: 1024},
+			{ n: "iPad Portrait iOS7@2x", w: 1536, h: 2048},
+			{ n: "iPhone Portrait iOS7 R4", w: 640, h: 1136},
+			{ n: "iPhone Portrait iOS7@2x", w: 640, h: 960}
+		],
+		icon : [
+			// app iconset
+			{ n: "iPad App iOS6", w: 72, h: 72},
+			{ n: "iPad App iOS6@2x", w: 144, h: 144},
+			{ n: "iPad App iOS7", w: 76, h: 76},
+			{ n: "iPad App iOS7@2x", w: 152, h: 152},
+			{ n: "iPhone App iOS6", w: 57, h: 57},
+			{ n: "iPhone App iOS6@2x", w: 114, h: 114},
+			{ n: "iPhone App iOS7@2x", w: 120, h: 120}
+		],
+		newsstand : [
+			// Newsstand icons
+			{ n: "newsstand-app-icon", w: 112, h: 126},
+			{ n: "newsstand-app-icon@2x", w: 224, h: 252},
+			{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}
+		],
+		shelf: [
+			// Shelf Bg
+			{ n: "shelf-bg-landscape-568h", w: 1136, h: 536},
+			{ n: "shelf-bg-landscape@2x~ipad", w: 2048, h: 1407},
+			{ n: "shelf-bg-landscape@2x~iphone", w: 960, h: 536},
+			{ n: "shelf-bg-landscape~ipad", w: 1024, h: 704},
+			{ n: "shelf-bg-portrait-568h", w: 640, h: 1008},
+			{ n: "shelf-bg-portrait@2x~ipad", w: 1536, h: 1920},
+			{ n: "shelf-bg-portrait@2x~iphone", w: 640, h: 832},
+			{ n: "shelf-bg-portrait~ipad", w: 768, h: 960},
+			{ n: "shelf-bg-portrait~iphone", w: 320, h: 416}
+		]
+	};
+}
 
