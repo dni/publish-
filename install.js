@@ -25,7 +25,7 @@ function jakeInstall() {
 }
 
 function bowerInstall() {
-	var bowerInstall = child_process('bower', ['install']);
+	var bowerInstall = child_process('bower', ['install', '--allow-root']);
 	bowerInstall.stdout.on('data', function (data) { console.log(data.toString()); });
 	bowerInstall.stderr.on('data', function (data) { console.log(data.toString()); });
 	bowerInstall.on('close', function (code) {
