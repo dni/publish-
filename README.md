@@ -2,7 +2,7 @@
 Publish your data on all channels!
 
 ## Software Requirements
-* apt-get npm phantomjs git mongo imagemagick graphicsmagick zip (or use Homebrew on macosx)
+* apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip (or use Homebrew on macosx)
 
 ## Installation
 * npm install -g bower jake
@@ -12,4 +12,4 @@ Publish your data on all channels!
 
 ## Starting the App
 * make sure mongod process is running, start it with mongod
-* node app.js
+* node app
