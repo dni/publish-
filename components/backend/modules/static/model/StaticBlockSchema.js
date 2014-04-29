@@ -7,4 +7,4 @@ var StaticBlockSchema = new Schema({
   deleteable: Boolean
 });
 
-module.exports.StaticBlock = mongoose.model('StaticBlock', StaticBlockSchema);
+module.exports = mongoose.model('StaticBlock', StaticBlockSchema);
