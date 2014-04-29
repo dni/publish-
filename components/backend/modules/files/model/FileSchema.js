@@ -17,4 +17,4 @@ var fileSchema = new Schema({
   bigPic: String
 });
 
-module.exports.File = mongoose.model('File', fileSchema);
+module.exports = mongoose.model('File', fileSchema);
