@@ -3,5 +3,6 @@ define({
     "author": "Autor",
     "article": "Artikel",
     "category": "Kategorie",
-    "tags": "Tags"
+    "tags": "Tags",
+    "categories": "Kategories"
 });

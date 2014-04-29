@@ -12,4 +12,4 @@ var ArticleSchema = new Schema({
   files: Object
 });
 
-module.exports.Article = mongoose.model('Article', ArticleSchema);
+module.exports = mongoose.model('Article', ArticleSchema);

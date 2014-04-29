@@ -11,8 +11,10 @@ var MagazineSchema = new Schema({
   published: Boolean,
   orientation: String,
   papersize: String,
-  date: Date
+  date: Date,
+  info: String,
+  product_id: String
 });
 
 
-module.exports.Magazine = mongoose.model('Magazine', MagazineSchema);
+module.exports = mongoose.model('Magazine', MagazineSchema);

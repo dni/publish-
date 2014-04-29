@@ -1,23 +1,33 @@
-<h1>Details</h1>
+<h1><%= t.details %></h1>
 <div id="details">
 
 	<div class="form-group">
-	    <label>Titel</label>
+	    <label><%= t.title %></label>
 	    <input type="text" name="title" class="form-control" value="<%= title %>" />
 	</div>
 
 	<div class="form-group">
-	    <label>Author</label>
+	    <label><%= t.author %></label>
 	    <input type="text" name="author" class="form-control" value="<%= author %>" />
 	</div>
 
 	<div class="form-group">
-		<label>Impressum</label>
+	    <label><%= t.product_id %></label>
+	    <input type="text" name="product_id" class="form-control" value="<%= product_id %>" />
+	</div>
+
+	<div class="form-group">
+	    <label><%= t.info %></label>
+	    <input type="text" name="info" class="form-control" value="<%= info %>" />
+	</div>
+
+	<div class="form-group">
+		<label><%= t.impressum %></label>
 		<textarea rows="5" class="wysiwyg form-control" name="impressum"><%= impressum %></textarea>
 	</div>
 
 	<div class="form-group">
-		<label>Editorial</label>
+		<label><%= t.editorial %></label>
 		<textarea rows="5" class="wysiwyg form-control" name="editorial"><%= editorial %></textarea>
 	</div>
 	<%
@@ -27,7 +37,7 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-				  <label>Select Papersize (Print)</label>
+				  <label><%= t.papersize %></label>
 				  <select name="papersize" class="form-control">
 				    <% _.each(["A4","A5","A6","letter"], function(ps){%>
 				        <% if(papersize==ps) { %>
@@ -41,7 +51,7 @@
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-				  <label>Select Orientation (Print)</label>
+				  <label><%= t.orientation %></label>
 				  <select name="orientation" class="form-control">
 				    <% _.each(["horizontal","vertical"], function(or){%>
 				        <% if(orientation==or) { %>

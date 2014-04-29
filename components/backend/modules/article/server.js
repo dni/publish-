@@ -1,17 +1,17 @@
-var db = require(__dirname + '/model/ArticleSchema');
+var Article = require(__dirname + '/model/ArticleSchema');
 
 module.exports.setup = function(app) {
 
 
 	// API
 	app.get('/articles', function(req, res){
-	  	db.Article.find().limit(20).execFind(function (arr,data) {
+	  	Article.find().limit(20).execFind(function (arr,data) {
 	    	res.send(data);
 	  	});
 	});
 
 	app.post('/articles', function(req, res){
-		var a = new db.Article();
+		var a = new Article();
 		a.title = req.body.title;
 		a.desc = req.body.desc;
 		a.author = req.body.author;
@@ -28,7 +28,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.put('/articles/:id', function(req, res){
-		db.Article.findById( req.params.id, function(e, a) {
+		Article.findById( req.params.id, function(e, a) {
 
 			a.title = req.body.title;
 			a.desc = req.body.desc;
@@ -45,7 +45,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.delete('/articles/:id', function(req, res){
-	  	db.Article.findById( req.params.id, function(e, a) {
+	  	Article.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
 		        return res.send('');

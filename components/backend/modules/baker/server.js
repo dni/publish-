@@ -1,5 +1,7 @@
-var db = require('./../settings/model/SettingSchema'),
+var Setting = require('./../settings/model/SettingSchema'),
+	Magazine = require('./../magazine/model/MagazineSchema'),
 	http = require("http"),
+	_ = require("underscore"),
 	ApnToken = require(__dirname + "/model/ApnTokenSchema"),
 	Issue = require(__dirname + "/model/IssueSchema"),
 	PurchasedIssue = require(__dirname + "/model/PurchasedIssueSchema"),
@@ -62,7 +64,7 @@ module.exports.setup = function(app) {
 
 	app.get("/shelf", function(req,res){
 
-		db.Magazine.find({published:1}).execFind(function (arr, magazines) {
+		Magazine.find({published:1}).execFind(function (arr, magazines) {
 			var json = [];
 			_.each(magazines, function(magazine){
 				json.push({
