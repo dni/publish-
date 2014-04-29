@@ -5,6 +5,7 @@ var fs = require('fs-extra'),
 	ejs = require("ejs"),
 	EE = new emitter(),
 	Settings = require('./../../settings/model/SettingSchema');
+	StaticBlocks = require('./../../static/model/StaticBlockSchema');
 
 
 module.exports.download = function(req, res){
@@ -81,6 +82,21 @@ function prepareDownload(){
 					// Baker-Info.plist
 					template = fs.readFileSync(__dirname+'/templates/Baker-Info.plist', 'utf-8');
 					fs.writeFileSync(dirname+'/Baker/Baker-Info.plist', ejs.render(template, { settings: setting.settings, domain:generalsetting.settings.domain.value}));
+					// info menu
+					StaticBlocks.findOne({key:'info'}).exec(function(err, block){
+						if(err){throw(err);}
+						else {
+							template = fs.readFileSync(__dirname+'/templates/info.html', 'utf-8');
+							fs.writeFileSync(
+								dirname+'/BakerShelf/info/info.html',
+								ejs.render(
+									template,
+									{ block: block.data }
+								)
+						);
+						}
+					});
+
 
 					EE.emit("ready", "constants");
 				});
