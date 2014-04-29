@@ -1,4 +1,4 @@
-var db = require(__dirname + '/model/FileSchema'),
+var File = require(__dirname + '/model/FileSchema'),
 	gm = require('gm'),
 	mongoose = require("mongoose"),
 	///// TODO: !!!!! :D not from config from DB !!
@@ -21,7 +21,7 @@ module.exports.setup = function(app) {
 		while(len--){
 
 			var srcFile = srcFiles[len];
-			var fileModel = new db.File();
+			var fileModel = new File();
 			var name = srcFile.name;
 			var targetLink = './public/files/' + name;
 
@@ -50,9 +50,9 @@ module.exports.setup = function(app) {
 		};
 
 		if (req.query.parents) {
-			db.File.find({'parent':undefined}).execFind(send);
+			File.find({'parent':undefined}).execFind(send);
 		} else {
-			db.File.find().execFind(send);
+			File.find().execFind(send);
 		}
 
 	});
@@ -60,7 +60,7 @@ module.exports.setup = function(app) {
 	app.post('/files', function(req, res) {
 		newfile = req.body;
 
-		file = new db.File();
+		file = new File();
 		filename = 'copy_'+Date.now()+'_'+ newfile.name;
 		fs.writeFileSync('./public/files/' + filename, fs.readFileSync('./public/files/' + newfile.name));
 
@@ -131,7 +131,7 @@ module.exports.setup = function(app) {
 	};
 
 	app.put('/files/:id', function(req, res){
-		db.File.findById(req.params.id, function(e, a) {
+		File.findById(req.params.id, function(e, a) {
 			if(a.name!=req.body.name) {
 				link = './public/files/' + a.name;
 				targetLink = './public/files/' + req.body.name;
@@ -163,7 +163,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.delete('/files/:id', function(req, res) {
-		db.File.findById(req.params.id, function(e, a) {
+		File.findById(req.params.id, function(e, a) {
 			if (fs.existsSync("./public/files/" + a.name)===true){
 				fs.unlink("./public/files/" + a.name);
 			}
