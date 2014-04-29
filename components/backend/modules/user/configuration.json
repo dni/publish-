@@ -4,10 +4,10 @@
         "namespace": "users"
     },
     "navigation": {
-        "button": "user",
-        "route": "users",
-        "label": "users",
-        "classNames": "users"
+	    "button": "user",
+	    "route": "users",
+	    "label": "users",
+	    "classNames": "users"
     },
 
 

@@ -1,33 +1,50 @@
-var db = require(__dirname + '/model/UserSchema'),
-	express = require('express');
+var User = require(__dirname + '/model/UserSchema'),
+	express = require('express'),
+	auth = require(__dirname + "/auth.js"),
+	passport = require('passport');
 
 module.exports.setup = function(app) {
 
 
-	app.get('/admin', function(req, res){
+	User.count({},function(err, count) {
+		if (count == 0) {
+			var admin = new User();
+			admin.name = "admin";
+			admin.password = "password";
+			admin.role = 0;
+			admin.save();
+			console.log("admin user was created");
+		}
+	});
 
-	 // db.User.find({
-	 	// username: req.body.username,
-	 	// password: req.body.password
-	 // });
 
+	app.get('/login', function(req, res){
+	  res.sendfile(process.cwd()+'/components/backend/modules/user/templates/login.html');
+	});
 
-	  app.use(express.basicAuth('admin', 'password'));
+	app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function(req, res) {
+	    res.redirect('/admin');
+	});
+
+	app.get('/logout', function(req, res){
+	  req.logout();
+	  res.redirect('/login');
+	});
+
+	app.get('/admin', auth, function(req, res){
 	  app.use('/admin', express.static(process.cwd()+'/components/backend'));
 	  res.sendfile(process.cwd()+'/components/backend/index.html');
-
-
 	});
 
 	// API
-	app.get('/users', function(req, res){
-	  	db.User.find().limit(20).execFind(function (arr,data) {
+	app.get('/users', auth, function(req, res){
+	  	User.find().limit(20).execFind(function (arr,data) {
 	    	res.send(data);
 	  	});
 	});
 
-	app.post('/users', function(req, res){
-		var a = new db.User();
+	app.post('/users', auth, function(req, res){
+		var a = new User();
 		a.name = req.body.name;
 		a.role = req.body.role;
 		a.password = req.body.password;
@@ -38,8 +55,8 @@ module.exports.setup = function(app) {
 
 	});
 
-	app.put('/users/:id', function(req, res){
-		db.User.findById( req.params.id, function(e, a) {
+	app.put('/users/:id', auth, function(req, res){
+		User.findById( req.params.id, function(e, a) {
 
 			a.name = req.body.name;
 			a.role = req.body.role;
@@ -51,8 +68,8 @@ module.exports.setup = function(app) {
 	  	});
 	});
 
-	app.delete('/users/:id', function(req, res){
-	  	db.User.findById( req.params.id, function(e, a) {
+	app.delete('/users/:id', auth, function(req, res){
+	  	User.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
 		        return res.send('');
