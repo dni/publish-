@@ -77,6 +77,7 @@ define (require)->
 
   App.navItems = new NavItems
 
+
   App.Settings.fetch
     success:->
       for key of settings
@@ -90,7 +91,7 @@ define (require)->
   App.Router = new AppRouter
 
   # App.addInitializer = ()->
-
+  App.navItems.add new NavItem App.config.navigation
   App.navigationRegion.show new NavigationView collection: App.navItems
 
   Vent.on 'app:addModule', (config)->
@@ -120,7 +121,7 @@ define (require)->
 
       # coming soon in 2.0
       # messageModule = require "cs!./modules/messages/MessageModule"
-      # userModule = require "cs!./modules/user/UserModule"
+      userModule = require "cs!./modules/user/UserModule"
       # reportModule = require "cs!./modules/reports/ReportModule"
 
 
@@ -132,3 +133,4 @@ define (require)->
   window.App = App
   Backbone.history.start()
   Vent.trigger 'app:ready'
+  App.navItems.add new NavItem App.config.navigation

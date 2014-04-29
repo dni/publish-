@@ -5,7 +5,6 @@ var fs = require('fs'),
 module.exports.setup = function(app) {
 
 	app.configure(function() {
-		app.use(express.bodyParser());
 		// load/setup modules
 		var moduleDir = __dirname + '/modules/';
 		fs.readdir(moduleDir, function (err, files) {
