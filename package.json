@@ -31,6 +31,7 @@
     "sauce": "",
     "sauce-tunnel": "",
     "q": "",
+    "chalk": "",
     "glob": "~3.2.9",
     "less": "~1.7.0",
     "amdlc": "~0.1.2",
