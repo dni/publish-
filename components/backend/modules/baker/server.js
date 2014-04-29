@@ -66,18 +66,22 @@ module.exports.setup = function(app) {
 
 		Magazine.find({published:1}).execFind(function (arr, magazines) {
 			var json = [];
-			_.each(magazines, function(magazine){
-				json.push({
-				    "name": magazine.title,
-				    "title": magazine.title,
-				    "info": "The original masterpiece by Sir A. Conan Doyle",
-				    "date": "1887-10-10 10:10:10",
-				    "cover": "http://bakerframework.com/newsstand-books/a-study-in-scarlet.png",
-				    "url": "http://bakerframework.com/public/books/a-study-in-scarlet.hpub",
-				    "product_id": "com.example.Baker.issues.january2013"
-			 	});
+			Setting.findOne({name:'General'}).execFind(function (arr, setting) {
+				// find One?!
+				var setting = setting[0];
+				_.each(magazines, function(magazine){
+					json.push({
+					    "name": magazine.title,
+					    "title": magazine.title,
+					    "info": magazine.info,
+					    "date": magazine.date,
+					    "cover": "http://"+setting.settings.domain.value+"/public/books/"+magazine.title+"/cover.png",
+					    "url": "http://"+setting.settings.domain.value+"/public/books/"+magazine.title+".hpub",
+					    "product_id": magazine.product_id
+				 	});
+				});
+				res.send(JSON.stringify(json));
 			});
-			res.send(JSON.stringify(json));
 	  	});
 
 	});
