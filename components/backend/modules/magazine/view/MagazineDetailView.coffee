@@ -3,16 +3,20 @@ define [
   'lodash'
   'backbone'
   'tpl!../templates/detail.html'
+  'i18n!../nls/language.js'
 ],
-( $, _, Backbone, Template) ->
+( $, _, Backbone, Template, i18n) ->
 
   class MagazineDetailView extends Backbone.Marionette.ItemView
 
     template: Template
+    templateHelpers: t: i18n
 
     ui:
       title: '[name=title]'
       author: '[name=author]'
+      product_id: '[name=product_id]'
+      info: '[name=info]'
       impressum: '[name=impressum]'
       editorial: '[name=editorial]'
       papersize: '[name=papersize]'
@@ -31,6 +35,8 @@ define [
       @model.set
         title: @ui.title.val()
         author: @ui.author.val()
+        product_id: @ui.product_id.val()
+        info: @ui.info.val()
         impressum: @ui.impressum.val()
         editorial: @ui.editorial.val()
         papersize: @ui.papersize.val()

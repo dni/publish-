@@ -5,8 +5,9 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
     defaults:
       "_id": undefined
       "title": "Neues Magazine"
+      "product_id": "app.dnilabs.org.publish.magazine"
+      "info": ""
       "author": "default author"
-      "desc": "description ..."
       "editorial": "Hello World!"
       "impressum": "dnilabs"
       "published": false
