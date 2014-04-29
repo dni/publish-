@@ -1,4 +1,4 @@
-var db = require(__dirname + '/model/MagazineSchema'),
+var Magazine = require(__dirname + '/model/MagazineSchema'),
 	Page = require(__dirname + '/model/PageSchema'),
 	fs = require('fs-extra'),
 	PrintGenerator = require(__dirname + '/generators/PrintGenerator'),
@@ -11,22 +11,28 @@ module.exports.setup = function(app) {
 
 	// API
 	app.get('/magazines', function(req, res){
-	  	db.Magazine.find().limit(20).execFind(function (arr,data) {
+	  	Magazine.find().limit(20).execFind(function (arr,data) {
 	    	res.send(data);
 	  	});
 	});
 
 	// create new magazine route
 	app.post('/magazines', function(req, res){
-		var a = new db.Magazine();
-		a.title = req.body.title;
+		var a = new Magazine();
+
 		a.editorial = req.body.editorial;
 		a.impressum = req.body.impressum;
+		a.cover = req.body.cover;
+		a.back = req.body.back;
 		a.author = req.body.author;
-		a.pages = req.body.pages;
+		a.product_id = req.body.product_id;
+		a.info = req.body.info;
+		a.published = req.body.published;
 		a.papersize = req.body.papersize;
 		a.orientation = req.body.orientation;
+		a.files = req.body.files;
 		a.date = new Date();
+		a.title = req.body.title;
 
 		a.save(function () {
 			createMagazineFiles(req.body.title, function(){
@@ -39,7 +45,7 @@ module.exports.setup = function(app) {
 
 	// update magazine route
 	app.put('/magazines/:id', function(req, res){
-		db.Magazine.findById( req.params.id, function(e, a) {
+		Magazine.findById( req.params.id, function(e, a) {
 
 			// rerender Magazine Files
 			var child_process = require('child_process').spawn;
@@ -57,7 +63,8 @@ module.exports.setup = function(app) {
 					a.cover = req.body.cover;
 					a.back = req.body.back;
 					a.author = req.body.author;
-					a.pages = req.body.pages;
+					a.product_id = req.body.product_id;
+					a.info = req.body.info;
 					a.published = req.body.published;
 					a.papersize = req.body.papersize;
 					a.orientation = req.body.orientation;
@@ -77,7 +84,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.delete('/magazines/:id', function(req, res){
-	  	db.Magazine.findById( req.params.id, function(e, a) {
+	  	Magazine.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
 		      	var child_process = require('child_process').spawn;
