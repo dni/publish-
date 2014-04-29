@@ -8,6 +8,13 @@
     	"namespace": "backend"
     },
 
+    "navigation": {
+	    "button": "off",
+	    "route": "logout",
+	    "label": "logout",
+	    "classNames": "logout"
+    },
+
     "modules": {
     	"settings": "SettingsModule",
     	"article": "ArticleModule",

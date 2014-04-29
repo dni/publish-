@@ -13,6 +13,7 @@ define [
       success:->
     App.Router.processAppRoutes new Controller,
       "users": "list"
+      "logout": "logout"
       "user/:id": "details"
       "newUser": "add"
     Vent.trigger "user:ready"
