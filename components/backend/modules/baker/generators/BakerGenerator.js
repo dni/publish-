@@ -122,234 +122,100 @@ function prepareDownload(){
 
 function startGenIconssets(setting){
 
-	var formats = ["icon", "newsstand", "shelf", "launch"];
+	var formats = ["shelf", "launch", "icon"];
 	var sizeList = getSizeList();
+	var background, logo, icon;
+
+	File.findOne({relation: 'setting:'+setting._id, key: "background"}).exec(function(err, file) {
+		if(err){throw(err);}
+		background =  file.name;
+		File.findOne({relation: 'setting:'+setting._id, key: "logo"}).exec(function(err, file) {
+			if(err){throw(err);}
+			logo =  file.name;
+			File.findOne({relation: 'setting:'+setting._id, key: "icon"}).exec(function(err, file) {
+				if(err){throw(err);}
+				icon =  file.name;
+				createIcons(formats.pop());
+			});
+		});
+	});
 
 	function createIcons(format) {
-		File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
-			if (file) {
-				var filename = file.name, targetImageLink, icon, targetDir, size;
-				var image = gm('./public/files/'+ filename);
-				var filetype = filename.split(".").pop();
 
-				// obtain the size of an image
-				gm('./public/files/'+ filename).size(function (err, size) {
+		format=="icon" ? key="icon" : key="logo"
+		key==="logo" ? size={width:1024,height:768} : size={width:286,height:286}
+		var targetImageLink = ""
+		, image = gm()
+		, filetype = "png"//file.name.split(".").pop();
+		, iconInfos = sizeList[format];
 
-					if (err) { return console.log("createIconSet getSize err=",err); }
+		function createIcon(imgData) {
 
-					var iconInfos = sizeList[format];
+			targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/';
 
-					function createIcon(icon) {
+			if (format==="icon") {
+				image = gm('./public/files/'+ icon)
 
-						targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/';
-
-
-						if (format==="launch") {
-							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
-							targetDir += "LaunchImage.launchimage";
-
-						} else if (format==="shelf") {
-							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
-							if (icon.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
-							else { targetDir += "shelf-bg-landscape.imageset"; }
-
-						} else if (format==="icon") {
-							image.resize(icon.w, icon.h);
-							targetDir += "AppIcon.appiconset";
-
-						} else if (format==="newsstand") {
-							if (icon.w!==480) {
-								if (icon.w < icon.h) { image.resize(0, icon.h); }
-								else { image.resize(icon.w, 0);	}
-								image.crop(icon.w, icon.h, icon.w/2, 0);
-							}
-							if (icon.n.indexOf("landscape")>1) { targetDir += "shelf-bg-landscape.imageset";}
-							else { targetDir += "newsstand-app-icon.imageset";}
-						}
-
-						targetImageLink = targetDir +"/"+ icon.n +".png";
-
-
-						console.log(format, icon, icon.n +"."+ filetype);
-
-						image.write(targetImageLink, function (err) {
-						  if (err) { return console.error("icon.write err=", err); }
-							if (iconInfos.length > 0) {
-								// next icon for format
-								createIcon(iconInfos.pop());
-							}
-							else {
-								if (formats.length > 0) {
-									// next format
-									createIcons(formats.pop());
-								} else {
-									// done with image generation
-									EE.emit('ready', 'icon');
-								}
-							}
-						});
-
-					};
-					createIcon(iconInfos.pop());
-
-				});
-
-			}
-			else {
-				// no file for format found
-				if (formats.length > 0) {
-					// next format
-					createIcons(formats.pop());
+				if(imgData.h>imgData.w){
+					//image.resize(imgData.w, imgData.h, "!");
+					image.resize(imgData.w);
+					image.extent(imgData.w, imgData.h);
+					image.in("-background", "transparent");
+					targetDir += "newsstand-app-icon.imageset";
 				} else {
-					// done with image generation
-					EE.emit('ready', 'icon');
+					image.resize(imgData.w);
+					targetDir += "AppIcon.appiconset";
 				}
-
-				console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);
-			}
-		});
-	};
-
-	createIcons(formats.pop());
-}
-
-function startGenIconssetsOLD(setting){
-
-	var formats = ["icon", "newsstand", "shelf", "launch"];
-	var sizeList = getSizeList();
-
-	function createIcons(format) {
-		Files.File.findOne({relation: 'setting:'+setting._id, key: format}).exec(function(err, file) {
-			if (file) {
-				var filename = file.name, targetImageLink, icon, targetDir, size;
-				var image = gm('./public/files/'+ filename);
-				var filetype = filename.split(".").pop();
-
-				// obtain the size of an image
-				gm('./public/files/'+ filename).size(function (err, size) {
-
-					if (err) { return console.log("createIconSet getSize err=",err); }
-
-					var iconInfos = sizeList[format];
-
-					function createIcon(icon) {
-
-						targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/';
-
-
-						if (format==="launch") {
-							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, (size.height-(icon.h))/2);
-							targetDir += "LaunchImage.launchimage";
-
-						} else if (format==="shelf") {
-							image.crop(icon.w, icon.h, (size.width-(icon.w))/2, 0);
-							if (icon.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
-							else { targetDir += "shelf-bg-landscape.imageset"; }
-
-						} else if (format==="icon") {
-							image.resize(icon.w, icon.h);
-							targetDir += "AppIcon.appiconset";
-
-						} else if (format==="newsstand") {
-							if (icon.w!==480) {
-								if (icon.w < icon.h) { image.resize(0, icon.h); }
-								else { image.resize(icon.w, 0);	}
-								image.crop(icon.w, icon.h, icon.w/2, 0);
-							}
-							if (icon.n.indexOf("landscape")>1) { targetDir += "shelf-bg-landscape.imageset";}
-							else { targetDir += "newsstand-app-icon.imageset";}
-						}
-
-						targetImageLink = targetDir +"/"+ icon.n +".png";
-
-
-						console.log(format, icon, icon.n +"."+ filetype);
-
-						image.write(targetImageLink, function (err) {
-						  if (err) { return console.error("icon.write err=", err); }
-							if (iconInfos.length > 0) {
-								// next icon for format
-								createIcon(iconInfos.pop());
-							}
-							else {
-								if (formats.length > 0) {
-									// next format
-									createIcons(formats.pop());
-								} else {
-									// done with image generation
-									EE.emit('ready', 'icon');
+				writeImage(image);
+			}else{
+				newImg = "tmpImg."+logo.split(".").pop();
+				newBg = "tmpBg."+background.split(".").pop();
+				gm('./public/files/'+ logo).resize(imgData.w/3)
+					.write('./public/files/'+newImg, function(){
+						gm('./public/files/'+ background).crop(imgData.w, imgData.h, (1024-imgData.w/2), (1024-imgData.h/2))
+							.write('./public/files/'+newBg, function(){
+								if (format==="shelf") {
+									image//.resize(imgData.w, imgData.h)
+										.in('-page', '+0+0')  // Custom place for each of the images
+										.in('./public/files/'+ newBg)
+										.in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')  // Custom place for each of the images
+										.in('./public/files/'+ newImg)
+										.flatten()
+									if (imgData.n.indexOf("portrait")>1) { targetDir += "shelf-bg-portrait.imageset"; }
+									else { targetDir += "shelf-bg-landscape.imageset"; }
+									writeImage(image);
+								} else if (format=="launch") {
+									image//.resize(imgData.w, imgData.h)
+										.in('-page', '+0+0')  // Custom place for each of the images
+										.in('./public/files/'+ newBg)
+										.in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')  // Custom place for each of the images
+										.in('./public/files/'+ newImg)
+										.flatten()
+									targetDir += "LaunchImage.launchimage";
+									writeImage(image);
 								}
-							}
-						});
-
-					};
-					createIcon(iconInfos.pop());
-
+							});
+					});
+			}
+			function writeImage(image){
+				targetImageLink = targetDir +"/"+ imgData.n +"."+ filetype;
+				console.log(format, imgData, imgData.n +"."+ filetype);
+				console.log(background ,logo, icon)
+				image.write(targetImageLink, function (err) {
+				  if (err) { return console.error("icon.write err=", err); }
+					if (iconInfos.length > 0) { createIcon(iconInfos.pop()); }
+					else {
+						if (formats.length > 0) { createIcons(formats.pop()); }
+						else { EE.emit('ready', 'icon'); }
+					}
 				});
-
 			}
-			else {
-				// no file for format found
-				if (formats.length > 0) {
-					// next format
-					createIcons(formats.pop());
-				} else {
-					// done with image generation
-					EE.emit('ready', 'icon');
-				}
-
-				console.error("some went wrong with startGenIconssets in BakerGenerator, err=", err);
-			}
-		});
-	};
-
-	createIcons(formats.pop());
+		};
+		createIcon(iconInfos.pop());
+	}
 }
-function getOldSizeList() {
-	return {
-		launch : [
-			// launch images
-			{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
-			{ n: "iPad Landscape iOS6 no status bar@2x", w: 2048, h: 1496},
-			{ n: "iPad Landscape iOS7", w: 1024, h: 768},
-			{ n: "iPad Landscape iOS7@2x", w: 2048, h: 1536},
-			{ n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004},
-			{ n: "iPad Portrait iOS6 no status bar@2x", w: 1536, h: 2008},
-			{ n: "iPad Portrait iOS7", w: 768, h: 1024},
-			{ n: "iPad Portrait iOS7@2x", w: 1536, h: 2048},
-			{ n: "iPhone Portrait iOS7 R4", w: 640, h: 1136},
-			{ n: "iPhone Portrait iOS7@2x", w: 640, h: 960}
-		],
-		icon : [
-			// app iconset
-			{ n: "iPad App iOS6", w: 72, h: 72},
-			{ n: "iPad App iOS6@2x", w: 144, h: 144},
-			{ n: "iPad App iOS7", w: 76, h: 76},
-			{ n: "iPad App iOS7@2x", w: 152, h: 152},
-			{ n: "iPhone App iOS6", w: 57, h: 57},
-			{ n: "iPhone App iOS6@2x", w: 114, h: 114},
-			{ n: "iPhone App iOS7@2x", w: 120, h: 120}
-		],
-		newsstand : [
-			// Newsstand icons
-			{ n: "newsstand-app-icon", w: 112, h: 126},
-			{ n: "newsstand-app-icon@2x", w: 224, h: 252},
-			{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}
-		],
-		shelf: [
-			// Shelf Bg
-			{ n: "shelf-bg-landscape-568h", w: 1136, h: 536},
-			{ n: "shelf-bg-landscape@2x~ipad", w: 2048, h: 1407},
-			{ n: "shelf-bg-landscape@2x~iphone", w: 960, h: 536},
-			{ n: "shelf-bg-landscape~ipad", w: 1024, h: 704},
-			{ n: "shelf-bg-portrait-568h", w: 640, h: 1008},
-			{ n: "shelf-bg-portrait@2x~ipad", w: 1536, h: 1920},
-			{ n: "shelf-bg-portrait@2x~iphone", w: 640, h: 832},
-			{ n: "shelf-bg-portrait~ipad", w: 768, h: 960},
-			{ n: "shelf-bg-portrait~iphone", w: 320, h: 416}
-		]
-	};
-}
+
+
 function getSizeList() {
 	return {
 		icon : [
@@ -361,8 +227,7 @@ function getSizeList() {
 			{ n: "iPhone App iOS6@2x", w: 114, h: 114},
 			{ n: "iPhone App iOS7@2x", w: 120, h: 120},
 			{ n: "newsstand-app-icon", w: 112, h: 126},
-			{ n: "newsstand-app-icon@2x", w: 224, h: 252},
-			{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}
+			{ n: "newsstand-app-icon@2x", w: 224, h: 252}
 		],
 		launch : [
 			{ n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748},
@@ -377,6 +242,7 @@ function getSizeList() {
 			{ n: "iPhone Portrait iOS7@2x", w: 640, h: 960}
 		],
 		shelf: [
+			{ n: "shelf-bg-landscape~iphone", w: 480, h: 268},
 			{ n: "shelf-bg-landscape-568h", w: 1136, h: 536},
 			{ n: "shelf-bg-landscape@2x~ipad", w: 2048, h: 1407},
 			{ n: "shelf-bg-landscape@2x~iphone", w: 960, h: 536},
