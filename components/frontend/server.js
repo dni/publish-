@@ -1,8 +1,8 @@
 var express = require('express');
 var _ = require('underscore');
-var db = require(process.cwd() + '/components/backend/modules/article/model/ArticleSchema');
-var db2 = require(process.cwd() + '/components/backend/modules/files/model/FileSchema');
-var blocks = require(process.cwd() + '/components/backend/modules/static/model/StaticBlockSchema');
+var Article = require(process.cwd() + '/components/backend/modules/article/model/ArticleSchema');
+var File = require(process.cwd() + '/components/backend/modules/files/model/FileSchema');
+var Blocks = require(process.cwd() + '/components/backend/modules/static/model/StaticBlockSchema');
 var async = require('async');
 
 module.exports.setup = function(app) {
@@ -15,7 +15,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.get('/blocks', function(req,res) {
-		blocks.StaticBlock.find({ 'key': { $in: req.query.blocks}}).execFind(function (arr,data) {
+		Blocks.find({ 'key': { $in: req.query.blocks}}).execFind(function (arr,data) {
 			res.send(data);
 		});
 	});
@@ -23,7 +23,7 @@ module.exports.setup = function(app) {
 
 	// public Route
 	app.get('/publicarticles', function(req,res) {
-		db.Article.find({ 'privatecode': false }).execFind(function (arr,data) {
+		Article.find({ 'privatecode': false }).execFind(function (arr,data) {
 			var calls = [];
 
 			data.forEach(function(article){
@@ -32,7 +32,7 @@ module.exports.setup = function(app) {
 
 			    calls.push(function(callback) {
 
-					db2.File.find({ 'relation': 'article:'+article._id}).execFind(function (arr,data) {
+					File.find({ 'relation': 'article:'+article._id}).execFind(function (arr,data) {
 						data.forEach(function(file){
 							article.files.push(file)
 						});

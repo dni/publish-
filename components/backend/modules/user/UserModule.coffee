@@ -8,6 +8,9 @@ define [
 
   Vent.on "app:ready", ()->
     Vent.trigger "app:addModule", JSON.parse Config
+
+    $.get '/user', (user) -> App.User = user
+
     App.Users = new Users
     App.Users.fetch
       success:->

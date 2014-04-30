@@ -13,7 +13,7 @@ define [
   class UserController extends Backbone.Marionette.Controller
 
     logout: ->
-      window.location = window.location.origin + '/logout'
+      if confirm 'Logout?' then window.location = window.location.origin + '/logout'
 
     settings: ->
       App.Settings.where({name: "UserModule"})[0]

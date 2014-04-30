@@ -20,6 +20,7 @@ module.exports.setup = function(app) {
 	app.post('/magazines', function(req, res){
 		var a = new Magazine();
 
+		a.user = app.user.id;
 		a.editorial = req.body.editorial;
 		a.impressum = req.body.impressum;
 		a.cover = req.body.cover;
