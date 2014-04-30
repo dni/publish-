@@ -36,6 +36,10 @@ module.exports.setup = function(app) {
 	  res.sendfile(process.cwd()+'/components/backend/index.html');
 	});
 
+	app.get('/user', auth, function(req, res){
+	  res.send(app.user);
+	});
+
 	// API
 	app.get('/users', auth, function(req, res){
 	  	User.find().limit(20).execFind(function (arr,data) {

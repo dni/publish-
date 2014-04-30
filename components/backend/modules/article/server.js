@@ -12,6 +12,7 @@ module.exports.setup = function(app) {
 
 	app.post('/articles', function(req, res){
 		var a = new Article();
+		a.user = app.user.id;
 		a.title = req.body.title;
 		a.desc = req.body.desc;
 		a.author = req.body.author;
