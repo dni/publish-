@@ -10,7 +10,7 @@ require.config({
 		lodash: "underscore-amd/underscore",
 		underscore: "underscore-amd/underscore",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
-		babysitter: "backbone.babysitter/lib/amd/backbone.babysitter",
+		babysitter: "backbone.babysitter/lib/backbone.babysitter",
 		backbone: "backbone-amd/backbone",
 		bootstrap: "bootstrap/dist/js/bootstrap",
 		marionette: "marionette/lib/core/amd/backbone.marionette",
