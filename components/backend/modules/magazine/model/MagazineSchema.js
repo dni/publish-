@@ -3,6 +3,7 @@ var mongoose = require('mongoose/'),
 
 
 var MagazineSchema = new Schema({
+  user: String,
   title: String,
   author: String,
   desc: String,

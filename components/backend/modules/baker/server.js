@@ -1,7 +1,9 @@
 var Setting = require('./../settings/model/SettingSchema'),
 	Magazine = require('./../magazine/model/MagazineSchema'),
+	auth = require('./../user/auth.js'),
 	http = require("http"),
 	_ = require("underscore"),
+
 	ApnToken = require(__dirname + "/model/ApnTokenSchema"),
 	Issue = require(__dirname + "/model/IssueSchema"),
 	PurchasedIssue = require(__dirname + "/model/PurchasedIssueSchema"),
@@ -10,7 +12,7 @@ var Setting = require('./../settings/model/SettingSchema'),
 
 module.exports.setup = function(app) {
 
-	app.get('/downloadApp', BakerGenerator.download);
+	app.get('/downloadApp', auth, BakerGenerator.download);
 
 	// API
 	app.post('/purchase_confirmation', function(req, res){
@@ -91,7 +93,6 @@ module.exports.setup = function(app) {
 	app.get("/issue", function(req, res) {
 
 		// only free issues so far
-
 		var spawn = require('child_process').spawn;
 	    var zip = spawn('zip', ['-r', '-', 'hpub'], {cwd:'./public/books/'+req.body.name});
 

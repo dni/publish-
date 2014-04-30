@@ -359,7 +359,7 @@ function getSizeList() {
 			{ n: "iPad App iOS7@2x", w: 152, h: 152},
 			{ n: "iPhone App iOS6", w: 57, h: 57},
 			{ n: "iPhone App iOS6@2x", w: 114, h: 114},
-			{ n: "iPhone App iOS7@2x", w: 120, h: 120}
+			{ n: "iPhone App iOS7@2x", w: 120, h: 120},
 			{ n: "newsstand-app-icon", w: 112, h: 126},
 			{ n: "newsstand-app-icon@2x", w: 224, h: 252},
 			{ n: "shelf-bg-landscape~iphone", w: 480, h: 268}

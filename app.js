@@ -11,8 +11,8 @@ var express = require('express'),
 
 app.configure(function() {
 
+	// authentication
 	passport.use(new LocalStrategy(function(username, password, done) {
-		console.log(username);
 	    User.findOne({ name: username, password: password }).execFind(function (err, user) {
 	    	done(err, user[0]);
 	    });
@@ -24,6 +24,12 @@ app.configure(function() {
 
 	passport.deserializeUser(function(_id, done) {
 	  User.findById(_id, function (err, user) {
+	  	if (!err) {
+		  	app.user = {
+		  		id: user._id,
+		  		role: user.role
+	  		}
+	  	}
 	    done(err, user);
 	  });
 	});

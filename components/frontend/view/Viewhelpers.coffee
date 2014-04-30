@@ -6,6 +6,10 @@ define [], () ->
       _.find @files, (file)->
         file.key == key
 
+    formatDate: (date)->
+      date = (new Date(date)).toString().split(" ");
+      return '<div class="number">'+date[2]+'</div><div class="month">'+date[1]+'</div>';
+
     getFilesByType: (type) ->
       _.filter @files, (file)->
        file.type == 'image/png' or 'image/jpeg'
