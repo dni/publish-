@@ -8,7 +8,7 @@ require.config({
 		backbone: "backbone-amd/backbone",
 		marionette: "marionette/lib/core/amd/backbone.marionette",
 		wreqr: "backbone.babysitter/lib/amd/backbone.babysitter",
-		babysitter: "backbone.wreqr/lib/amd/backbone.wreqr",
+		babysitter: "backbone.wreqr/lib/backbone.wreqr",
 		text: 'requirejs-text/text',
 		cs: 'require-cs/cs',
 		text: 'requirejs-text/text',
