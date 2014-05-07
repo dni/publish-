@@ -27,7 +27,8 @@
     "fancybox": "~2.1.5",
     "jquery-minicolors": "~2.1.2",
     "i18n": "*",
-    "requirejs-i18n": "~2.0.4"
+    "requirejs-i18n": "~2.0.4",
+    "require-css": "~0.1.2"
   },
   "devDependencies": {
     "requirejs": "latest"
