@@ -2,7 +2,7 @@ var requirejs = require('requirejs');
 
 var config = {
 
-    appDir: './components/backend',
+    appDir: '.',
     baseUrl: 'bower_components',
 
     //Uncomment to turn off uglify minification.
@@ -14,13 +14,13 @@ var config = {
     stubModules: ['cs'],
 
     paths: {
-        'cs' :'../../cs',
-        'coffee-script': '../../coffee-script'
+        'cs' :'require-cs/cs',
+        'coffee-script': 'require-cs/coffee-script'
     },
 
     modules: [
         {
-            name: 'main',
+            name: '../components/backend/configuration/require-config',
             //The optimization will load CoffeeScript to convert
             //the CoffeeScript files to plain JS. Use the exclude
             //directive so that the coffee-script module is not included
@@ -31,7 +31,7 @@ var config = {
 };
 
 requirejs.optimize(config, function (buildResponse) {
-    var contents = fs.readFileSync(config.dir, 'utf8');
+    console.log("building success");
 }, function(err) {
 	console.log("error building", err);
     //optimization err callback
