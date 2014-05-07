@@ -6,6 +6,7 @@ module.exports.setup = function(app) {
 
 	app.get('/clearCache', function(req, res){
 	  	Setting.collection.drop();
+	  	var build = require('./components/backend/utilities/build.js');
 	  	res.send("cache cleared");
 	});
 
@@ -38,9 +39,15 @@ module.exports.setup = function(app) {
 		Setting.findById( req.params.id, function(e, s) {
 			s.name = req.body.name;
 			s.settings = req.body.settings;
+
+			if (req.body.development.value) {
+				var build = require('./components/backend/utilities/build.js');
+			}
+
 			s.save(function () {
 				res.send(s);
 			});
+
 	  	});
 	});
 
