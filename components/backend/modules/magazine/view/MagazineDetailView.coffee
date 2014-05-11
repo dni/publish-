@@ -43,11 +43,17 @@ define [
         orientation: @ui.orientation.val()
 
       if @model.isNew()
+
         App.Magazines.create @model,
           wait: true
           success: (res) ->
-            c.l "success save magazine", res
-            App.Router.navigate 'magazine/'+res.attributes._id, false
+            route = 'magazine/'+res.attributes._id
+            App.Utilities.Log i18n.newMagazine, 'new',
+              text: res.attributes.title
+              href: route
+            App.Router.navigate route, false
       else
-        @model.save
-          success:->
+        App.Utilities.Log i18n.updateMagazine, 'update',
+          text: @model.get 'title'
+          href: 'magazine/'+@model.get '_id'
+        @model.save()

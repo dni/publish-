@@ -23,7 +23,8 @@ define [
 
     #save page onrender for initial article + layout
     initialize:->
-      @on 'render', @updatePage
+      @model.on 'change', @render
+      # @on 'render', @updatePage
 
     updatePage: ->
       @model.set
@@ -52,21 +53,12 @@ define [
       @collection.create page,
         success:->
 
-# should be fix, but not working
-
-    # appendHtml: (collectionView, itemView, index) ->
-      # if collectionView.itemViewContainer then childrenContainer = collectionView.$(collectionView.itemViewContainer) else childrenContainer = collectionView.$el
-      # children = childrenContainer.children()
-      # if (children.size() <= index)
-        # childrenContainer.append(itemView.el)
-      # else
-        # children.eq(index).before(itemView.el)
-
     initialize:(args)->
+      @collection.sort()
       @magazine = args['magazine']
       @listenTo @collection, 'reset', @render
+      @listenTo @collection, 'sort', @render
       @listenTo @, "render", @_sortAble
-
 
     _sortAble:->
       @$el.find(".page-list").sortable(
@@ -78,13 +70,13 @@ define [
 
     _sortStop: (event, ui)->
       that = @
-      $(event.target).find('.number').each (i)->
+      @$el.find('.number').each (i)->
         elNumber = $(@).text()
         model = that.collection.findWhere number: parseInt elNumber
-        if !model? then return c.l "its broken nr.", elNumber
         model.set "number", i+1
         model.save()
-        $(@).text(i+1)
+
+      @collection.sort()
 
 
 
