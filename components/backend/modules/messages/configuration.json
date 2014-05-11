@@ -1,7 +1,7 @@
 {
     "config": {
-        "name": "ReportModule",
-        "namespace": "reports"
+        "name": "MessageModule",
+        "namespace": "messages"
     },
     "navigation": {
         "button": "comment",

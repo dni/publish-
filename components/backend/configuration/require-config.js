@@ -2,6 +2,7 @@ require.config({
 	deps: ["cs!/admin/App"],
 	baseUrl: '/lib',
 	paths: {
+		io: "socket.io-client/dist/socket.io",
 		jquery: "jquery/dist/jquery",
 		"jquery.ui": "jquery-ui/ui/jquery-ui",
 		"jquery.tinymce": "tinymce/js/tinymce/jquery.tinymce.min",

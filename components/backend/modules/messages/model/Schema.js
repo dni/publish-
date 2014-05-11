@@ -1,12 +1,12 @@
 var mongoose = require('mongoose/'),
-	Schema = mongoose.Schema,
-	modelName = "Message";
+	Schema = mongoose.Schema
 
 var modelSchema = new Schema({
 	date: Date,
 	type: String,
-	title: String,
+	message: String,
+	additionalinfo: Object,
 	username: String
 });
 
-module.exports[modelName] = mongoose.model(modelName, modelSchema);
+module.exports = mongoose.model("Message", modelSchema);
