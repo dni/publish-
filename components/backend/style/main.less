@@ -79,12 +79,12 @@ height: auto;
   a:hover {text-decoration:none; color:@highlight;}
 }
 
-#sidebar #list div div {
+#sidebar #list > div > div {
   margin-bottom: 6px;
   padding-bottom: 6px;
   border-bottom: 1px solid #ddd;
 }
-#sidebar #list div :last-child  {
+#sidebar #list > div > :last-child  {
   margin:0;
   padding:0;
   border-bottom: 0;
@@ -98,7 +98,7 @@ margin-left:0;
 margin-right: 0;
 }
 
-#list, #list-top, #content > div {
+#list, #list-top, #content > * {
 
   padding:24px;
   background:rgba(200,200,200, 0.9);

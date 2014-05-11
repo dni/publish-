@@ -4,5 +4,7 @@ define({
     "article": "Artikel",
     "category": "Kategorie",
     "tags": "Tags",
-    "categories": "Kategories"
+    "categories": "Kategories",
+    "newArticle": "hat neuen Artikel erstellt",
+    "updateArticle": "hat Artikel bearbeitet"
 });
