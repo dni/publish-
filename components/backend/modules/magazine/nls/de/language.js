@@ -7,5 +7,8 @@ define({
 	"product_id": "Produkt ID",
     "info": "Info",
 	"papersize": "Papierformat auswählen (Druck)",
-	"orientation": "Paperausrichtung auswählen (Druck)"
+	"orientation": "Paperausrichtung auswählen (Druck)",
+	"newMagazine": "hat eines Neues Magazine erstellt",
+    "updateMagazine": "hat ein Magazine aktualisiert",
+    "deleteMagazine": "hat ein Magazine gelöscht"
 });

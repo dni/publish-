@@ -11,7 +11,7 @@ define [
 ], (Vent, $, _, Backbone, Template, PageListView, DetailView, PreviewView) ->
 
   class MagazineLayout extends Backbone.Marionette.Layout
-    # Not required since 'div' is the default if no el or tagName specified
+
     template: Template
 
     regions:

@@ -27,5 +27,17 @@ module.exports.setup = function(app) {
 		});
 	});
 
+	app.delete('/messages/:id', function(req, res){
+	  	Message.findById( req.params.id, function(e, a) {
+			return a.remove(function (err) {
+		      if (!err) {
+		        return res.send('');
+		      } else {
+		        console.log(err);
+		      }
+		    });
+	  	});
+	});
+
 };
 

@@ -14,9 +14,16 @@ define [
 
     events:
       "submit form": "newMessage"
+      "click [name='clear']": "clearMessages"
 
     ui:
       message: '[name=message]'
+
+    clearMessages: ->
+      messages = App.Messages.models
+      if confirm i18n.confirmClear
+        while model = App.Messages.first()
+          model.destroy()
 
     newMessage: (e)->
       e.preventDefault()
