@@ -9,11 +9,14 @@ define [
   Vent.on "app:ready", ()->
     Vent.trigger "app:addModule", JSON.parse Config
 
-    $.get '/user', (user) -> App.User = user
 
     App.Users = new Users
     App.Users.fetch
       success:->
+        $.get '/user', (user) ->
+          App.User = App.Users.findWhere _id:user.id
+
+
     App.Router.processAppRoutes new Controller,
       "users": "list"
       "logout": "logout"

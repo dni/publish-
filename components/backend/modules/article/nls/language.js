@@ -4,7 +4,9 @@ define({
         "author": "Author",
         "article": "Article",
         "category": "Category",
-        "tags": "Tags"
+        "tags": "Tags",
+        "newArticle": "created new article",
+        "updateArticle": "updated article"
     },
     "de": true
 });

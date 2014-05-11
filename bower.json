@@ -28,7 +28,9 @@
     "jquery-minicolors": "~2.1.2",
     "i18n": "*",
     "requirejs-i18n": "~2.0.4",
-    "require-css": "~0.1.2"
+    "require-css": "~0.1.2",
+    "socket.io": "~0.9.15",
+    "socket.io-client": "~0.9.16"
   },
   "devDependencies": {
     "requirejs": "latest"

@@ -1,0 +1,10 @@
+<span class="label label-default date"><%= (new Date(date)).format() %></span>
+<label><%= username %>: </label>
+<p><%= message %></p>
+
+<% if (additionalinfo.href) { %>
+	<a href="#<%= additionalinfo.href %>"<span class="label label-info additional"><%= additionalinfo.text %></span>
+<% } else { %>
+	<span class="label label-info additional"><%= additionalinfo.text %></span>
+<% } %>
+

@@ -1,4 +1,4 @@
-var express = require('express'),
+var express = require('express.io'),
 	app = express(),
 	passport = require("passport"),
 	LocalStrategy = require('passport-local').Strategy,
@@ -8,6 +8,7 @@ var express = require('express'),
 	db = mongoose.connect('mongodb://localhost/publish'),
 	fs = require('fs');
 
+app.http().io()
 
 app.configure(function() {
 
