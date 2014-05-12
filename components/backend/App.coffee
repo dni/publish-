@@ -25,11 +25,11 @@ define (require)->
 
   App = new Backbone.Marionette.Application
 
-  App.Utilities = {
+  App.Utilities =
     Date: require "cs!./utilities/Date"
     Vent: require "cs!./utilities/Vent"
     Log: require "cs!./utilities/Log"
-  }
+
   # Shortcut Log
   window.log = App.Utilities.Log;
 
@@ -51,7 +51,7 @@ define (require)->
       # App.vent.trigger "socket:disconnected"
 
     socket.on "error", (err)->
-      c.l "SOCKET ERROR: ", err
+      App.Utilities.Log "SOCKET ERROR: " + err
 
 
   App.config = JSON.parse Config
