@@ -36,12 +36,11 @@ app.configure(function() {
 	});
 
 	app.use(express.static('public'));
-	app.use('/static', express.static(__dirname + '/public'));
-	app.use('/lib', express.static(__dirname + '/bower_components'));
+	app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
 	app.use(express.bodyParser());
 	app.use(express.cookieParser());
-	app.use(express.session({ secret: 'keyboard cat' }));
+	app.use(express.session({ secret: 'publish crossplattform app' }));
 
 	app.use(passport.initialize());
 	app.use(passport.session());

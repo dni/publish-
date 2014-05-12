@@ -1,6 +1,6 @@
 require.config({
 	deps: ["cs!/admin/App"],
-	baseUrl: '/lib',
+	baseUrl: '/bower_components',
 	paths: {
 		io: "socket.io-client/dist/socket.io",
 		jquery: "jquery/dist/jquery",

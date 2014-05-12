@@ -1,34 +1,38 @@
 var requirejs = require('requirejs');
 
 var config = {
+  appDir: "components/backend",
+  dir: "cache/build/backend",
+  baseUrl: "../../../bower_components",
+  mainConfigFile: 'components/backend/configuration/require-config.js',
+  // out: "cache/main.built.js",
+  include : 'require-config',
 
-    appDir: '.',
-    baseUrl: 'bower_components',
+  optimize: "uglify",
 
-    //Uncomment to turn off uglify minification.
-    //optimize: 'none',
-    dir: './cache/build',
+  uglify: {
+    toplevel: true,
+    ascii_only: true,
+    beautify: false,
+    max_line_length: 1000
+  },
 
-    //Stub out the cs module after a build since
-    //it will not be needed.
-    stubModules: ['cs'],
+  inlineText: true,
+  useStrict: false,
 
-    paths: {
-        'cs' :'require-cs/cs',
-        'coffee-script': 'require-cs/coffee-script'
-    },
+  skipPragmas: false,
+  skipModuleInsertion: false,
+  stubModules: ['text'],
+  optimizeAllPluginResources: false,
+  findNestedDependencies: false,
+  removeCombined: false,
 
-    modules: [
-        {
-            name: '../components/backend/configuration/require-config',
-            //The optimization will load CoffeeScript to convert
-            //the CoffeeScript files to plain JS. Use the exclude
-            //directive so that the coffee-script module is not included
-            //in the built file.
-            exclude: ['coffee-script', 'require-css/normalize']
-        }
-    ]
-};
+  fileExclusionRegExp: /^\./,
+
+  preserveLicenseComments: true,
+
+  logLevel: 0
+}
 
 requirejs.optimize(config, function (buildResponse) {
     console.log("building success");
