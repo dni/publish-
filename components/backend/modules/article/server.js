@@ -22,7 +22,9 @@ module.exports.setup = function(app) {
 		a.tags = req.body.tags;
 		a.date = new Date();
 
+
 		a.save(function () {
+			req.io.broadcast('updateCollection', 'Articles');
 			res.send(a);
 		});
 
@@ -40,6 +42,7 @@ module.exports.setup = function(app) {
 			a.tags = req.body.tags;
 			a.date = new Date();
 			a.save(function () {
+				req.io.broadcast('updateCollection', 'Articles');
 				res.send(a);
 			});
 	  	});
@@ -49,6 +52,7 @@ module.exports.setup = function(app) {
 	  	Article.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
+		      	req.io.broadcast('updateCollection', 'Articles');
 		        return res.send('');
 		      } else {
 		        console.log(err);

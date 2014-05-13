@@ -17,10 +17,5 @@ define [
 
     uploadFile: ->
       @$el.find("#uploadFile").ajaxForm (response) ->
-        App.Files.fetch
-          success:->
-            files = App.Files.where parent:undefined
-            App.listRegion.currentView.collection.reset files
-
       @$el.find("#uploadFile").submit()
 

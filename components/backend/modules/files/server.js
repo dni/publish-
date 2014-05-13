@@ -1,8 +1,7 @@
 var File = require(__dirname + '/model/FileSchema'),
+	Setting = require('./../settings/model/SettingSchema');
 	gm = require('gm'),
 	mongoose = require("mongoose"),
-	///// TODO: !!!!! :D not from config from DB !!
-	cfg = require("./configuration.json"),
 	fs = require("fs");
 
 module.exports.setup = function(app) {
@@ -21,7 +20,7 @@ module.exports.setup = function(app) {
 		while(len--){
 
 			var srcFile = srcFiles[len];
-			var fileModel = new File();
+			var file = new File();
 			var name = srcFile.name;
 			var targetLink = './public/files/' + name;
 
@@ -31,13 +30,25 @@ module.exports.setup = function(app) {
 				targetLink = './public/files/' + name;
 			}
 
-			fileModel.name = name;
-			fileModel.type = srcFile.type;
-			fileModel.link = name;
+			file.name = name;
+			file.type = srcFile.type;
+			file.link = name;
 			fs.renameSync(srcFile.path, targetLink);
 			// fs.unlinkSync(srcFile.path);
 
-			fileModel.save();
+
+			if (file.type.split("/")[0]=="image") {
+				Setting.findOne({name: 'Files'}).execFind(function(err, setting){
+					cfg = setting.pop();
+					createImages(file, name, res, req, cfg);
+				});
+			} else {
+				file.save(function(){
+					req.io.broadcast('updateCollection', 'Files');
+					res.send(file);
+				});
+			}
+
 
 		}
 		res.send("success");
@@ -75,16 +86,21 @@ module.exports.setup = function(app) {
 		file.key = newfile.key;
 
 		if (newfile.type.split("/")[0]=="image") {
-			createImages(file, filename, res);
+			Setting.findOne({name: 'Files'}).execFind(function(err, setting){
+				cfg = setting.pop();
+				createImages(file, filename, res, req, cfg);
+			});
+			console.log("new");
 		} else {
 			file.save(function(){
+				req.io.broadcast('updateCollection', 'Files');
 				res.send(file);
 			});
 		}
 
 	});
 
-	function createImages(file, filename, res) {
+	function createImages(file, filename, res, req, cfg) {
 
 		var types = ["thumbnail", "smallPic", "bigPic"];
 		var image = gm('./public/files/'+ filename);
@@ -116,6 +132,7 @@ module.exports.setup = function(app) {
 				  	shrinkPic(types.pop());
 				  } else {
 					file.save(function(){
+						req.io.broadcast('updateCollection', 'Files');
 						res.send(file);
 					});
 				  }
@@ -157,28 +174,33 @@ module.exports.setup = function(app) {
 			// a.smallPic = req.body.smallPic;
 			// a.bigPic = req.body.bigPic;
 			a.save(function () {
+				req.io.broadcast('updateCollection', 'Files');
 				res.send(a);
 			});
 	  	});
 	});
 
 	app.delete('/files/:id', function(req, res) {
-		File.findById(req.params.id, function(e, a) {
-			if (fs.existsSync("./public/files/" + a.name)===true){
-				fs.unlink("./public/files/" + a.name);
-			}
+		Setting.findOne({name: 'Files'}).execFind(function(err, setting){
+			cfg = setting.pop();
+			File.findById(req.params.id, function(e, a) {
+				if (fs.existsSync("./public/files/" + a.name)===true){
+					fs.unlink("./public/files/" + a.name);
+				}
 
-			for (var index in cfg.settings) {
-			    if (cfg.settings.hasOwnProperty(index)) {
-					if (fs.existsSync("./public/files/" + a[index])===true){
-						fs.unlink("./public/files/" + a[index]);
-					}
-			    }
-			}
+				for (var index in cfg.settings) {
 
-			return a.remove(function(err, model) {
-				if (err) return console.log(err);
-				return res.send('');
+				    if (cfg.settings.hasOwnProperty(index)) {
+						if (fs.existsSync("./public/files/" + a[index])===true){
+							fs.unlink("./public/files/" + a[index]);
+						}
+				    }
+				}
+
+				return a.remove(function(err, model) {
+					if (err) return console.log(err);
+					return res.send('');
+				});
 			});
 		});
 	});

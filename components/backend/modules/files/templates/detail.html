@@ -27,27 +27,27 @@
     	<div class="file-preview">
 	        <% var extGroup = type.split("/")[0], ext = type.split("/")[1];
 	          if (extGroup=="image") { %>
-	            <img height="450" src="./static/files/<%= name %>" alt="<%= name %>" />
+	            <img height="450" src="./public/files/<%= name %>" alt="<%= name %>" />
 	        <% } else if (extGroup=="text") {
 	        	if (ext =="javascript") {
-		        	require(['./static/files/'+name+"?"+Math.random()]);
+		        	require(['./public/files/'+name+"?"+Math.random()]);
 	        	} else if (ext == "html") {
-	        		%> <iframe src="./static/files/<%= name %>" border="0" /> <%
+	        		%> <iframe src="./public/files/<%= name %>" border="0" /> <%
 	        	} else {
-		            $.get('./static/files/'+link, function(data) { $(".file-preview").html(data);} )
+		            $.get('./public/files/'+link, function(data) { $(".file-preview").html(data);} )
 	        	}
 	        } else if (ext=="json"){ %>
 	            <h3>Yes it's a JSON file</h3>
 	        <% } else if (extGroup=="audio"||ext=="ogg"){ %>
 	            <h3>Yes it's a AUDIO file</h3>
 				<audio controls>
-				  <source src="./static/files/<%= name %>" type="<%= type %>">
+				  <source src="./public/files/<%= name %>" type="<%= type %>">
 				  Your browser does not support this audio format.
 				</audio>
 	        <% } else if (extGroup=="video"){ %>
 	            <h3>Yes it's a Video file</h3>
 				<video controls>
-				  <source src="./static/files/<%= name %>" type="<%= type %>">
+				  <source src="./public/files/<%= name %>" type="<%= type %>">
 				  Your browser does not support this video format.
 				</video>
 	        <% } else { %>
