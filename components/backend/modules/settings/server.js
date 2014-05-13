@@ -40,7 +40,7 @@ module.exports.setup = function(app) {
 			s.name = req.body.name;
 			s.settings = req.body.settings;
 
-			if (req.body.development.value) {
+			if (req.body.development && req.body.development.value) {
 				var build = require('./components/backend/utilities/build.js');
 			}
 

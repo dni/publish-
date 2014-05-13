@@ -44,7 +44,9 @@ define (require)->
       # App.vent.trigger "socket:connected"
 
     socket.on "updateCollection", (collection)->
-      App[collection].fetch()
+      c.l "updatecollection", collection
+      App[collection].fetch
+        success:->
 
     # socket.on "disconnect", ->
       # SocketAdapter.connected = false

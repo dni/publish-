@@ -14,3 +14,10 @@ define [
 
   class ListView extends Backbone.Marionette.CollectionView
     itemView: ItemView
+    initialize: ->
+      App.Files.on "sync", @sync, @
+
+    sync: ->
+      files = App.Files.where parent:undefined
+      @collection.reset files
+      @render()

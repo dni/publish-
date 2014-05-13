@@ -1,6 +1,6 @@
 {
     "config": {
-        "name": "UserModule",
+        "name": "Users",
         "namespace": "users"
     },
     "navigation": {
@@ -8,44 +8,5 @@
 	    "route": "users",
 	    "label": "users",
 	    "classNames": "users"
-    },
-
-
-    "settings": {
-        "setting1" : {
-          "label": "Setting1",
-          "value": "setting1DefaultValue",
-          "type": "text"
-        },
-        "defaultAuthor" : {
-          "label": "Default Author",
-          "value": "dnilabs e.U",
-          "type": "text"
-        },
-        "setting2" : {
-          "label": "Setting2",
-          "value": "1",
-          "type": "checkbox"
-        }
-    },
-
-    "model": {
-        "user": {
-            "fields" : {
-                "title": {
-                    "type": "text",
-                    "label": "Titel",
-                    "default": "Hello Titel",
-                    "eval": {
-                        "maxLength": "100"
-                    }
-                },
-                "description": {
-                    "type": "text",
-                    "label": "Titel",
-                    "default": "Hello Description"
-                }
-            }
-        }
     }
 }
