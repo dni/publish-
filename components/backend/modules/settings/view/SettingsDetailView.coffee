@@ -1,6 +1,10 @@
-define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _, Backbone, Template) ->
+define [
+  'jquery'
+  'marionette'
+  'tpl!../templates/detail.html'
+], ( $, Marionette, Template) ->
 
-  class SettingsDetailView extends Backbone.Marionette.ItemView
+  class SettingsDetailView extends Marionette.ItemView
 
     template: Template
 

@@ -10,10 +10,10 @@ define [
       "desc": "Hello World!"
       "files": []
       "author": "dnilabs"
-      "privatecode": true
+      "published": false
       "category": ""
       "tags": ""
 
     togglePublish: ->
-      @.set "privatecode", not @.get "privatecode";
+      @.set "published", not @.get "published";
 
