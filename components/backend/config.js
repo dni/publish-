@@ -4,22 +4,24 @@ require.config({
 	//baseUrl: './',
 
 	paths: {
-		//utils: "utilities/Utilities",
-		io: "vendor/socket.io",
+		App: "utilities/App",
+		Router: "utilities/Router",
+		utils: "utilities/Utilities",
+		io: "vendor/io",
 		jquery: "vendor/jquery",
-		"jquery.ui": "vendor/jquery-ui",
+		"jquery.ui": "vendor/jquery.ui",
 		tinymce: "vendor/tinymce",
 		"jquery.form": "vendor/jquery.form",
 		underscore: "vendor/underscore",
-		wreqr: "vendor/backbone.wreqr",
-		babysitter: "vendor/backbone.babysitter",
+		wreqr: "vendor/wreqr",
+		babysitter: "vendor/babysitter",
 		backbone: "vendor/backbone",
 		bootstrap: "vendor/bootstrap",
-		marionette: "vendor/backbone.marionette",
+		marionette: "vendor/marionette",
         localstorage: "vendor/backbone-localstorage",
 		less: 'vendor/require-less/less',
-		text: 'vendor/requirejs-text/text',
-		tpl: 'vendor/requirejs-tpl/tpl',
+		text: 'vendor/require-text/text',
+		tpl: 'vendor/require-tpl/tpl',
 		cs: 'vendor/require-cs/cs',
 		d3: 'vendor/d3',
 		//gm: 'vendor/gm/index',
@@ -40,14 +42,14 @@ require.config({
       },{
 	    name: 'cs',
 	    location: 'vendor/require-cs',
-	    main: 'vendor/require-cs/cs'
+	    main: 'cs'
 	  },{
 	    name: 'coffee-script',
-	  	location: 'vendor/coffee-script',
-	    main: 'index'
+	  	location: 'vendor',
+	    main: 'coffee-script'
 	  },{
 	    name: 'i18n',
-	  	location: 'vendor/requirejs-i18n',
+	  	location: 'vendor/require-i18n',
 	    main: 'i18n'
 	  }
     ],
