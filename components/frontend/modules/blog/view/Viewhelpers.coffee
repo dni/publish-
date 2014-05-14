@@ -1,4 +1,4 @@
-define [], () ->
+define ['underscore'], (_) ->
 
   Viewhelpers =
 
@@ -20,7 +20,7 @@ define [], () ->
         image = @getFile key
       else
         image = key
-      '<img src="static/files/'+ image[size] + '" alt="'+image.alt+'"/>'
+      '<img src="/public/files/'+image[size]+ '" alt="'+image.alt+'"/>'
 
     renderImages: ->
       images = @getFilesByType 'image'
@@ -28,7 +28,7 @@ define [], () ->
       i = 0
       str = '<div class="row">'
       _.each images, (image) ->
-        str += '<div class="col-md-3 col-xs-6"><a href="static/files/'+image.bigPic+'" rel="gallery" class="thumbnail">' + that.renderImage(image, 'thumbnail') + '</a></div>'
+        str += '<div class="col-md-3 col-xs-6"><a href="/public/files/'+image.bigPic+'" rel="gallery" class="thumbnail">' + that.renderImage(image, 'thumbnail') + '</a></div>'
       str += '</div>'
 
     fileKeyExists: (key) ->

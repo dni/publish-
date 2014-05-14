@@ -1,6 +1,5 @@
 require.config({
-	deps: ["cs!/App"],
-	baseUrl: '/components/frontend',
+	deps: ["main"],
 	paths: {
 		jquery: "vendor/jquery",
 		fancybox: "vendor/fancybox/jquery.fancybox",
