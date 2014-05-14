@@ -8,6 +8,7 @@ define [
 ],
 ( App, Utils, Config, NavigationItem, NavigationItems, NavigationView)->
 
+  # show navigation
   App.navigationRegion.show new NavigationView collection: NavigationItems
 
   # events
@@ -15,5 +16,5 @@ define [
     NavigationItems.add new NavigationItem config
 
   # add Module Config
-  Utils.Vent.trigger "app:addModule", JSON.parse Config
+  Utils.addModule Config
 

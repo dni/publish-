@@ -1,9 +1,10 @@
 define [
+  'cs!App'
   'marionette'
   'tpl!../templates/preview.html'
   'tpl!../templates/preview-item.html'
   'jquery.ui'
-], (Marionette, Template, ItemTemplate) ->
+], (App, Marionette, Template, ItemTemplate) ->
 
 
   class ItemView extends Marionette.ItemView
