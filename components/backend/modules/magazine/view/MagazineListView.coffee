@@ -1,15 +1,12 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
+  'marionette'
   'tpl!../templates/list-item.html'
-],
-($, _, Backbone, ItemTemplate) ->
+], (Marionette, Template) ->
 
-  class ItemView extends Backbone.Marionette.ItemView
-    template: ItemTemplate
+  class ItemView extends Marionette.ItemView
+    template: Template
     initialize:->
       @model.on "change", @render
 
-  class MagazineListView extends Backbone.Marionette.CollectionView
+  class MagazineListView extends Marionette.CollectionView
     itemView: ItemView

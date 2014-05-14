@@ -2,7 +2,6 @@ define [
   'cs!modules/messages/model/Model'
 ],
 (Message) ->
-  console.log "log"
   (log, type, additionalinfo)->
     if additionalinfo? else additionalinfo = ''
     if type? else type = 'log'

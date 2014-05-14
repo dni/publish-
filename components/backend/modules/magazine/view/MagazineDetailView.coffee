@@ -1,13 +1,11 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
+  'marionette'
   'tpl!../templates/detail.html'
   # 'i18n!../nls/language.js'
 ],
-( $, _, Backbone, Template, i18n) ->
+( Marionette, Template, i18n) ->
 
-  class MagazineDetailView extends Backbone.Marionette.ItemView
+  class MagazineDetailView extends Marionette.ItemView
 
     template: Template
     templateHelpers: t: i18n
