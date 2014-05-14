@@ -2,14 +2,38 @@
 Publish your data on all channels!
 
 ## Software Requirements
-* apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip (or use Homebrew on macosx)
+```js
+apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip (or use Homebrew on macosx)
+npm install -g bower grunt jake
+make sure mongod process is running, start it with mongod
+```
 
 ## Installation
-* npm install -g bower jake
-* git clone https://github.com/dni/publish-.git
-* cd publish-
-* node install.js
+```js
+npm install publish-
+cd publish-
+grunt install
+```
 
 ## Starting the App
-* make sure mongod process is running, start it with mongod
-* node app
+```js
+grunt start
+```
+
+
+## Enjoy the App
+
+### Frontend
+http://localhost:1666/
+
+### Backend
+http://localhost:1666/admin/
+User: admin
+Password: password
+
+## Starting the App for Development
+```js
+grunt dev
+```
+
+
