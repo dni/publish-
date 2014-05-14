@@ -1,32 +1,35 @@
 require.config({
 	// urlArgs: "bust=" + (new Date()).getTime(),
 	deps: ['main'],
+	//baseUrl: './',
+
 	paths: {
-		utils: "utilities/Utilities",
-		io: "vendor/socket.io-client/dist/socket.io",
-		jquery: "vendor/jquery/dist/jquery",
-		"jquery.ui": "vendor/jquery-ui/ui/jquery-ui",
-		"jquery.tinymce": "vendor/tinymce/js/tinymce/jquery.tinymce.min",
-		tinymce: "vendor/tinymce/js/tinymce/tinymce",
-		"jquery.form": "vendor/jquery-form/jquery.form",
-		underscore: "vendor/underscore-amd/underscore",
-		wreqr: "vendor/backbone.wreqr/lib/amd/backbone.wreqr",
-		babysitter: "vendor/backbone.babysitter/lib/backbone.babysitter",
-		backbone: "vendor/backbone-amd/backbone",
-		bootstrap: "vendor/bootstrap/dist/js/bootstrap",
-		marionette: "vendor/marionette/lib/core/amd/backbone.marionette",
-        localstorage: "vendor/backbone-localstorage/backbone-localstorage",
+		//utils: "utilities/Utilities",
+		io: "vendor/socket.io",
+		jquery: "vendor/jquery",
+		"jquery.ui": "vendor/jquery-ui",
+		tinymce: "vendor/tinymce",
+		"jquery.form": "vendor/jquery.form",
+		underscore: "vendor/underscore",
+		wreqr: "vendor/backbone.wreqr",
+		babysitter: "vendor/backbone.babysitter",
+		backbone: "vendor/backbone",
+		bootstrap: "vendor/bootstrap",
+		marionette: "vendor/backbone.marionette",
+        localstorage: "vendor/backbone-localstorage",
+		less: 'vendor/require-less/less',
 		text: 'vendor/requirejs-text/text',
 		tpl: 'vendor/requirejs-tpl/tpl',
 		cs: 'vendor/require-cs/cs',
-		d3: 'vendor/d3/d3',
-		gm: 'vendor/gm/index',
-		minicolors: 'vendor/jquery-minicolors/jquery.minicolors'
+		d3: 'vendor/d3',
+		//gm: 'vendor/gm/index',
+		minicolors: 'vendor/jquery.minicolors'
 	},
 	map: {
 	    '*': {
 	        'backbone.wreqr': 'wreqr',
-	        'backbone.babysitter': 'babysitter'
+	        'backbone.babysitter': 'babysitter',
+	        'jquery.tinymce': 'tinymce'
 	    }
 	},
 	packages: [
@@ -37,7 +40,7 @@ require.config({
       },{
 	    name: 'cs',
 	    location: 'vendor/require-cs',
-	    main: 'cs'
+	    main: 'vendor/require-cs/cs'
 	  },{
 	    name: 'coffee-script',
 	  	location: 'vendor/coffee-script',

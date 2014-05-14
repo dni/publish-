@@ -1,6 +1,8 @@
 node_modules
 bower_components
 baker-master
+components/frontend/vendor
+components/backend/vendor
 
 .project
 .DS_Store
