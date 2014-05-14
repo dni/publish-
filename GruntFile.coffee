@@ -71,12 +71,13 @@ module.exports = (grunt)->
           "components": "../components"
 
       requirejs:
-        compile:
-          options:
-            baseUrl: "./",
-            mainConfigFile: "config.js",
-            name: "build",
-            out: "optimized.js"
+        dev:
+          compile:
+            options:
+              baseUrl: "./",
+              mainConfigFile: "config.js",
+              name: "build",
+              out: "optimized.js"
 
 
 
@@ -87,16 +88,15 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-bowercopy'
 
-  grunt.registerTask 'dev'
-    , 'Prepare for Development'
-    , [ 'requirejs' ]
-  grunt.registerTask 'build'
-    , 'Compiles all of the assets and copies the files to the build directory.'
-    , [
-      'clean',
-      'bowercopy:libsBackend',
-      'bowercopy:libsFrontend',
-      #'bowercopy:components'
-    ]
+  grunt.registerTask 'dev', 'Prepare for Development', [
+    'bowercopy:libsBackend',
+    'bowercopy:libsFrontend',
+    # 'bowercopy:components'
+  ]
+
+  grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
+    'clean',
+    'requirejs'
+  ]
 
   return grunt
