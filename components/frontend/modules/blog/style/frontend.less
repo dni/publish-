@@ -1,7 +1,7 @@
 @import "/vendor/bootstrap/less/bootstrap.less";
 @import "/vendor/fancybox/jquery.fancybox.css";
 @import url('http://fonts.googleapis.com/css?family=Voltaire');
-@icon-font-path:"../../../fonts/";
+@icon-font-path:"/public/fonts/";
 
 @highlight:#cb5432;
 
@@ -10,7 +10,7 @@ html {background:rgb(111, 111, 111);}
 body {
   font-family: Arial, sans-serif;
   color: #656360;
-  background: #f1ede8 url(../static/frontend/noise-all.png);
+  background: #f1ede8 url(/public/frontend/noise-all.png);
  }
 
 img {width:100%;}
@@ -174,7 +174,7 @@ aside {
 #main {
   min-height: 500px;
   padding: 40px 0;
-  background-image: url('../static/frontend/main-bg.png'), url('../static/frontend/main-bg.png');
+  background-image: url('/public/frontend/main-bg.png'), url('/public/frontend/main-bg.png');
   background-repeat: repeat-x, repeat-x;
   background-position: bottom left, top left;
 }
