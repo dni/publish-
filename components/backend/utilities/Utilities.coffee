@@ -1,7 +1,7 @@
 define [
   'cs!utilities/Vent'
   'cs!utilities/Log'
-], (  Vent, Log ) ->
+], ( Vent, Log ) ->
   # return utilites, date util extens Date Object
   Utilities =
 

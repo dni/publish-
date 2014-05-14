@@ -7,8 +7,13 @@ define [
 
   # Event - app:addModule
   Utils.Vent.on 'app:addModule', (config)->
-    if config.navigation then Utils.Vent.trigger 'publish:addNavItem', config.navigation
-    if config.settings then Utils.Vent.trigger 'settings:addSetting', config.config.name, config.settings
+
+    Utils.Vent.on 'settings:ready', ->
+      if config.settings then Utils.Vent.trigger 'settings:addSetting', config.config.name, config.settings
+
+    Utils.Vent.on 'publish:ready', ->
+      if config.navigation then Utils.Vent.trigger 'publish:addNavItem', config.navigation
+
     Utils.Vent.trigger config.config.namespace+":ready"
 
   # Event - app:updateRegion

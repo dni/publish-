@@ -19,13 +19,10 @@ define [
       Utils.Vent.trigger "settings:ready"
 
   Utils.Vent.on "settings:addSetting", (name, settings)->
-    c.l 'addsetting'
+    console.log "add setting: "+name
     setting = App.Settings.where name: name
     if setting.length is 0
       setting = new Setting
       setting.set "settings", settings
       setting.set "name", name
       App.Settings.create setting
-
-  Utils.addModule Config
-
