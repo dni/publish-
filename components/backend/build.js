@@ -1,9 +1,9 @@
 var requirejs = require('requirejs');
 
 var config = {
-  appDir: "components/backend",
-  dir: "cache/build/backend",
-  mainConfigFile: 'components/backend/config.js',
+  appDir: "components/frontend",
+  dir: "cache/build/frontend",
+  mainConfigFile: 'components/frontend/config.js',
   // out: "cache/main.built.js",
   // include : 'main.js',
 
