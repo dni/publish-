@@ -1,11 +1,12 @@
 define [
-  'cs!./../modules/messages/model/Model'
+  'cs!modules/messages/model/Model'
 ],
 (Message) ->
+  console.log "log"
   (log, type, additionalinfo)->
     if additionalinfo? else additionalinfo = ''
     if type? else type = 'log'
-    message = new Message
+    # message = new Message
     message.set
       message: log
       username: App.User.get "name"

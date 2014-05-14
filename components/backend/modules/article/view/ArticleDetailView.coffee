@@ -3,7 +3,7 @@ define [
   'lodash'
   'backbone'
   'tpl!../templates/detail.html'
-  'i18n!../nls/language.js'
+  # 'i18n!../nls/language.js'
 ], ($, _, Backbone, Template, i18n) ->
 
   class ArticleDetailView extends Backbone.Marionette.ItemView
