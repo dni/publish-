@@ -1,5 +1,4 @@
 module.exports = (grunt)->
-
   grunt.initConfig
 
     pkg: grunt.file.readJSON 'package.json'
@@ -9,6 +8,24 @@ module.exports = (grunt)->
       build:
         src: [ 'cache/build' ]
 
+    # bower
+    bower:
+      install:
+        option:
+          targetDir: 'bower_components'
+
+    # forever
+    forever:
+      dev:
+        options:
+          command: 'coffee'
+          index: 'app.coffee'
+          logDir: 'cache'
+
+      dist:
+        options:
+          index: 'app.js',
+          logDir: 'cache'
 
     bowercopy:
       options:
@@ -19,28 +36,27 @@ module.exports = (grunt)->
       libsBackend:
         options:
           destPrefix: "components/backend/vendor"
-
         files:
-          "io.js": "socket.io-client/dist/socket.io.js",
-          "jquery.js": "jquery/dist/jquery.js",
-          "require.js": "requirejs/require.js",
-          "jquery.ui.js": "jquery-ui/ui/jquery-ui.js",
-          "tinymce.js": "tinymce/js/tinymce/tinymce.js",
-          "jquery.form.js": "jquery-form/jquery.form.js",
-          "underscore.js": "underscore-amd/underscore.js",
-          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js",
-          "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js",
-          "backbone.js": "backbone-amd/backbone.js",
-          "bootstrap.js": "bootstrap/dist/js/bootstrap.js",
-          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js",
-          "localstorage.js": "backbone-localstorage/backbone-localstorage.js",
-          "require-text": 'requirejs-text',
-          "require-tpl": 'requirejs-tpl',
-          "require-cs": 'require-cs',
-          "require-less": 'require-less',
-          "require-i18n": 'requirejs-i18n',
-          "coffee-script.js": 'coffee-script/index.js',
-          "d3.js": 'd3/d3.js',
+          "io.js": "socket.io-client/dist/socket.io.js"
+          "jquery.js": "jquery/dist/jquery.js"
+          "require.js": "requirejs/require.js"
+          "jquery.ui.js": "jquery-ui/ui/jquery-ui.js"
+          "tinymce.js": "tinymce/js/tinymce/tinymce.js"
+          "jquery.form.js": "jquery-form/jquery.form.js"
+          "underscore.js": "underscore-amd/underscore.js"
+          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
+          "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js"
+          "backbone.js": "backbone-amd/backbone.js"
+          "bootstrap.js": "bootstrap/dist/js/bootstrap.js"
+          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js"
+          "localstorage.js": "backbone-localstorage/backbone-localstorage.js"
+          "require-text": 'requirejs-text'
+          "require-tpl": 'requirejs-tpl'
+          "require-cs": 'require-cs'
+          "require-less": 'require-less'
+          "require-i18n": 'requirejs-i18n'
+          "coffee-script.js": 'coffee-script/index.js'
+          "d3.js": 'd3/d3.js'
           "minicolors.js": 'jquery-minicolors/jquery.minicolors.js'
 
       libsFrontend:
@@ -74,8 +90,7 @@ module.exports = (grunt)->
         dev:
           compile:
             options:
-              baseUrl: "./",
-              mainConfigFile: "config.js",
+              mainConfigFile: "components/backend/config.js",
               name: "build",
               out: "optimized.js"
 
@@ -87,11 +102,18 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
   grunt.loadNpmTasks 'grunt-bowercopy'
+  grunt.loadNpmTasks 'grunt-forever'
 
   grunt.registerTask 'dev', 'Prepare for Development', [
-    'bowercopy:libsBackend',
-    'bowercopy:libsFrontend',
-    # 'bowercopy:components'
+    'bower:install'
+    'bowercopy:libsBackend'
+    'bowercopy:libsFrontend'
+    'forever:dist:start'
+  ]
+
+  grunt.registerTask 'restart', 'Restart forever Server', [
+    'forever:dev:restart'
+    'forever:dist:restart'
   ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
