@@ -28,12 +28,13 @@ grunt start
 ## Enjoy the App
 
 ##### Frontend
+Before you visit this you should create some articles in the backend
 http://localhost:1666/
 
-#### Backend
+##### Backend
 http://localhost:1666/admin/
 
-**User:** admin
+**User:** admin <br>
 **Password:** password
 
 ## Starting the App for Development
