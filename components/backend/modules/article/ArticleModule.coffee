@@ -16,4 +16,4 @@ define [
     "article/:id": "details"
     "newArticle": "add"
 
-  Utils.Vent.trigger "app:addModule", JSON.parse Config
+  Utils.addModule Config

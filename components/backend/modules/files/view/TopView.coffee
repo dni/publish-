@@ -1,17 +1,9 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
   'marionette'
   'tpl!../templates/top.html'
-  "jquery.form"
-  'cs!../view/ListView'
-
-],
-($, _, Backbone, Marionette, Template) ->
-  class TopView extends Backbone.Marionette.ItemView
+], (Marionette, Template) ->
+  class TopView extends Marionette.ItemView
     template: Template
-
     events:
       "change #upload": "uploadFile"
 
