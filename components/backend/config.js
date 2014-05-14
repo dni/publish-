@@ -2,6 +2,8 @@ require.config({
 	// urlArgs: "bust=" + (new Date()).getTime(),
 	deps: ['main'],
 	paths: {
+		App: "utilities/App",
+		Router: "utilities/Router",
 		utils: "utilities/Utilities",
 		io: "vendor/socket.io-client/dist/socket.io",
 		jquery: "vendor/jquery/dist/jquery",

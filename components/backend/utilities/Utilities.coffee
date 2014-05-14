@@ -2,7 +2,6 @@ define [
   'cs!utilities/Vent'
   'cs!utilities/Log'
 ], (  Vent, Log ) ->
-  console.log "Utilities", Vent
   # return utilites, date util extens Date Object
   Utilities =
     Vent: Vent

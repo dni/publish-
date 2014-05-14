@@ -1,14 +1,11 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
-  'tpl!../templates/layout.html'
-  'cs!../view/ArticleDetailView'
-  'cs!../../files/view/PreviewView'
-], (Vent, $, _, Backbone, Template, DetailView, PreviewView) ->
-
-  class ArticleLayout extends Backbone.Marionette.Layout
+  'cs!utils'
+  'marionette'
+  'tpl!modules/article/templates/layout.html'
+  'cs!modules/article/view/ArticleDetailView'
+  # 'cs!modules/files/view/PreviewView'
+], (Utils, Marionette, Template, DetailView, PreviewView) ->
+  class ArticleLayout extends Marionette.Layout
 
     template: Template
 
