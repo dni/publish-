@@ -1,13 +1,21 @@
 define [
+  'cs!App'
   'marionette'
   'tpl!modules/article/templates/detail.html'
-  # 'i18n!../nls/language.js'
-], (Marionette, Template, i18n) ->
+  'i18n!admin/modules/article/nls/language.js'
+], (App,Marionette, Template, i18n) ->
 
   class ArticleDetailView extends Marionette.ItemView
 
     template: Template
-    templateHelpers: t: i18n
+    templateHelpers:
+      t: i18n
+      renderCategories: (category, func)->
+        cats = (App.Settings.findWhere name:'Articles').getValue "categories"
+
+        for cat in cats.split ','
+          cat = cat.replace " ", ""
+          if cat is category then func cat, 'selected' else func cat, ''
 
     ui:
       title: '[name=title]'

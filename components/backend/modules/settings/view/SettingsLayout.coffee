@@ -1,25 +1,24 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!Router'
+  'cs!utils'
+  'marionette'
   'tpl!../templates/layout.html'
   'cs!../view/SettingsDetailView'
-  'cs!../../files/view/PreviewView'
-], (Vent, $, _, Backbone, Template, DetailView, PreviewView) ->
-
-  class SettingLayout extends Backbone.Marionette.Layout
+  'cs!modules/files/view/PreviewView'
+], (App, Router, Utils, Marionette, Template, DetailView, PreviewView)->
+  class SettingsLayout extends Marionette.Layout
 
     template: Template
-
     events:
       "click .save": "save"
       "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()
+
     cancel: ->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
-      App.Router.navigate 'settings'
+      App.contentRegion.close()
+      Router.navigate 'settings'
 
     regions:
       'detailRegion': '#setting-details'
