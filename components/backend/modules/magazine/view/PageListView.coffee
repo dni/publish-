@@ -1,15 +1,12 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
   'cs!../model/Page',
   'jquery.ui'
-], ($, _, Backbone, Marionette, Template, ItemTemplate, Page, jqueryui) ->
+], (Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
-  class PageListItemView extends Backbone.Marionette.ItemView
+  class PageListItemView extends Marionette.ItemView
     template: ItemTemplate
 
     ui:
@@ -37,7 +34,7 @@ define [
       @model.destroy
         success: ->
 
-  class PageListView extends Backbone.Marionette.CompositeView
+  class PageListView extends Marionette.CompositeView
 
     template: Template
     itemView: PageListItemView

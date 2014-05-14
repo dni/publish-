@@ -1,16 +1,17 @@
 define [
+    'cs!modules/publish/App'
     'marionette'
-    'cs!../../utilities/Vent'
-    'cs!./model/Magazines'
-    'cs!./controller/MagazineController'
-    "text!./configuration.json"
+    'cs!utils'
+    'cs!modules/magazine/model/Magazines'
+    'cs!modules/magazine/controller/MagazineController'
+    "text!modules/magazine/configuration.json"
 ],
-( Marionette, Vent, Magazines, Controller, Config ) ->
+( App, Marionette, Utils, Magazines, Controller, Config ) ->
+  c.l App
 
+  Utils.Vent.on "app:ready", ()->
 
-  Vent.on "app:ready", ()->
-
-    Vent.trigger "app:addModule", JSON.parse Config
+    Utils.Vent.trigger "app:addModule", JSON.parse Config
     App.Magazines = new Magazines
     App.Magazines.fetch
       success:->
@@ -20,4 +21,4 @@ define [
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
 
-    Vent.trigger "magazine:ready"
+    Utils.Vent.trigger "magazine:ready"

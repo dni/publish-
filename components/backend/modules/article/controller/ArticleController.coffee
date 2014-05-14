@@ -1,15 +1,15 @@
 define [
+  'cs!App'
   'cs!utils'
   'marionette'
   'cs!modules/article/view/ArticleListView'
   'cs!modules/article/view/ArticleLayout'
   'cs!modules/article/view/TopView'
   'cs!modules/article/model/Article'
-  # 'cs!modules/files/model/Files'
-], ( Utils, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
+  'cs!modules/files/model/Files'
+], ( App, Utils, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
 
   class ArticleController extends Marionette.Controller
-    c.l "controller"
     settings: (attr)->
       (App.Settings.findWhere name: "Articles").getValue(attr)
 
