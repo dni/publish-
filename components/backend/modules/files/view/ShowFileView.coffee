@@ -1,13 +1,10 @@
 define [
-  'cs!../../../utilities/Vent'
   'jquery'
-  'lodash'
-  'backbone'
+  'marionette'
   'tpl!../templates/showfile.html'
-  'cs!../model/File'
-], (Vent, $, _, Backbone, Template, File) ->
+], ($, Marionette, Template) ->
 
-  class ShowFileView extends Backbone.Marionette.ItemView
+  class ShowFileView extends Marionette.ItemView
 
     template: Template
 
@@ -27,11 +24,6 @@ define [
       $('.modal').modal('hide')
       @model.destroy
         success:->
-
-    editFile: ->
-      c.l "cropfile in showfileview"
-      App.Router.navigate("cropfile/"+@model.get('_id'), {trigger:true})
-      $('.modal').modal('hide')
 
     save: ->
       @model.set
