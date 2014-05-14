@@ -1,7 +1,7 @@
 define([
 	"backbone",
 	"cs!App",
-	"less!modules/publish/style/main",
+	// "less!modules/publish/style/main",
 	"cs!modules/publish/Regions",
 	"cs!modules/publish/Events",
 	"cs!modules/publish/Socket",
