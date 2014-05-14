@@ -5,18 +5,21 @@ Publish your data on all channels!
 
 ```js
 apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
-npm install -g bower grunt jake
-make sure mongod process is running, start it with mongod
 ```
 On Mac OSX use Homebrew
 ```js
 brew install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
 ```
+Install node.js modules
+```js
+npm install -g bower grunt jake
+```
+Make sure mongod process is running, start it with mongod
 
 ## Installation
 ```js
-npm install publish-
-cd publish- && grunt install && jake
+git clone https://github.com/dni/publish-.git
+cd publish- && jake && grunt install
 ```
 
 ## Starting the App
@@ -27,13 +30,20 @@ grunt start
 
 ## Enjoy the App
 
+Before you visit the Frontend you should
+
+* create a new admin user
+* go through the settings
+* customize your staticblocks
+* add some article
+
 ##### Frontend
-Before you visit this you should create some articles in the backend
+
 http://localhost:1666/
 
 ##### Backend
-http://localhost:1666/admin/
 
+http://localhost:1666/admin/ <br>
 **User:** admin <br>
 **Password:** password
 
