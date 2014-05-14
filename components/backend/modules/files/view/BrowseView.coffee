@@ -1,9 +1,8 @@
 define [
   'jquery'
-  'lodash'
   'backbone'
   'tpl!../templates/browseItem.html'
-], ($, _, Backbone, Template) ->
+], ($, Backbone, Template) ->
 
   class ItemView extends Backbone.Marionette.ItemView
     template: Template
