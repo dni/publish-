@@ -1,8 +1,5 @@
 require.config({
-	// urlArgs: "bust=" + (new Date()).getTime(),
 	deps: ['main'],
-	//baseUrl: './',
-
 	paths: {
 		App: "utilities/App",
 		Router: "utilities/Router",
