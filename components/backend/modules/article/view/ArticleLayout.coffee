@@ -3,7 +3,7 @@ define [
   'marionette'
   'tpl!modules/article/templates/layout.html'
   'cs!modules/article/view/ArticleDetailView'
-  # 'cs!modules/files/view/PreviewView'
+  'cs!modules/files/view/PreviewView'
 ], (Utils, Marionette, Template, DetailView, PreviewView) ->
   class ArticleLayout extends Marionette.Layout
 
