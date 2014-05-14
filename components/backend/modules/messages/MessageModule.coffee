@@ -1,16 +1,16 @@
 define [
-    'cs!../../utilities/Vent'
+    'cs!utils'
     'marionette'
-    'cs!./model/Collection'
-    'cs!./controller/Controller'
+    'cs!modules/messages/model/Collection'
+    # 'cs!./controller/Controller'
     "text!./configuration.json"
     'less!./style'
 ],
-( Vent, Marionette, Collection, Controller, Config ) ->
+( Utils, Marionette, Collection, Controller, Config ) ->
+  c.l "message"
+  Utils.Vent.on "app:ready", ->
 
-  Vent.on "app:ready", ->
-
-    Vent.trigger "app:addModule", JSON.parse Config
+    Utils.Vent.trigger "app:addModule", JSON.parse Config
 
     App.Messages = new Collection
     App.Messages.fetch
@@ -18,3 +18,5 @@ define [
 
     App.Router.processAppRoutes new Controller,
       "messages": "list"
+
+  return

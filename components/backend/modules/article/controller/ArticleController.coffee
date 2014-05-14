@@ -1,31 +1,28 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!utils'
   'marionette'
-  'cs!../view/ArticleListView'
-  'cs!../view/ArticleLayout'
-  'cs!../view/TopView'
-  'cs!../model/Article'
-  'cs!../../files/model/Files'
-], ( Vent, $, _, Backbone, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
+  'cs!modules/article/view/ArticleListView'
+  'cs!modules/article/view/ArticleLayout'
+  'cs!modules/article/view/TopView'
+  'cs!modules/article/model/Article'
+  # 'cs!modules/files/model/Files'
+], ( Utils, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
 
-  class ArticleController extends Backbone.Marionette.Controller
-
+  class ArticleController extends Marionette.Controller
+    c.l "controller"
     settings: (attr)->
       (App.Settings.findWhere name: "Articles").getValue(attr)
 
     details: (id) ->
-      Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout
+      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout
         model: App.Articles.findWhere _id: id
         files: new Files App.Files.where relation: "article:"+id
 
     add: ->
-      Vent.trigger 'app:updateRegion', 'contentRegion', new ArticleLayout
+      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new ArticleLayout
         model: new Article author: @settings("defaultAuthor")
         files: new Files
 
     list: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles
