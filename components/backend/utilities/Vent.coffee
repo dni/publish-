@@ -1,4 +1,3 @@
-#vent.js
 define [
   'wreqr'
 ],

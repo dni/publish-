@@ -1,6 +1,4 @@
-var fs = require('fs'),
-	express = require("express");
-
+var fs = require('fs');
 
 module.exports.setup = function(app) {
 

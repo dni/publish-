@@ -1,4 +1,6 @@
-define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
+define [
+  'backbone'
+], (Backbone) ->
   class Article extends Backbone.Model
     idAttribute: "_id"
     urlRoot: "articles"

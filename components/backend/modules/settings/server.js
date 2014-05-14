@@ -6,7 +6,7 @@ module.exports.setup = function(app) {
 
 	app.get('/clearCache', function(req, res){
 	  	Setting.collection.drop();
-	  	var build = require(process.cwd()+'/components/backend/utilities/build.js');
+	  	var build = require(process.cwd()+'/components/backend/build.js');
 	  	res.send("cache cleared");
 	});
 

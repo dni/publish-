@@ -4,7 +4,7 @@ define [
   'backbone'
   'cs!../model/Model'
   'tpl!../templates/list.html'
-  'i18n!../nls/language.js'
+  # 'i18n!../nls/language.js'
 ], ($, _, Backbone, Model, Template, i18n) ->
 
   class MessageListView extends Backbone.Marionette.ItemView
