@@ -17,9 +17,9 @@ require.config({
 		marionette: "vendor/marionette",
         localstorage: "vendor/backbone-localstorage",
 		less: 'vendor/require-less/less',
-		text: 'vendor/require-text/text',
-		tpl: 'vendor/require-tpl/tpl',
-		cs: 'vendor/require-cs/cs',
+		text: 'vendor/text',
+		tpl: 'vendor/tpl',
+		cs: 'vendor/cs',
 		d3: 'vendor/d3',
 		//gm: 'vendor/gm/index',
 		minicolors: 'vendor/minicolors'
@@ -38,7 +38,7 @@ require.config({
         main: 'less'
       },{
 	    name: 'cs',
-	    location: 'vendor/require-cs',
+	    location: 'vendor',
 	    main: 'cs'
 	  },{
 	    name: 'coffee-script',
@@ -46,7 +46,7 @@ require.config({
 	    main: 'coffee-script'
 	  },{
 	    name: 'i18n',
-	  	location: 'vendor/require-i18n',
+	  	location: 'vendor',
 	    main: 'i18n'
 	  }
     ],
