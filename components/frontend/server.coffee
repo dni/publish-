@@ -1,6 +1,5 @@
 express = require 'express'
 _ = require 'underscore'
-
 Article = require process.cwd()+'/components/backend/modules/article/model/ArticleSchema'
 File = require process.cwd()+'/components/backend/modules/files/model/FileSchema'
 Blocks = require process.cwd()+'/components/backend/modules/static/model/StaticBlockSchema'
@@ -8,7 +7,7 @@ async = require 'async'
 
 module.exports.setup = (app)->
 
-	app.use'/', express.static __dirname
+	app.use '/', express.static __dirname
 
 	# web app
 	app.get '/', (req, res) -> res.sendfile __dirname+'/index.html'
@@ -23,16 +22,16 @@ module.exports.setup = (app)->
 
   # articles
 	app.get '/publicarticles', (req,res)->
-		Article.find({'published': true}).execFind (err,data)->
-			calls = []
-      data.forEach (article)->
-				article.files = []
-        calls.push (callback)->
-          File.find({ 'relation': 'article:'+article._id}).execFind (arr,data)->
-						data.forEach (file)->
-							article.files.push file
-          callback null, article
-
-			async.parallel calls, (err, result)->
-				res.send result
+    Article.find(
+      privatecode: false
+    ).execFind (err,articles)->
+      calls = []
+      articles.forEach (article)->
+        article.files = []
+        File.find(
+          relation: 'article:'+article._id
+        ).execFind (err, files)->
+          if err then return
+  				files.forEach (file)->
+  				  if file.length then article.files.push file
 
