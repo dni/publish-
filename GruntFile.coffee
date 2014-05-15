@@ -19,7 +19,7 @@ module.exports = (grunt)->
       dev:
         options:
           command: 'coffee'
-          index: 'app.coffee'
+          index: 'server.coffee'
           logDir: 'cache'
 
       dist:
@@ -105,10 +105,9 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-forever'
 
   grunt.registerTask 'dev', 'Prepare for Development', [
-    'bower:install'
     'bowercopy:libsBackend'
     'bowercopy:libsFrontend'
-    'forever:dist:start'
+    'forever:dev:start'
   ]
 
   grunt.registerTask 'restart', 'Restart forever Server', [
@@ -119,6 +118,7 @@ module.exports = (grunt)->
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean',
     'requirejs'
+    'forever:dist:start'
   ]
 
   return grunt
