@@ -1,11 +1,12 @@
 define [
+  'cs!App'
   'cs!utils'
   'marionette'
   'cs!../view/MessageListView'
   'cs!../view/MessageDetailView'
   'cs!../view/TopView'
 
-], ( Utils, Marionette, ListView, DetailView, TopView) ->
+], ( App, Utils, Marionette, ListView, DetailView, TopView) ->
 
   class MessageController extends Backbone.Marionette.Controller
 

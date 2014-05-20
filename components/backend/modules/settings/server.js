@@ -1,20 +1,15 @@
-var Setting = require(__dirname + '/model/SettingSchema'),
-	mongoose = require("mongoose");
-
+var Setting = require(__dirname + '/model/SettingSchema');
 
 module.exports.setup = function(app) {
 
 	app.get('/clearCache', function(req, res){
-	  	Setting.collection.drop();
-	  	var build = require(process.cwd()+'/components/backend/build.js');
-	  	res.send("cache cleared");
+		var spawn = require('child_process').spawn;
+	    var grunt = spawn('grunt', ['build']);
+	    grunt.on("end",function(){
+	    	res.send("cache cleared");
+	    });
 	});
 
-
-	app.get('/reset', function(req, res){
-	  	Setting.collection.drop();
-	  	res.send("module config reset");
-	});
 
 	// API
 	app.get('/settings', function(req, res){
@@ -52,7 +47,7 @@ module.exports.setup = function(app) {
 	});
 
 	app.delete('/settings/:id', function(req, res){
-	  	db.Setting.findById( req.params.id, function(e, a) {
+	  	Setting.findById( req.params.id, function(e, a) {
 			return a.remove(function (err) {
 		      if (!err) {
 		        return res.send('');

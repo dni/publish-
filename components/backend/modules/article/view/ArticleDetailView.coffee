@@ -1,9 +1,11 @@
 define [
   'cs!App'
+  'cs!Router'
+  'cs!utils'
   'marionette'
   'tpl!modules/article/templates/detail.html'
   'i18n!admin/modules/article/nls/language.js'
-], (App,Marionette, Template, i18n) ->
+], (App, Router, Utils, Marionette, Template, i18n) ->
 
   class ArticleDetailView extends Marionette.ItemView
 
@@ -37,13 +39,13 @@ define [
           wait: true
           success: (res) ->
             route = 'article/'+res.attributes._id
-            App.Utilities.Log i18n.newArticle, 'new',
+            Utils.Log i18n.newArticle, 'new',
               text: res.attributes.title
               href: route
 
-            App.Router.navigate route, false
+            Router.navigate route, false
       else
-        App.Utilities.Log i18n.updateArticle, 'update',
+        Utils.Log i18n.updateArticle, 'update',
           text: @model.get 'title'
           href: 'article/'+@model.get '_id'
 

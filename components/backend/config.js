@@ -14,7 +14,7 @@ require.config({
 		wreqr: "vendor/wreqr",
 		babysitter: "vendor/babysitter",
 		backbone: "vendor/backbone",
-		bootstrap: "vendor/bootstrap/bootstrap",
+		bootstrap: "vendor/bootstrap/dist/js/bootstrap",
 		marionette: "vendor/marionette",
         localstorage: "vendor/backbone-localstorage",
 		less: 'vendor/require-less/less',
