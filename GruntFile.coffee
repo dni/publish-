@@ -16,16 +16,11 @@ module.exports = (grunt)->
 
     # forever
     forever:
-      dev:
-        options:
-          command: 'coffee'
-          index: 'server.coffee'
-          logDir: 'cache'
+      options:
+        command: 'coffee'
+        index: 'server.coffee'
+        logDir: 'cache'
 
-      dist:
-        options:
-          index: 'app.js',
-          logDir: 'cache'
 
     bowercopy:
       options:
@@ -87,15 +82,16 @@ module.exports = (grunt)->
     requirejs:
       compile:
         options:
-          appDir: '.'
+          appDir: 'components/backend/'
           mainConfigFile: "components/backend/config.js"
           dir: "cache/build"
           #out: "optimized.js"
 
           stubModules: ['cs']
-          modules:
-            name: "config"
-            exclude: ['coffee-script']
+          # modules: [{
+          #name: "main"
+            # exclude: ['coffee-script']
+          # }]
 
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -108,15 +104,15 @@ module.exports = (grunt)->
   grunt.registerTask 'dev', 'Prepare for Development', [
     'bowercopy:libsBackend'
     'bowercopy:libsFrontend'
-    'forever:dev:start'
+    'forever:start'
   ]
 
   grunt.registerTask 'restart', 'Restart forever Server', [
-    'forever:dev:restart'
-    'forever:dist:restart'
+    'forever:restart'
   ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
+    'clean'
     'requirejs'
     'forever:dist:start'
   ]
