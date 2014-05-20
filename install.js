@@ -1,5 +1,5 @@
 var child_process = require('child_process').spawn;
-console.log("\x1b[40m\x1b[33m");
+console.log("\x1b[30m\x1b[33m");
 console.log('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n');
 console.log('\x1b[33m\x1b[4mPUBLISH! INSTALLATION STARTED\x1b[24m');
 console.log('\n\n\x1b[33mSTART NPM INSTALL');
@@ -12,7 +12,7 @@ var errorlog = ""
 function end() {
 	if(errorlog.length>0){
 		console.log('\x1b[31mINSTALLATION HAS COMPLETED WITH ERRORS !!!');
-		console.log(errorlog); 
+		console.log(errorlog);
 	} else {
 		console.log('\x1b[32m\x1b[5mINSTALLATION IS COMPLETE !!!');
 	}
