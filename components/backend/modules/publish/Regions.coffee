@@ -3,7 +3,8 @@ define [
   'jquery'
   'jquery.tinymce'
   'minicolors'
-], (App, $, tinymce, minicolors) ->
+  'bootstrap'
+], (App, $, tinymce, minicolors, bootstrap) ->
 
   App.addRegions
     navigationRegion:"#navigation"

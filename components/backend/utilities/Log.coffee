@@ -5,7 +5,7 @@ define [
   (log, type, additionalinfo)->
     if additionalinfo? else additionalinfo = ''
     if type? else type = 'log'
-    # message = new Message
+    message = new Message
     message.set
       message: log
       username: App.User.get "name"

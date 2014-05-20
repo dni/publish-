@@ -21,8 +21,13 @@
 	      "value": "localhost",
 	      "type": "text"
 		},
-		"development" : {
-	      "label": "In Development Mode",
+		"backend_development" : {
+	      "label": "Backend in Development Mode",
+	      "value": "1",
+	      "type": "checkbox"
+		},
+		"frontend_development" : {
+	      "label": "Frontend in Development Mode",
 	      "value": "1",
 	      "type": "checkbox"
 		}

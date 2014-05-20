@@ -3,7 +3,7 @@ define [
   'marionette'
   'cs!../model/Model'
   'tpl!../templates/list.html'
-  # 'i18n!../nls/language.js'
+  'i18n!admin/modules/messages/nls/language.js'
 ], (App, Marionette, Model, Template, i18n) ->
 
   class MessageListView extends Marionette.ItemView
