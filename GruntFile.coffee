@@ -41,7 +41,6 @@ module.exports = (grunt)->
           "jquery.js": "jquery/dist/jquery.js"
           "require.js": "requirejs/require.js"
           "jquery.ui.js": "jquery-ui/ui/jquery-ui.js"
-          "tinymce.js": "tinymce/tinymce.min.js"
           "jquery.tinymce.js": "tinymce/jquery.tinymce.min.js"
           "jquery.form.js": "jquery-form/jquery.form.js"
           "underscore.js": "underscore-amd/underscore.js"
@@ -57,6 +56,7 @@ module.exports = (grunt)->
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'
           # Folders
+          "tinymce": "tinymce"
           "minicolors": 'jquery-minicolors'
           "fancybox": "fancybox/source",
           "bootstrap": "bootstrap",

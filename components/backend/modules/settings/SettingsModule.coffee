@@ -26,3 +26,5 @@ define [
       setting.set "settings", settings
       setting.set "name", name
       App.Settings.create setting
+
+  Utils.addModule Config

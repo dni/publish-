@@ -1,4 +1,5 @@
 define [
+  'cs!App'
   'cs!utils'
   'marionette'
   'cs!modules/magazine/view/MagazineLayout'
@@ -8,7 +9,7 @@ define [
   'cs!modules/magazine/model/Magazines'
   'cs!modules/magazine/model/Pages'
   'cs!modules/files/model/Files'
-], ( Utils, Marionette, MagazineLayout, MagazineListView, TopView, Magazine, Magazines, Pages, Files) ->
+], ( App, Utils, Marionette, MagazineLayout, MagazineListView, TopView, Magazine, Magazines, Pages, Files) ->
 
   class MagazineController extends Marionette.Controller
     detailsMagazine: (id) ->
@@ -29,5 +30,5 @@ define [
         pages: new Pages()
 
     magazines: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines

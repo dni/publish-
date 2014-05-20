@@ -1,29 +1,25 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!utils'
   'marionette'
   'cs!../view/ListView'
   'cs!../view/DetailView'
   'cs!../model/StaticBlock'
   'cs!../view/TopView'
-], ( Vent, $, _, Backbone, Marionette, ListView, DetailView, Model, TopView ) ->
+], ( App, Utils, Marionette, ListView, DetailView, Model, TopView ) ->
 
-  class StaticController extends Backbone.Marionette.Controller
-#
+  class StaticController extends Marionette.Controller
     settings: ->
       App.Settings.where({name: "StaticModule"})[0]
-#
+
     details: (id) ->
       model = App.StaticBlocks.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
+      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model[0]
 
     add: ->
       view = new DetailView model: new Model
-      Vent.trigger 'app:updateRegion', 'contentRegion', view
-      #view.toggleEdit()
+      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', view
 
     list: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.StaticBlocks
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.StaticBlocks

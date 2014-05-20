@@ -10,10 +10,10 @@ define([
 	"cs!modules/files/FileModule",
 	"cs!modules/user/UserModule",
 	"cs!modules/article/ArticleModule",
-	// "cs!modules/magazine/MagazineModule",
-	// "cs!modules/baker/BakerModule",
-	// "cs!modules/static/StaticModule",
-    // "cs!modules/messages/MessageModule",
+	"cs!modules/magazine/MagazineModule",
+	"cs!modules/baker/BakerModule",
+	"cs!modules/static/StaticModule",
+    "cs!modules/messages/MessageModule",
 	// coming soon in 2.0
 	// "cs!modules/reports/ReportModule",
 ], function(Backbone){
