@@ -5,8 +5,9 @@ module.exports = (grunt)->
 
     #clean
     clean:
-      build:
-        src: [ 'cache/build' ]
+      build: src: [ 'cache/build' ]
+      vendorFrontend: src: [ 'components/backend/vendor' ]
+      vendorBackend: src: [ 'components/frontend/vendor' ]
 
     # bower
     bower:
@@ -112,9 +113,11 @@ module.exports = (grunt)->
   ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
-    'clean'
+    'clean:build'
+    'bowercopy:libsBackend'
+    'bowercopy:libsFrontend'
     'requirejs'
-    'forever:dist:start'
+    #'forever:dist:start'
   ]
 
   return grunt
