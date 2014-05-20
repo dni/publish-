@@ -16,4 +16,5 @@ define [
     "article/:id": "details"
     "newArticle": "add"
 
+  console.log "add article config"
   Utils.addModule Config
