@@ -7,7 +7,7 @@ require.config({
 		io: "vendor/io",
 		jquery: "vendor/jquery",
 		"jquery.ui": "vendor/jquery.ui",
-		tinymce: "vendor/tinymce",
+		tinymce: "vendor/tinymce/tinymce.min",
 		"jquery.tinymce": "vendor/jquery.tinymce",
 		"jquery.form": "vendor/jquery.form",
 		underscore: "vendor/underscore",
@@ -52,7 +52,7 @@ require.config({
     ],
 	shim: {
 		'jquery.ui':['jquery'],
-		'jquery.tinymce':['jquery'],
+		'jquery.tinymce':['jquery', 'tinymce'],
 		'jquery.form':['jquery'],
 		'bootstrap':['jquery'],
 		'minicolors':['jquery'],

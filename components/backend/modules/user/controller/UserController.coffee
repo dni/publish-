@@ -1,16 +1,14 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!utils'
   'marionette'
   'cs!../view/UserListView'
   'cs!../view/UserDetailView'
   'cs!../model/User'
   'cs!../view/TopView'
-], ( Vent, $, _, Backbone, Marionette, UserListView, UserDetailView, User, TopView ) ->
+], ( App, Utils, Marionette, UserListView, UserDetailView, User, TopView ) ->
 
-  class UserController extends Backbone.Marionette.Controller
+  class UserController extends Marionette.Controller
 
     logout: ->
       if confirm 'Logout?' then window.location = window.location.origin + '/logout'
@@ -20,12 +18,12 @@ define [
 
     details: (id) ->
       user = App.Users.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new UserDetailView model: user[0]
+      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new UserDetailView model: user[0]
 
     add: ->
       view = new UserDetailView model:new User
-      Vent.trigger 'app:updateRegion', 'contentRegion', view
+      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', view
 
     list: ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new UserListView collection: App.Users
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new UserListView collection: App.Users

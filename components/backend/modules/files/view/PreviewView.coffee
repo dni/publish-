@@ -1,10 +1,11 @@
 define [
   'cs!App'
+  'cs!Router'
   'marionette'
   'tpl!../templates/preview.html'
   'tpl!../templates/preview-item.html'
   'jquery.ui'
-], (App, Marionette, Template, ItemTemplate) ->
+], (App, Router, Marionette, Template, ItemTemplate) ->
 
 
   class ItemView extends Marionette.ItemView
@@ -18,7 +19,7 @@ define [
       "click": "showFile"
 
     showFile: ->
-      App.Router.navigate("showfile/"+@model.get('_id'), {trigger:true})
+      Router.navigate("showfile/"+@model.get('_id'), {trigger:true})
 
 
   class PreviewView extends Marionette.CompositeView
@@ -41,4 +42,4 @@ define [
       "click #files": "add"
 
     add:->
-      App.Router.navigate("filebrowser/#{@namespace}/#{@modelId}", {trigger:true})
+      Router.navigate("filebrowser/#{@namespace}/#{@modelId}", {trigger:true})
