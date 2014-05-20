@@ -39,7 +39,7 @@ app.configure ->
 
 
 	# load/setup components
-	componentsDir = __dirname+'/components/'
+  componentsDir = __dirname+'/components/'
 	fs.readdir componentsDir, (err, files)->
     if err then throw err
     files.forEach (file)->

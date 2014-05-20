@@ -1,22 +1,20 @@
 define [
+    'cs!App'
     'cs!utils'
+    'cs!Router'
     'marionette'
     'cs!modules/messages/model/Collection'
-    # 'cs!./controller/Controller'
+    'cs!./controller/Controller'
     "text!./configuration.json"
     'less!./style'
 ],
-( Utils, Marionette, Collection, Controller, Config ) ->
-  c.l "message"
-  Utils.Vent.on "app:ready", ->
+( App, Utils, Router, Marionette, Collection, Controller, Config ) ->
 
-    Utils.Vent.trigger "app:addModule", JSON.parse Config
+  App.Messages = new Collection
+  App.Messages.fetch
+    success:->
 
-    App.Messages = new Collection
-    App.Messages.fetch
-      success:->
+  Router.processAppRoutes new Controller,
+    "messages": "list"
 
-    App.Router.processAppRoutes new Controller,
-      "messages": "list"
-
-  return
+  Utils.addModule Config

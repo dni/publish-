@@ -1,18 +1,15 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!utils'
   'marionette'
   'cs!../view/MessageListView'
   'cs!../view/MessageDetailView'
   'cs!../view/TopView'
 
-], ( Vent, $, _, Backbone, Marionette, ListView, DetailView, TopView) ->
+], ( Utils, Marionette, ListView, DetailView, TopView) ->
 
   class MessageController extends Backbone.Marionette.Controller
 
     list : ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new ListView
-      Vent.trigger 'app:updateRegion', 'contentRegion', new DetailView collection: App.Messages
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView
+      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new DetailView collection: App.Messages
