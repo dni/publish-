@@ -1,4 +1,6 @@
 port = 1666
+sessionSecret = 'publish#crossplattform#app'
+
 express = require 'express.io'
 app = express()
 passport = require "passport"
@@ -31,7 +33,7 @@ app.configure ->
 	app.use '/public', express.static 'public'
 	app.use express.bodyParser()
 	app.use express.cookieParser()
-	app.use express.session secret: 'publish#crossplattform#app'
+	app.use express.session secret: sessionSecret
 	app.use passport.initialize()
 	app.use passport.session()
 
