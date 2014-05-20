@@ -1,10 +1,10 @@
 ({
-    appDir: '.',
-    //baseUrl: 'lib',
+    //appDir: './',
+    baseUrl: '.',
 
     //Uncomment to turn off uglify minification.
     //optimize: 'none',
-    dir: '../demo-build',
+    dir: '../../demo-build',
 
     //Stub out the cs module after a build since
     //it will not be needed.
@@ -17,7 +17,7 @@
 
     modules: [
         {
-            name: 'main',
+            name: 'config',
             //The optimization will load CoffeeScript to convert
             //the CoffeeScript files to plain JS. Use the exclude
             //directive so that the coffee-script module is not included

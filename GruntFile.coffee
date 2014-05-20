@@ -48,7 +48,6 @@ module.exports = (grunt)->
           "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
           "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js"
           "backbone.js": "backbone-amd/backbone.js"
-          "bootstrap.js": "bootstrap/dist/js/bootstrap.js"
           "marionette.js": "marionette/lib/core/amd/backbone.marionette.js"
           "localstorage.js": "backbone-localstorage/backbone-localstorage.js"
           "text.js": 'requirejs-text/text.js'
@@ -57,8 +56,10 @@ module.exports = (grunt)->
           "i18n.js": 'requirejs-i18n/i18n.js'
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'
-          "minicolors.js": 'jquery-minicolors/jquery.minicolors.js'
           # Folders
+          "minicolors": 'jquery-minicolors'
+          "fancybox": "fancybox/source",
+          "bootstrap": "bootstrap",
           "require-less": 'require-less'
 
       libsFrontend:
@@ -82,22 +83,19 @@ module.exports = (grunt)->
           "bootstrap": "bootstrap",
           "require-less": 'require-less'
 
-      components:
+
+    requirejs:
+      compile:
         options:
-          destPrefix: "cache/build"
-        files:
-          # Make dependencies follow your naming conventions
-          "components": "../components"
+          appDir: '.'
+          mainConfigFile: "components/backend/config.js"
+          dir: "cache/build"
+          #out: "optimized.js"
 
-      requirejs:
-        dev:
-          compile:
-            options:
-              mainConfigFile: "components/backend/build.js",
-              name: "main",
-              out: "optimized.js"
-
-
+          stubModules: ['cs']
+          modules:
+            name: "config"
+            exclude: ['coffee-script']
 
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -119,7 +117,6 @@ module.exports = (grunt)->
   ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
-    'clean',
     'requirejs'
     'forever:dist:start'
   ]
