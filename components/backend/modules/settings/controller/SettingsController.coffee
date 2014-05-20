@@ -26,4 +26,4 @@ define [
     clearCache: ->
       $.get "/clearCache", ->
         console.log "cache cleared"
-        window.location.reload()
+        window.location = "/admin#settings";

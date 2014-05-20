@@ -13,7 +13,8 @@ define [
   App.Users.fetch
     success:->
       $.get '/user', (user) ->
-        App.User = App.Users.findWhere _id:user.id
+        console.log user
+        App.User = App.Users.findWhere _id:user._id
 
 
   Router.processAppRoutes new Controller,

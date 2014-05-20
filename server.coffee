@@ -38,17 +38,18 @@ app.configure ->
 	app.use passport.session()
 
 
-	# load/setup components
-  componentsDir = __dirname+'/components/'
-	fs.readdir componentsDir, (err, files)->
-    if err then throw err
-    files.forEach (file)->
-      fs.lstat componentsDir+file, (err, stats)->
-        if !err && stats.isDirectory()
-          fs.exists componentsDir+file+'/server.coffee', (exists)->
-            if exists
-              component = require componentsDir+file+'/server.coffee'
-              component.setup app
+
+# load/setup components
+componentsDir = __dirname+'/components/'
+fs.readdir componentsDir, (err, files)->
+  if err then throw err
+  files.forEach (file)->
+    fs.lstat componentsDir+file, (err, stats)->
+      if !err && stats.isDirectory()
+        fs.exists componentsDir+file+'/server.coffee', (exists)->
+          if exists
+            component = require componentsDir+file+'/server.coffee'
+            component.setup app
 
 
 app.listen port
