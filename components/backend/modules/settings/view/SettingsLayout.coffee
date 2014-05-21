@@ -12,9 +12,11 @@ define [
     template: Template
     events:
       "click .save": "save"
+      "click .reset": "reset"
       "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()
+    reset: -> @detailRegion.currentView.reset()
 
     cancel: ->
       App.contentRegion.close()
