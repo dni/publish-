@@ -1,7 +1,9 @@
 define [
+  'jquery'
   'marionette'
   'tpl!../templates/top.html'
-], (Marionette, Template) ->
+  'jquery.form'
+], ($, Marionette, Template) ->
   class TopView extends Marionette.ItemView
     template: Template
     events:

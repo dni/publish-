@@ -1,6 +1,6 @@
 var Setting = require('./../settings/model/SettingSchema'),
 	Magazine = require('./../magazine/model/MagazineSchema'),
-	auth = require('./../user/auth.js'),
+	// auth = require('./../../utilities/auth'),
 	http = require("http"),
 	_ = require("underscore"),
 
@@ -12,7 +12,7 @@ var Setting = require('./../settings/model/SettingSchema'),
 
 module.exports.setup = function(app) {
 
-	app.get('/downloadApp', auth, BakerGenerator.download);
+	app.get('/downloadApp', BakerGenerator.download);
 
 	// API
 	app.post('/purchase_confirmation', function(req, res){

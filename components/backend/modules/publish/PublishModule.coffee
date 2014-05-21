@@ -13,7 +13,6 @@ define [
 
   # events
   Utils.Vent.on "publish:addNavItem", (config)->
-    console.log "publish:addNavItem"
     NavigationItems.add new NavigationItem config
 
   # add Module Config
