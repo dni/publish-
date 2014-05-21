@@ -4,8 +4,6 @@ var User = require(__dirname + '/model/UserSchema'),
 	passport = require('passport');
 
 module.exports.setup = function(app) {
-
-
 	User.count({},function(err, count) {
 		if (count == 0) {
 			var admin = new User();
@@ -16,7 +14,6 @@ module.exports.setup = function(app) {
 			console.log("admin user was created");
 		}
 	});
-
 
 	app.get('/login', function(req, res){
 	  res.sendfile(process.cwd()+'/components/backend/modules/user/templates/login.html');
@@ -32,7 +29,13 @@ module.exports.setup = function(app) {
 	});
 
 	app.get('/admin', auth, function(req, res){
+	  // production mode!
+	  // app.use('/admin', express.static(process.cwd()+'/cache/build'));
+	  // res.sendfile(process.cwd()+'/cache/build/index.html');
+
 	  app.use('/admin', express.static(process.cwd()+'/components/backend'));
+	  // workaround for requirejs i18n problem with /admin
+	  app.use('/modules', express.static(process.cwd()+'/components/backend/modules'));
 	  res.sendfile(process.cwd()+'/components/backend/index.html');
 	});
 

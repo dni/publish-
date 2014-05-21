@@ -4,7 +4,7 @@ define [
   'cs!utils'
   'marionette'
   'tpl!modules/article/templates/detail.html'
-  'i18n!admin/modules/article/nls/language.js'
+  'i18n!modules/article/nls/language.js'
 ], (App, Router, Utils, Marionette, Template, i18n) ->
 
   class ArticleDetailView extends Marionette.ItemView

@@ -48,6 +48,7 @@ module.exports = (grunt)->
           "text.js": 'requirejs-text/text.js'
           "tpl.js": 'requirejs-tpl/tpl.js'
           "cs.js": 'require-cs/cs.js'
+          "css.js": 'require-css/css.js'
           "i18n.js": 'requirejs-i18n/i18n.js'
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'

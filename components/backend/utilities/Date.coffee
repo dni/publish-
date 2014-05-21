@@ -1,5 +1,5 @@
 define [
-  'i18n!admin/modules/publish/nls/language.js'
+  'i18n!modules/publish/nls/language.js'
 ],
 (i18n) ->
 
