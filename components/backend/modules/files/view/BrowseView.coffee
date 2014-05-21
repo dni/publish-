@@ -1,11 +1,11 @@
 define [
+  'cs!App'
   'jquery'
-  'lodash'
-  'backbone'
+  'marionette'
   'tpl!../templates/browseItem.html'
-], ($, _, Backbone, Template) ->
+], (App, $, Marionette, Template) ->
 
-  class ItemView extends Backbone.Marionette.ItemView
+  class ItemView extends Marionette.ItemView
     template: Template
     events:
       "click input": 'toggleSelect'
@@ -14,7 +14,7 @@ define [
     toggleSelect: -> @model.set "selected", !@model.get "selected"
     uploadFile: -> App.router.navigate "upl"
 
-  class BrowseView extends Backbone.Marionette.CollectionView
+  class BrowseView extends Marionette.CollectionView
     itemView: ItemView
 
     initialize: ->

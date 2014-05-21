@@ -1,8 +1,6 @@
 define [
-  'jquery'
-  'lodash'
   'backbone'
-], ($, _, Backbone) ->
+], (Backbone) ->
   class Message extends Backbone.Model
     idAttribute: "_id"
     urlRoot: "messages"

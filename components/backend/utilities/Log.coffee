@@ -1,7 +1,7 @@
 define [
-  'cs!./../modules/messages/model/Model'
-],
-(Message) ->
+  'cs!App'
+  'cs!modules/messages/model/Model'
+], (App, Message) ->
   (log, type, additionalinfo)->
     if additionalinfo? else additionalinfo = ''
     if type? else type = 'log'

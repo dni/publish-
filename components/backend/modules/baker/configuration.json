@@ -49,6 +49,11 @@
 	      "type": "checkbox"
 		},
 
+		"uiconstants" : {
+	      "label": "Baker UI Constants",
+	      "type": "header"
+		},
+
 		"bakerColorsetCoverBg" : {
 	      "label": "Cover Background Color",
 	      "description": "Comma seperated list of layout keys",

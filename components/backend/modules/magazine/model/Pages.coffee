@@ -1,9 +1,8 @@
 define [
-  "lodash"
   "backbone"
   "cs!./Page"
-],
-(_, Backbone, Page) ->
+], (Backbone, Page) ->
+
   class Pages extends Backbone.Collection
     url: "/pages/"
     model: Page

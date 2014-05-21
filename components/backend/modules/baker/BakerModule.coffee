@@ -1,10 +1,8 @@
 define [
-    'marionette'
-    'cs!../../utilities/Vent'
+    'jquery'
+    'cs!utils'
     "text!./configuration.json"
 ],
-( Marionette, Vent, Config ) ->
-  Vent.on "app:ready", ()->
-    Vent.trigger "app:addModule", JSON.parse Config
-    $("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
-    Vent.trigger "baker:ready"
+( $, Utils, Config ) ->
+  $("body").on "downloadApp", -> window.open(window.location.origin + '/downloadApp','_blank')
+  Utils.addModule Config

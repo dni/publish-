@@ -1,4 +1,6 @@
-define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
+define [
+  'backbone'
+], (Backbone) ->
   class Article extends Backbone.Model
     idAttribute: "_id"
     urlRoot: "articles"
@@ -8,10 +10,10 @@ define ['jquery', 'lodash', 'backbone'], ($, _, Backbone) ->
       "desc": "Hello World!"
       "files": []
       "author": "dnilabs"
-      "privatecode": true
+      "published": false
       "category": ""
       "tags": ""
 
     togglePublish: ->
-      @.set "privatecode", not @.get "privatecode";
+      @.set "published", not @.get "published";
 
