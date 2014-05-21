@@ -21,6 +21,7 @@ require.config({
 		text: 'vendor/text',
 		tpl: 'vendor/tpl',
 		cs: 'vendor/cs',
+		cs: 'vendor/css',
 		d3: 'vendor/d3',
 		//gm: 'vendor/gm/index',
 		minicolors: 'vendor/minicolors/jquery.minicolors'
@@ -40,6 +41,10 @@ require.config({
 	    name: 'cs',
 	    location: 'vendor',
 	    main: 'cs'
+	  },{
+	    name: 'css',
+	    location: 'vendor',
+	    main: 'css'
 	  },{
 	    name: 'coffee-script',
 	  	location: 'vendor',
