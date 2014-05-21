@@ -6,7 +6,7 @@ app = express()
 passport = require "passport"
 LocalStrategy = require('passport-local').Strategy
 mongoose = require "mongoose"
-User = require __dirname+"/components/backend/modules/user/model/UserSchema.js"
+User = require __dirname+"/components/backend/modules/user/model/UserSchema"
 db = mongoose.connect 'mongodb://localhost/publish'
 fs = require 'fs'
 

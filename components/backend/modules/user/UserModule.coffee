@@ -13,7 +13,6 @@ define [
   App.Users.fetch
     success:->
       $.get '/user', (user) ->
-        console.log user
         App.User = App.Users.findWhere _id:user._id
 
 
