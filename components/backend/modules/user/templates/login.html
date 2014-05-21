@@ -10,18 +10,108 @@
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+
 	</head>
 
 	<body>
 		<div id="app">
-			<div id="main" class="container">
-				<form action="/login" method="post">
-					<input type="text" placeholder="Username" name="username"/>
-					<input type="password" placeholder="Password" name="password"/>
-					<input type="submit" class="btn btn-default" value="Login"/>
-				</form>
+			<div class="container">
+				<div class="userlogin">
+			<div class="loginorsignup">
+				<div class="container"><h1>LOG IN</h1></div>							
+			</div>			
+					<div id="login">
+						<form role="form" action="/login" method="post">
+						  <div class="form-group"><span class="glyphicon glyphicon-user"></span>
+						    <label for="exampleInputEmail1">Username</label>
+						    <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Username">
+						  </div>
+						  <div class="form-group"><span class="glyphicon glyphicon-lock"></span>
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						  </div>
+						  <!-- <div class="checkbox">
+						    <label>
+						      <input type="checkbox"> Check me out
+						    </label>
+						  </div> -->
+						  <div><button type="submit" class="btn btn-default">Login</button></div>
+						</form>
+					</div>
+				</div>
+				<div class="thanks"><p>ut imperdiet enim odio ipsum. Nulla facilisi.
+					Cras magna ante, bibendum sit amet, porta vitae, laoreet ut, justo. Nam tortor 
+					sem et purus pretium consectetuer.</p>
+				</div>
+				<div class="links"><a href="https://github.com/">github</a><span>|</span><a href="http://publishweb.dnilabs.com/">dnilabs</a></div>
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript" data-main="admin/config" src="admin/vendor/require.js"></script>
+	<script type="text/javascript" data-main="/admin/configuration/require-config" src="/lib/requirejs/require.js"></script>
+			<style>
+			
+					#app{
+						height: 100%;
+					}
+					.btn{
+						margin-left:10%;
+						border-radius:none;
+						margin-left:0px;
+					}
+					.userlogin{
+						box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+						width: 340px;
+						margin: 25px auto -15px;
+						padding: 15px;
+						position: relative;
+						background:rgba(200,200,200, 0.9);
+						background: rgb(255,255,255); /* Old browsers */
+						background: -moz-linear-gradient(-45deg,  rgba(255,255,255,1) 0%, rgba(243,243,243,1) 50%, rgba(237,237,237,1) 51%, rgba(255,255,255,1) 100%); /* FF3.6+ */
+						background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(50%,rgba(243,243,243,1)), color-stop(51%,rgba(237,237,237,1)), color-stop(100%,rgba(255,255,255,1))); /* Chrome,Safari4+ */
+						background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Chrome10+,Safari5.1+ */
+						background: -o-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* Opera 11.10+ */
+						background: -ms-linear-gradient(-45deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* IE10+ */
+						background: linear-gradient(135deg,  rgba(255,255,255,1) 0%,rgba(243,243,243,1) 50%,rgba(237,237,237,1) 51%,rgba(255,255,255,1) 100%); /* W3C */
+						color: #656360;
+					}
+					h1{
+						font-size:33px;
+						display:inline-block;
+					}
+					#app #login form>div {
+						width: 49%;
+						display: inline-block;
+					}
+					.loginorsignup h1{
+						margin-top:0px;
+						margin-left:-14px;
+					}
+					.loginorsignup{
+						margin-bottom: 15px;
+						border-bottom:1px solid rgba(0, 0, 0, 0.1);
+					}
+					.thanks{
+						margin: 25px auto 30px;
+						border-bottom:1px solid rgba(255,255,255,0.5);
+						font-size: 12px;
+						text-align:center;
+						line-height:1.1;
+						width:340px;
+						color:rgba(255,255,255,0.5);
+					}
+					.links{
+						color:rgba(255,255,255,0.5);
+						width:340px;
+						margin:auto;
+						margin-top:-21px;
+						text-align: center;
+					}
+					.links span {
+						padding: 10px;
+					}
+					a{	color:rgba(255,255,255,0.5);
+						text-decoration:none;
+					}
+					a:hover{text-decoration: none;}
+		</style>
 </html>
