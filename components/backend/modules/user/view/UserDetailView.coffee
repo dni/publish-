@@ -1,13 +1,13 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!Router'
+  'cs!utils'
+  'marionette'
   'tpl!../templates/detail.html'
   'cs!../model/User'
-], (Vent, $, _, Backbone, Template, User) ->
+], (App, Router, Utils, Marionette, Template, User) ->
 
-  class UserDetailView extends Backbone.Marionette.ItemView
+  class UserDetailView extends Marionette.ItemView
 
     template: Template
 
@@ -18,7 +18,7 @@ define [
     deleteModel: ->
       @model.destroy
         success:->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     saveModel: ->
       @model.set
@@ -29,7 +29,7 @@ define [
         App.Users.create @model,
           wait: true
           success: (res) ->
-            App.Router.navigate 'user/'+res.attributes._id, false
+            Router.navigate 'user/'+res.attributes._id, false
       else
         @model.save()
 

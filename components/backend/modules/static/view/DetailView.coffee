@@ -1,14 +1,11 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!Router'
+  'marionette'
   'tpl!../templates/detail.html'
-  'cs!../model/StaticBlock'
+], (App, Router, Marionette, Template) ->
 
-], (Vent, $, _, Backbone, Template, StaticBlock) ->
-
-  class StaticDetailView extends Backbone.Marionette.ItemView
+  class StaticDetailView extends Marionette.ItemView
 
     template: Template
 
@@ -24,11 +21,11 @@ define [
       "click .cancel": "cancel"
 
     cancel: ->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
-      App.Router.navigate 'articles'
+      App.contentRegion.close()
+      Router.navigate 'articles'
 
     addFiles:->
-      App.Router.navigate "filebrowser", true
+      Router.navigate "filebrowser", true
 
     revertStatic: ->
       @model.destroy success: ->
@@ -42,7 +39,7 @@ define [
         App.StaticBlocks.create @model,
           wait: true
           success: (res) ->
-            App.Router.navigate 'static/'+res.attributes._id, false
+            Router.navigate 'static/'+res.attributes._id, false
       else
         @model.save()
 
@@ -50,4 +47,4 @@ define [
     deleteStatic: ->
       @model.destroy
         success:->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+      App.contentRegion.close()

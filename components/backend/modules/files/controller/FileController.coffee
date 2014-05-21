@@ -1,21 +1,18 @@
 define [
-  'cs!../../../utilities/Vent'
+  'cs!App'
+  'cs!utils'
   'jquery'
-  'lodash'
-  'backbone'
   'marionette'
   'cs!../view/ListView'
   'cs!../view/BrowseView'
   'cs!../view/DetailView'
   'cs!../view/TopView'
   'cs!../view/ShowFileView'
-  'cs!../view/CropFileView'
   'cs!../model/File'
   'cs!../model/Files'
 
-], ( Vent, $, _, Backbone, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, CropFileView,File, Files) ->
-
-  class FileController extends Backbone.Marionette.Controller
+], ( App, Utils, $, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, File, Files) ->
+  class FileController extends Marionette.Controller
 
     filebrowser: (namespace, id)->
       files = App.Files.where parent:undefined
@@ -24,7 +21,7 @@ define [
 
       view = new BrowseView collection: new Files files
 
-      Vent.trigger 'overlay:action', ->
+      Utils.Vent.trigger 'overlay:action', ->
 
         files = view.collection.where selected:true
         if !files.length then return $('.modal').modal('hide')
@@ -56,14 +53,14 @@ define [
 
         eachFile(files.pop())
 
-      Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
 
     showfile: (id) ->
       fileView = App.contentRegion.currentView.fileRegion.currentView
       view = new ShowFileView model: fileView.collection.findWhere _id: id
 
-      Vent.trigger 'app:updateRegion', 'overlayRegion', view
-      Vent.trigger 'overlay:action', ->
+      Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Utils.Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')
 
     cropfile: (id) ->
@@ -71,15 +68,15 @@ define [
       fileView = App.contentRegion.currentView.fileRegion.currentView
       view = new CropFileView model: fileView.collection.findWhere _id: id
 
-      Vent.trigger 'app:updateRegion', 'overlayRegion', view
-      Vent.trigger 'overlay:action', ->
+      Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Utils.Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')
 
     show: (id) ->
       file = App.Files.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
+      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
 
     list : ->
-      Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: new Files App.Files.where parent:undefined
       #App.sidebarRegion.show view

@@ -1,16 +1,13 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!utils'
+  'marionette'
   'tpl!../templates/layout.html'
   'cs!./PageListView'
   'cs!./MagazineDetailView'
-  'cs!../../files/view/PreviewView'
+  'cs!modules/files/view/PreviewView'
+], (Utils, Marionette, Template, PageListView, DetailView, PreviewView) ->
 
-], (Vent, $, _, Backbone, Template, PageListView, DetailView, PreviewView) ->
-
-  class MagazineLayout extends Backbone.Marionette.Layout
+  class MagazineLayout extends Marionette.Layout
 
     template: Template
 
@@ -34,8 +31,7 @@ define [
       @detailRegion.currentView.save()
 
     cancel: ->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
-      App.Router.navigate 'magazines'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     initialize: (args) ->
       # custom arguments dont get passed automatically
@@ -45,20 +41,18 @@ define [
 
     afterRender:->
       @detailRegion.show new DetailView model: @model
+      # dont childviews if model is new and there no _id for the relation
+      if @model.isNew() then @model.on 'sync', @addChildViews else @addChildViews()
 
-      # dont create files, pages if model is new and there no _id for the relationx
-      that = @
-      modelNotNewAction = ->
-        that.pageRegion.show new PageListView
-          collection: that.pages
-          magazine: that.model.get "_id"
-        that.fileRegion.show new PreviewView
-          collection: that.files
-          namespace: 'magazine'
-          modelId: that.model.get "_id"
-
-      if !@model.isNew() then modelNotNewAction() else @model.on "sync", modelNotNewAction
-
+    addChildViews:->
+      console.log @
+      @pageRegion.show new PageListView
+        collection: @pages
+        magazine: @model.get "_id"
+      @fileRegion.show new PreviewView
+        collection: @files
+        namespace: 'magazine'
+        modelId: @model.get "_id"
 
     publish:->
       # before model is toggled
@@ -79,5 +73,5 @@ define [
       @model.destroy
         success:->
 
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
