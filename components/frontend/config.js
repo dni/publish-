@@ -1,37 +1,42 @@
 require.config({
-	deps: ["cs!/App"],
-	baseUrl: '/lib',
+	deps: ["main"],
 	paths: {
-		jquery: "jquery/dist/jquery",
-		fancybox: "fancybox/source/jquery.fancybox",
-		lodash: "underscore-amd/underscore",
-		backbone: "backbone-amd/backbone",
-		marionette: "marionette/lib/core/amd/backbone.marionette",
-		babysitter: "backbone.babysitter/lib/backbone.babysitter",
-		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
-		text: 'requirejs-text/text',
-		cs: 'require-cs/cs',
-		text: 'requirejs-text/text',
-		tpl: 'requirejs-tpl/tpl',
-		cs: 'require-cs/cs',
-		underscore: 'underscore-amd/underscore'
+		jquery: "vendor/jquery",
+		fancybox: "vendor/fancybox/jquery.fancybox",
+		lodash: "vendor/underscore",
+		backbone: "vendor/backbone",
+		marionette: "vendor/marionette",
+		babysitter: "vendor/babysitter",
+		wreqr: "vendor/wreqr",
+		text: 'vendor/text',
+		cs: 'vendor/cs',
+		tpl: 'vendor/require-tpl/tpl',
+		underscore: 'vendor/underscore'
 	},
 	packages: [
       {
         name: 'less',
-        location: 'require-less',
+        location: 'vendor/require-less',
         main: 'less'
       },{
 	    name: 'cs',
-	    location: 'require-cs',
+	    location: 'vendor',
 	    main: 'cs'
 	  },{
-	  	location: 'coffee-script',
 	    name: 'coffee-script',
-	    main: 'index'
+	  	location: 'vendor',
+	    main: 'coffee-script'
+	  },{
+	    name: 'i18n',
+	  	location: 'vendor/require-i18n',
+	    main: 'i18n'
 	  }
     ],
-
+	// map: {
+	    // '*': {
+	        // 'jquery.fancybox': 'fancybox'
+	    // }
+	// },
     shim: {
 		'jquery.fancybox':['jquery']
 	},

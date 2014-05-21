@@ -1,10 +1,7 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
   'marionette'
   'tpl!../templates/list.html'
-], 
-($, _, Backbone, Marionette, Template) ->   
-  class SettingsListTopView extends Backbone.Marionette.ItemView    
+],
+(Marionette, Template) ->
+  class SettingsListTopView extends Marionette.ItemView
     template: Template

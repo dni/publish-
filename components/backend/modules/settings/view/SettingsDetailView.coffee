@@ -1,15 +1,24 @@
-define ['jquery', 'lodash', 'backbone', 'tpl!../templates/detail.html'], ( $, _, Backbone, Template) ->
+define [
+  'cs!utils'
+  'jquery'
+  'marionette'
+  'tpl!../templates/detail.html'
+], ( Utils, $, Marionette, Template) ->
 
-  class SettingsDetailView extends Backbone.Marionette.ItemView
+  class SettingsDetailView extends Marionette.ItemView
 
     template: Template
 
     initialize: ->
       # @model.bind 'change', @render, @
 
+    reset:->
+      console.log "resets"
+      @model.destroy success:->
+        document.location.reload()
+
     save: ->
       settings = @model.get "settings"
-
       @$el.find(".setting").each ()->
         type = $(@).attr("type")
         if type=="checkbox" or type=="radio" then val = $(@).is(':checked')

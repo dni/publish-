@@ -1,0 +1,42 @@
+{
+	"name": "General",
+	"author": "dnilabs e.U",
+	"version":"0.0.1",
+
+	"config": {
+	    "name": "General",
+    	"namespace": "backend"
+    },
+
+    "navigation": {
+	    "button": "off",
+	    "route": "logout",
+	    "label": "logout",
+	    "classNames": "logout"
+    },
+
+    "settings": {
+		"domain" : {
+	      "label": "Domain",
+	      "value": "localhost",
+	      "type": "text"
+		},
+		"development" : {
+	      "label": "Development",
+	      "type": "header"
+		},
+		"backend_development" : {
+	      "label": "Backend in Development Mode",
+	      "value": "0",
+	      "type": "checkbox"
+		},
+		"frontend_development" : {
+	      "label": "Frontend in Development Mode",
+	      "value": "0",
+	      "type": "checkbox"
+		}
+	}
+
+
+
+}

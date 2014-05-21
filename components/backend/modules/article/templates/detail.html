@@ -16,17 +16,8 @@
 	<label><%= t.category %></label>
 	<select class="form-control" name="category">
 		<option></option>
-		<%
-		var cats =_.find(App.Settings.models, function(model){if(model.attributes.name=="Articles"){return model;}});
-		cats = cats.attributes.settings.categories.value.split(",");
-		_.each(cats, function(cat ,i){
-			var cat = cat.replace(" ", "");
-		%>
-			<% if (category == cat) { %>
-				<option selected="selected" value="<%= cat %>"><%= cat %></option>
-			<%} else { %>
-				<option value="<%= cat %>"><%= cat %></option>
-			<%}%>
+		<% renderCategories(category, function(category, selected) { %>
+			<option <%= selected %> value="<%= category %>"><%= category %></option>
 		<% }); %>
 	</select>
 </div>

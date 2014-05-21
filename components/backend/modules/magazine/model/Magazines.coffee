@@ -1,5 +1,7 @@
-define ["lodash","backbone", "cs!./Magazine"],
-(_, Backbone, Model) ->
+define [
+  "backbone"
+  "cs!./Magazine"
+], (Backbone, Model) ->
 
   class Magazines extends Backbone.Collection
     model: Model

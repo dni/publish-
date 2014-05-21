@@ -1,14 +1,14 @@
 define [
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!App'
+  'cs!Router'
+  'marionette'
   'tpl!../templates/preview.html'
   'tpl!../templates/preview-item.html'
   'jquery.ui'
-], ($, _, Backbone, Template, ItemTemplate) ->
+], (App, Router, Marionette, Template, ItemTemplate) ->
 
 
-  class ItemView extends Backbone.Marionette.ItemView
+  class ItemView extends Marionette.ItemView
     template: ItemTemplate
     className: "preview-item"
 
@@ -19,10 +19,10 @@ define [
       "click": "showFile"
 
     showFile: ->
-      App.Router.navigate("showfile/"+@model.get('_id'), {trigger:true})
+      Router.navigate("showfile/"+@model.get('_id'), {trigger:true})
 
 
-  class PreviewView extends Backbone.Marionette.CompositeView
+  class PreviewView extends Marionette.CompositeView
 
     template: Template
     itemView: ItemView
@@ -42,4 +42,4 @@ define [
       "click #files": "add"
 
     add:->
-      App.Router.navigate("filebrowser/#{@namespace}/#{@modelId}", {trigger:true})
+      Router.navigate("filebrowser/#{@namespace}/#{@modelId}", {trigger:true})

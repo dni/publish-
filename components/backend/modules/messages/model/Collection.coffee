@@ -1,8 +1,7 @@
 define [
-  "lodash"
   "backbone"
-  "cs!./Model"
-], (_, Backbone, Model) ->
+  "cs!modules/messages/model/Model"
+], (Backbone, Model) ->
   class Messages extends Backbone.Collection
     model: Model
     url: "/messages/"

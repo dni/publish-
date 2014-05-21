@@ -1,13 +1,10 @@
 define [
-  'cs!../../../utilities/Vent'
-  'jquery'
-  'lodash'
-  'backbone'
+  'cs!utils'
+  'marionette'
   'tpl!../templates/detail.html'
-  'cs!../model/File'
-], (Vent, $, _, Backbone, Template, File) ->
+], (Utils, Marionette, Template) ->
 
-  class DetailView extends Backbone.Marionette.ItemView
+  class DetailView extends Marionette.ItemView
 
     template: Template
 
@@ -17,7 +14,6 @@ define [
       desc: 'textarea[name=desc]'
       alt: 'input[name=alt]'
 
-
     events:
       "click .delete": "deleteFile"
       "blur .form-control": "save"
@@ -25,7 +21,7 @@ define [
     deleteFile: ->
       @model.destroy
         success:->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     save: ->
       @model.set

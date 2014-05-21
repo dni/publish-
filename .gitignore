@@ -1,6 +1,11 @@
+cache
 node_modules
 bower_components
 baker-master
+components/frontend/vendor
+components/backend/vendor
+public/files
+public/books
 
 .project
 .DS_Store
