@@ -5,15 +5,38 @@ module.exports = (grunt)->
 
     #clean
     clean:
+      everything: src: [
+        'baker-master'
+        'bower_components'
+        'lib'
+        'node_modules'
+        'cache'
+        'components/backend/vendor'
+        'components/frontend/vendor'
+        'public/files'
+        'public/books'
+      ]
+      lib: src: [ 'lib' ]
       build: src: [ 'cache/build' ]
       vendorFrontend: src: [ 'components/backend/vendor' ]
       vendorBackend: src: [ 'components/frontend/vendor' ]
+
+    mkdir:
+      all:
+        options:
+          create: ['cache', 'public/books', 'public/files']
 
     # bower
     bower:
       install:
         option:
           targetDir: 'bower_components'
+
+    gitclone:
+      baker:
+        options:
+          repository: 'https://github.com/bakerframework/baker.git'
+          directory: 'baker-master'
 
     # forever
     forever:
@@ -26,7 +49,7 @@ module.exports = (grunt)->
     bowercopy:
       options:
         # Bower components folder will be removed afterwards
-        clean: true
+        clean: false
 
       # Javascript
       libsBackend:
@@ -100,23 +123,26 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
+
+  grunt.loadNpmTasks 'grunt-mkdir'
+  grunt.loadNpmTasks 'grunt-bower-task'
+  grunt.loadNpmTasks 'grunt-git'
   grunt.loadNpmTasks 'grunt-bowercopy'
   grunt.loadNpmTasks 'grunt-forever'
 
-  grunt.registerTask 'dev', 'Prepare for Development', [
+
+  grunt.registerTask 'install', 'Install the App', [
+    'mkdir:all'
+    'bower:install'
+    'gitclone:baker:clone'
     'bowercopy:libsBackend'
     'bowercopy:libsFrontend'
-    'forever:start'
+    'clean:lib' #workaround ;()
   ]
 
-  grunt.registerTask 'restart', 'Restart forever Server', [
-    'forever:restart'
-  ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
-    'bowercopy:libsBackend'
-    'bowercopy:libsFrontend'
     'requirejs'
     #'forever:dist:start'
   ]
