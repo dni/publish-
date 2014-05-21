@@ -138,13 +138,14 @@ module.exports = (grunt)->
     'bowercopy:libsBackend'
     'bowercopy:libsFrontend'
     'clean:lib' #workaround ;()
+    'forever:start'
   ]
 
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
     'requirejs'
-    #'forever:dist:start'
+    'forever:restart'
   ]
 
   return grunt
