@@ -1,14 +1,21 @@
 define [
+  'cs!App'
+  'cs!Router'
+  'cs!utils'
   'marionette'
   'tpl!../templates/detail.html'
-  # 'i18n!../nls/language.js'
+  'i18n!modules/magazine/nls/language.js'
 ],
-( Marionette, Template, i18n) ->
+( App, Router, Utils, Marionette, Template, i18n) ->
 
   class MagazineDetailView extends Marionette.ItemView
 
     template: Template
-    templateHelpers: t: i18n
+    templateHelpers:
+      t: i18n
+      isPrint:->
+        setting = App.Settings.where name:'Magazines'
+        setting[0].getValue 'print'
 
     ui:
       title: '[name=title]'
@@ -46,12 +53,12 @@ define [
           wait: true
           success: (res) ->
             route = 'magazine/'+res.attributes._id
-            App.Utilities.Log i18n.newMagazine, 'new',
+            Utils.Log i18n.newMagazine, 'new',
               text: res.attributes.title
               href: route
-            App.Router.navigate route, false
+            Router.navigate route, false
       else
-        App.Utilities.Log i18n.updateMagazine, 'update',
+        Utils.Log i18n.updateMagazine, 'update',
           text: @model.get 'title'
           href: 'magazine/'+@model.get '_id'
         @model.save()
