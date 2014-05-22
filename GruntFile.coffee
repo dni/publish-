@@ -213,6 +213,10 @@ module.exports = (grunt)->
     'clean:reinstall'
     'install'
   ]
+  grunt.registerTask 'reset', 'Reinstalling the App', [
+    'dropDatabase'
+    'clean:everthingy'
+  ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
