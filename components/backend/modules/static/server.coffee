@@ -8,7 +8,7 @@ module.exports.setup = (app)->
 		if count == 0
       mongoimport = require('child_process').spawn('mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], {cwd:__dirname+'/data/'})
       mongoimport.on 'exit', (code)->
-        if code not 0 then console.log 'Error: while importing Static Blocks, code: #{code}' else console.log "Imported Static Blocks"
+        if code == 0 then console.log 'Error: while importing Static Blocks, code: #{code}' else console.log "Imported Static Blocks"
 
   # get single static block data
 	app.get '/staticBlocks/:id', (req, res)->
@@ -19,7 +19,7 @@ module.exports.setup = (app)->
 		if fs.existsSync __dirname+'/data/publish/staticblocks.json' then fs.unlinkSync __dirname+'/data/publish/staticblocks.json'
 		mongoimport = require('child_process').spawn('mongoexport', ['-d', 'publish', '-c', 'staticblocks', '-o', 'staticblocks.json'], {cwd:__dirname+'/data'})
 		mongoimport.on 'exit', (code)->
-      if code not 0
+      if code == 0
         res.send('Error: while exporting Static Blocks, code: ' + code)
         console.log('Error: while exporting Static Blocks, code: ' + code)
       else

@@ -4,15 +4,15 @@ Publish your data on all channels!
 ## Software Requirements
 
 ```js
-apt-get install nodejs npm phantomjs git mongodb imagemagick graphicsmagick zip
+apt-get install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 On Mac OSX use Homebrew
 ```js
-brew install nodejs npm phantomjs git mongodb imagemagick graphicsmagick zip
+brew install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 Install node.js modules
 ```js
-npm install -g bower grunt
+npm install -g bower grunt-cli
 ```
 Make sure mongod process is running, start it with mongod
 
