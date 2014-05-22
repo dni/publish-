@@ -49,7 +49,8 @@
     "grunt-forever": "~0.4.4",
     "grunt-bower-task": "~0.3.4",
     "grunt-mkdir": "latest",
-    "grunt-git": "~0.2.10"
+    "grunt-git": "~0.2.10",
+    "multiparty": "~3.2.6"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
