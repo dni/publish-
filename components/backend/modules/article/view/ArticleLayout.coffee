@@ -53,4 +53,4 @@ define [
     deleteArticle: ->
       @files.each (file)-> file.destroy success:->
       @model.destroy success:->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'

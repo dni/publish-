@@ -1,4 +1,5 @@
 User = require __dirname+'/model/UserSchema'
+Setting = require process.cwd()+'/components/backend/modules/settings/model/SettingSchema'
 express = require 'express'
 auth = require "../../utilities/auth"
 passport = require 'passport'
@@ -28,12 +29,18 @@ module.exports.setup = (app)->
 
   #admin route
 	app.get '/admin', auth, (req, res)->
-	  # production mode!
-	  # app.use '/admin', express.static process.cwd()+'/cache/build'
-	  # res.sendfile process.cwd()+'/cache/build/index.html'
-	  app.use '/admin', express.static process.cwd()+'/components/backend'
-	  app.use '/modules', express.static process.cwd()+'/components/backend/modules' # workaround for requirejs i18n problem with /admin
-	  res.sendfile process.cwd()+'/components/backend/index.html'
+    Setting.find name:'General', (e, a)->
+      settings = a[0].settings;
+      if settings.backend_development.value
+        console.log "Starting backend in development mode"
+        app.use '/admin', express.static process.cwd()+'/components/backend'
+        app.use '/modules', express.static process.cwd()+'/components/backend/modules' # workaround for requirejs i18n problem with /admin
+        res.sendfile process.cwd()+'/components/backend/index.html'
+      else
+        console.log "Starting backend in production mode"
+        app.use '/admin', express.static process.cwd()+'/cache/build'
+        app.use '/modules', express.static process.cwd()+'/cache/build/modules' # workaround for requirejs i18n problem with /admin
+        res.sendfile process.cwd()+'/cache/build/index.html'
 
 	app.get '/user', auth, (req, res)-> res.send app.user
 

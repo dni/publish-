@@ -2,6 +2,7 @@ var File = require(__dirname + '/model/FileSchema'),
 	Setting = require('./../settings/model/SettingSchema');
 	gm = require('gm'),
 	mongoose = require("mongoose"),
+	multiparty = require("multiparty"),
 	fs = require("fs");
 
 module.exports.setup = function(app) {

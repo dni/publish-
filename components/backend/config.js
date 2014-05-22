@@ -21,7 +21,7 @@ require.config({
 		text: 'vendor/text',
 		tpl: 'vendor/tpl',
 		cs: 'vendor/cs',
-		cs: 'vendor/css',
+		css: 'vendor/css',
 		d3: 'vendor/d3',
 		//gm: 'vendor/gm/index',
 		minicolors: 'vendor/minicolors/jquery.minicolors'

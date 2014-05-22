@@ -4,7 +4,7 @@
 	<% if (settings[key].type=="checkbox") { %>
 		<div class="form-group checkbox">
 		    <label>
-		      <% if (settings[key].value) { %>
+		      <% if (settings[key].value != "0" || settings[key].value) { %>
 		      	<input class="setting" type="checkbox" name="<%= key %>" checked>
 		      <% } else { %>
 				<input class="setting" type="checkbox" name="<%= key %>">

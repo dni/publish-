@@ -1,15 +1,27 @@
+mongoose = require "mongoose"
+db = mongoose.connect 'mongodb://localhost/publish'
+
 module.exports = (grunt)->
   grunt.initConfig
 
     pkg: grunt.file.readJSON 'package.json'
 
-    #clean
     clean:
       everything: src: [
         'baker-master'
         'bower_components'
         'lib'
         'node_modules'
+        'cache'
+        'components/backend/vendor'
+        'components/frontend/vendor'
+        'public/files'
+        'public/books'
+      ]
+      reinstall: src: [
+        'baker-master'
+        'bower_components'
+        'lib'
         'cache'
         'components/backend/vendor'
         'components/frontend/vendor'
@@ -26,7 +38,6 @@ module.exports = (grunt)->
         options:
           create: ['cache', 'public/books', 'public/files']
 
-    # bower
     bower:
       install:
         option:
@@ -38,20 +49,13 @@ module.exports = (grunt)->
           repository: 'https://github.com/bakerframework/baker.git'
           directory: 'baker-master'
 
-    # forever
     forever:
       options:
         command: 'coffee'
         index: 'server.coffee'
         logDir: 'cache'
 
-
     bowercopy:
-      options:
-        # Bower components folder will be removed afterwards
-        clean: false
-
-      # Javascript
       libsBackend:
         options:
           destPrefix: "components/backend/vendor"
@@ -71,11 +75,11 @@ module.exports = (grunt)->
           "text.js": 'requirejs-text/text.js'
           "tpl.js": 'requirejs-tpl/tpl.js'
           "cs.js": 'require-cs/cs.js'
-          "css.js": 'require-css/css.js'
           "i18n.js": 'requirejs-i18n/i18n.js'
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'
           # Folders
+          "css": 'require-css'
           "tinymce": "tinymce"
           "minicolors": 'jquery-minicolors'
           "fancybox": "fancybox/source",
@@ -107,16 +111,71 @@ module.exports = (grunt)->
     requirejs:
       compile:
         options:
-          appDir: 'components/backend/'
-          mainConfigFile: "components/backend/config.js"
+          baseUrl: './components/backend'
+          paths:
+            App: "utilities/App",
+            Router: "utilities/Router",
+            utils: "utilities/Utilities",
+            io: "vendor/io",
+            jquery: "vendor/jquery",
+            "jquery.ui": "vendor/jquery.ui",
+            tinymce: "vendor/tinymce/tinymce.min",
+            "jquery.tinymce": "vendor/jquery.tinymce",
+            "jquery.form": "vendor/jquery.form",
+            underscore: "vendor/underscore",
+            wreqr: "vendor/wreqr",
+            babysitter: "vendor/babysitter",
+            backbone: "vendor/backbone",
+            bootstrap: "vendor/bootstrap/dist/js/bootstrap",
+            marionette: "vendor/marionette",
+            localstorage: "vendor/backbone-localstorage",
+            less: 'vendor/require-less/less',
+            text: 'vendor/text',
+            tpl: 'vendor/tpl',
+            cs: 'vendor/cs',
+            css: 'vendor/css',
+            d3: 'vendor/d3',
+            minicolors: 'vendor/minicolors/jquery.minicolors'
+          map:
+            '*':
+              'backbone.wreqr': 'wreqr'
+              'backbone.babysitter': 'babysitter'
+          packages: [
+            {
+              name: 'less',
+              location: 'vendor/require-less',
+              main: 'less'
+            },{
+              name: 'cs',
+              location: 'vendor',
+              main: 'cs'
+            },{
+              name: 'css',
+              location: 'vendor/css',
+              main: 'css'
+            },{
+              name: 'coffee-script',
+              location: 'vendor',
+              main: 'coffee-script'
+            },{
+              name: 'i18n',
+              location: 'vendor',
+              main: 'i18n'
+            }
+          ]
+          shim:
+            'jquery.ui':['jquery']
+            'jquery.tinymce':['jquery', 'tinymce']
+            'jquery.form':['jquery']
+            'bootstrap':['jquery']
+            'minicolors':['jquery']
           dir: "cache/build"
-          #out: "optimized.js"
-
-          stubModules: ['cs']
-          # modules: [{
-          #name: "main"
-            # exclude: ['coffee-script']
-          # }]
+          # out: "cache/build/optimized.js"
+          stubModules: ['cs', 'css', 'less', 'i18n']
+          modules: [{
+            name: 'main',
+            exclude: ['coffee-script', 'i18n', 'css', 'less']
+          }]
 
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -130,6 +189,14 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-bowercopy'
   grunt.loadNpmTasks 'grunt-forever'
 
+  # clean db
+  grunt.registerTask 'dropDatabase', 'drop the database', ->
+    done = this.async()
+    db.connection.on 'open', ->
+      db.connection.db.dropDatabase (err)->
+        if err then console.log err else console.log 'Successfully dropped database'
+        mongoose.connection.close done
+
 
   grunt.registerTask 'install', 'Install the App', [
     'mkdir:all'
@@ -141,6 +208,11 @@ module.exports = (grunt)->
     'forever:start'
   ]
 
+  grunt.registerTask 'reinstall', 'Reinstalling the App', [
+    'dropDatabase'
+    'clean:reinstall'
+    'install'
+  ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
