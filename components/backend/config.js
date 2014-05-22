@@ -43,7 +43,7 @@ require.config({
 	    main: 'cs'
 	  },{
 	    name: 'css',
-	    location: 'vendor',
+	    location: 'vendor/css',
 	    main: 'css'
 	  },{
 	    name: 'coffee-script',
