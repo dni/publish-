@@ -30,8 +30,9 @@ app.configure ->
       if !err then app.user = user
       done(err, user)
 
-	app.use '/public', express.static 'public'
-	app.use express.bodyParser()
+  app.use '/public', express.static 'public'
+  app.use express.json()
+  app.use express.urlencoded()
 	app.use express.cookieParser()
 	app.use express.session secret: sessionSecret
 	app.use passport.initialize()
