@@ -1,10 +1,12 @@
 define [
+  'cs!App'
+  'cs!Router'
   'cs!utils'
   'marionette'
   'tpl!modules/article/templates/layout.html'
   'cs!modules/article/view/ArticleDetailView'
   'cs!modules/files/view/PreviewView'
-], (Utils, Marionette, Template, DetailView, PreviewView) ->
+], (App, Router, Utils, Marionette, Template, DetailView, PreviewView) ->
   class ArticleLayout extends Marionette.Layout
 
     template: Template
@@ -41,8 +43,8 @@ define [
     save: -> @detailRegion.currentView.save()
 
     cancel: ->
-      Vent.trigger 'app:closeRegion', 'contentRegion'
-      App.Router.navigate 'articles'
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
+      Router.navigate 'articles', trigger:true
 
 
 

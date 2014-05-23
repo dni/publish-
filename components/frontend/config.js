@@ -10,7 +10,7 @@ require.config({
 		wreqr: "vendor/wreqr",
 		text: 'vendor/text',
 		cs: 'vendor/cs',
-		tpl: 'vendor/require-tpl/tpl',
+		tpl: 'vendor/tpl',
 		underscore: 'vendor/underscore'
 	},
 	packages: [

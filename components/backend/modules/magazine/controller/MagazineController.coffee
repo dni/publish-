@@ -1,5 +1,6 @@
 define [
   'cs!App'
+  'cs!Router'
   'cs!utils'
   'marionette'
   'cs!modules/magazine/view/MagazineLayout'
@@ -9,18 +10,24 @@ define [
   'cs!modules/magazine/model/Magazines'
   'cs!modules/magazine/model/Pages'
   'cs!modules/files/model/Files'
-], ( App, Utils, Marionette, MagazineLayout, MagazineListView, TopView, Magazine, Magazines, Pages, Files) ->
+  'i18n!modules/magazine/nls/language.js'
+  'cs!utilities/views/EmptyView'
+], ( App, Router, Utils, Marionette, MagazineLayout, MagazineListView, TopView, Magazine, Magazines, Pages, Files, i18n, EmptyView) ->
 
   class MagazineController extends Marionette.Controller
     detailsMagazine: (id) ->
-      pages = new Pages
-      pages.fetch
-        data:
-          magazine:id
-      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new MagazineLayout
-        model: App.Magazines.findWhere _id: id
-        files: new Files App.Files.where relation: "magazine:"+id
-        pages: pages
+      magazine = App.Magazines.findWhere _id: id
+      if magazine
+        pages = new Pages
+        pages.fetch
+          data:
+            magazine:id
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new MagazineLayout
+          model: magazine
+          files: new Files App.Files.where relation: "magazine:"+id
+          pages: pages
+      else
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new EmptyView message: i18n.emptyMessage
 
 
     addMagazine: ->
