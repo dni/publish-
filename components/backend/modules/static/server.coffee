@@ -17,7 +17,7 @@ module.exports.setup = (app)->
 		if fs.existsSync __dirname+'/data/publish/staticblocks.json' then fs.unlinkSync __dirname+'/data/publish/staticblocks.json'
 		mongoimport = require('child_process').spawn('mongoexport', ['-d', 'publish', '-c', 'staticblocks', '-o', 'staticblocks.json'], {cwd:__dirname+'/data'})
 		mongoimport.on 'exit', (code)->
-      if code == 0
+      if code is 0
         res.send('Error: while exporting Static Blocks, code: ' + code)
         console.log('Error: while exporting Static Blocks, code: ' + code)
       else

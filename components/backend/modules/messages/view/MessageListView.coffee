@@ -14,9 +14,15 @@ define [
     events:
       "submit form": "newMessage"
       "click [name='clear']": "clearMessages"
+      "change [name=limit]": "limit"
 
     ui:
       message: '[name=message]'
+      limit:  "[name=limit]"
+
+    limit:->
+      App.Messages.fetch
+        data: limit: @ui.limit.val()
 
     clearMessages: ->
       messages = App.Messages.models

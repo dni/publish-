@@ -11,6 +11,6 @@ define [
   class MessageController extends Backbone.Marionette.Controller
 
     list : ->
-      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
-      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView
-      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new DetailView collection: App.Messages
+      App.listTopRegion.show new TopView
+      App.listRegion.show new ListView
+      App.contentRegion.show new DetailView collection: App.Messages

@@ -3,8 +3,9 @@ fs = require("fs")
 
 module.exports.setup = (app) ->
 
-	app.get "/messages", (req, res) ->
-		Message.find().sort(date: -1).limit(50).execFind (arr, data) ->
+  app.get "/messages", (req, res) ->
+    limit = if req.query.limit? then req.query.limit else 25
+    Message.find().sort(date: -1).limit(limit).execFind (arr, data) ->
       res.send data
 
   app.post "/messages", (req, res) ->
