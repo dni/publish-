@@ -9,13 +9,9 @@ define [
 
     template: Template
 
-    initialize: ->
-      # @model.bind 'change', @render, @
-
     reset:->
-      console.log "resets"
       @model.destroy success:->
-        document.location.reload()
+        Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     save: ->
       settings = @model.get "settings"

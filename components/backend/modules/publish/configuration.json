@@ -27,12 +27,12 @@
 		},
 		"backend_development" : {
 	      "label": "Backend in Development Mode",
-	      "value": "0",
+	      "value": true,
 	      "type": "checkbox"
 		},
 		"frontend_development" : {
 	      "label": "Frontend in Development Mode",
-	      "value": "0",
+	      "value": true,
 	      "type": "checkbox"
 		}
 	}

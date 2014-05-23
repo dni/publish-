@@ -19,7 +19,7 @@
 		},
 		"print" : {
 	      "label": "Enable Print PDF",
-	      "value": "0",
+	      "value": false,
 	      "type": "checkbox"
 		}
 	}
