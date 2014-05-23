@@ -9,3 +9,4 @@ public/books
 
 .project
 .DS_Store
+components/backend/modules/baker/generators/BakerGenerator.js
