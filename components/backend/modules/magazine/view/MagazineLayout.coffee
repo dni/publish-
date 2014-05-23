@@ -23,7 +23,6 @@ define [
     events:
       "click #download": "downloadPrint"
       "click .deleteMagazine": "deleteMagazine"
-      "click .publish": "publish"
       "click .save": "save"
       "click .cancel": "cancel"
 
@@ -42,10 +41,9 @@ define [
     afterRender:->
       @detailRegion.show new DetailView model: @model
       # dont childviews if model is new and there no _id for the relation
-      if @model.isNew() then @model.on 'sync', @addChildViews else @addChildViews()
+      if @model.isNew() then @model.on 'sync', @addChildViews, @ else @addChildViews()
 
     addChildViews:->
-      console.log @
       @pageRegion.show new PageListView
         collection: @pages
         magazine: @model.get "_id"
@@ -54,11 +52,6 @@ define [
         namespace: 'magazine'
         modelId: @model.get "_id"
 
-    publish:->
-      # before model is toggled
-      if @model.get("published") then @ui.publish.addClass("btn-success").text('Publish') else @ui.publish.removeClass("btn-success").text('Unpublish')
-      @model.togglePublish()
-      @save()
 
     downloadPrint: ->
        window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
