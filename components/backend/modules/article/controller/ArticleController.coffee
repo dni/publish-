@@ -2,21 +2,27 @@ define [
   'cs!App'
   'cs!utils'
   'marionette'
+  'i18n!modules/article/nls/language'
   'cs!modules/article/view/ArticleListView'
   'cs!modules/article/view/ArticleLayout'
   'cs!modules/article/view/TopView'
   'cs!modules/article/model/Article'
   'cs!modules/files/model/Files'
-], ( App, Utils, Marionette, ArticleListView, ArticleLayout, TopView, Article, Files ) ->
+  'cs!utilities/views/EmptyView'
+], ( App, Utils, Marionette, i18n, ArticleListView, ArticleLayout, TopView, Article, Files, EmptyView ) ->
 
   class ArticleController extends Marionette.Controller
     settings: (attr)->
       (App.Settings.findWhere name: "Articles").getValue(attr)
 
     details: (id) ->
-      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout
-        model: App.Articles.findWhere _id: id
-        files: new Files App.Files.where relation: "article:"+id
+      article = App.Articles.findWhere _id: id
+      if article
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new ArticleLayout
+          model: article
+          files: new Files App.Files.where relation: "article:"+id
+      else
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new EmptyView message: i18n.emptyMessage
 
     add: ->
       Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new ArticleLayout

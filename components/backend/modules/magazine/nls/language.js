@@ -12,6 +12,7 @@ define({
         "orientation": "Select Orientation (Print)",
         "newMagazine": "created new magazine",
         "updateMagazine": "updated magazine",
+        "emptyMessage": "The magazine does not exist anymore",
         "deleteMagazine": "deleted magazine"
 
     },
