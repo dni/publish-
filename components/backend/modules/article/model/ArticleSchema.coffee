@@ -7,7 +7,7 @@ module.exports = mongoose.model 'Article', new Schema
   author: String
   desc: String
   date: Date
-  privatecode: Boolean
+  published: Boolean
   category: String
   tags: String
   files: Object

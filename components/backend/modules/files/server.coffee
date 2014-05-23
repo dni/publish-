@@ -73,10 +73,10 @@ module.exports.setup = (app)->
 
   app.delete '/files/:id', (req, res)->
     File.findById req.params.id, (e, a)->
-      a.remove (err, model)->
-        if err then return res.send "error while removing file "+model.name
+      a.remove (err)->
+        if err then return res.send "error while removing file "+a.name
         if fs.existsSync "./public/files/"+a.name then fs.unlink "./public/files/"+a.name
-        res.send 'removing file '+model.name
+        res.send 'removing file '+a.name
 
   app.put '/files/:id', (req, res)->
     File.findById req.params.id, (e, a)->
@@ -103,7 +103,8 @@ module.exports.setup = (app)->
 createImages = (file, filename, res, req, cfg) ->
   shrinkPic = (type, size) ->
     maxSize = cfg.settings[type].value
-    targetName = type + "_thumb_" + filename
+    targetName = type + filename
+    file[type] = targetName
     targetLink = "./public/files/" + targetName
     image.quality parseInt(cfg.settings.quality.value)
     if size.width > size.height
