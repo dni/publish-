@@ -1,17 +1,21 @@
 define [
+  'cs!App'
+  'cs!Router'
   'cs!utils'
   'jquery'
   'marionette'
   'tpl!../templates/detail.html'
-], ( Utils, $, Marionette, Template) ->
+], ( App, Router, Utils, $, Marionette, Template) ->
 
   class SettingsDetailView extends Marionette.ItemView
 
     template: Template
 
     reset:->
-      @model.destroy success:->
-        Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
+      @model.destroy
+        success:->
+      App.contentRegion.close()
+      Router.navigate 'settings'
 
     save: ->
       settings = @model.get "settings"

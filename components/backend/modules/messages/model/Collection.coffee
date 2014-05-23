@@ -5,3 +5,5 @@ define [
   class Messages extends Backbone.Collection
     model: Model
     url: "/messages/"
+    comparator: (msg)->
+      msg.get "date"
