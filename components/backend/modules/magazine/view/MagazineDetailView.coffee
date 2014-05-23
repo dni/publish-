@@ -26,9 +26,18 @@ define [
       editorial: '[name=editorial]'
       papersize: '[name=papersize]'
       orientation: '[name=orientation]'
+      publish: '.publish'
 
     events:
       "change [name=title]": 'save'
+      "click .publish": 'publish'
+
+    publish:->
+      # before model is toggled
+      if @model.get("published") then @ui.publish.addClass("btn-success").text('Publish') else @ui.publish.removeClass("btn-success").text('Unpublish')
+      @model.togglePublish()
+      @save()
+
 
     save: ->
       if @model.isNew() then check = 0 else check = 1
@@ -56,7 +65,7 @@ define [
             Utils.Log i18n.newMagazine, 'new',
               text: res.attributes.title
               href: route
-            Router.navigate route, false
+            Router.navigate route, trigger:false
       else
         Utils.Log i18n.updateMagazine, 'update',
           text: @model.get 'title'
