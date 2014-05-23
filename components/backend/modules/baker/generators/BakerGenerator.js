@@ -127,13 +127,9 @@ function startGenIconssets(setting){
 	var background, logo, icon;
 
 	File.findOne({relation: 'setting:'+setting._id, key: "background"}).exec(function(err, file) {
-		if(err){throw(err);}
-		background =  file.name;
 		File.findOne({relation: 'setting:'+setting._id, key: "logo"}).exec(function(err, file) {
-			if(err){throw(err);}
 			logo =  file.name;
 			File.findOne({relation: 'setting:'+setting._id, key: "icon"}).exec(function(err, file) {
-				if(err){throw(err);}
 				icon =  file.name;
 				createIcons(formats.pop());
 			});
