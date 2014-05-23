@@ -31,12 +31,12 @@ module.exports.setup = (app)->
 	app.get '/admin', auth, (req, res)->
     Setting.find name:'General', (e, a)->
       # if setting doesnt exists start in development mode
-      if a.length is 0 || a[0].settings.backend_development.value
-        console.log "Starting backend in development mode"
-        app.use '/admin', express.static process.cwd()+'/components/backend'
-        app.use '/modules', express.static process.cwd()+'/components/backend/modules' # workaround for requirejs i18n problem with /admin
-        res.sendfile process.cwd()+'/components/backend/index.html'
-      else
+      # if a.length is 0 || a[0].settings.backend_development.value
+        # console.log "Starting backend in development mode"
+        # app.use '/admin', express.static process.cwd()+'/components/backend'
+        # app.use '/modules', express.static process.cwd()+'/components/backend/modules' # workaround for requirejs i18n problem with /admin
+        # res.sendfile process.cwd()+'/components/backend/index.html'
+      # else
         console.log "Starting backend in production mode"
         app.use '/admin', express.static process.cwd()+'/cache/build'
         app.use '/modules', express.static process.cwd()+'/cache/build/modules' # workaround for requirejs i18n problem with /admin

@@ -25,6 +25,15 @@ define [
       article: '[name=article]'
       tags: '[name=tags]'
       category: '[name=category]'
+      publish: '.publish'
+
+    events:
+      'click .publish': 'publish'
+
+    publish: ->
+      if @model.get("published") then @ui.publish.removeClass("btn-success").text('Unpublish') else @ui.publish.addClass("btn-success").text('Publish')
+      @model.togglePublish()
+      @save()
 
     save: ->
       @model.set
