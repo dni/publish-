@@ -22,15 +22,16 @@ module.exports.setup = (app)->
   # articles
 	app.get '/publicarticles', (req,res)->
     Article.find(published: true).execFind (err, articles)->
-  	  res.send articles
-      # calls = []
-      # for article in articles
-        # calls.push (cb)->
-          # File.find(relation:'article:'+article._id).execFind (err, files)->
-            # if err then return
-    				# for file in files
-    				  # if file.length then article.files.push file
-    				# cb()
-#
-      # async.parallel calls, ->
-        # res.send articles
+      calls = []
+      for article in articles
+        article.files = []
+        calls.push (cb)->
+          console.log "hello", article
+          File.find(relation:'article:'+article._id).execFind (err, files)->
+            if err then return
+            for file in files
+              article.files.push file
+            cb()
+
+      async.parallel calls, ->
+        res.send articles
