@@ -1,13 +1,17 @@
 define [
+  'cs!App'
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
   'cs!../model/Page',
   'jquery.ui'
-], (Marionette, Template, ItemTemplate, Page, jqueryui) ->
+], (App, Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
   class PageListItemView extends Marionette.ItemView
     template: ItemTemplate
+    templateHelpers:
+      getArticles: -> App.Articles.toJSON()
+      getSettings: -> App.Settings.where({name: "Magazines"})[0].getValue("layouts").split(",")
 
     ui:
       number: '.number'

@@ -1,21 +1,15 @@
 <div class="page ui-state-default">
 	<form class="form-inline">
 
-	    <% var articles = App.Articles.toJSON() %>
-	    <% var settings = App.Settings.where({name: "Magazines"})[0].getValue("layouts").split(",") %>
 		<span class="number badge"><%= number %></span>
 		<select class="article form-control">
-			<% for(var i = 0; i < articles.length; i++) { %>
-				<% if (articles[i]._id == article) { %>
-					<option selected="selected" value="<%= articles[i]._id %>"><%= articles[i].title %></option>
-				<% } else { %>
-					<option value="<%= articles[i]._id %>"><%= articles[i].title %></option>
-				<% } %>
-			<% }; %>
+			<% for(var i = 0, articles = getArticles(); i < articles.length; i++) { %>
+				<option <% if (articles[i]._id == article) { %> selected="selected" <% } %> value="<%= articles[i]._id %>"><%= articles[i].title %></option>
+			<% } %>
 		</select>
 		<select class="layout form-control">
-			<% for(key in settings) { %>
-				<option <% if (layout == settings[key]) { %> selected <% } %> value="<%= settings[key] %>"><%= settings[key] %></option>
+			<% for(var i = 0, settings = getSettings(); i < settings.length; i++) { %>
+				<option <% if (layout == settings[i]) { %> selected <% } %> value="<%= settings[i] %>"><%= settings[i] %></option>
 			<% } %>
 		</select>
 		<a class="remove btn btn-default"><span class="glyphicon glyphicon-remove"></span></a>

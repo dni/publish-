@@ -62,6 +62,12 @@
 			</div>
 		</div>
 	<%}%>
+	<% if (published === false) { %>
+		<button class="publish btn btn-success">Publish</button>
+	<% } else { %>
+		<button class="publish btn btn-default">Unpublish</button>
+	<% } %>
+
 
 </div>
 
