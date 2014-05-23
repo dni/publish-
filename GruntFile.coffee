@@ -163,6 +163,7 @@ module.exports = (grunt)->
               main: 'i18n'
             }
           ]
+          fileExclusionRegExp: new RegExp 'server.coffee$'
           shim:
             'jquery.ui':['jquery']
             'jquery.tinymce':['jquery', 'tinymce']
@@ -206,6 +207,7 @@ module.exports = (grunt)->
     'bowercopy:libsFrontend'
     'clean:lib' #workaround ;()
     'forever:start'
+    'build'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [
@@ -215,7 +217,7 @@ module.exports = (grunt)->
   ]
   grunt.registerTask 'reset', 'Reinstalling the App', [
     'dropDatabase'
-    'clean:everthingy'
+    'clean:everything'
   ]
 
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [

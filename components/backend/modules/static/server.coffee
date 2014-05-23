@@ -7,8 +7,6 @@ module.exports.setup = (app)->
 	StaticBlock.count {}, (err, count)->
 		if count == 0
       mongoimport = require('child_process').spawn('mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], {cwd:__dirname+'/data/'})
-      mongoimport.on 'exit', (code)->
-        if code == 0 then console.log 'Error: while importing Static Blocks, code: #{code}' else console.log "Imported Static Blocks"
 
   # get single static block data
 	app.get '/staticBlocks/:id', (req, res)->

@@ -35,7 +35,6 @@ define [
 
     events:
       "click .delete": "deleteArticle"
-      'click #publish': "publish"
       "click .save": "save"
       "click .cancel": "cancel"
 
@@ -45,10 +44,7 @@ define [
       Vent.trigger 'app:closeRegion', 'contentRegion'
       App.Router.navigate 'articles'
 
-    publish: ->
-      if @model.get("privatecode") then @ui.publish.removeClass("btn-success").text('Unpublish') else @ui.publish.addClass("btn-success").text('Publish!')
-      @model.togglePublish()
-      @save()
+
 
     deleteArticle: ->
       @files.each (file)-> file.destroy success:->

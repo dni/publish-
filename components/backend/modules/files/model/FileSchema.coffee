@@ -1,8 +1,7 @@
-var mongoose = require('mongoose/'),
-	Schema = mongoose.Schema;
+mongoose = require 'mongoose'
+Schema = mongoose.Schema
 
-
-var fileSchema = new Schema({
+module.exports = mongoose.model 'File', new Schema
   name: String,
   link: String,
   type: String,
@@ -15,6 +14,3 @@ var fileSchema = new Schema({
   thumbnail: String,
   smallPic: String,
   bigPic: String
-});
-
-module.exports = mongoose.model('File', fileSchema);

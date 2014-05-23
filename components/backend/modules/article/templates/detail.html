@@ -26,3 +26,9 @@
 	<label><%= t.tags %></label>
 	<input class="form-control" type="text" name="tags" value="<%= tags %>" />
 </div>
+
+<% if (published) { %>
+	<button class="publish btn btn-default">Unpublish</button>
+<% } else { %>
+	<button class="publish btn btn-success">Publish</button>
+<% } %>

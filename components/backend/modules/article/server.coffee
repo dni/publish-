@@ -8,6 +8,7 @@ module.exports.setup = (app)->
 
 	app.post '/articles', (req, res)->
 		a = new Article
+		a = req.body
 		a.user = app.user.id
 		a.title = req.body.title
 		a.desc = req.body.desc
