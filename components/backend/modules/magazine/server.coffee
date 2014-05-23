@@ -86,16 +86,13 @@ module.exports.setup = (app) ->
 
   app.delete '/magazines/:id', (req, res)->
     Magazine.findById req.params.id, (e, a)->
-      a.remove (err)->
-        if err
-          console.log err
-        else
-          spawn = require('child_process').spawn('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'})
-			    spawn.on 'exit', (code)->
-            if code is 0 then res.send 'deleted'
-            else
-              res.statusCode = 500;
-              console.log('remove book/yourmagazine (rm) process exited with code ' + code);
+      a.remove ->
+        spawn = require('child_process').spawn('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'})
+  	    spawn.on 'exit', (code)->
+          if code is 0 then res.send 'deleted'
+          else
+            res.statusCode = 500;
+            console.log('remove book/yourmagazine (rm) process exited with code ' + code);
 
   app.delete '/pages/:id', (req, res)->
     Page.findById req.params.id, (e, model)->
