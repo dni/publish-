@@ -1,6 +1,11 @@
 define({
     "root": {
-    	"delete": "Delete",
+    	"thumbnail": "Thumbnail size",
+    	"smallPic": "Small image size",
+    	"bigPic": "Big image size",
+    	"quality": "Image quality",
+    	"addFiles": "Add files...",
+    	"headline": "Files",
     	"name": "Name",
     	"info": "Info",
     	"description": "Description",
