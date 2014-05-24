@@ -1,5 +1,6 @@
 define({
     "root": {
+    	"langCode": "en",
     	"domain": "Domain",
     	"development": "Development",
     	"backend_development": "Backend in Development Mode",
