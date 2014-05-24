@@ -1,4 +1,4 @@
-mongoose = require 'mongoose/'
+mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
 module.exports = mongoose.model 'StaticBlock', new Schema
