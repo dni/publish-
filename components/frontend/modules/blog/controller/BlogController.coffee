@@ -8,8 +8,17 @@ define [
   class BlogController extends Marionette.Controller
 
     list: ->
-      App.contentRegion.show new ListView collection: Articles
+      Articles.fetch
+        success:->
+          App.contentRegion.show new ListView collection: Articles
 
     details: (id) ->
       article = Articles.findWhere _id: id
       App.contentRegion.show new DetailView model: article
+
+    filterCategory: (name) ->
+      console.log name, Articles, Articles.where category: name
+      Articles.fetch
+        data: category: name
+        success:->
+          App.contentRegion.show new ListView collection: Articles
