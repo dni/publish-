@@ -116,6 +116,12 @@ module.exports = (grunt)->
         files:
           "jquery.min.js": "jquery/dist/jquery.min.js",
 
+    copy:
+      tinymce:
+        cwd: 'components/backend/modules/publish/nls/langs-tinymce'
+        src: '*'
+        dest: 'components/backend/vendor/tinymce/langs'
+        expand: true
 
     requirejs:
       compile:
@@ -213,6 +219,7 @@ module.exports = (grunt)->
     'bower:install'
     'gitclone:baker:clone'
     'bowercopy'
+    'copy:tinymce' # translations for tinymce
     'clean:lib' #workaround ;()
     'forever:start'
     'build'
