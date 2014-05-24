@@ -9,5 +9,4 @@ $(function(){
 		$("body").addClass('print');
 	}
 
-
 });
