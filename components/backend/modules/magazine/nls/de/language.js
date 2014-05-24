@@ -1,4 +1,6 @@
 define({
+	"pageHeadline": "Seiten",
+    "addPage": "Seite hinzufügen",
 	"navigation": "Magazine",
 	"layouts": "Vorlagen",
 	"print": "Druck Pdf's aktivieren",

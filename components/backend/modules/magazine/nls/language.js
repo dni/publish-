@@ -1,6 +1,8 @@
 define({
     "root": {
     	"navigation": "Magazines",
+    	"pageHeadline": "Pages",
+    	"addPage": "Add Page",
     	"layouts": "Layouts",
     	"print": "Enable Print PDF",
     	"publish": "Publish",
