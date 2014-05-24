@@ -1,7 +1,13 @@
 define({
+	"navigation": "Magazine",
+	"layouts": "Vorlagen",
+	"print": "Druck Pdf's aktivieren",
 	"details": "Magazin Details",
 	"title": "Titel",
 	"author": "Autor",
+	"publish": "Publish",
+	"unpublish": "Unpublish",
+	"downloadPdf": "Download Druck Pdf",
 	"impressum": "Impressum",
 	"editorial": "Editorial",
 	"product_id": "Produkt ID",

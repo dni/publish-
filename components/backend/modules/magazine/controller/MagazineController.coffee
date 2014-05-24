@@ -5,7 +5,7 @@ define [
   'marionette'
   'cs!modules/magazine/view/MagazineLayout'
   'cs!modules/magazine/view/MagazineListView'
-  'cs!modules/magazine/view/TopView'
+  'cs!utilities/views/TopView'
   'cs!modules/magazine/model/Magazine'
   'cs!modules/magazine/model/Magazines'
   'cs!modules/magazine/model/Pages'
@@ -37,5 +37,5 @@ define [
         pages: new Pages()
 
     magazines: ->
-      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView navigation: i18n.navigation, newModel: 'newMagazine'
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new MagazineListView collection: App.Magazines

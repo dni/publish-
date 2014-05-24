@@ -6,7 +6,6 @@
     "navigation": {
 	    "button": "user",
 	    "route": "users",
-	    "label": "users",
 	    "classNames": "users"
     }
 }

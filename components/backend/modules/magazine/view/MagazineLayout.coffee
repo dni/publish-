@@ -10,6 +10,7 @@ define [
   class MagazineLayout extends Marionette.Layout
 
     template: Template
+    templateHelpers:vhs:Utils.Viewhelpers
 
     regions:
       'detailRegion': '#magazine-details'
@@ -21,7 +22,6 @@ define [
       title: "[name=title]"
 
     events:
-      "click #download": "downloadPrint"
       "click .deleteMagazine": "deleteMagazine"
       "click .save": "save"
       "click .cancel": "cancel"
@@ -51,10 +51,6 @@ define [
         collection: @files
         namespace: 'magazine'
         modelId: @model.get "_id"
-
-
-    downloadPrint: ->
-       window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
 
     deleteMagazine: ->
       @pages.each (page)->

@@ -6,19 +6,16 @@
     "navigation": {
         "button": 0,
         "route": "magazines",
-        "label": "Magazine",
         "classNames": "magazines"
     },
 
     "settings": {
 		"layouts" : {
-	      "label": "Layouts",
 	      "description": "Comma seperated list of layout keys",
 	      "value": "default, fullsize",
 	      "type": "text"
 		},
 		"print" : {
-	      "label": "Enable Print PDF",
 	      "value": false,
 	      "type": "checkbox"
 		}
