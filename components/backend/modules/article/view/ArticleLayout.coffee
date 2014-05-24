@@ -36,19 +36,18 @@ define [
       publish: "#publish"
 
     events:
-      "click .delete": "deleteArticle"
+      "click .delete": "destroy"
       "click .save": "save"
       "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()
 
+    destroy: ->
+      @files.each (file)-> file.destroy success:->
+      @detailRegion.currentView.destroy()
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
+
     cancel: ->
       Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
       Router.navigate 'articles', trigger:true
 
-
-
-    deleteArticle: ->
-      @files.each (file)-> file.destroy success:->
-      @model.destroy success:->
-      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'

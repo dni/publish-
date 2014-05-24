@@ -4,7 +4,7 @@
 
 <% if (additionalinfo.href) { %>
 	<a href="#<%= additionalinfo.href %>"<span class="label label-info additional"><%= additionalinfo.text %></span>
-<% } else { %>
+<% } else if (additionalinfo.text) { %>
 	<span class="label label-info additional"><%= additionalinfo.text %></span>
 <% } %>
 

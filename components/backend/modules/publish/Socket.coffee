@@ -11,7 +11,6 @@ define [
     # App.vent.trigger "socket:connected"
 
   socket.on "updateCollection", (collection)->
-    c.l "updatecollection", collection
     App[collection].fetch
       success:->
 

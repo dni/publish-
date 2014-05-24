@@ -24,6 +24,7 @@ define [
       App.Messages.fetch
         data: limit: @ui.limit.val()
 
+    #unused
     clearMessages: ->
       messages = App.Messages.models
       if confirm i18n.confirmClear

@@ -5,8 +5,9 @@ define({
         "article": "Article",
         "category": "Category",
         "tags": "Tags",
-        "newArticle": "created new article",
         "emptyMessage": "The article does not exist anymore",
+        "newArticle": "created new article",
+        "deleteArticle": "deleted article",
         "updateArticle": "updated article"
     },
     "de": true
