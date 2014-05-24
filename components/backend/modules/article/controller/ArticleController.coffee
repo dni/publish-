@@ -5,7 +5,7 @@ define [
   'i18n!modules/article/nls/language'
   'cs!modules/article/view/ArticleListView'
   'cs!modules/article/view/ArticleLayout'
-  'cs!modules/article/view/TopView'
+  'cs!utilities/views/TopView'
   'cs!modules/article/model/Article'
   'cs!modules/files/model/Files'
   'cs!utilities/views/EmptyView'
@@ -30,5 +30,5 @@ define [
         files: new Files
 
     list: ->
-      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView navigation: i18n.navigation, newModel: 'newArticle'
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles
