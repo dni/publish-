@@ -1,17 +1,17 @@
 define [
   'cs!App'
   'cs!Router'
-  'cs!utilities/Viewhelpers'
+  'cs!utils'
   'i18n!modules/static/nls/language.js'
   'marionette'
   'tpl!../templates/detail.html'
-], (App, Router, ViewHelpers, i18n, Marionette, Template) ->
+], (App, Router, Utils, i18n, Marionette, Template) ->
 
   class StaticDetailView extends Marionette.ItemView
 
     template: Template
     templateHelpers:
-      vhs: ViewHelpers
+      vhs: Utils.Viewhelpers
       t: i18n
 
     ui:

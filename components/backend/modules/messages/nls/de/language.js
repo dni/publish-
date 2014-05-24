@@ -1,4 +1,5 @@
 define({
+	"navigation": "Nachrichten",
 	"message": "Nachricht",
     "messagePlaceholder": "Nachricht senden...",
     "send": "Senden",

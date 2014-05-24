@@ -1,5 +1,6 @@
 define({
     "root": {
+    	"navigation": "Messages",
 		"message": "Message",
 	    "messagePlaceholder": "Send message...",
 	    "send": "Send",
