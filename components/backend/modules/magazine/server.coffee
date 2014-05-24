@@ -87,8 +87,9 @@ module.exports.setup = (app) ->
   app.delete '/magazines/:id', (req, res)->
     Magazine.findById req.params.id, (e, a)->
       a.remove ->
-        spawn = require('child_process').spawn('rm', ['-rf', '-', a.title], {cwd:process.cwd()+'/public/books/'})
-  	    spawn.on 'exit', (code)->
+        child_process = require("child_process").spawn
+        spawn = child_process("rm", ["-rf", a.title], cwd: "./public/books/")
+        spawn.on "exit", (code) ->
           if code is 0 then res.send 'deleted'
           else
             res.statusCode = 500;
