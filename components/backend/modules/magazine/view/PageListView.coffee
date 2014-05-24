@@ -1,11 +1,12 @@
 define [
   'cs!App'
+  "i18n!modules/magazine/nls/language.js"
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
   'cs!../model/Page',
   'jquery.ui'
-], (App, Marionette, Template, ItemTemplate, Page, jqueryui) ->
+], (App, i18n, Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
   class PageListItemView extends Marionette.ItemView
     template: ItemTemplate
@@ -41,6 +42,7 @@ define [
   class PageListView extends Marionette.CompositeView
 
     template: Template
+    templateHelpers:t:i18n
     itemView: PageListItemView
     itemViewContainer: ".page-list"
 
