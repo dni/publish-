@@ -1,17 +1,19 @@
 define [
   'cs!App'
   'cs!utils'
+  'i18n!modules/files/nls/language.js'
   'jquery'
   'marionette'
   'cs!../view/ListView'
   'cs!../view/BrowseView'
   'cs!../view/DetailView'
   'cs!../view/TopView'
+  'cs!utilities/views/EmptyView'
   'cs!../view/ShowFileView'
   'cs!../model/File'
   'cs!../model/Files'
 
-], ( App, Utils, $, Marionette, ListView, BrowseView, DetailView, TopView, ShowFileView, File, Files) ->
+], ( App, Utils, i18n, $, Marionette, ListView, BrowseView, DetailView, TopView, EmptyView, ShowFileView, File, Files) ->
   class FileController extends Marionette.Controller
 
     filebrowser: (namespace, id)->
@@ -63,18 +65,14 @@ define [
       Utils.Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')
 
-    cropfile: (id) ->
-      c.l "cropfile .. controller"
-      fileView = App.contentRegion.currentView.fileRegion.currentView
-      view = new CropFileView model: fileView.collection.findWhere _id: id
-
-      Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
-      Utils.Vent.trigger 'overlay:action', ->
-        $('.modal').modal('hide')
 
     show: (id) ->
-      file = App.Files.where _id: id
-      Utils.Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file[0]
+      file = App.Files.findWhere _id: id
+      if file
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: file
+      else
+        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new EmptyView message: i18n.emptyMessage
+
 
     list : ->
       Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
