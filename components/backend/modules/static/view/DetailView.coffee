@@ -1,37 +1,33 @@
 define [
   'cs!App'
   'cs!Router'
+  'cs!utilities/Viewhelpers'
+  'i18n!modules/static/nls/language.js'
   'marionette'
   'tpl!../templates/detail.html'
-], (App, Router, Marionette, Template) ->
+], (App, Router, ViewHelpers, i18n, Marionette, Template) ->
 
   class StaticDetailView extends Marionette.ItemView
 
     template: Template
+    templateHelpers:
+      vhs: ViewHelpers
+      t: i18n
 
     ui:
-      edit: ".edit"
-      deleteable: ".deleteable"
       key: 'input[name=key]'
       data: 'textarea[name=data]'
 
     events:
-      "click .revert": "revertStatic"
-      "click .save": "saveStatic"
+      "click .save": "save"
       "click .cancel": "cancel"
+      "click .delete": "deleteStatic"
 
     cancel: ->
       App.contentRegion.close()
-      Router.navigate 'articles'
+      Router.navigate 'staticBlocks'
 
-    addFiles:->
-      Router.navigate "filebrowser", true
-
-    revertStatic: ->
-      @model.destroy success: ->
-      window.document.location.reload()
-
-    saveStatic: ->
+    save: ->
       @model.set
         key: @ui.key.val()
         data: @ui.data.val()
@@ -39,12 +35,20 @@ define [
         App.StaticBlocks.create @model,
           wait: true
           success: (res) ->
-            Router.navigate 'static/'+res.attributes._id, false
+            route = 'static/'+res.attributes._id
+            Utils.Log i18n.newStatic, 'new',
+              text: res.attributes.key
+              href: route
+            Router.navigate route, false
       else
+        Utils.Log i18n.updateStatic, 'update',
+          text: @model.get 'key'
+          href: 'static/'+@model.get '_id'
         @model.save()
 
 
     deleteStatic: ->
+      Utils.Log i18n.deletStatic, 'delete', text: @model.get 'key'
       @model.destroy
         success:->
       App.contentRegion.close()

@@ -1,4 +1,5 @@
 define({
+	"navigation": "Artikel",
 	"title": "Titel",
     "author": "Autor",
     "article": "Artikel",
