@@ -96,8 +96,7 @@ module.exports.setup = (app) ->
 
   app.delete '/pages/:id', (req, res)->
     Page.findById req.params.id, (e, model)->
-      model.remove (err)->
-      if !err then return res.send '' else console.log err
+      model.remove -> res.send 'page deleted'
 
 createMagazineFiles = (folder, cb) ->
   fs.mkdirSync "./public/books/" + folder
