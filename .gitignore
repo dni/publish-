@@ -2,11 +2,9 @@ cache
 node_modules
 bower_components
 baker-master
-components/frontend/vendor
-components/backend/vendor
+vendor
 public/files
 public/books
 
 .project
 .DS_Store
-components/backend/modules/baker/generators/BakerGenerator.js

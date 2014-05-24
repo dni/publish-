@@ -14,6 +14,7 @@ module.exports = (grunt)->
         'node_modules'
         'cache'
         'components/backend/vendor'
+        'components/magazine/vendor'
         'components/frontend/vendor'
         'public/files'
         'public/books'
@@ -24,6 +25,7 @@ module.exports = (grunt)->
         'lib'
         'cache'
         'components/backend/vendor'
+        'components/magazine/vendor'
         'components/frontend/vendor'
         'public/files'
         'public/books'
@@ -32,6 +34,7 @@ module.exports = (grunt)->
       build: src: [ 'cache/build' ]
       vendorFrontend: src: [ 'components/backend/vendor' ]
       vendorBackend: src: [ 'components/frontend/vendor' ]
+      vendorMagazine: src: [ 'components/magazine/vendor' ]
 
     mkdir:
       all:
@@ -106,6 +109,12 @@ module.exports = (grunt)->
           "fancybox": "fancybox/source",
           "bootstrap": "bootstrap",
           "require-less": 'require-less'
+
+      libsMagazine:
+        options:
+          destPrefix: "components/magazine/js/vendor"
+        files:
+          "jquery.min.js": "jquery/dist/jquery.min.js",
 
 
     requirejs:
@@ -203,8 +212,7 @@ module.exports = (grunt)->
     'mkdir:all'
     'bower:install'
     'gitclone:baker:clone'
-    'bowercopy:libsBackend'
-    'bowercopy:libsFrontend'
+    'bowercopy'
     'clean:lib' #workaround ;()
     'forever:start'
     'build'
