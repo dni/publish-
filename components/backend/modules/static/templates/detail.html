@@ -1,23 +1,9 @@
-    <div class="form-group">
-        <label>Key</label>
-        <% if(deleteable){ %>
-            <input type="text" name="key" class="form-control" value="<%= key %>" />
-        <% } else { %>
-            <input type="text" readonly name="key" class="form-control" value="<%= key %>" />
-        <% } %>
-    </div>
-
-    <div class="form-group">
-        <label>Data</label>
-        <textarea name="data" rows="12" class="wysiwyg form-control"><%= data %></textarea>
-    </div>
-
-<div class="buttons">
-	<button class="save btn btn-success">Save</button>
-	<button class="cancel btn">Cancel</button>
-	<% if(deleteable){ %>
-	   <button class="delete btn btn-danger">Delete</button>
-    <% } else { %>
-       <button class="revert btn btn-danger">Revert Changes</button>
-    <% } %>
+<div class="form-group">
+    <label><%= t.key %></label>
+    <input type="text" name="key" class="form-control" value="<%= key %>" />
 </div>
+<div class="form-group">
+    <label><%= t.data %></label>
+    <textarea name="data" rows="12" class="wysiwyg form-control"><%= data %></textarea>
+</div>
+<%= vhs.renderButtons %>

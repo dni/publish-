@@ -1,4 +1,8 @@
 define({
+
+	"cancel": "Abbrechen",
+	"deleteModel": "Löschen",
+	"save": "Speichern",
     "date": "Datum",
     "dateformat": "%d.%m.%y %H:%m:%S",
     "sunday": "Sonntag",

@@ -1,5 +1,6 @@
 define({
     "root": {
+    	"navigation": "Users",
     	"delete": "Delete",
     	"save": "Save",
     	"name": "Name",
@@ -8,6 +9,7 @@ define({
     	"role": "Role",
     	"password": "Password",
         "emptyMessage": "The user does not exist anymore",
+
         "newUser": "created a new user",
         "deleteUser": "deleted user",
         "updateUser": "updated user"

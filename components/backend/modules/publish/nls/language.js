@@ -1,6 +1,8 @@
 define({
     "root": {
-
+    	"cancel": "Cancel",
+    	"deleteModel": "Delete",
+    	"save": "Save",
 
         "date": "Date",
         "dateformat": "%d.%m.%y %H:%m:%S",

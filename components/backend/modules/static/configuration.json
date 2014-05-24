@@ -6,7 +6,6 @@
     "navigation": {
         "button": 0,
         "route": "staticBlocks",
-        "label": "Static Blocks",
         "classNames": "staticBlocks"
     }
 }

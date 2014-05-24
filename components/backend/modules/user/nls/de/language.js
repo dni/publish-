@@ -1,4 +1,5 @@
 define({
+	"navigation": "Benutzer",
 	"delete": "Löschen",
 	"save": "Speichern",
 	"name": "Name",
@@ -7,6 +8,7 @@ define({
 	"role": "Benutzergruppe",
 	"password": "Passwort",
     "emptyMessage": "Der Benutzer existiert nicht mehr",
+    "confirmLogout": "Wirklich ausloggen?",
     "newUser": "hat Benutzer erstellt",
     "deleteUser": "hat Benutzer gelöscht",
     "updateUser": "hat Benutzer bearbeitet"
