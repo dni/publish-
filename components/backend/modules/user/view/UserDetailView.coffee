@@ -11,7 +11,9 @@ define [
   class UserDetailView extends Marionette.ItemView
 
     template: Template
-    templateHelpers: t: i18n # translation
+    templateHelpers:
+      t: i18n # translation
+      vhs: Utils.Viewhelpers
 
     ui:
       name: '[name=name]'
@@ -22,7 +24,11 @@ define [
 
     events:
       "click .delete": "deleteModel"
+      "click .cancel": "cancel"
       "click .save": "saveModel"
+
+    cancel:->
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     deleteModel: ->
       Utils.Log i18n.deleteUser, 'delete', text: @model.get 'name'

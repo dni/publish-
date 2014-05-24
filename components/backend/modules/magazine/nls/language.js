@@ -1,5 +1,11 @@
 define({
     "root": {
+    	"navigation": "Magazines",
+    	"layouts": "Layouts",
+    	"print": "Enable Print PDF",
+    	"publish": "Publish",
+    	"unpublish": "Unpublish",
+    	"downloadPdf": "Download Print Pdf",
     	"details": "Magazine details",
         "title": "Title",
         "author": "Author",
@@ -14,7 +20,6 @@ define({
         "updateMagazine": "updated magazine",
         "emptyMessage": "The magazine does not exist anymore",
         "deleteMagazine": "deleted magazine"
-
     },
     "de": true
 });
