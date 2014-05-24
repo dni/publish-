@@ -1,9 +1,13 @@
 define({
     "root": {
+    	"domain": "Domain",
+    	"development": "Development",
+    	"backend_development": "Backend in Development Mode",
+    	"frontend_development": "Frontend in Development Mode",
     	"cancel": "Cancel",
     	"deleteModel": "Delete",
     	"save": "Save",
-
+    	"navigation": "General",
         "date": "Date",
         "dateformat": "%d.%m.%y %H:%m:%S",
         "sunday": "Sunday",
@@ -25,7 +29,6 @@ define({
         "october": "October",
         "november": "November",
         "december": "December"
-
     },
     "de": true
 });

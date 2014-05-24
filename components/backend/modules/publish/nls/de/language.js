@@ -1,7 +1,11 @@
 define({
-
+	"domain": "Domain",
+	"development": "Entwicklung",
+	"backend_development": "Backend im Entwicklungsmodus",
+	"frontend_development": "Frontend im Entwicklungsmodus",
 	"cancel": "Abbrechen",
 	"deleteModel": "Löschen",
+	"navigation": "Allgemein",
 	"save": "Speichern",
     "date": "Datum",
     "dateformat": "%d.%m.%y %H:%m:%S",

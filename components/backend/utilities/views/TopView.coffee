@@ -10,6 +10,7 @@ define [
       navigation: 'Navigation Title'
       newModel:false
       search:false
+      icon: 'plus'
 
   class TopView extends Marionette.ItemView
     template: Template

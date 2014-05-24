@@ -1,4 +1,5 @@
 define({
+
 	"thumbnail": "Thumbnail Größe",
 	"smallPic": "Kleine Bildgröße",
 	"bigPic": "Große Bildgröße",
@@ -6,6 +7,7 @@ define({
 	"name": "Name",
 	"addFiles": "Dateien hinzufügen...",
     "headline": "Dateien",
+    "navigation": "Dateien",
 	"info": "Info",
 	"description": "Beschreibung",
 	"alt": "Alternative Text",

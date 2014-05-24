@@ -6,6 +6,7 @@ define({
     	"quality": "Image quality",
     	"addFiles": "Add files...",
     	"headline": "Files",
+    	"navigation": "Files",
     	"name": "Name",
     	"info": "Info",
     	"description": "Description",

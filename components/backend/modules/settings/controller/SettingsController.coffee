@@ -1,14 +1,15 @@
 define [
   'cs!App'
   'cs!utils'
+  'i18n!modules/settings/nls/language.js'
   'jquery'
   'marionette'
   'cs!../view/SettingsListView'
   'cs!../view/SettingsLayout'
-  'cs!../view/SettingsListTopView'
+  'cs!utilities/views/TopView'
   'cs!modules/files/model/Files'
 ],
-( App, Utils, $, Marionette, ListView, Layout, ListTopView, Files ) ->
+( App, Utils, i18n, $, Marionette, ListView, Layout, TopView, Files ) ->
 
   class SettingsController extends Marionette.Controller
 
@@ -19,7 +20,11 @@ define [
         files: new Files App.Files.where relation: "setting:"+model[0].get "_id"
 
     list: ->
-      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new ListTopView
+      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
+        navigation: i18n.headline
+        newModel: 'settings/clearCache'
+        icon: 'refresh'
+
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
 
 

@@ -25,6 +25,7 @@ define [
       setting = new Setting
       setting.set "settings", settings
       setting.set "name", name
+      setting.set "label", name
       if i18n then setting.translate i18n
       App.Settings.create setting
     else
