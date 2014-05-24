@@ -1,7 +1,6 @@
 fs = require 'fs'
 module.exports.setup = (app)->
 	app.configure ->
-		# load/setup modules
 		dir =  __dirname+'/modules/'
 		fs.readdir dir, (err, files)->
       if err then throw err
