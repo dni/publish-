@@ -10,9 +10,10 @@ define [
   class SettingsLayout extends Marionette.Layout
 
     template: Template
+    templateHelpers: vhs: Utils.Viewhelpers
     events:
       "click .save": "save"
-      "click .reset": "reset"
+      "click .delete": "reset"
       "click .cancel": "cancel"
 
     save: -> @detailRegion.currentView.save()

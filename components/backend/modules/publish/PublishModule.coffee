@@ -1,12 +1,13 @@
 define [
   'cs!App'
   'cs!utils'
+  'i18n!modules/publish/nls/language.js'
   'text!modules/publish/configuration.json'
   'cs!modules/publish/model/NavigationItem'
   'cs!modules/publish/model/NavigationItems'
   'cs!modules/publish/view/NavigationView'
 ],
-( App, Utils, Config, NavigationItem, NavigationItems, NavigationView)->
+( App, Utils, i18n, Config, NavigationItem, NavigationItems, NavigationView)->
 
   # show navigation
   App.navigationRegion.show new NavigationView collection: NavigationItems
@@ -17,5 +18,5 @@ define [
     NavigationItems.add new NavigationItem config
 
   # add Module Config
-  Utils.addModule Config
+  Utils.addModule Config, i18n
 
