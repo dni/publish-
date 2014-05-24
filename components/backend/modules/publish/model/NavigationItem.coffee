@@ -3,7 +3,7 @@ define [
 ], (Backbone) ->
   class NavigationItem extends Backbone.Model
     defaults:
-      "label": "Neuer Navigationspunkt"
+      "label": "Navigation Item"
       "route": ""
       "classNames": ""
       "button": 0

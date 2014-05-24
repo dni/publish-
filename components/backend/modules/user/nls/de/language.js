@@ -1,5 +1,6 @@
 define({
 	"delete": "Löschen",
+	"save": "Speichern",
 	"name": "Name",
 	"username": "Benutzername",
 	"email": "Email",

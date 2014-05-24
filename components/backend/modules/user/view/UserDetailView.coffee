@@ -22,7 +22,7 @@ define [
 
     events:
       "click .delete": "deleteModel"
-      "blur .form-control": "saveModel"
+      "click .save": "saveModel"
 
     deleteModel: ->
       Utils.Log i18n.deleteUser, 'delete', text: @model.get 'name'
