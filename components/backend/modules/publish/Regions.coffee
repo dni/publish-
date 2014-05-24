@@ -1,10 +1,11 @@
 define [
   'cs!App'
+  'i18n!modules/publish/nls/language.js'
   'jquery'
   'jquery.tinymce'
   'minicolors'
   'bootstrap'
-], (App, $, tinymce, minicolors, bootstrap) ->
+], (App, i18n, $, tinymce, minicolors, bootstrap) ->
 
   App.addRegions
     navigationRegion:"#navigation"
@@ -35,6 +36,7 @@ define [
     App.contentRegion.currentView.$el.find(".wysiwyg").tinymce
       theme: "modern"
       menubar : false
+      language: i18n.langCode
       plugins: [
           "advlist autolink lists link charmap print preview hr anchor pagebreak",
           "searchreplace wordcount code fullscreen",

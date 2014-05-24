@@ -1,4 +1,5 @@
 define({
+	"langCode": "de",
 	"domain": "Domain",
 	"development": "Entwicklung",
 	"backend_development": "Backend im Entwicklungsmodus",
