@@ -1,10 +1,10 @@
-StaticBlock = require __dirname+'/model/StaticBlockSchema'
+StaticBlocks = require __dirname+'/model/StaticBlockSchema'
 fs = require "fs-extra"
 
 module.exports.setup = (app)->
 
 	# Insert Frontend Layout Data
-	StaticBlock.count {}, (err, count)->
+	StaticBlocks.count {}, (err, count)->
 		if count == 0
       mongoimport = require('child_process').spawn('mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], {cwd:__dirname+'/data/'})
 
