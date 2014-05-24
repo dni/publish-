@@ -7,40 +7,17 @@
 	"navigation": {
 		"button": 0,
 		"route": "articles",
-		"label": "Artikel",
 		"classNames": "articles"
 	},
 
 	"settings": {
 		"defaultAuthor" : {
-	      "label": "Default Author",
 	      "value": "dnilabs e.U",
 	      "type": "text"
 		},
 		"categories" : {
-	      "label": "Categories",
 	      "value": "Webdevelopment, Interactive, Webdesign",
 	      "type": "text"
-		}
-	},
-
-	"model": {
-		"article": {
-			"fields" : {
-				"title": {
-					"type": "text",
-					"label": "Titel",
-					"default": "Hello Titel",
-					"eval": {
-						"maxLength": "100"
-					}
-				},
-				"description": {
-					"type": "text",
-					"label": "Titel",
-					"default": "Hello Description"
-				}
-			}
 		}
 	}
 }

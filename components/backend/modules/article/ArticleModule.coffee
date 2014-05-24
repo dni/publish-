@@ -3,9 +3,10 @@ define [
     'cs!Router'
     'cs!utils'
     'text!./configuration.json'
+    'i18n!./nls/configuration.js'
     'cs!./model/Articles'
     'cs!./controller/ArticleController'
-], ( App, Router, Utils, Config, Articles, Controller ) ->
+], ( App, Router, Utils, Config, i18n, Articles, Controller ) ->
 
   App.Articles = new Articles
   App.Articles.fetch
@@ -16,4 +17,4 @@ define [
     "article/:id": "details"
     "newArticle": "add"
 
-  Utils.addModule Config
+  Utils.addModule Config, i18n
