@@ -2,11 +2,13 @@ define [
   'cs!utils'
   'marionette'
   'tpl!../templates/detail.html'
-], (Utils, Marionette, Template) ->
+  'i18n!modules/files/nls/language.js'
+], (Utils, Marionette, Template, i18n) ->
 
   class DetailView extends Marionette.ItemView
 
     template: Template
+    templateHelpers: t: i18n # translation
 
     ui:
       name: 'input[name=name]'
@@ -21,6 +23,7 @@ define [
     deleteFile: ->
       @model.destroy
         success:->
+      Utils.Log i18n.deleteFile, 'update', text: @model.get 'name'
       Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
 
     save: ->
@@ -30,3 +33,7 @@ define [
         alt: @ui.alt.val()
         desc: @ui.desc.val()
       @model.save()
+
+      Utils.Log i18n.updateFile, 'update',
+        text: @model.get 'name'
+        href: 'file/'+@model.get '_id'

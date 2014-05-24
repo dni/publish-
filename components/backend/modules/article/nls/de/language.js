@@ -5,7 +5,8 @@ define({
     "category": "Kategorie",
     "tags": "Tags",
     "categories": "Kategories",
-    "newArticle": "hat neuen Artikel erstellt",
     "emptyMessage": "Der Artikel existiert nicht mehr",
+    "newArticle": "hat neuen Artikel erstellt",
+    "deleteArticle": "hat Artikel gelöscht",
     "updateArticle": "hat Artikel bearbeitet"
 });

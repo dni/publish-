@@ -17,7 +17,7 @@ app.configure ->
   #authentication
   passport.use new LocalStrategy (username, password, done) ->
     User.findOne(
-      name: username
+      username: username
       password: password
     ).execFind (err, user)->
       done err, user[0]
