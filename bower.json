@@ -25,10 +25,8 @@
     "tinymce": "~4.0.20",
     "fancybox": "~2.1.5",
     "jquery-minicolors": "2.1.4",
-    "i18n": "*",
     "requirejs-i18n": "~2.0.4",
     "require-css": "~0.1.2",
-    "socket.io": "~0.9.15",
     "socket.io-client": "~0.9.16",
     "requirejs": "latest"
   },
