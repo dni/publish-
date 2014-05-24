@@ -6,16 +6,6 @@ passport = require 'passport'
 
 module.exports.setup = (app)->
 
-  # create default admin user if no user exists
-	User.count {}, (err, count)->
-		if count == 0
-			admin = new User
-			admin.name = "admin"
-			admin.password = "password"
-			admin.role = 0
-			admin.save()
-			console.log "admin user was created"
-
 	# login
 	app.get '/login', (req, res)->
     res.sendfile process.cwd()+'/components/backend/modules/user/templates/login.html'
@@ -44,23 +34,26 @@ module.exports.setup = (app)->
 
 	app.get '/user', auth, (req, res)-> res.send app.user
 
-
   #crud
 	app.get '/users', auth, (req, res)->
 	  	User.find().limit(20).execFind (arr,data)->
 	    	res.send data
 
-	app.post '/users', auth, (req, res)->
-		a = new User
-		a.name = req.body.name
-		a.role = req.body.role
-		a.password = req.body.password
-		a.save -> res.send(a);
+  app.post '/users', auth, (req, res)->
+    a = new User
+    a.name = req.body.name
+    a.username = req.body.username
+    a.email = req.body.email
+    a.role = req.body.role
+    a.password = req.body.password
+    a.save -> res.send a
 
 	app.put '/users/:id', auth, (req, res)->
 		User.findById req.params.id, (e, a)->
-			a.name = req.body.name
-			a.role = req.body.role
+      a.name = req.body.name
+      a.role = req.body.role
+      a.username = req.body.username
+      a.email = req.body.email
 			a.password = req.body.password
 			a.save -> res.send a
 
@@ -68,6 +61,14 @@ module.exports.setup = (app)->
     User.findById req.params.id, (e, a)->
       a.remove (err)-> if !err then res.send 'deleted' else console.log err
 
-
-
-
+  # create default admin user if no user exists
+  User.count {}, (err, count)->
+    if count == 0
+      admin = new User
+      admin.name = "Admin"
+      admin.email = "admin@publish.org"
+      admin.username = "admin"
+      admin.password = "password"
+      admin.role = 0
+      admin.save()
+      console.log "admin user was created"

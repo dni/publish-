@@ -35,6 +35,11 @@ define [
       @model.togglePublish()
       @save()
 
+
+    destroy:->
+      Utils.Log i18n.deleteArticle, 'delete', text: @model.get 'title'
+      @model.destroy success:->
+
     save: ->
       @model.set
         title: @ui.title.val()

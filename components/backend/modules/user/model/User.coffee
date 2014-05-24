@@ -4,10 +4,8 @@ define ['backbone'], (Backbone) ->
     urlRoot: "users"
     defaults:
       "_id": undefined
-      "name": "gues"
-      "role": "guest"
-      "password": "hackme"
-
-    getPw: ->
-      @.get("password")
-
+      "username": "noname"
+      "name": "Noname"
+      "email": "no@name.org"
+      "role": "admin"
+      "password": "******"

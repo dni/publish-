@@ -1,28 +1,20 @@
-
 <div class="form-group">
-    <label>Name</label>
+    <label><%= t.username %></label>
+    <input type="text" name="username" class="form-control" value="<%= username %>" />
+</div>
+<div class="form-group">
+    <label><%= t.name %></label>
     <input type="text" name="name" class="form-control" value="<%= name %>" />
 </div>
 <div class="form-group">
-	<label>Role</label>
-
-	  <select class="form-control">
-	    <% _.each(["admin","superuser","user","guest"], function(roleSelect){%>
-	        <% if(role==roleSelect) { %>
-	            <option selected value="<%= roleSelect %>"> <%= roleSelect %> </option>
-	        <% } else { %>
-	            <option value="<%= roleSelect %>"> <%= roleSelect %> </option>
-	        <% } %>
-	    <% }) %>
-	  </select>
-
+    <label><%= t.email %></label>
+    <input type="text" name="email" class="form-control" value="<%= email %>" />
 </div>
-
 <div class="form-group">
-	<label>Password</label>
+	<label><%= t.password %></label>
 	<input class="form-control" type="password" name="password" value="<%= password %>" />
-	<br>
-	<button class="delete btn btn-danger pull-right">Delete</button>
 </div>
+
+<button class="delete btn btn-danger"><%= t.delete %></button>
 
 
