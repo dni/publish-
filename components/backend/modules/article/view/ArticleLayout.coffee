@@ -10,6 +10,7 @@ define [
   class ArticleLayout extends Marionette.Layout
 
     template: Template
+    templateHelpers: vhs:   Utils.Viewhelpers
 
     regions:
       'detailRegion': '#article-details'

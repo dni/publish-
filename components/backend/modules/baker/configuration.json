@@ -7,123 +7,90 @@
     "settings": {
     	"fileView" : true,
 		"appid" : {
-	      "label": "Bundle Identifier for App",
 	      "value": "org.publish.com.magazines",
 	      "type": "text"
 		},
 		"apptype" : {
-	      "label": "Type of the App",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "standalone",
 	      "type": "select",
 	      "options": {
-	      	"standalone": "Standalone App",
-	      	"newsstand": "Newsstand App",
-	      	"paid": "Newsstand App with paid subscriptions"
+	      	"standalone": "Standalone",
+	      	"newsstand": "Newsstand",
+	      	"paid": "Paid"
 	      }
 		},
 
 		"orientation" : {
-	      "label": "Device Orientation",
 	      "type": "header"
 		},
 
 		"orPortrait" : {
-	      "label": "Portrait",
 	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orUpsidedown" : {
-	      "label": "Upside Down",
 	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orLandscapeleft" : {
-	      "label": "Landscape Left",
 	      "value": "true",
 	      "type": "checkbox"
 		},
 		"orLandscaperight" : {
-	      "label": "Landscape Right",
 	      "value": "true",
 	      "type": "checkbox"
 		},
 
 		"uiconstants" : {
-	      "label": "Baker UI Constants",
 	      "type": "header"
 		},
 
 		"bakerColorsetCoverBg" : {
-	      "label": "Cover Background Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "color"
 		},
 		"bakerColorsetTitleColor" : {
-	      "label": "Title Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#000000",
 	      "type": "color"
 		},
 		"bakerColorsetInfoColor" : {
-	      "label": "Info Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "color"
 		},
 		"bakerColorsetPriceColor" : {
-	      "label": "Price Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "color"
 		},
 		"bakerColorsetActionButtonBg" : {
-	      "label": "Action Button Background Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "color"
 		},
 		"bakerColorsetActionButtonColor" : {
-	      "label": "Action Button Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "color"
 		},
 		"bakerColorsetArchiveButtonBg" : {
-	      "label": "Archive Button Background Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "color"
 		},
 		"bakerColorsetArchiveButtonColor" : {
-	      "label": "Archive Button Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#ffffff",
 	      "type": "color"
 		},
 		"bakerColorsetLoadingLabelColor" : {
-	      "label": "Loading Label Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "color"
 		},
 		"bakerColorsetLoadingSpinnerColor" : {
-	      "label": "Loading Spinner Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#929292",
 	      "type": "color"
 		},
 		"bakerColorsetProgressbarTintColor" : {
-	      "label": "Progressbar Tint Color",
-	      "description": "Comma seperated list of layout keys",
 	      "value": "#bc242a",
 	      "type": "color"
 		},
 
 		"download" : {
-	      "label": "Download App",
-	      "description": "Comma seperated list of layout keys",
 	      "type": "button",
 	      "event": "downloadApp"
 		}
