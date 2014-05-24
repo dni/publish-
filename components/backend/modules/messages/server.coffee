@@ -1,14 +1,15 @@
 Message = require(__dirname + "/model/Schema")
 fs = require("fs")
+auth = require './../../utilities/auth'
 
 module.exports.setup = (app) ->
 
-  app.get "/messages", (req, res) ->
+  app.get "/messages", auth, (req, res) ->
     limit = if req.query.limit? then req.query.limit else 25
     Message.find().sort(date: -1).limit(limit).execFind (arr, data) ->
       res.send data
 
-  app.post "/messages", (req, res) ->
+  app.post "/messages", auth, (req, res) ->
     message = new Message()
     message.date = req.body.date
     message.message = req.body.message
@@ -22,6 +23,6 @@ module.exports.setup = (app) ->
       req.io.broadcast "updateCollection", "Messages"
       res.send message
 
-  app.delete '/staticBlocks/:id', (req, res)->
+  app.delete '/staticBlocks/:id', auth, (req, res)->
     StaticBlock.findById req.params.id, (e, a)->
       a.remove (err)-> if !err then res.send 'deleted' else console.log err

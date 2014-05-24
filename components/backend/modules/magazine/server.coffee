@@ -1,18 +1,19 @@
 Magazine = require(__dirname + "/model/MagazineSchema")
 Page = require(__dirname + "/model/PageSchema")
 fs = require("fs-extra")
+auth = require './../../utilities/auth'
 PrintGenerator = require(__dirname + "/generators/PrintGenerator")
 HpubGenerator = require(__dirname + "/generators/HpubGenerator")
 
 
 module.exports.setup = (app) ->
-  app.get "/downloadPrint/:title", PrintGenerator.download
+  app.get "/downloadPrint/:title", auth, PrintGenerator.download
 
-  app.get "/magazines", (req, res) ->
+  app.get "/magazines", auth, (req, res) ->
     Magazine.find().limit(20).execFind (arr, data) ->
       res.send data
 
-  app.post "/magazines", (req, res) ->
+  app.post "/magazines", auth, (req, res) ->
     a = new Magazine()
     a.user = app.user.id
     a.editorial = req.body.editorial
@@ -34,7 +35,7 @@ module.exports.setup = (app) ->
       #shortcut
       res.send a
 
-  app.put "/magazines/:id", (req, res) ->
+  app.put "/magazines/:id", auth, (req, res) ->
     Magazine.findById req.params.id, (e, a) ->
       child_process = require("child_process").spawn
       spawn = child_process("rm", ["-r", a.title], cwd: "./public/books/")
@@ -63,12 +64,12 @@ module.exports.setup = (app) ->
               HpubGenerator.generate a
             res.send a
 
-  app.get "/pages", (req, res) ->
+  app.get "/pages", auth, (req, res) ->
     res.send "no magazine id"  unless req.query.magazine
     Page.find(magazine: req.query.magazine).execFind (arr, data) ->
       res.send data
 
-  app.post "/pages", (req, res) ->
+  app.post "/pages", auth, (req, res) ->
     a = new Page()
     a.magazine = req.body.magazine
     a.article = req.body.article
@@ -76,7 +77,7 @@ module.exports.setup = (app) ->
     a.layout = req.body.layout
     a.save -> res.send a
 
-  app.put "/pages/:id", (req, res) ->
+  app.put "/pages/:id", auth, (req, res) ->
     Page.findById req.params.id, (e, a) ->
       a.magazine = req.body.magazine
       a.article = req.body.article
@@ -84,7 +85,7 @@ module.exports.setup = (app) ->
       a.layout = req.body.layout
       a.save -> res.send a
 
-  app.delete '/magazines/:id', (req, res)->
+  app.delete '/magazines/:id', auth, (req, res)->
     Magazine.findById req.params.id, (e, a)->
       a.remove ->
         child_process = require("child_process").spawn
@@ -95,7 +96,7 @@ module.exports.setup = (app) ->
             res.statusCode = 500;
             console.log('remove book/yourmagazine (rm) process exited with code ' + code);
 
-  app.delete '/pages/:id', (req, res)->
+  app.delete '/pages/:id', auth, (req, res)->
     Page.findById req.params.id, (e, model)->
       model.remove -> res.send 'page deleted'
 
