@@ -8,32 +8,23 @@
     "navigation": {
         "button": "cloud-upload",
         "route": "files",
-        "label": "Files",
         "classNames": "files"
     },
 
     "settings": {
         "thumbnail" : {
-          "label": "Thumbnail max. size",
-          "description": "very small picture",
           "value": "200",
           "type": "text"
         },
         "smallPic" : {
-          "label": "Small picture max. size",
-          "description": "not so small picture",
           "value": "800",
           "type": "text"
         },
         "bigPic" : {
-          "label": "Big picture max. size",
-          "description": "very small picture",
           "value": "1800",
           "type": "text"
         },
         "quality" : {
-          "label": "Image quality",
-          "description": "Change image quality",
           "value": "85",
           "type": "range",
           "min": 1,

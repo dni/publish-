@@ -1,11 +1,12 @@
 define [
   'cs!App'
   'cs!Router'
+  'i18n!modules/files/nls/language.js'
   'marionette'
   'tpl!../templates/preview.html'
   'tpl!../templates/preview-item.html'
   'jquery.ui'
-], (App, Router, Marionette, Template, ItemTemplate) ->
+], (App, Router, i18n, Marionette, Template, ItemTemplate) ->
 
 
   class ItemView extends Marionette.ItemView
@@ -25,6 +26,7 @@ define [
   class PreviewView extends Marionette.CompositeView
 
     template: Template
+    templateHelpers: t:i18n
     itemView: ItemView
     itemViewContainer: ".file-list"
 
