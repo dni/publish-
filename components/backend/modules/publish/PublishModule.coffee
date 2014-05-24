@@ -12,7 +12,8 @@ define [
   App.navigationRegion.show new NavigationView collection: NavigationItems
 
   # events
-  Utils.Vent.on "publish:addNavItem", (config)->
+  Utils.Vent.on "publish:addNavItem", (config, i18n)->
+    config.label = i18n.navigation if i18n
     NavigationItems.add new NavigationItem config
 
   # add Module Config

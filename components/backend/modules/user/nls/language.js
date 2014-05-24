@@ -1,6 +1,7 @@
 define({
     "root": {
     	"delete": "Delete",
+    	"save": "Save",
     	"name": "Name",
     	"username": "Username",
     	"email": "Email",
