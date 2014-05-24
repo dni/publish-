@@ -2,8 +2,6 @@
 	<% if(type.split("/")[0]=="image") { %>
 		<p><img width="100" src="./public/files/<%= thumbnail %>" alt="<%= alt %>" /></p>
 	<% } else { %>
-		<p>
-			<%= name %>
-		</p>
+		<p><%= name %></p>
 	<% } %>
 </a>

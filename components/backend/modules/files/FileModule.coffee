@@ -2,10 +2,11 @@ define [
   'cs!App'
   'cs!Router'
   'cs!utils'
+  "i18n!modules/files/nls/language.js"
   "text!./configuration.json"
   'cs!./model/Files'
   'cs!./controller/FileController'
-],( App, Router, Utils, Config, Files, Controller ) ->
+],( App, Router, Utils, i18n, Config, Files, Controller ) ->
 
   App.Files = new Files
   App.Files.fetch
@@ -17,5 +18,5 @@ define [
     "showfile/:id": "showfile"
     "filebrowser/:collection/:id": "filebrowser"
 
-  Utils.addModule Config
+  Utils.addModule Config, i18n
 

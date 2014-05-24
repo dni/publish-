@@ -1,14 +1,17 @@
 define [
   'cs!utils'
+  'cs!Router'
   'marionette'
   'tpl!../templates/detail.html'
   'i18n!modules/files/nls/language.js'
-], (Utils, Marionette, Template, i18n) ->
+], (Utils, Router, Marionette, Template, i18n) ->
 
   class DetailView extends Marionette.ItemView
 
     template: Template
-    templateHelpers: t: i18n # translation
+    templateHelpers:
+      t: i18n # translation
+      vhs: Utils.Viewhelpers
 
     ui:
       name: 'input[name=name]'
@@ -18,7 +21,12 @@ define [
 
     events:
       "click .delete": "deleteFile"
-      "blur .form-control": "save"
+      "click .save": "save"
+      "click .cancel": "cancel"
+
+    cancel: ->
+      Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
+      Router.navigate 'files'
 
     deleteFile: ->
       @model.destroy
