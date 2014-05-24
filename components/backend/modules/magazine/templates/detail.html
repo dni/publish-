@@ -63,11 +63,11 @@
 		</div>
 	<%}%>
 	<% if (published === false) { %>
-		<button class="publish btn btn-success">Publish</button>
+		<button class="publish btn btn-success"><%= t.publish %></button>
 	<% } else { %>
-		<button class="publish btn btn-default">Unpublish</button>
+		<button class="publish btn btn-default"><%= t.unpulish %></button>
 	<% } %>
-
+	<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
 
 </div>
 

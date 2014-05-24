@@ -31,6 +31,10 @@ define [
     events:
       "change [name=title]": 'save'
       "click .publish": 'publish'
+      "click #download": "downloadPrint"
+
+    downloadPrint: ->
+       window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
 
     publish:->
       # before model is toggled

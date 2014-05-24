@@ -2,10 +2,11 @@ define [
     'cs!App'
     'cs!Router'
     'cs!utils'
+    'i18n!modules/magazine/nls/language.js'
     "text!modules/magazine/configuration.json"
     'cs!modules/magazine/controller/MagazineController'
     'cs!modules/magazine/model/Magazines'
-], ( App, Router, Utils, Config, Controller, Magazines ) ->
+], ( App, Router, Utils, i18n, Config, Controller, Magazines ) ->
 
     App.Magazines = new Magazines
     App.Magazines.fetch
@@ -16,4 +17,4 @@ define [
       "magazine/:id": "detailsMagazine"
       "magazines": "magazines"
 
-    Utils.addModule Config
+    Utils.addModule Config, i18n
