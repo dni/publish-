@@ -1,16 +1,17 @@
 define [
   'cs!App'
   'cs!utils'
+  'i18n!modules/messages/nls/language.js'
   'marionette'
   'cs!../view/MessageListView'
   'cs!../view/MessageDetailView'
-  'cs!../view/TopView'
+  'cs!utilities/views/TopView'
 
-], ( App, Utils, Marionette, ListView, DetailView, TopView) ->
+], ( App, Utils, i18n, Marionette, ListView, DetailView, TopView) ->
 
   class MessageController extends Backbone.Marionette.Controller
 
     list : ->
-      App.listTopRegion.show new TopView
+      App.listTopRegion.show new TopView navigation:i18n.navigation
       App.listRegion.show new ListView
       App.contentRegion.show new DetailView collection: App.Messages

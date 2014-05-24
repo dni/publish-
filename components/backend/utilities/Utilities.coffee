@@ -1,8 +1,9 @@
 define [
   'cs!utilities/Vent'
   'cs!utilities/Log'
+  'cs!utilities/Viewhelpers'
   'cs!utilities/Date'
-], ( Vent, Log ) ->
+], ( Vent, Log, Viewhelpers) ->
 
 
   addSetting = (configname, settings, i18n)-> Vent.trigger 'settings:addSetting', configname, settings, i18n
@@ -17,7 +18,7 @@ define [
 
   # return utilites, date util extens Date Object
   Utilities =
-
+    Viewhelpers: Viewhelpers
     Vent: Vent
     Log: Log
     settingsready: false

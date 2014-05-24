@@ -1,5 +1,5 @@
-Message = require(__dirname + "/model/Schema")
-fs = require("fs")
+Message = require __dirname + "/model/Schema"
+fs = require "fs"
 auth = require './../../utilities/auth'
 
 module.exports.setup = (app) ->
@@ -23,6 +23,3 @@ module.exports.setup = (app) ->
       req.io.broadcast "updateCollection", "Messages"
       res.send message
 
-  app.delete '/staticBlocks/:id', auth, (req, res)->
-    StaticBlock.findById req.params.id, (e, a)->
-      a.remove (err)-> if !err then res.send 'deleted' else console.log err
