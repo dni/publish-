@@ -1,12 +1,13 @@
 Article = require __dirname+'/model/ArticleSchema'
+auth = require "../../utilities/auth"
 
 module.exports.setup = (app)->
 
-	app.get '/articles', (req, res)->
+	app.get '/articles', auth, (req, res)->
     Article.find().limit(20).execFind (arr,data)->
       res.send data
 
-	app.post '/articles', (req, res)->
+	app.post '/articles', auth, (req, res)->
 		a = new Article
 		a.user = app.user.id
 		a.title = req.body.title
@@ -21,7 +22,7 @@ module.exports.setup = (app)->
 			req.io.broadcast 'updateCollection', 'Articles'
 			res.send a
 
-	app.put '/articles/:id', (req, res)->
+	app.put '/articles/:id', auth, (req, res)->
 		Article.findById req.params.id, (e, a)->
 			a.title = req.body.title
 			a.desc = req.body.desc
@@ -35,7 +36,7 @@ module.exports.setup = (app)->
 				req.io.broadcast 'updateCollection', 'Articles'
 				res.send a
 
-	app.delete '/articles/:id', (req, res)->
+	app.delete '/articles/:id', auth, (req, res)->
 		Article.findById req.params.id, (e, a)->
   		a.remove (err)->
   			if !err

@@ -1,6 +1,6 @@
 Setting = require("./../settings/model/SettingSchema")
 Magazine = require("./../magazine/model/MagazineSchema")
-# auth = require('./../../utilities/auth'),
+auth = require './../../utilities/auth'
 http = require("http")
 _ = require("underscore")
 ApnToken = require(__dirname + "/model/ApnTokenSchema")
@@ -10,9 +10,10 @@ Receipt = require(__dirname + "/model/ReceiptSchema")
 BakerGenerator = require(__dirname + "/generators/BakerGenerator")
 
 module.exports.setup = (app) ->
-  app.get "/downloadApp", BakerGenerator.download
 
-  # API
+  app.get "/downloadApp", auth, BakerGenerator.download
+
+  # BAKER SERVER API
   app.post "/purchase_confirmation", (req, res) ->
     receipt = new Receipt()
     receipt.app_id = req.body.app_id
