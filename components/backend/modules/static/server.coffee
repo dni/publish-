@@ -1,5 +1,6 @@
 StaticBlock = require __dirname+'/model/StaticBlockSchema'
 fs = require "fs-extra"
+auth = require './../../utilities/auth'
 
 module.exports.setup = (app)->
 
@@ -10,11 +11,11 @@ module.exports.setup = (app)->
       mongoimport = spawn 'mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], cwd:__dirname+'/data/'
 
   # get single static block data
-	app.get '/StaticBlock/:id', (req, res)->
+	app.get '/StaticBlock/:id', auth, (req, res)->
     StaticBlock.findOne key:req.params.id, (e, a)-> res.send a.data
 
   # export StaticBlock
-	app.get '/exportStaticBlocks', (req, res)->
+	app.get '/exportStaticBlocks', auth, (req, res)->
     if fs.existsSync __dirname+'/data/staticblocks.json' then fs.unlinkSync __dirname+'/data/staticblocks.json'
     spawn = require('child_process').spawn
     mongoexport = spawn('mongoexport', ['-d', 'publish', '-c', 'staticblocks', '-o', 'staticblocks.json'], cwd:__dirname+'/data/').on 'exit', (code)->
@@ -26,10 +27,10 @@ module.exports.setup = (app)->
         console.log('Error: while exporting Static Blocks, code: ' + code)
 
 	# crud
-	app.get '/StaticBlocks', (req, res)->
+	app.get '/StaticBlocks', auth, (req, res)->
     StaticBlock.find().limit(20).execFind (arr,data)-> res.send data
 
-	app.post '/StaticBlocks', (req, res)->
+	app.post '/StaticBlocks', auth, (req, res)->
 		a = new StaticBlock
 		a.title = req.body.title
 		a.key = req.body.key
@@ -37,7 +38,7 @@ module.exports.setup = (app)->
 		a.deleteable = req.body.deleteable
 		a.save -> res.send a
 
-	app.put '/StaticBlocks/:id', (req, res)->
+	app.put '/StaticBlocks/:id', auth, (req, res)->
 		StaticBlock.findById req.params.id, (e, a)->
 			a.title = req.body.title
 			a.key = req.body.key
@@ -45,7 +46,7 @@ module.exports.setup = (app)->
 			a.deleteable = req.body.deleteable
 			a.save -> res.send a
 
-	app.delete '/StaticBlocks/:id', (req, res)->
+	app.delete '/StaticBlocks/:id', auth, (req, res)->
     StaticBlock.findById req.params.id, (e, a)->
       a.remove -> res.send 'deleted static block'
 

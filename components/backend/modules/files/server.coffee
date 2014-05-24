@@ -1,11 +1,12 @@
 File = require __dirname+'/model/FileSchema'
 Setting = require './../settings/model/SettingSchema'
+auth = require './../../utilities/auth'
 gm = require 'gm'
 multiparty = require "multiparty"
 fs = require "fs"
 
 module.exports.setup = (app)->
-	app.post "/uploadFile", (req,res)->
+	app.post "/uploadFile", auth, (req,res)->
 
     form = new multiparty.Form
     form.parse req, (err, fields, files)->
@@ -38,14 +39,14 @@ module.exports.setup = (app)->
     res.send "success"
 
 
-	app.get '/files', (req, res)->
+	app.get '/files', auth, (req, res)->
 		send = (arr, data)-> res.send(data)
 		if req.query.parents
 			File.find({'parent':undefined}).execFind send
 		else
 			File.find().execFind send
 
-	app.post "/files", (req, res) ->
+	app.post "/files", auth, (req, res) ->
     newfile = req.body
     file = new File()
     filename = "copy_" + Date.now() + "_" + newfile.name
@@ -71,14 +72,14 @@ module.exports.setup = (app)->
         req.io.broadcast "updateCollection", "Files"
         res.send file
 
-  app.delete '/files/:id', (req, res)->
+  app.delete '/files/:id', auth, (req, res)->
     File.findById req.params.id, (e, a)->
       a.remove (err)->
         if err then return res.send "error while removing file "+a.name
         if fs.existsSync "./public/files/"+a.name then fs.unlink "./public/files/"+a.name
         res.send 'removing file '+a.name
 
-  app.put '/files/:id', (req, res)->
+  app.put '/files/:id', auth, (req, res)->
     File.findById req.params.id, (e, a)->
       name = req.body.name
       # rename file if name changes
