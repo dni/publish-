@@ -19,7 +19,7 @@ module.exports.download = (req, res) ->
       res.contentType "zip"
       zip.stdout.on "data", (data) -> res.write data
       zip.on "close", (code) ->
-        if code is 0 then console.log "download app zip done" else console.log "zip process exited with code " + code
+        if code is 0 then console.log "download app zip done" else console.log "download app zip exited with code " + code
         res.end()
 
   Settings.findOne(name: "Baker").exec (error, setting) ->
@@ -32,6 +32,8 @@ module.exports.download = (req, res) ->
       else
         dirname = process.cwd() + "/cache/publish-baker"
         fs.copySync process.cwd() + "/baker-master", dirname
+
+        # start image generating
         startGenIconssets setting
 
         # if standalone copy all hpubs into baker project
@@ -39,8 +41,7 @@ module.exports.download = (req, res) ->
           files = fs.readdirSync("./public/books")
           for key of files
             file = files[key]
-            continue if file is ".DS_Store" ||
-            continue if file is ".gitignore"
+            continue if file is ".DS_Store" || ".gitignore"
             fs.copySync "./public/books/" + file + "/hpub", dirname + "/books/" + file
 
         Settings.findOne(name: "General").exec (error, generalsetting) ->
@@ -70,17 +71,7 @@ module.exports.download = (req, res) ->
 
           EE.emit "ready", "constants"
 
-
         EE.emit "ready", "build"
-
-createIcons = (format)->
-  if format is "icon" then key="icon" else key="logo"
-  if key is "logo" then size={width:1024,height:768} else size={width:286,height:286}
-  targetImageLink = ""
-  image = gm()
-  filetype = "png"
-  iconInfos = sizeList[format]
-
 
 writeImage = (image) ->
   targetImageLink = targetDir +"/"+ imgData.n +"."+ filetype
@@ -94,17 +85,23 @@ writeImage = (image) ->
       # else all done
       else EE.emit('ready', 'icon')
 
+createIcons = (format)->
+  key = if format is "icon" then "icon" else "logo"
+  size = if key is "logo" then width:1024,height:768 else width:286,height:286
+  image = gm()
+  filetype = "png"
+  iconInfos = sizeList[format]
+
 createIcon = (imgData)->
   targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/'
   if format is "icon"
     image = gm('./public/files/'+ icon)
+    image.resize imgData.w
     if imgData.h>imgData.w
-      image.resize imgData.w
       image.extent imgData.w, imgData.h
       image.in "-background", "transparent"
       targetDir += "newsstand-app-icon.imageset"
     else
-      image.resize imgData.w
       targetDir += "AppIcon.appiconset"
     writeImage(image)
   else
@@ -113,17 +110,12 @@ createIcon = (imgData)->
     gm('./public/files/'+ logo).resize(imgData.w/3).write './public/files/'+newImg, ->
       gm(background).crop(imgData.w, imgData.h, (1024-imgData.w/2), (1024-imgData.h/2)).write './public/files/'+newBg, ->
         if format is "shelf"
-          image
-            .in('-page', '+0+0').in('./public/files/'+ newBg)
-            .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')
-            .in('./public/files/'+ newImg).flatten()
-          if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
-          else targetDir += "shelf-bg-landscape.imageset"
-          writeImage image
+          if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset" else targetDir += "shelf-bg-landscape.imageset"
         else if format is "launch"
-          image
-            .in('-page', '+0+0').in('./public/files/'+ newBg)
-            .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')
-            .in('./public/files/'+ newImg).flatten()
           targetDir += "LaunchImage.launchimage"
-          writeImage image
+        image
+          .in('-page', '+0+0').in('./public/files/'+ newBg)
+          .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')
+          .in('./public/files/'+ newImg).flatten()
+
+        writeImage image
