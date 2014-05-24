@@ -21,6 +21,7 @@ define [
   Router.processAppRoutes new Controller,
     "": "list",
     "article/:id": "details"
+    "category/:name": "filterCategory"
 
   App.addRegions
     contentRegion:"#list"
