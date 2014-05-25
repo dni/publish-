@@ -1,6 +1,7 @@
 define({
     "root": {
     	"navigation": "Articles",
+    	"details": "Article details",
         "title": "Title",
         "author": "Author",
         "article": "Article",

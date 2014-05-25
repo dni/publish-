@@ -5,7 +5,9 @@
 // bootstrap 3.1.0,
 // find the mixins, variables here
 // http://twitter.github.com/bootstrap/less.html
+@import "../../../vendor/bootstrap/less/bootstrap.less";
 @icon-font-path:"/public/fonts/";
+@screen-lg-min:1400px;
 
 
 @keyframes "animation" {.labs-animation();}
@@ -42,17 +44,9 @@ html {
 
 
 
-body {margin:0;padding:0;height:100%;background:#b3b3b3;
+body {margin:0;padding:0;height:100%;background:#b3b3b3;}
 
 
-// .animation(animation 3s infinite);
-
-}
-
-// #sidebar {
-  // position:absolute;
- // // .animation(sidebar 3s infinite);
-// }
 
 img {
   max-width: 100%;
@@ -190,7 +184,7 @@ pre ::selection {background:rgb(255,255,255);color:black;}
 
 .info {padding:5%;}
 
-.buttons {text-align:right;}
+.buttons {text-align:right;margin-top:24px;}
 
 footer {padding-left:2%;color:white;}
 footer a {color:#008000;}
@@ -222,8 +216,15 @@ footer a {color:#008000;}
   min-height: 50px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: @screen-lg-min) {
   .container {
     width: 95%;
+  }
+  #setting-details {
+    h1,h2 {width:100%;}
+  }
+  .form-fields {
+    .make-row();.clearfix();
+    > * {.make-lg-column(6);}
   }
 }

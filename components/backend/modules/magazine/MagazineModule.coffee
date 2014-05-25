@@ -6,6 +6,7 @@ define [
     "text!modules/magazine/configuration.json"
     'cs!modules/magazine/controller/MagazineController'
     'cs!modules/magazine/model/Magazines'
+    'less!./magazine.less'
 ], ( App, Router, Utils, i18n, Config, Controller, Magazines ) ->
 
     App.Magazines = new Magazines

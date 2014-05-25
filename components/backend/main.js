@@ -1,7 +1,6 @@
 define([
 	"backbone",
 	"cs!App",
-	"less!vendor/bootstrap/less/bootstrap.less",
 	"css!vendor/minicolors/jquery.minicolors.css",
 	"less!modules/publish/style/main",
 	"cs!modules/publish/Regions",
