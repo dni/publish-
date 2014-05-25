@@ -1,5 +1,6 @@
 define({
     "root": {
+    	"details": "Staticblock details",
     	"navigation": "Staticblocks",
     	"key": "Key",
     	"data": "Content",

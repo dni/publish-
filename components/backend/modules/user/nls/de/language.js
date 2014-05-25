@@ -1,4 +1,5 @@
 define({
+	"details": "Benutzer Details",
 	"navigation": "Benutzer",
 	"delete": "Löschen",
 	"save": "Speichern",

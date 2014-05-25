@@ -1,4 +1,14 @@
 <h1><%= t.details %></h1>
+<div class="buttons-top">
+	<% if (published === false) { %>
+		<button class="publish btn btn-success"><%= t.publish %></button>
+	<% } else { %>
+		<button class="publish btn btn-default"><%= t.unpublish %></button>
+	<% } %>
+	<% if (isPrint()) { %>
+		<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
+	<% } %>
+</div>
 <div class="form-fields">
 	<div class="form-group">
 	    <label><%= t.title %></label>
@@ -30,44 +40,29 @@
 		<textarea rows="5" class="wysiwyg form-control" name="editorial"><%= editorial %></textarea>
 	</div>
 	<% if (isPrint()) { %>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="form-group">
-				  <label><%= t.papersize %></label>
-				  <select name="papersize" class="form-control">
-				    <% _.each(["A4","A5","A6","letter"], function(ps){%>
-				        <% if(papersize==ps) { %>
-				            <option selected value="<%= ps %>"> <%= ps %> </option>
-				        <% } else { %>
-				            <option value="<%= ps %>"> <%= ps %> </option>
-				        <% } %>
-				    <% }) %>
-				  </select>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="form-group">
-				  <label><%= t.orientation %></label>
-				  <select name="orientation" class="form-control">
-				    <% _.each(["horizontal","vertical"], function(or){%>
-				        <% if(orientation==or) { %>
-				            <option selected value="<%= or %>"> <%= or %> </option>
-				        <% } else { %>
-				            <option value="<%= or %>"> <%= or %> </option>
-				        <% } %>
-				    <% }) %>
-				  </select>
-				</div>
-			</div>
+		<div class="form-group">
+		  <label><%= t.papersize %></label>
+		  <select name="papersize" class="form-control">
+		    <% _.each(["A4","A5","A6","letter"], function(ps){%>
+		        <% if(papersize==ps) { %>
+		            <option selected value="<%= ps %>"> <%= ps %> </option>
+		        <% } else { %>
+		            <option value="<%= ps %>"> <%= ps %> </option>
+		        <% } %>
+		    <% }) %>
+		  </select>
+		</div>
+		<div class="form-group">
+		  <label><%= t.orientation %></label>
+		  <select name="orientation" class="form-control">
+		    <% _.each(["horizontal","vertical"], function(or){%>
+		        <% if(orientation==or) { %>
+		            <option selected value="<%= or %>"> <%= or %> </option>
+		        <% } else { %>
+		            <option value="<%= or %>"> <%= or %> </option>
+		        <% } %>
+		    <% }) %>
+		  </select>
 		</div>
 	<%}%>
 </div>
-<% if (published === false) { %>
-	<button class="publish btn btn-success"><%= t.publish %></button>
-<% } else { %>
-	<button class="publish btn btn-default"><%= t.unpublish %></button>
-<% } %>
-<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
-
-
-

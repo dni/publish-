@@ -1,5 +1,6 @@
 define({
     "root": {
+    	"details": "File details",
     	"thumbnail": "Thumbnail size",
     	"smallPic": "Small image size",
     	"bigPic": "Big image size",
