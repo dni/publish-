@@ -28,9 +28,9 @@ module.exports.setup = (app)->
         res.sendfile process.cwd()+'/components/backend/index.html'
       else
         console.log "Starting backend in production mode"
-        app.use '/admin', express.static process.cwd()+'/cache/build'
-        app.use '/modules', express.static process.cwd()+'/cache/build/modules' # workaround for requirejs i18n problem with /admin
-        res.sendfile process.cwd()+'/cache/build/index.html'
+        app.use '/admin', express.static process.cwd()+'/cache/build/backend'
+        app.use '/modules', express.static process.cwd()+'/cache/build/backend/modules' # workaround for requirejs i18n problem with /admin
+        res.sendfile process.cwd()+'/cache/build/backend/index.html'
 
 	app.get '/user', auth, (req, res)-> res.send app.user
 
