@@ -1,4 +1,5 @@
 define({
+	"details": "Block Details",
 	"navigation": "Statischer Block",
 	"key": "Schlüssel",
 	"data": "Inhalt",

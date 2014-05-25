@@ -1,4 +1,11 @@
 <h1><%= t.details %></h1>
+<div class="buttons-top">
+	<% if (published) { %>
+		<button class="publish btn btn-default">Unpublish</button>
+	<% } else { %>
+		<button class="publish btn btn-success">Publish</button>
+	<% } %>
+</div>
 <div class="form-fields">
 	<div class="form-group">
 	    <label><%= t.title %></label>
@@ -26,9 +33,3 @@
 	<label><%= t.article %></label>
 	<textarea class="wysiwyg form-control" rows="9" name="article"><%= desc %></textarea>
 </div>
-
-<% if (published) { %>
-	<button class="publish btn btn-default">Unpublish</button>
-<% } else { %>
-	<button class="publish btn btn-success">Publish</button>
-<% } %>
