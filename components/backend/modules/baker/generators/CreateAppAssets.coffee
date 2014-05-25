@@ -6,28 +6,28 @@ File = require "./../../files/model/FileSchema"
 module.exports = (setting, cb)->
 
   formats = ["shelf", "launch", "icon"]
-
-  background = './templates/bg.jpg'
+  icon= ""
+  logo= "" 
+  background= ""
   File.find(relation: 'setting:'+setting._id).exec (err, files)->
-    console.log files
     if err then return
-    for file of files
-      background = file.name if file.key is 'background'
-      logo = file.name if file.key is 'logo'
-      icon = file.name if file.key is 'icon'
-    createIcons formats.pop(), icon, logo, background
+    for i, file of files
+      background = if file.key is 'background' then file.name else '/templates/bg.jpg'
+      if file.key is 'logo' then logo = file.name 
+      if file.key is 'icon' then icon = file.name
+    createIcons formats.pop()
 
-  createIcons = (format, icon, logo, background)->
+  createIcons = (format)->
+    console.log format, logo, icon, background
     key = if format is "icon" then "icon" else "logo"
     size = if key is "logo" then width:1024,height:768 else width:286,height:286
     image = gm()
     filetype = "png"
     iconInfos = sizeList[format]
-    console.log iconInfos, typeof iconInfos
     createIcon = (imgData)->
-      targetDir = './cache/publish-baker/Baker/BakerAssets.xcassets/'
+      targetDir = process.cwd()+'/cache/publish-baker/Baker/BakerAssets.xcassets/'
       if format is "icon"
-        image = gm('./public/files/'+icon)
+        image = gm(process.cwd()+'/public/files/'+icon)
         image.resize imgData.w
         if imgData.h>imgData.w
           image.extent imgData.w, imgData.h
@@ -37,26 +37,33 @@ module.exports = (setting, cb)->
           targetDir += "AppIcon.appiconset"
         writeImage image, imgData, targetDir
       else
-        newImg = "tmpImg."+logo.split(".").pop()
-        newBg = "tmpBg."+background.split(".").pop()
-        gm('./public/files/'+logo).resize(imgData.w / 3).write './public/files/'+newImg, ->
-          gm(background).crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2)).write './public/files/'+newBg, ->
+        newImg = "tmpImg.png"#+logo.split(".").pop()
+        newBg = "tmpBg.png"#+background.split(".").pop()
+
+        gm(process.cwd()+'/public/files/'+logo)
+        .resize(imgData.w / 3)
+        .write process.cwd()+'/public/files/'+newImg, ->
+          gm(background)
+          .crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2))
+          .write process.cwd()+'/public/files/'+newBg, ->
+            console.log "new bg done.........................."
             if format is "shelf"
-              if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset" else targetDir += "shelf-bg-landscape.imageset"
+              if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
+              else targetDir += "shelf-bg-landscape.imageset"
             else if format is "launch"
               targetDir += "LaunchImage.launchimage"
             image
-              .in('-page', '+0+0').in('./public/files/'+newBg)
+              .in('-page', '+0+0').in(process.cwd()+'/public/files/'+newBg)
               .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')
-              .in('./public/files/'+newImg).flatten()
-
+              .in(process.cwd()+'/public/files/'+newImg).flatten()
             writeImage image, imgData, targetDir
 
     # write the image
     writeImage = (image, imgData, targetDir) ->
-      targetImageLink = targetDir+"/"+imgData.n+"."+filetype
+      targetImageLink = targetDir+"/"+imgData.n+".png"
+      console.log targetImageLink
       image.write targetImageLink, (err)->
-        if err then return console.error("icon.write err=", err)
+        if err then return console.error("WriteImage error...",err)
         # check if icon variation is left
         if iconInfos.length>0 then createIcon iconInfos.pop()
         else
