@@ -3,14 +3,12 @@
 	<% for (key in settings) { %>
 		<% if (settings[key].type=="checkbox") { %>
 			<div class="form-group">
-			    <label>
+			    <label><%= settings[key].label %></label>
 			      <% if (settings[key].value != "0" || settings[key].value) { %>
-			      	<input class="setting" type="checkbox" name="<%= key %>" checked>
+			      	<input class="setting form-control" type="checkbox" name="<%= key %>" checked>
 			      <% } else { %>
-					<input class="setting" type="checkbox" name="<%= key %>">
+					<input class="setting form-control" type="checkbox" name="<%= key %>">
 			      <% } %>
-			       <%= settings[key].label %>
-			    </label>
 			</div>
 
 		<% } if (settings[key].type=="select") { %>
