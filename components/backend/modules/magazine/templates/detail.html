@@ -1,6 +1,5 @@
 <h1><%= t.details %></h1>
-<div id="details">
-
+<div class="form-fields">
 	<div class="form-group">
 	    <label><%= t.title %></label>
 	    <input type="text" name="title" class="form-control" value="<%= title %>" />
@@ -62,13 +61,13 @@
 			</div>
 		</div>
 	<%}%>
-	<% if (published === false) { %>
-		<button class="publish btn btn-success"><%= t.publish %></button>
-	<% } else { %>
-		<button class="publish btn btn-default"><%= t.unpulish %></button>
-	<% } %>
-	<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
-
 </div>
+<% if (published === false) { %>
+	<button class="publish btn btn-success"><%= t.publish %></button>
+<% } else { %>
+	<button class="publish btn btn-default"><%= t.unpublish %></button>
+<% } %>
+<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
+
 
 

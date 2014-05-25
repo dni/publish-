@@ -1,6 +1,7 @@
 define({
 	"navigation": "Artikel",
 	"title": "Titel",
+	"details": "Artikel Details",
     "author": "Autor",
     "article": "Artikel",
     "category": "Kategorie",

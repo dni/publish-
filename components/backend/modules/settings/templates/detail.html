@@ -1,57 +1,62 @@
 <h1><%= label %></h1>
+<div class="form-fields">
+	<% for (key in settings) { %>
+		<% if (settings[key].type=="checkbox") { %>
+			<div class="form-group">
+			    <label>
+			      <% if (settings[key].value != "0" || settings[key].value) { %>
+			      	<input class="setting" type="checkbox" name="<%= key %>" checked>
+			      <% } else { %>
+					<input class="setting" type="checkbox" name="<%= key %>">
+			      <% } %>
+			       <%= settings[key].label %>
+			    </label>
+			</div>
 
-<% for (key in settings) { %>
-	<% if (settings[key].type=="checkbox") { %>
-		<div class="form-group checkbox">
-		    <label>
-		      <% if (settings[key].value != "0" || settings[key].value) { %>
-		      	<input class="setting" type="checkbox" name="<%= key %>" checked>
-		      <% } else { %>
-				<input class="setting" type="checkbox" name="<%= key %>">
-		      <% } %>
-		       <%= settings[key].label %>
-		    </label>
-		</div>
-
-	<% } if (settings[key].type=="select") { %>
-		<div class="form-group">
-			<label><%= settings[key].label %></label>
-			<select class="setting form-control" name="<%= key %>" >
-				<% for (option in settings[key].options) { %>
-				    <% if (settings[key].value == option) { %>
-				      	<option selected value="<%= option %>"><%= settings[key].options[option] %></option>
-				    <% } else { %>
-						<option value="<%= option %>"><%= settings[key].options[option] %></option>
-				    <% } %>
-		    	<% } %>
-			</select>
-		</div>
-	<% } if (settings[key].type=="text") { %>
-		<div class="form-group">
-		    <label><%= settings[key].label %></label>
-		    <input type="<%= settings[key].type %>" class="setting form-control" name="<%= key %>" value="<%= settings[key].value %>">
-		 </div>
-	<% } %>
-
-	<% if (settings[key].type=="header") { %>
-        <h2><%= settings[key].label %></h2>
-    <% } %>
-
-    <% if (settings[key].type=="range") { %>
-        <label><%= settings[key].label %></label>
-        <input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
-    <% } %>
-    <% if (settings[key].type=="color") { %>
-        <label><%= settings[key].label %></label>
-        <input type="text" class="setting form-control colorpicker <%= key %>" value="<%= settings[key].value %>"  name="<%= key %>" >
-    <% } %>
-
-<% } %>
-
-<% for (key in settings) { %>
-	<div class="btns">
-		<% if (settings[key].type=="button") { %>
-		    <button class="btn btn-default" id="<%= key %>" onclick="$('body').trigger('<%= settings[key].event %>')"><%= settings[key].label %></button>
+		<% } if (settings[key].type=="select") { %>
+			<div class="form-group">
+				<label><%= settings[key].label %></label>
+				<select class="setting form-control" name="<%= key %>" >
+					<% for (option in settings[key].options) { %>
+					    <% if (settings[key].value == option) { %>
+					      	<option selected value="<%= option %>"><%= settings[key].options[option] %></option>
+					    <% } else { %>
+							<option value="<%= option %>"><%= settings[key].options[option] %></option>
+					    <% } %>
+			    	<% } %>
+				</select>
+			</div>
+		<% } if (settings[key].type=="text") { %>
+			<div class="form-group">
+			    <label><%= settings[key].label %></label>
+			    <input type="<%= settings[key].type %>" class="setting form-control" name="<%= key %>" value="<%= settings[key].value %>">
+			 </div>
 		<% } %>
-	</div>
+
+		<% if (settings[key].type=="header") { %>
+	        <h2><%= settings[key].label %></h2>
+	    <% } %>
+
+	    <% if (settings[key].type=="range") { %>
+	    	<div class="form-group">
+	        	<label><%= settings[key].label %></label>
+	        	<input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
+	   		</div>
+	    <% } %>
+	    <% if (settings[key].type=="color") { %>
+	    	<div class="form-group">
+	        	<label><%= settings[key].label %></label>
+	        	<input type="text" class="setting form-control colorpicker <%= key %>" value="<%= settings[key].value %>"  name="<%= key %>" >
+	        </div>
+	    <% } %>
+
+	<% } %>
+</div>
+
+<% for (key in settings) { %>
+	<% if (settings[key].type=="button") { %>
+		<div class="btns">
+		    <button class="btn btn-default" id="<%= key %>" onclick="$('body').trigger('<%= settings[key].event %>')"><%= settings[key].label %></button>
+		</div>
+	<% } %>
 <% } %>
