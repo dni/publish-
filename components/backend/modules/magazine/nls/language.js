@@ -1,6 +1,12 @@
 define({
     "root": {
     	"navigation": "Magazines",
+    	"cover": "Cover",
+    	"back": "Back",
+    	"downloadHpub": "Download hpub",
+    	"index": "Index",
+    	"editorial": "Editorial",
+    	"preview": "Preview",
     	"pageHeadline": "Pages",
     	"addPage": "Add Page",
     	"layouts": "Layouts",
