@@ -1,5 +1,18 @@
 <h1><%= t.details %></h1>
 <div class="buttons-top">
+
+	<div class="btn-group">
+	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><%= t.preview %> <span class="caret"></span></button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a href="public/books/<%= title %>/hpub/Book Cover.html" target="_blank"><%= t.cover %></a></li>
+	    <li><a href="public/books/<%= title %>/hpub/Book Back.html" target="_blank"><%= t.back %></a></li>
+	    <li><a href="public/books/<%= title %>/hpub/Book Index.html" target="_blank"><%= t.index %></a></li>
+	    <li><a href="public/books/<%= title %>/hpub/Tail.html" target="_blank"><%= t.editorial %></a></li>
+	    <li class="divider"></li>
+	    <li><a href="/downloadHpub/<%= _id %>" target="_blank"><%= t.downloadHpub %></a></li>
+	  </ul>
+	</div>
+
 	<% if (published === false) { %>
 		<button class="publish btn btn-success"><%= t.publish %></button>
 	<% } else { %>

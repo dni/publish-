@@ -29,7 +29,6 @@ define [
       else
         Utils.Vent.trigger 'app:updateRegion', "contentRegion", new EmptyView message: i18n.emptyMessage
 
-
     addMagazine: ->
       Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new MagazineLayout
         model: new Magazine
