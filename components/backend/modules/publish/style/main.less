@@ -85,10 +85,7 @@ height: auto;
 #list-top {
   margin-bottom:12px;
 }
-.row {
-margin-left:0;
-margin-right: 0;
-}
+
 
 #list, #list-top, #content > * {
 
@@ -112,7 +109,6 @@ margin-right: 0;
 #login > div {display:none;}
 
 
-.btn {margin-left:6px;}
 .list-btns {
   display: block;
   margin: 12px -6px 0;
@@ -184,6 +180,7 @@ pre ::selection {background:rgb(255,255,255);color:black;}
 
 .info {padding:5%;}
 
+.buttons, .buttons-top, .page {.btn {margin-left:6px;}}
 .buttons {text-align:right;margin-top:24px;}
 .buttons-top {text-align:right;margin-bottom:12px;}
 
@@ -215,6 +212,13 @@ footer a {color:#008000;}
 
 .modal-header {
   min-height: 50px;
+}
+
+@media (max-width: @screen-sm) {
+  .row {
+    margin-left:0;
+    margin-right: 0;
+  }
 }
 
 @media (min-width: @screen-lg-min) {
