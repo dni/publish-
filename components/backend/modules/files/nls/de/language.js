@@ -1,5 +1,5 @@
 define({
-
+	"details": "Datei Details",
 	"thumbnail": "Thumbnail Größe",
 	"smallPic": "Kleine Bildgröße",
 	"bigPic": "Große Bildgröße",
