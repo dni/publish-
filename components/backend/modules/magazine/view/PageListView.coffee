@@ -13,6 +13,7 @@ define [
     templateHelpers:
       getArticles: -> App.Articles.toJSON()
       getSettings: -> App.Settings.where({name: "Magazines"})[0].getValue("layouts").split(",")
+      getMagazineName: (magazine)-> App.Magazines.findWhere(_id:magazine).get "title"
 
     ui:
       number: '.number'
