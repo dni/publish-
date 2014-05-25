@@ -1,5 +1,5 @@
-fs = require("fs-extra")
 _ = require("underscore")
+fs = require "fs-extra"
 ejs = require("ejs")
 PrintGenerator = require(__dirname + "/PrintGenerator")
 Magazine = require("./../model/MagazineSchema")
@@ -93,8 +93,8 @@ module.exports.generate = (magazine) ->
         _.each pages, (page) ->
           return unless page.layout
           template = fs.readFileSync("./components/magazine/pages/" + (page.layout).trim() + ".html", "utf8")
-          Article.find(_id: page.article).execFind (err, article) ->
-            article = article.pop()
+          Article.findOne(_id: page.article).exec (err, article) ->
+            if err then return
             File.find(relation: "article:" + article._id).execFind (err, files) ->
               articlefiles = {}
               _.each files, (file) ->
