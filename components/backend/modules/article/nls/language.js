@@ -4,6 +4,7 @@ define({
     	"details": "Article details",
         "title": "Title",
         "author": "Author",
+        "teaser": "Teaser",
         "article": "Article",
         "category": "Category",
         "tags": "Tags",
