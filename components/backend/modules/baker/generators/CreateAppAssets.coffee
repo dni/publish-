@@ -7,22 +7,23 @@ module.exports = (setting, cb)->
 
   formats = ["shelf", "launch", "icon"]
   icon= ""
-  logo= "" 
+  logo= ""
   background= ""
+  sizeList = sizeList()
   File.find(relation: 'setting:'+setting._id).exec (err, files)->
     if err then return
     for i, file of files
       background = if file.key is 'background' then file.name else '/templates/bg.jpg'
-      if file.key is 'logo' then logo = file.name 
+      if file.key is 'logo' then logo = file.name
       if file.key is 'icon' then icon = file.name
+    # "no logos found, take default
+    if logo=="" or icon=="" then cb()
     createIcons formats.pop()
 
   createIcons = (format)->
-    console.log format, logo, icon, background
     key = if format is "icon" then "icon" else "logo"
     size = if key is "logo" then width:1024,height:768 else width:286,height:286
     image = gm()
-    filetype = "png"
     iconInfos = sizeList[format]
     createIcon = (imgData)->
       targetDir = process.cwd()+'/cache/publish-baker/Baker/BakerAssets.xcassets/'
@@ -37,8 +38,8 @@ module.exports = (setting, cb)->
           targetDir += "AppIcon.appiconset"
         writeImage image, imgData, targetDir
       else
-        newImg = "tmpImg.png"#+logo.split(".").pop()
-        newBg = "tmpBg.png"#+background.split(".").pop()
+        newImg = "tmpImg."+logo.split(".").pop()
+        newBg = "tmpBg."+background.split(".").pop()
 
         gm(process.cwd()+'/public/files/'+logo)
         .resize(imgData.w / 3)
