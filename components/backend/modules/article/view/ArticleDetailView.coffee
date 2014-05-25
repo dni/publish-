@@ -23,6 +23,7 @@ define [
       title: '[name=title]'
       author: '[name=author]'
       article: '[name=article]'
+      teaser: '[name=teaser]'
       tags: '[name=tags]'
       category: '[name=category]'
       publish: '.publish'
@@ -45,6 +46,7 @@ define [
         title: @ui.title.val()
         author: @ui.author.val()
         desc: @ui.article.val()
+        teaser: @ui.teaser.val()
         category: @ui.category.val()
         tags: @ui.tags.val()
 

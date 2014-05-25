@@ -6,6 +6,7 @@ define({
     "article": "Artikel",
     "category": "Kategorie",
     "tags": "Tags",
+    "teaser": "Einleitungstext",
     "categories": "Kategories",
     "emptyMessage": "Der Artikel existiert nicht mehr",
     "newArticle": "hat neuen Artikel erstellt",

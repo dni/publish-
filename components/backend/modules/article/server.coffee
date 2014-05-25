@@ -12,6 +12,7 @@ module.exports.setup = (app)->
 		a.user = app.user.id
 		a.title = req.body.title
 		a.desc = req.body.desc
+		a.teaser = req.body.teaser
 		a.author = req.body.author
 		a.images = req.body.images
 		a.published = req.body.published
@@ -26,6 +27,7 @@ module.exports.setup = (app)->
 		Article.findById req.params.id, (e, a)->
 			a.title = req.body.title
 			a.desc = req.body.desc
+			a.teaser = req.body.teaser
 			a.author = req.body.author
 			a.images = req.body.images
 			a.published = req.body.published
