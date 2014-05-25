@@ -32,6 +32,8 @@ module.exports = (grunt)->
       ]
       lib: src: [ 'lib' ]
       build: src: [ 'cache/build' ]
+      buildFrontend: src: [ 'cache/build/frontend' ]
+      buildBackend: src: [ 'cache/build/backend' ]
       vendorFrontend: src: [ 'components/backend/vendor' ]
       vendorBackend: src: [ 'components/frontend/vendor' ]
       vendorMagazine: src: [ 'components/magazine/vendor' ]
@@ -106,6 +108,7 @@ module.exports = (grunt)->
           "cs.js": 'require-cs/cs.js'
           "i18n.js": 'requirejs-i18n/i18n.js'
           # Folders
+          "css": 'require-css'
           "fancybox": "fancybox/source",
           "bootstrap": "bootstrap",
           "require-less": 'require-less'
@@ -124,7 +127,7 @@ module.exports = (grunt)->
         expand: true
 
     requirejs:
-      compile:
+      backend:
         options:
           baseUrl: './components/backend'
           paths:
@@ -185,14 +188,67 @@ module.exports = (grunt)->
             'jquery.form':['jquery']
             'bootstrap':['jquery']
             'minicolors':['jquery']
-          dir: "cache/build"
+          dir: "cache/build/backend"
           # out: "cache/build/optimized.js"
           stubModules: ['cs', 'css', 'less', 'i18n']
           modules: [{
             name: 'main',
             exclude: ['coffee-script', 'i18n', 'css', 'less']
           }]
-
+      frontend:
+        options:
+          baseUrl: './components/frontend'
+          paths:
+            jquery: "vendor/jquery"
+            fancybox: "vendor/fancybox/jquery.fancybox"
+            lodash: "vendor/underscore"
+            backbone: "vendor/backbone"
+            marionette: "vendor/marionette"
+            babysitter: "vendor/babysitter"
+            wreqr: "vendor/wreqr"
+            text: 'vendor/text'
+            cs: 'vendor/cs'
+            tpl: 'vendor/tpl'
+            underscore: 'vendor/underscore'
+          map:
+            '*':
+              'backbone.wreqr': 'wreqr'
+              'backbone.babysitter': 'babysitter'
+          packages: [
+            {
+              name: 'less',
+              location: 'vendor/require-less',
+              main: 'less'
+            },{
+              name: 'cs',
+              location: 'vendor',
+              main: 'cs'
+            },{
+              name: 'css',
+              location: 'vendor/css',
+              main: 'css'
+            },{
+              name: 'coffee-script',
+              location: 'vendor',
+              main: 'coffee-script'
+            },{
+              name: 'i18n',
+              location: 'vendor',
+              main: 'i18n'
+            }
+          ]
+          shim:
+            'jquery.ui':['jquery']
+            'jquery.tinymce':['jquery', 'tinymce']
+            'jquery.form':['jquery']
+            'bootstrap':['jquery']
+            'minicolors':['jquery']
+          dir: "cache/build/frontend"
+          stubModules: ['cs', 'css', 'less', 'i18n']
+          modules: [{
+            name: 'main',
+            exclude: ['coffee-script', 'i18n', 'css', 'less']
+          }]
 
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-clean'
@@ -238,6 +294,18 @@ module.exports = (grunt)->
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
     'requirejs'
+    'forever:restart'
+  ]
+
+  grunt.registerTask 'buildFrontend', 'Compiles all of the assets and copies the files to the build directory.', [
+    'clean:buildFrontend'
+    'requirejs:frontend'
+    'forever:restart'
+  ]
+
+   grunt.registerTask 'buildBackend', 'Compiles all of the assets and copies the files to the build directory.', [
+    'clean:buildBackend'
+    'requirejs:backend'
     'forever:restart'
   ]
 
