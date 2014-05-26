@@ -30,6 +30,7 @@ module.exports = (grunt)->
         'public/files'
         'public/books'
       ]
+      baker: src: [ 'baker-master/books' ]
       lib: src: [ 'lib' ]
       build: src: [ 'cache/build' ]
       buildFrontend: src: [ 'cache/build/frontend' ]
@@ -41,7 +42,7 @@ module.exports = (grunt)->
     mkdir:
       all:
         options:
-          create: ['cache', 'public/books', 'public/files']
+          create: ['cache', 'public/books', 'public/files', 'baker-master/books']
 
     bower:
       install:
@@ -271,9 +272,10 @@ module.exports = (grunt)->
 
 
   grunt.registerTask 'install', 'Install the App', [
-    'mkdir:all'
     'bower:install'
     'gitclone:baker:clone'
+    'clean:baker'
+    'mkdir:all'
     'bowercopy'
     'copy:tinymce' # translations for tinymce
     'clean:lib' #workaround ;()
