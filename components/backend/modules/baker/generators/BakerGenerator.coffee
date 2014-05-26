@@ -45,7 +45,7 @@ module.exports.download = (req, res) ->
           files = fs.readdirSync("./public/books")
           for key of files
             file = files[key]
-            continue if file is ".DS_Store" || ".gitignore"
+            continue if file is ".DS_Store" || file is ".gitignore"
             fs.copySync "./public/books/" + file + "/hpub", dirname + "/books/" + file
 
         EE.emit "ready", "build"
