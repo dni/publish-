@@ -279,8 +279,8 @@ module.exports = (grunt)->
     'bowercopy'
     'copy:tinymce' # translations for tinymce
     'clean:lib' #workaround ;()
-    'forever:start'
     'build'
+    'forever:start'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [
@@ -305,7 +305,7 @@ module.exports = (grunt)->
     'forever:restart'
   ]
 
-   grunt.registerTask 'buildBackend', 'Compiles all of the assets and copies the files to the build directory.', [
+  grunt.registerTask 'buildBackend', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:buildBackend'
     'requirejs:backend'
     'forever:restart'
