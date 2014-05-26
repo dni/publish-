@@ -7,7 +7,6 @@ async = require 'async'
 
 module.exports.setup = (app)->
   app.get '/', (req,res)->
-    console.log Setting
     Setting.find name:'General', (e, a)->
       if a.length is 0 || a[0].settings.frontend_development.value
         console.log "Starting frontend in development mode"
@@ -30,18 +29,18 @@ module.exports.setup = (app)->
         category: req.query.category
     else
       condition =
-      published: true
+        published: true
 
-    Article.find(condition).execFind (err, articles)->
-      calls = []
-      for article in articles
+    Article.find(condition).sort(date: -1).execFind (err, articles)->
+      if err then res.end()
+      addFiles = (article, cb)->
         article.files = []
-        calls.push (cb)->
-          File.find(relation:'article:'+article._id).execFind (err, files)->
-            if err then return
-            for file in files
-              article.files.push file
-            cb()
+        File.find(relation:'article:'+article._id).execFind (err, files)->
+          if err then return
+          for file in files
+            article.files.push file
+          cb()
 
-      async.parallel calls, ->
-        res.send articles
+      async.each articles, addFiles, -> res.send articles
+
+
