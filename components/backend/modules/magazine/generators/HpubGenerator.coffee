@@ -18,6 +18,7 @@ module.exports.generate = (magazine) ->
       _.each files, (file) ->
         fs.copy process.cwd() + "/public/files/" + file.name, process.cwd() + "/public/books/" + magazine.title + "/hpub/images/" + file.name
         magazinefiles[file.key] = file.name
+        if file.key is 'cover' then fs.copy process.cwd() + "/public/files/" + file.name, process.cwd() + "/public/books/" + magazine.title + "/hpub/cover"+file.name.split(".").pop()
 
       # generage INDEX
       Page.find(magazine: magazine._id).exec (err, pages) ->
@@ -77,6 +78,7 @@ module.exports.generate = (magazine) ->
         author: [magazine.author]
         creator: [magazine.author]
         date: new Date()
+        cover: "cover.jpg"
         url: "book://localhost:1666/public/books/" + magazine.title + "/hpub"
         orientation: "both"
         zoomable: false

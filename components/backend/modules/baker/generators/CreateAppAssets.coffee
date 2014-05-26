@@ -1,34 +1,38 @@
 gm = require "gm"
 fs = require "fs-extra"
-sizeList = require "./AppAssets"
+completeSizeList = require "./AppAssets"
 File = require "./../../files/model/FileSchema"
+extend = require('util')._extend
 
 module.exports = (setting, cb)->
-
+  sizeList = extend {}, completeSizeList
   formats = ["shelf", "launch", "icon"]
-  icon= ""
-  logo= ""
-  background= ""
-  sizeList = sizeList()
+  icon=''
+  background=''
+  logo=''
   File.find(relation: 'setting:'+setting._id).exec (err, files)->
     if err then return
-    for i, file of files
-      background = if file.key is 'background' then file.name else '/templates/bg.jpg'
-      if file.key is 'logo' then logo = file.name
-      if file.key is 'icon' then icon = file.name
-    # "no logos found, take default
-    if logo=="" or icon=="" then cb()
+    if files.length is not 0
+      for i of files
+        if files[i].key is 'background' then background = process.cwd()+'/public/files/'+files[i].name
+        if files[i].key is 'logo' then logo = process.cwd()+'/public/files/'+files[i].name
+        if files[i].key is 'icon' then icon = process.cwd()+'/public/files/'+files[i].name
+
+    if background? then background = __dirname+'/templates/bg.jpg'
+    if logo? then logo = __dirname+'/templates/logo.png'
+    if icon? then icon = __dirname+'/templates/icon.png'
     createIcons formats.pop()
 
   createIcons = (format)->
     key = if format is "icon" then "icon" else "logo"
     size = if key is "logo" then width:1024,height:768 else width:286,height:286
     image = gm()
+
     iconInfos = sizeList[format]
     createIcon = (imgData)->
       targetDir = process.cwd()+'/cache/publish-baker/Baker/BakerAssets.xcassets/'
       if format is "icon"
-        image = gm(process.cwd()+'/public/files/'+icon)
+        image = gm(icon)
         image.resize imgData.w
         if imgData.h>imgData.w
           image.extent imgData.w, imgData.h
@@ -38,10 +42,10 @@ module.exports = (setting, cb)->
           targetDir += "AppIcon.appiconset"
         writeImage image, imgData, targetDir
       else
-        newImg = "tmpImg."+logo.split(".").pop()
-        newBg = "tmpBg."+background.split(".").pop()
+        newImg = "tmpImg.png";
+        newBg = "tmpBg.png";
 
-        gm(process.cwd()+'/public/files/'+logo)
+        gm(logo)
         .resize(imgData.w / 3)
         .write process.cwd()+'/public/files/'+newImg, ->
           gm(background)
@@ -75,3 +79,4 @@ module.exports = (setting, cb)->
 
     # start it up
     createIcon iconInfos.pop()
+  return

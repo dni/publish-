@@ -11,7 +11,7 @@ BakerGenerator = require(__dirname + "/generators/BakerGenerator")
 
 module.exports.setup = (app) ->
 
-  app.get "/downloadApp", auth, BakerGenerator.download
+  app.get "/downloadApp", BakerGenerator.download
 
   # BAKER SERVER API
   app.post "/purchase_confirmation", (req, res) ->
