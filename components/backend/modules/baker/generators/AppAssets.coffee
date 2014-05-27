@@ -1,4 +1,4 @@
-module.exports =
+module.exports = ->
   icon: [
     {n: "iPad App iOS6", w: 72, h: 72}
     {n: "iPad App iOS6@2x", w: 144, h: 144}

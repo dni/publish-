@@ -1,7 +1,7 @@
 define([
 	"backbone",
 	"cs!App",
-	"css!vendor/minicolors/jquery.minicolors.css",
+	"css!modules/publish/style/jquery.minicolors.css",
 	"less!modules/publish/style/main",
 	"cs!modules/publish/Regions",
 	"cs!modules/publish/Events",
