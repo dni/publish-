@@ -6,19 +6,19 @@ passport = require 'passport'
 
 module.exports.setup = (app)->
 
-	# login
-	app.get '/login', (req, res)->
+  # login
+  app.get '/login', (req, res)->
     res.sendfile process.cwd()+'/components/backend/modules/user/templates/login.html'
 
-	app.post '/login', passport.authenticate('local', failureRedirect: '/login'), (req, res)->
+  app.post '/login', passport.authenticate('local', failureRedirect: '/login'), (req, res)->
     res.redirect '/admin'
 
-	app.get '/logout', (req, res)->
-	  req.logout()
-	  res.redirect '/login'
+  app.get '/logout', (req, res)->
+    req.logout()
+    res.redirect '/login'
 
   #admin route
-	app.get '/admin', auth, (req, res)->
+  app.get '/admin', auth, (req, res)->
     Setting.find name:'General', (e, a)->
       # if setting doesnt exists start in development mode
       if a.length is 0 || a[0].settings.backend_development.value
@@ -32,12 +32,12 @@ module.exports.setup = (app)->
         app.use '/modules', express.static process.cwd()+'/cache/build/backend/modules' # workaround for requirejs i18n problem with /admin
         res.sendfile process.cwd()+'/cache/build/backend/index.html'
 
-	app.get '/user', auth, (req, res)-> res.send app.user
+  app.get '/user', auth, (req, res)-> res.send app.user
 
   #crud
-	app.get '/users', auth, (req, res)->
-	  	User.find().limit(20).execFind (arr,data)->
-	    	res.send data
+  app.get '/users', auth, (req, res)->
+    User.find().limit(20).execFind (arr,data)->
+      res.send data
 
   app.post '/users', auth, (req, res)->
     a = new User
@@ -48,16 +48,16 @@ module.exports.setup = (app)->
     a.password = req.body.password
     a.save -> res.send a
 
-	app.put '/users/:id', auth, (req, res)->
-		User.findById req.params.id, (e, a)->
+  app.put '/users/:id', auth, (req, res)->
+    User.findById req.params.id, (e, a)->
       a.name = req.body.name
       a.role = req.body.role
       a.username = req.body.username
       a.email = req.body.email
-			a.password = req.body.password
-			a.save -> res.send a
+      a.password = req.body.password
+      a.save -> res.send a
 
-	app.delete '/users/:id', auth, (req, res)->
+  app.delete '/users/:id', auth, (req, res)->
     User.findById req.params.id, (e, a)->
       a.remove (err)-> if !err then res.send 'deleted' else console.log err
 
