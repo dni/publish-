@@ -37,6 +37,10 @@ define [
       theme: "modern"
       menubar : false
       language: i18n.langCode
+      convert_urls: true,
+      remove_script_host:false,
+      relative_urls : true,
+      baseURL : 'admin/vendor/tinymce'
       plugins: [
           "advlist autolink lists link charmap print preview hr anchor pagebreak",
           "searchreplace wordcount code fullscreen",
