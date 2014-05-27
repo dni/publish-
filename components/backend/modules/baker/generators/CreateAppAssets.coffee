@@ -5,22 +5,22 @@ File = require "./../../files/model/FileSchema"
 extend = require('util')._extend
 
 module.exports = (setting, cb)->
-  sizeList = extend {}, completeSizeList
+  sizeList = completeSizeList()
   formats = ["shelf", "launch", "icon"]
   icon=''
   background=''
   logo=''
   File.find(relation: 'setting:'+setting._id).exec (err, files)->
     if err then return
-    if files.length is not 0
-      for i of files
-        if files[i].key is 'background' then background = process.cwd()+'/public/files/'+files[i].name
-        if files[i].key is 'logo' then logo = process.cwd()+'/public/files/'+files[i].name
-        if files[i].key is 'icon' then icon = process.cwd()+'/public/files/'+files[i].name
+    if files.length != 0
+      for i, file of files
+        if file.key is 'background' then background = process.cwd()+'/public/files/'+file.name
+        if file.key is 'logo' then logo = process.cwd()+'/public/files/'+file.name
+        if file.key is 'icon' then icon = process.cwd()+'/public/files/'+file.name
 
-    if background? then background = __dirname+'/templates/bg.jpg'
-    if logo? then logo = __dirname+'/templates/logo.png'
-    if icon? then icon = __dirname+'/templates/icon.png'
+    if background is "" then background = __dirname+'/templates/bg.jpg'
+    if logo is "" then logo = __dirname+'/templates/logo.png'
+    if icon is "" then icon = __dirname+'/templates/icon.png'
     createIcons formats.pop()
 
   createIcons = (format)->
@@ -51,7 +51,6 @@ module.exports = (setting, cb)->
           gm(background)
           .crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2))
           .write process.cwd()+'/public/files/'+newBg, ->
-            console.log "new bg done.........................."
             if format is "shelf"
               if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
               else targetDir += "shelf-bg-landscape.imageset"
@@ -66,7 +65,6 @@ module.exports = (setting, cb)->
     # write the image
     writeImage = (image, imgData, targetDir) ->
       targetImageLink = targetDir+"/"+imgData.n+".png"
-      console.log targetImageLink
       image.write targetImageLink, (err)->
         if err then return console.error("WriteImage error...",err)
         # check if icon variation is left
