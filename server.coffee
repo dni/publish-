@@ -55,6 +55,3 @@ fs.readdir componentsDir, (err, files)->
 
 app.listen port
 console.log "Welcome to Publish! server runs on port "+port
-
-
-
