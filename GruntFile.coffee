@@ -56,10 +56,11 @@ module.exports = (grunt)->
           directory: 'baker-master'
 
     forever:
-      options:
-        command: 'coffee'
-        index: 'server.coffee'
-        logDir: 'cache'
+      server1:
+        options:
+          command: 'coffee'
+          index: 'server.coffee'
+          logDir: 'cache'
 
     bowercopy:
       libsBackend:
@@ -130,7 +131,9 @@ module.exports = (grunt)->
     requirejs:
       backend:
         options:
+          optimizeAllPluginResources: true
           baseUrl: './components/backend'
+          fileExclusionRegExp: /^server/
           paths:
             App: "utilities/App",
             Router: "utilities/Router",
@@ -182,7 +185,6 @@ module.exports = (grunt)->
               main: 'i18n'
             }
           ]
-          fileExclusionRegExp: new RegExp 'server.coffee$'
           shim:
             'jquery.ui':['jquery']
             'jquery.tinymce':['jquery', 'tinymce']
@@ -194,11 +196,12 @@ module.exports = (grunt)->
           stubModules: ['cs', 'css', 'less', 'i18n']
           modules: [{
             name: 'main',
-            exclude: ['coffee-script', 'i18n', 'css', 'less']
+            exclude: ['coffee-script']
           }]
       frontend:
         options:
           baseUrl: './components/frontend'
+          fileExclusionRegExp: /^server/
           paths:
             jquery: "vendor/jquery"
             fancybox: "vendor/fancybox/jquery.fancybox"
@@ -270,6 +273,14 @@ module.exports = (grunt)->
         if err then console.log err else console.log 'Successfully dropped database'
         mongoose.connection.close done
 
+  # TODO
+  # grunt.registerTask 'backupDatabase', 'backup the database', ->
+    # done = this.async()
+    # db.connection.on 'open', ->
+      # db.connection.db.dropDatabase (err)->
+        # if err then console.log err else console.log 'Successfully dropped database'
+        # mongoose.connection.close done
+
 
   grunt.registerTask 'install', 'Install the App', [
     'bower:install'
@@ -280,7 +291,7 @@ module.exports = (grunt)->
     'copy:tinymce' # translations for tinymce
     'clean:lib' #workaround ;()
     'build'
-    'forever:start'
+    'forever:server1:start'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [
@@ -296,19 +307,24 @@ module.exports = (grunt)->
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
     'requirejs'
-    'forever:restart'
+    'restart'
   ]
 
   grunt.registerTask 'buildFrontend', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:buildFrontend'
     'requirejs:frontend'
-    'forever:restart'
+    'restart'
   ]
 
   grunt.registerTask 'buildBackend', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:buildBackend'
     'requirejs:backend'
-    'forever:restart'
+    'restart'
+  ]
+
+  grunt.registerTask 'restart', 'Restart the app daemon', [
+    'forever:server1:stop'
+    'forever:server1:start'
   ]
 
   return grunt
