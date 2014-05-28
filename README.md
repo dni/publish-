@@ -55,3 +55,8 @@ grunt build
 grunt reset
 * view all available tasks
 grunt --help
+
+
+## Support
+The project was supported by aws - austria wirtschaftsservice
+<a href="http://www.awsg.at/">http://www.awsg.at/</a>
