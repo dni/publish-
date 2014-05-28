@@ -42,10 +42,16 @@ http://localhost:1666/admin/ <br>
 **User:** admin <br>
 **Password:** password
 
-## Starting the App for Development
-```js
-coffee server.coffee
-```
-
-## Grunt Task
-
+## Grunt Tasks
+* Restart the app daemon, mostly afterwards changes on the serverside script
+grunt restart
+* install the publish app
+grunt install
+* clean the project, drop the database and reinstall
+grunt reinstall
+* build all components use build:backend, build:frontend to build single components
+grunt build
+* reset the whole project, use npm install afterwards
+grunt reset
+* view all available tasks
+grunt --help
