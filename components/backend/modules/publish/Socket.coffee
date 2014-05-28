@@ -14,9 +14,8 @@ define [
     App[collection].fetch
       success:->
 
-  # socket.on "disconnect", ->
-    # SocketAdapter.connected = false
-    # App.vent.trigger "socket:disconnected"
+  socket.on "disconnect", ->
+    document.location.reload()
 
   socket.on "error", (err)->
     Utils.Log "SOCKET ERROR: " + err
