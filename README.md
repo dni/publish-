@@ -4,11 +4,11 @@ Publish your data on all channels!
 ## Software Requirements
 
 ```js
-apt-get install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+apt-get install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 On Mac OSX use Homebrew
 ```js
-brew install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+brew install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 Install node.js modules
 ```js
