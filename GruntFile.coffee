@@ -307,7 +307,6 @@ module.exports = (grunt)->
   grunt.registerTask 'build', 'Compiles all of the assets and copies the files to the build directory.', [
     'clean:build'
     'requirejs'
-    'restart'
   ]
 
   grunt.registerTask 'buildFrontend', 'Compiles all of the assets and copies the files to the build directory.', [
