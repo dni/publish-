@@ -8,3 +8,6 @@ public/books
 
 .project
 .DS_Store
+
+_SpecRunner.html
+.grunt

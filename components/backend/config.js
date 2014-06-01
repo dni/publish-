@@ -1,5 +1,5 @@
 require.config({
-	deps: ['main'],
+    baseUrl: 'components/backend/',
 	paths: {
 		App: "utilities/App",
 		Router: "utilities/Router",
@@ -63,3 +63,5 @@ require.config({
 		'minicolors':['jquery'],
 	}
 });
+
+require(['main']);
