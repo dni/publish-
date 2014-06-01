@@ -23,12 +23,16 @@ require.config({
 	    location: 'vendor',
 	    main: 'cs'
 	  },{
+        name: 'css',
+        location: 'vendor/css',
+        main: 'css'
+      },{
 	    name: 'coffee-script',
 	  	location: 'vendor',
 	    main: 'coffee-script'
 	  },{
 	    name: 'i18n',
-	  	location: 'vendor/require-i18n',
+	  	location: 'vendor',
 	    main: 'i18n'
 	  }
     ],

@@ -22,21 +22,21 @@ app.configure ->
     ).execFind (err, user)->
       done err, user[0]
 
-	passport.serializeUser (user, done) ->
-	 done null, user._id
+  passport.serializeUser (user, done) ->
+    done null, user._id
 
-	passport.deserializeUser (_id, done)->
-	  User.findById _id, (err, user)->
+  passport.deserializeUser (_id, done)->
+    User.findById _id, (err, user)->
       if !err then app.user = user
       done(err, user)
 
   app.use '/public', express.static 'public'
   app.use express.json()
   app.use express.urlencoded()
-	app.use express.cookieParser()
-	app.use express.session secret: sessionSecret
-	app.use passport.initialize()
-	app.use passport.session()
+  app.use express.cookieParser()
+  app.use express.session secret: sessionSecret
+  app.use passport.initialize()
+  app.use passport.session()
 
 
 

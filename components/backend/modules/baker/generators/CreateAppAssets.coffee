@@ -42,8 +42,8 @@ module.exports = (setting, cb)->
           targetDir += "AppIcon.appiconset"
         writeImage image, imgData, targetDir
       else
-        newImg = "tmpImg.png";
-        newBg = "tmpBg.png";
+        newImg = "tmpImg.png"
+        newBg = "tmpBg.png"
 
         gm(logo)
         .resize(imgData.w / 3)
