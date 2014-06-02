@@ -9,7 +9,7 @@ module.exports = (grunt)->
     watch:
       scripts:
         files: ['components/**/*.coffee']
-        tasks: ['coffeelint']
+        tasks: ['test']
         options:
           spawn: false
 

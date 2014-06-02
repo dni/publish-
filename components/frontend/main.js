@@ -1,6 +1,6 @@
 require([
-	'backbone',
-	'cs!modules/blog/BlogModule'
+  'backbone',
+  'cs!modules/blog/BlogModule'
 ], function(Backbone){
-	Backbone.history.start();
+  Backbone.history.start();
 });

@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: 'components/backend/',
+  baseUrl: 'components/backend/',
 	paths: {
 		App: "utilities/App",
 		Router: "utilities/Router",
