@@ -67,31 +67,43 @@ module.exports.generate = (magazine) ->
         PrintGenerator.generatePage "Book Index.html", magazine
 
       # generate JSON
-      files = fs.readdirSync("./public/books/" + magazine.title + "/hpub/")
-      contents = []
-      while file = files.pop()
-        contents.push file if file.match(/.html/g)
+      Page.find(magazine: magazine._id).exec (err, pages) ->
 
-      fs.writeFileSync "./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify
-        hpub: 1
-        title: magazine.title
-        author: [magazine.author]
-        creator: [magazine.author]
-        date: new Date()
-        cover: "cover.jpg"
-        url: "book://localhost:1666/public/books/" + magazine.title + "/hpub"
-        orientation: "both"
-        zoomable: false
-        "-baker-background": "#000000"
-        "-baker-vertical-bounce": true
-        "-baker-media-autoplay": true
-        "-baker-background-image-portrait": "gfx/background-portrait.png"
-        "-baker-background-image-landscape": "gfx/background-landscape.png"
-        "-baker-page-numbers-color": "#000000"
-        contents: contents
+        # first pages
+        contents = [
+          "Book Cover.html"
+          "Book Index.html"
+        ]
+
+        for i, page of pages
+          j = parseInt(i)+1 # pages starts at 1 ;)
+          contents.push "Page#{j}.html"
+
+        # last pages
+        contents.push "Book Tail.html"
+        contents.push "Book Back.html"
+
+        fs.writeFileSync "./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify
+          hpub: 1
+          title: magazine.title
+          author: [magazine.author]
+          creator: [magazine.author]
+          date: new Date()
+          cover: "cover.jpg"
+          url: "book://localhost:1666/public/books/" + magazine.title + "/hpub"
+          orientation: "both"
+          zoomable: false
+          "-baker-background": "#000000"
+          "-baker-vertical-bounce": true
+          "-baker-media-autoplay": true
+          "-baker-background-image-portrait": "gfx/background-portrait.png"
+          "-baker-background-image-landscape": "gfx/background-landscape.png"
+          "-baker-page-numbers-color": "#000000"
+          contents: contents
 
       # CHAPTERS
       Page.find(magazine: magazine._id).exec (err, pages) ->
+        # generate pages
         _.each pages, (page) ->
           return unless page.layout
           template = fs.readFileSync("./components/magazine/pages/" + (page.layout).trim() + ".html", "utf8")
@@ -111,3 +123,5 @@ module.exports.generate = (magazine) ->
                 files: articlefiles
 
               PrintGenerator.generatePage filename, magazine if print
+
+
