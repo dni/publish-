@@ -45,9 +45,10 @@ define [
 
 
   # Shortcut Log
-  window.log = Log;
+  window.log = Log
 
   # Global c.l for console.log
-  window.c = console; c.l = c.log
+  window.c = console
+  c.l = c.log
 
   return Utilities
