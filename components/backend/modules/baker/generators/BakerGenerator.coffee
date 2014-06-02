@@ -13,13 +13,13 @@ module.exports.download = (req, res) ->
   EE.on "ready", (task) ->
     tasks.splice tasks.indexOf(task), 1
     unless tasks.length
-      console.log("§")
       # all tasks done, zip to res
       spawn = require("child_process").spawn
       zip = spawn("zip", ["-r","-","publish-baker"],cwd: "./cache")
       res.contentType "zip"
-      zip.stdout.on "data", (data) -> res.write data
-      zip.on "close", (code) ->
+      zip.stdout.on "data", (data) -> res.write data; console.log "got data"
+      zip.on "exit", (code) ->
+        console.log "i am done !!!!"
         console.log(code)
         if code is 0 then console.log "download app zip done" else console.log "download app zip exited with code " + code
         res.end()
@@ -51,7 +51,3 @@ module.exports.download = (req, res) ->
             fs.copySync "./public/books/" + file + "/hpub", dirname + "/books/" + file
 
         EE.emit "ready", "build"
-
-
-
-
