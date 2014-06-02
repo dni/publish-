@@ -4,11 +4,11 @@ Publish your data on all channels!
 ## Software Requirements
 
 ```js
-apt-get install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+apt-get install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 On Mac OSX use Homebrew
 ```js
-brew install nodejs npm coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+brew install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 Install node.js modules
 ```js
@@ -42,10 +42,32 @@ http://localhost:1666/admin/ <br>
 **User:** admin <br>
 **Password:** password
 
-## Starting the App for Development
+## Grunt Tasks
+* Restart the app daemon, mostly afterwards changes on the serverside script
 ```js
-coffee server.coffee
+grunt restart
+```
+* install the publish app
+```js
+grunt install
+```
+* clean the project, drop the database and reinstall
+```js
+grunt reinstall
+```
+* build all components use build:backend, build:frontend to build single components
+```js
+grunt build
+```
+* reset the whole project, use npm install afterwards
+```js
+grunt reset
+```
+* view all available tasks
+```js
+grunt --help
 ```
 
-## Grunt Task
-
+## Support
+The project was supported by aws - austria wirtschaftsservice
+<a href="http://www.awsg.at/">http://www.awsg.at/</a>

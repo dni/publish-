@@ -35,7 +35,7 @@ define [
         App.StaticBlocks.create @model,
           wait: true
           success: (res) ->
-            route = 'static/'+res.attributes._id
+            route = 'staticBlock/'+res.attributes._id
             Utils.Log i18n.newStatic, 'new',
               text: res.attributes.key
               href: route
@@ -43,7 +43,7 @@ define [
       else
         Utils.Log i18n.updateStatic, 'update',
           text: @model.get 'key'
-          href: 'static/'+@model.get '_id'
+          href: 'staticBlock/'+@model.get '_id'
         @model.save()
 
 
