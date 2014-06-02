@@ -1,5 +1,4 @@
 require.config({
-  baseUrl: 'components/frontend/',
 	paths: {
 		jquery: "vendor/jquery",
 		fancybox: "vendor/fancybox/jquery.fancybox",
