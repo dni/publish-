@@ -13,6 +13,7 @@ module.exports = ->
   launch: [
     {n: "iPad Landscape iOS6 no status bar", w: 1024, h: 748}
     {n: "iPad Landscape iOS6 no status bar@2x", w: 2048, h: 1496}
+    {n: "iPad Landscape iOS6 no status bar@2x-1", w: 2048, h: 1496}
     {n: "iPad Landscape iOS7", w: 1024, h: 768}
     {n: "iPad Landscape iOS7@2x", w: 2048, h: 1536}
     {n: "iPad Portrait iOS6 no status bar", w: 768, h: 1004}
