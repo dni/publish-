@@ -8,7 +8,7 @@ apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 On Mac OSX use Homebrew
 ```js
-brew install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
+brew install nodejs phantomjs git mongodb imagemagick graphicsmagick
 ```
 Install node.js modules
 ```js
