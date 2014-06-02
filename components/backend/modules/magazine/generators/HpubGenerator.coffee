@@ -85,7 +85,7 @@ module.exports.generate = (magazine) ->
           contents.push "Page#{j}.html"
 
         # last pages
-        contents.push "Book Tail.html"
+        contents.push "Tail.html"
         contents.push "Book Back.html"
 
         fs.writeFileSync "./public/books/" + magazine.title + "/hpub/book.json", JSON.stringify
