@@ -22,9 +22,14 @@ module.exports.generate = (magazine) ->
 
       # generage INDEX
       Page.find(magazine: magazine._id).exec (err, pages) ->
+
         articleIds = []
-        _.each pages, (page) ->
-          articleIds.push page.article
+        articleIds.push page.article for page in pages
+
+        sortedPages = pages.sort (a,b)->
+          return 1 if a.number > b.number
+          return -1 if a.number < b.number
+          return 0
 
         Article.find(_id: $in: articleIds).execFind (err, articles) ->
           newarticles = {}
@@ -33,7 +38,7 @@ module.exports.generate = (magazine) ->
           template = fs.readFileSync("./components/magazine/index.html", "utf8")
           fs.writeFileSync "./public/books/" + magazine.title + "/hpub/index.html", ejs.render template,
             magazine: magazine
-            pages: pages
+            pages: sortedPages
             articles: newarticles
 
           PrintGenerator.generatePage "index.html", magazine if print
