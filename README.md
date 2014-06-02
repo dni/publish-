@@ -4,15 +4,15 @@ Publish your data on all channels!
 ## Software Requirements
 
 ```js
-apt-get install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+apt-get install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 On Mac OSX use Homebrew
 ```js
-brew install nodejs coffeescript phantomjs git mongodb imagemagick graphicsmagick zip
+brew install nodejs phantomjs git mongodb imagemagick graphicsmagick zip
 ```
 Install node.js modules
 ```js
-npm install -g bower grunt-cli
+npm install -g bower grunt-cli coffee-script
 ```
 Make sure mongod process is running, start it with mongod
 
@@ -62,6 +62,10 @@ grunt build
 * reset the whole project, use npm install afterwards
 ```js
 grunt reset
+
+* watch your coffeescript files while development
+```js
+grunt watch
 ```
 * view all available tasks
 ```js
