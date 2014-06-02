@@ -1,5 +1,5 @@
 require.config({
-	deps: ["main"],
+  baseUrl: 'components/frontend/',
 	paths: {
 		jquery: "vendor/jquery",
 		fancybox: "vendor/fancybox/jquery.fancybox",
@@ -53,3 +53,5 @@ require.config({
     },
 
 });
+
+require(['main']);
