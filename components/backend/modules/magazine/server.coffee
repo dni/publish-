@@ -107,8 +107,8 @@ module.exports.setup = (app) ->
         spawn.on "exit", (code) ->
           if code is 0 then res.send 'deleted'
           else
-            res.statusCode = 500;
-            console.log('remove book/yourmagazine (rm) process exited with code ' + code);
+            res.statusCode = 500
+            console.log('remove book/yourmagazine (rm) process exited with code ' + code)
 
   app.delete '/pages/:id', auth, (req, res)->
     Page.findById req.params.id, (e, model)->

@@ -3,8 +3,8 @@ define [
   'cs!modules/messages/model/Model'
 ], (App, Message) ->
   (log, type, additionalinfo)->
-    if additionalinfo? else additionalinfo = ''
-    if type? else type = 'log'
+    if !additionalinfo? then additionalinfo = ''
+    if !type? then type = 'log'
     message = new Message
     message.set
       message: log

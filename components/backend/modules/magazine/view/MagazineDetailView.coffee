@@ -34,7 +34,7 @@ define [
       "click #download": "downloadPrint"
 
     downloadPrint: ->
-       window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
+      window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
 
     publish:->
       # before model is toggled
