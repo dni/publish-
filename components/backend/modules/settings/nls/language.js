@@ -1,6 +1,8 @@
 define({
     "root": {
-    	"headline": "Settings"
+    	"headline": "Settings",
+    	"deleteSetting": "deleted setting",
+        "updateSetting": "updated setting"
     },
     "de": true
 });
