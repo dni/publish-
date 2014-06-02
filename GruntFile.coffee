@@ -6,6 +6,13 @@ module.exports = (grunt)->
 
     pkg: grunt.file.readJSON 'package.json'
 
+    watch:
+      scripts:
+        files: ['components/**/*.coffee']
+        tasks: ['coffeelint']
+        options:
+          spawn: false
+
     coffeelint:
       all:
         options:
@@ -179,6 +186,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-copy'
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-less'
+  grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
 
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
