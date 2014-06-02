@@ -44,7 +44,6 @@ module.exports = (setting, cb)->
       else
         newImg = "tmpImg.png";
         newBg = "tmpBg.png";
-
         gm(logo)
         .resize(imgData.w / 3)
         .write process.cwd()+'/public/files/'+newImg, ->
@@ -52,13 +51,16 @@ module.exports = (setting, cb)->
           .crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2))
           .write process.cwd()+'/public/files/'+newBg, ->
             if format is "shelf"
+              topPos = 20
               if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
               else targetDir += "shelf-bg-landscape.imageset"
             else if format is "launch"
+              topPos = (imgData.h-imgData.h/4)/3
               targetDir += "LaunchImage.launchimage"
+            else topPos = (imgData.h-imgData.h/4)/3
             image
               .in('-page', '+0+0').in(process.cwd()+'/public/files/'+newBg)
-              .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+((imgData.h-imgData.h/4)/3)+'')
+              .in('-page', '+'+((imgData.w-imgData.w/3)/2)+'+'+topPos)
               .in(process.cwd()+'/public/files/'+newImg).flatten()
             writeImage image, imgData, targetDir
 
