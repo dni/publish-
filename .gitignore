@@ -11,3 +11,5 @@ public/books
 
 _SpecRunner.html
 .grunt
+
+npm-debug.log

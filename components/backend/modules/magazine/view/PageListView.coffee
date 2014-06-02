@@ -66,10 +66,10 @@ define [
 
     _sortAble:->
       @$el.find(".page-list").sortable(
-         revert: true
-         axis: "y"
-         cursor: "move"
-         stop: @_sortStop.bind(@)
+        revert: true
+        axis: "y"
+        cursor: "move"
+        stop: @_sortStop.bind(@)
       ).disableSelection()
 
     _sortStop: (event, ui)->

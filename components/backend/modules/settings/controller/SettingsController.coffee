@@ -31,4 +31,4 @@ define [
     clearCache: ->
       $.get "/clearCache", ->
         console.log "cache cleared"
-        window.location = "/admin#settings";
+        window.location = "/admin#settings"

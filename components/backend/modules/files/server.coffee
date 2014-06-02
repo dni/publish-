@@ -6,7 +6,7 @@ multiparty = require "multiparty"
 fs = require "fs"
 
 module.exports.setup = (app)->
-	app.post "/uploadFile", auth, (req,res)->
+  app.post "/uploadFile", auth, (req,res)->
 
     form = new multiparty.Form
     form.parse req, (err, fields, files)->
@@ -39,14 +39,14 @@ module.exports.setup = (app)->
     res.send "success"
 
 
-	app.get '/files', auth, (req, res)->
-		send = (arr, data)-> res.send(data)
-		if req.query.parents
-			File.find({'parent':undefined}).execFind send
-		else
-			File.find().execFind send
+  app.get '/files', auth, (req, res)->
+    send = (arr, data)-> res.send(data)
+    if req.query.parents
+      File.find({'parent':undefined}).execFind send
+    else
+      File.find().execFind send
 
-	app.post "/files", auth, (req, res) ->
+  app.post "/files", auth, (req, res) ->
     newfile = req.body
     file = new File()
     filename = "copy_" + Date.now() + "_" + newfile.name

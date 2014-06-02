@@ -18,4 +18,4 @@ define [
 
 
     togglePublish: ->
-      @.set "published", not @.get "published";
+      @.set "published", not @.get "published"
