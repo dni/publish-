@@ -17,7 +17,7 @@ module.exports.download = (req, res) ->
       spawn = require("child_process").spawn
       zip = spawn("zip", ["-r","-","publish-baker"],cwd: "./cache")
       res.contentType "zip"
-      zip.stdout.on "data", (data) -> res.write data; console.log "got data"
+      zip.stdout.on "data", (data) -> res.write data
       zip.on "exit", (code) ->
         if code is 0 then console.log "download app zip done" else console.log "download app zip exited with code " + code
         res.end()
