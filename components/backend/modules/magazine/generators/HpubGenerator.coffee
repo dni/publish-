@@ -24,8 +24,9 @@ module.exports.generate = (magazine) ->
       Page.find(magazine: magazine._id).exec (err, pages) ->
 
         articleIds = []
-        articleIds.push page.article for page in pages
 
+        _.each pages, (page) ->
+          articleIds.push page.article if page.article
         sortedPages = pages.sort (a,b)->
           return 1 if a.number > b.number
           return -1 if a.number < b.number
@@ -33,15 +34,26 @@ module.exports.generate = (magazine) ->
 
         Article.find(_id: $in: articleIds).execFind (err, articles) ->
           newarticles = {}
-          _.each articles, (article) -> newarticles[article._id] = article.title
+          _.each articles, (article) ->
+            newarticles[article._id] = article.title
 
+          # generage index for baker navigation
           template = fs.readFileSync("./components/magazine/index.html", "utf8")
           fs.writeFileSync "./public/books/" + magazine.title + "/hpub/index.html", ejs.render template,
             magazine: magazine
             pages: sortedPages
             articles: newarticles
 
-          PrintGenerator.generatePage "index.html", magazine if print
+          # generate Editorial
+          template = fs.readFileSync("./components/magazine/Book Index.html", "utf8")
+          fs.writeFileSync "./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render template,
+            magazine: magazine
+            pages: sortedPages
+            articles: newarticles
+
+          if print
+            PrintGenerator.generatePage "Book Index.html", magazine
+            PrintGenerator.generatePage "index.html", magazine
 
       # generate Cover
       template = fs.readFileSync("./components/magazine/Book Cover.html", "utf8")
@@ -60,16 +72,13 @@ module.exports.generate = (magazine) ->
       fs.writeFileSync "./public/books/" + magazine.title + "/hpub/Tail.html", ejs.render template,
         magazine: magazine
 
-      # generate Editorial
-      template = fs.readFileSync("./components/magazine/Book Index.html", "utf8")
-      fs.writeFileSync "./public/books/" + magazine.title + "/hpub/Book Index.html", ejs.render template,
-        magazine: magazine
+
 
       if print
         PrintGenerator.generatePage "Book Cover.html", magazine
         PrintGenerator.generatePage "Book Back.html", magazine
         PrintGenerator.generatePage "Tail.html", magazine
-        PrintGenerator.generatePage "Book Index.html", magazine
+
 
       # generate JSON
       Page.find(magazine: magazine._id).exec (err, pages) ->
