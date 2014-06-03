@@ -3,21 +3,19 @@
 <head>
 	<title>Index</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="stylesheet" type="text/css" href="css/book.css">
-	<link rel="stylesheet" media="print" type="text/css" href="css/print.css">
 </head>
 <body>
   <div id="index">
-      <div class="navigation">
+      <ul class="navigation">
 
       	<% for (var i = 0; i < pages.length; i++) { %>
-	        <h5>Page <%= pages[i].number %></h5>
-      		<a href="Page<%= pages[i].number %>.html"><h7><%= articles[pages[i].article] %></h7></a>
+      	    <li class="page">
+    	        <label>Page <%= pages[i].number %>: </label>
+          		<a href="Page<%= pages[i].number %>.html"><h7><%= articles[pages[i].article] %></a>
+      	    </li>
       	<% } %>
-
-      </div>
+          <li class="clear"></li>
+      </ul>
     </div>
   </div>
-  <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
 </body>
