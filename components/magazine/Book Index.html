@@ -10,6 +10,16 @@
 <body>
 	<div id="page" class="editorial">
 		<%- magazine.editorial %>
+
+		<ul class="navigation">
+            <% for (var i = 0; i < pages.length; i++) { %>
+                <li class="page">
+                    <label>Page <%= pages[i].number %>: </label>
+                    <a href="Page<%= pages[i].number %>.html"><h7><%= articles[pages[i].article] %></a>
+                </li>
+            <% } %>
+        </ul>
+
 	</div>
   <script type="text/javascript" src="js/vendor/jquery.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
