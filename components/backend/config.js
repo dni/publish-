@@ -23,7 +23,6 @@ require.config({
 		cs: 'vendor/cs',
 		css: 'vendor/css',
 		d3: 'vendor/d3',
-		//gm: 'vendor/gm/index',
 		minicolors: 'vendor/minicolors/jquery.minicolors'
 	},
 	map: {
