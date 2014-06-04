@@ -22,7 +22,7 @@
     "jquery-ui": "~1.10.4",
     "jquery-form": "~3.46.0",
     "d3": "~3.4.3",
-    "tinymce": "~4.0.20",
+    "tinymce-builded": "*",
     "fancybox": "~2.1.5",
     "jquery-minicolors": "2.1.4",
     "requirejs-i18n": "~2.0.4",
