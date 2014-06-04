@@ -120,21 +120,21 @@ module.exports = (grunt)->
           "css": 'require-css'
           "tinymce": "tinymce"
           "minicolors": 'jquery-minicolors'
-          "fancybox": "fancybox/source",
-          "bootstrap": "bootstrap",
+          "fancybox": "fancybox/source"
+          "bootstrap": "bootstrap"
           "require-less": 'require-less'
 
       libsFrontend:
         options:
           destPrefix: "components/frontend/vendor"
         files:
-          "jquery.js": "jquery/dist/jquery.js",
-          "require.js": "requirejs/require.js",
-          "backbone.js": "backbone-amd/backbone.js",
-          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js",
-          "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js",
-          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js",
-          "coffee-script.js": 'coffee-script/index.js',
+          "jquery.js": "jquery/dist/jquery.js"
+          "require.js": "requirejs/require.js"
+          "backbone.js": "backbone-amd/backbone.js"
+          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js"
+          "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js"
+          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
+          "coffee-script.js": 'coffee-script/index.js'
           "underscore.js": 'underscore-amd/underscore.js'
           "text.js": 'requirejs-text/text.js'
           "tpl.js": 'requirejs-tpl/tpl.js'
@@ -142,15 +142,15 @@ module.exports = (grunt)->
           "i18n.js": 'requirejs-i18n/i18n.js'
           # Folders
           "css": 'require-css'
-          "fancybox": "fancybox/source",
-          "bootstrap": "bootstrap",
+          "fancybox": "fancybox/source"
+          "bootstrap": "bootstrap"
           "require-less": 'require-less'
 
       libsMagazine:
         options:
           destPrefix: "components/magazine/js/vendor"
         files:
-          "jquery.min.js": "jquery/dist/jquery.min.js",
+          "jquery.min.js": "jquery/dist/jquery.min.js"
 
     copy:
       tinymce:
@@ -164,22 +164,22 @@ module.exports = (grunt)->
         options:
           baseUrl: './components/backend'
           fileExclusionRegExp: /^(server|spec)/
-          mainConfigFile: "components/backend/config.js",
+          mainConfigFile: "components/backend/config.js"
           dir: "cache/build/backend"
           stubModules: ['cs', 'css', 'less', 'i18n']
           modules: [{
-            name: 'main',
+            name: 'main'
             exclude: ['coffee-script', 'i18n', 'css', 'less']
           }]
       frontend:
         options:
           baseUrl: './components/frontend'
           fileExclusionRegExp: /^(server|spec)/
-          mainConfigFile: "components/frontend/config.js",
+          mainConfigFile: "components/frontend/config.js"
           dir: "cache/build/frontend"
           stubModules: ['cs', 'css', 'less']
           modules: [{
-            name: 'main',
+            name: 'main'
             exclude: ['coffee-script', 'css', 'less']
           }]
 
