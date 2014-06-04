@@ -25,19 +25,19 @@
 		},
 
 		"orPortrait" : {
-	      "value": "true",
+	      "value": true,
 	      "type": "checkbox"
 		},
 		"orUpsidedown" : {
-	      "value": "true",
+	      "value": true,
 	      "type": "checkbox"
 		},
 		"orLandscapeleft" : {
-	      "value": "true",
+	      "value": true,
 	      "type": "checkbox"
 		},
 		"orLandscaperight" : {
-	      "value": "true",
+	      "value": true,
 	      "type": "checkbox"
 		},
 
