@@ -30,9 +30,8 @@ define [
 
       settings = @model.get "settings"
       @$el.find(".setting").each ()->
-        type = $(@).attr("type")
-        if type=="checkbox" or type=="radio" then val = $(@).is(':checked')
-        else val = $(@).val()
+        val = $(@).val()
+        if $(@).attr("type") is "checkbox" then val = $(@).prop("checked")
         settings[$(@).attr("name")].value = val
 
       @model.set 'settings', settings
