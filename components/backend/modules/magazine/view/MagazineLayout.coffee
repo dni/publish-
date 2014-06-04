@@ -22,7 +22,7 @@ define [
       title: "[name=title]"
 
     events:
-      "click .deleteMagazine": "deleteMagazine"
+      "click .delete": "deleteMagazine"
       "click .save": "save"
       "click .cancel": "cancel"
 
