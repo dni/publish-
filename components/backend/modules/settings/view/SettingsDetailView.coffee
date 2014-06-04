@@ -12,7 +12,7 @@ define [
 
     template: Template
 
-    reset:->
+    reset: ->
       Utils.Log i18n.deleteSetting, 'delete',
         text: @model.get 'name'
         href: 'setting/'+@model.get 'name'
@@ -27,12 +27,12 @@ define [
         text: @model.get 'name'
         href: 'setting/'+@model.get 'name'
 
-
       settings = @model.get "settings"
-      @$el.find(".setting").each ()->
+      @$el.find(".setting").each ->
         val = $(@).val()
-        if $(@).attr("type") is "checkbox" then val = $(@).prop("checked")
+        if $(@).attr("type") is "checkbox" then val = $(@).is(":checked")
         settings[$(@).attr("name")].value = val
+        @
 
       @model.set 'settings', settings
       @model.save()
