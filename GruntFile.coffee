@@ -102,7 +102,6 @@ module.exports = (grunt)->
           "jquery.js": "jquery/dist/jquery.js"
           "require.js": "requirejs/require.js"
           "jquery.ui.js": "jquery-ui/ui/jquery-ui.js"
-          "jquery.tinymce.js": "tinymce/jquery.tinymce.min.js"
           "jquery.form.js": "jquery-form/jquery.form.js"
           "underscore.js": "underscore-amd/underscore.js"
           "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
@@ -118,7 +117,7 @@ module.exports = (grunt)->
           "d3.js": 'd3/d3.js'
           # Folders
           "css": 'require-css'
-          "tinymce": "tinymce"
+          "tinymce": "tinymce-builded/js/tinymce"
           "minicolors": 'jquery-minicolors'
           "fancybox": "fancybox/source"
           "bootstrap": "bootstrap"
