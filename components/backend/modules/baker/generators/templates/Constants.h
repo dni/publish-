@@ -62,13 +62,21 @@
         // Optional - This constant specifies a URL that will be used to retrieve the list of purchased issues.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/purchases"
-        #define PURCHASES_URL @"http://<%= domain %>/purchases"
+         <% if(settings.apptype.value == 'paid'){ %>
+	        #define PURCHASES_URL @"http://<%= domain %>/purchases"
+   		 <% } else { %>
+	        #define PURCHASES_URL @""
+   		 <% } %>
 
         // ----------------------------------------------------------------------------------------------------
         // Optional - This constant specifies the URL to ping back when a user enables push notifications.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/post_apns_token"
-        #define POST_APNS_TOKEN_URL @"http://<%= domain %>/post_apns_token"
+        <% if(settings.apptype.value == 'paid'){ %>
+          #define POST_APNS_TOKEN_URL @"http://<%= domain %>/post_apns_token"
+        <% } else { %>
+          #define POST_APNS_TOKEN_URL @""
+        <% } %>
 
         // ----------------------------------------------------------------------------------------------------
         // Mandatory - The following two constants identify the subscriptions you set up in iTunesConnect.
@@ -77,7 +85,13 @@
 
         // This constant identifies a free subscription.
         // E.g. @"com.example.MyBook.subscription.free"
-        #define FREE_SUBSCRIPTION_PRODUCT_ID @"<%= settings.appid.value %>.subscriptions.free"
+        
+        <% if(settings.apptype.value == 'paid'){ %>
+          #define FREE_SUBSCRIPTION_PRODUCT_ID @"<%= settings.appid.value %>.subscriptions.free"
+        <% } else { %>
+          #define FREE_SUBSCRIPTION_PRODUCT_ID @""
+        <% } %>
+        
 
         // This constant identifies one or more auto-renewable subscriptions.
         // E.g.:
