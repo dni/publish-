@@ -49,20 +49,25 @@ module.exports.setup = (app) ->
   app.get "/shelf", (req, res) ->
     Magazine.find(published: 1).execFind (arr, magazines) ->
       json = []
-      Setting.findOne(name: "General").execFind (arr, setting) ->
-        # find One?!
-        setting = setting[0]
-        _.each magazines, (magazine) ->
-          json.push
-            name: magazine.title
-            title: magazine.title
-            info: magazine.info
-            date: magazine.date
-            cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
-            url: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + ".hpub"
-            product_id: magazine.product_id
+      Setting.findOne(name: "Baker").execFind (arr, bakersetting) ->
+        bakersetting = bakersetting[0]
+        Setting.findOne(name: "General").execFind (arr, setting) ->
+          setting = setting[0]
+          _.each magazines, (magazine) ->
+            item =
+              name: magazine.title
+              title: magazine.title
+              info: magazine.info
+              date: magazine.date
+              cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
+              url: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + ".hpub"
+              product_id: magazine.product_id
 
-        res.send JSON.stringify(json)
+            delete item.product_id if bakersetting.settings.apptype.value isnt "paid"
+
+            json.push item
+
+          res.send JSON.stringify(json)
 
 
   # endpoint for downloading hpub file (zip)
