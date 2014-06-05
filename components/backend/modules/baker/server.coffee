@@ -60,7 +60,7 @@ module.exports.setup = (app) ->
               info: magazine.info
               date: magazine.date
               cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
-              url: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + ".hpub"
+              url: "http://" + setting.settings.domain.value + "/issue/" + magazine.title
               product_id: magazine.product_id
 
             delete item.product_id if bakersetting.settings.apptype.value isnt "paid"
@@ -71,11 +71,13 @@ module.exports.setup = (app) ->
 
 
   # endpoint for downloading hpub file (zip)
-  app.get "/issue", (req, res) ->
+  app.get "/issue/:title", (req, res) ->
+
+    magazine = req.params.title or req.body.name
 
     # only free issues so far
     spawn = require("child_process").spawn
-    zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + req.body.name)
+    zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + magazine)
     res.contentType "hpub"
     zip.stdout.on "data", (data) -> res.write data
 
