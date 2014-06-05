@@ -125,7 +125,7 @@ module.exports.setup = (app) ->
     spawn = require("child_process").spawn
     zip = spawn("zip", ["-r", "-", "hpub/"], cwd: "./public/books/" + magazine.replace('.hpub', ''))
     res.contentType "hpub"
-    zip.stdout.on "data", (data) -> res.write datay
+    zip.stdout.on "data", (data) -> res.write data
     zip.stderr.on 'data', (data) -> console.log 'zip stderr: '+data
 
     zip.on "exit", (code) ->
