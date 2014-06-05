@@ -60,7 +60,7 @@ module.exports.setup = (app) ->
               info: magazine.info
               date: magazine.date
               cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
-              url: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/hpub/"+  magazine.title +".hpub"
+              url: "http://" + setting.settings.domain.value + "/public/books/" +magazine.title+"/hpub/"+magazine.title+".hpub"
               product_id: magazine.product_id
 
             delete item.product_id if bakersetting.settings.apptype.value isnt "paid"
