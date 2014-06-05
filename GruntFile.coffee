@@ -22,6 +22,7 @@ module.exports = (grunt)->
           src: ['components/backend/**/*.coffee', 'components/frontend/**/*.coffee']
 
     jasmine:
+
       backend:
         src: '*.js'
         options:
@@ -252,7 +253,7 @@ module.exports = (grunt)->
     'requirejs:backend'
   ]
 
-  grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine']
+  grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine', 'restart']
 
   grunt.registerTask 'restart', 'Restart the app daemon', [
     'forever:server1:stop'

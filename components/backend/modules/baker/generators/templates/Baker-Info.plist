@@ -25,6 +25,20 @@
 	<string>4.2.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
+	<key>UIBackgroundModes</key>
+	<array>
+		<% if(settings.apptype.value == 'newsstand'){ %><string>newsstand-content</string><% } %>
+		<string>remote-notification</string>
+	</array>
+
+
+    <% if(settings.apptype.value == 'newsstand'){ %>
+		<key>UINewsstandApp</key>
+		<true/>
+    <% } %>
+
+	
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
