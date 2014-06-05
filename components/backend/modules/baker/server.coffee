@@ -54,11 +54,12 @@ module.exports.setup = (app) ->
         Setting.findOne(name: "General").execFind (arr, setting) ->
           setting = setting[0]
           _.each magazines, (magazine) ->
+            date = magazine.date.replace("T"," ").split(".").shift()
             item =
               name: magazine.title
               title: magazine.title
               info: magazine.info
-              date: "1887-11-24 09:00:00"
+              date: date
               cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
               url: "http://" + setting.settings.domain.value + "/issue/" +magazine.title+".hpub"
               product_id: magazine.product_id
@@ -69,6 +70,8 @@ module.exports.setup = (app) ->
 
           res.send JSON.stringify(json)
 
+# need 1887-11-24 09:00:00
+#have 2014-06-04T14:54:50.260Z
 
   # endpoint for downloading hpub file (zip)
   app.get "/issue/:title", (req, res) ->
@@ -77,11 +80,10 @@ module.exports.setup = (app) ->
 
     # only free issues so far
     spawn = require("child_process").spawn
-    zip = spawn("zip", ["-r", "-", '.', '*'], cwd: "./public/books/" + magazine.replace('.hpub', '') + "/hpub")
+    zip = spawn("zip", ["-r", "-", "hpub/"], cwd: "./public/books/" + magazine.replace('.hpub', ''))
     res.contentType "hpub"
-    zip.stdout.on "data", (data) -> res.write data
+    zip.stdout.on "data", (data) -> res.write datay
     zip.stderr.on 'data', (data) -> console.log 'zip stderr: '+data
-
 
     zip.on "exit", (code) ->
       if code isnt 0
