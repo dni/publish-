@@ -76,7 +76,7 @@ module.exports.setup = (app) ->
     # only free issues so far
     spawn = require("child_process").spawn
     zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + req.body.name)
-    res.contentType "zip"
+    res.contentType "hpub"
     zip.stdout.on "data", (data) -> res.write data
 
     zip.on "exit", (code) ->
