@@ -103,8 +103,8 @@ module.exports.generate = (magazine) ->
           author: [magazine.author]
           creator: [magazine.author]
           date: new Date()
-          cover: "cover.jpg"
-          url: "book://localhost:1666/public/books/" + magazine.title + "/hpub"
+          cover: "cover.png"
+          url: "book://server2.dnilabs.com:1666/issue/" + magazine.title
           orientation: "both"
           zoomable: false
           "-baker-background": "#000000"
