@@ -103,7 +103,7 @@ module.exports.setup = (app) ->
               title: magazine.title
               info: magazine.info
               date: date
-              cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
+              cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/hpub/cover.png"
               url: "http://" + setting.settings.domain.value + "/issue/" +magazine.title+".hpub"
               product_id: magazine.product_id
 
