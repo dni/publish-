@@ -9,6 +9,49 @@ PurchasedIssue = require(__dirname + "/model/PurchasedIssueSchema")
 Receipt = require(__dirname + "/model/ReceiptSchema")
 BakerGenerator = require(__dirname + "/generators/BakerGenerator")
 
+Number::pad = (digits, signed) ->
+  s = Math.abs(@).toString()
+  s = "0" + s while s.length < digits
+  (if @ < 0 then "-" else (if signed then "+" else "")) + s
+
+
+Date::format = (fmt) ->
+  parts = fmt.split "%%"
+  for own char, callback of Date.formats
+    r = new RegExp("%#{char}", "g")
+    parts = (part.replace(r, => callback.apply(this)) for part in parts)
+  parts.join "%"
+
+Date::getDayOfYear = -> Math.ceil((@getTime() - new Date(@getFullYear(), 0, 1).getTime()) / 24 / 60 / 60 / 1000)
+
+Date::getWeekOfYear = (start = 0) ->
+  Math.floor((@getDayOfYear() - (start + 7 - new Date(@getFullYear(), 0, 1).getDay()) % 7) / 7) + 1
+
+Date.formats =
+  "c": -> @toLocaleString()
+  "d": -> @getDate().toString()
+  "F": -> "#{@getFullYear()}-#{@getMonth() + 1}-#{@getDate()}"
+  "H": -> @getHours().pad(2)
+  "I": -> "#{(@getHours() % 12) || 12}"
+  "j": -> @getDayOfYear()
+  "L": -> @getMilliseconds().pad(3)
+  "m": -> (@getMonth() + 1).pad(2)
+  "M": -> @getMinutes().pad(2)
+  "N": -> @getMilliseconds().pad(3)
+  "p": -> if @getHours() < 12 then "AM" else "PM"
+  "P": -> if @getHours() < 12 then "am" else "pm"
+  "S": -> @getSeconds().pad(2)
+  "s": -> Math.floor(@getTime() / 1000)
+  "U": -> @getWeekOfYear()
+  "w": -> @getDay()
+  "W": -> @getWeekOfYear(1)
+  "y": -> @getFullYear() % 100
+  "Y": -> @getFullYear()
+  "x": -> @toLocaleDateString()
+  "X": -> @toLocaleTimeString()
+  "z": -> Math.floor((z = -@getTimezoneOffset()) / 60).pad(2, true) + (Math.abs(z) % 60).pad(2)
+  "Z": -> /\(([^\)]*)\)$/.exec(@toString())[1]
+
 module.exports.setup = (app) ->
 
   app.get "/downloadApp", BakerGenerator.download
@@ -54,7 +97,7 @@ module.exports.setup = (app) ->
         Setting.findOne(name: "General").execFind (arr, setting) ->
           setting = setting[0]
           _.each magazines, (magazine) ->
-            date = magazine.date.replace("T"," ").split(".").shift()
+            date = magazine.date.format "%Y-%m-%d %H:%m:%S"
             item =
               name: magazine.title
               title: magazine.title
@@ -71,7 +114,7 @@ module.exports.setup = (app) ->
           res.send JSON.stringify(json)
 
 # need 1887-11-24 09:00:00
-#have 2014-06-04T14:54:50.260Z
+# have 2014-06-04T14:54:50.260Z
 
   # endpoint for downloading hpub file (zip)
   app.get "/issue/:title", (req, res) ->
