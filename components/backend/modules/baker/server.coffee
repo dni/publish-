@@ -60,7 +60,7 @@ module.exports.setup = (app) ->
               info: magazine.info
               date: magazine.date
               cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
-              url: "http://" + setting.settings.domain.value + "/issue/" + magazine.title
+              url: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/hpub/"+  magazine.title +".hpub"
               product_id: magazine.product_id
 
             delete item.product_id if bakersetting.settings.apptype.value isnt "paid"
@@ -77,9 +77,11 @@ module.exports.setup = (app) ->
 
     # only free issues so far
     spawn = require("child_process").spawn
-    zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + magazine)
+    zip = spawn("zip", ["-r", "-", '.', '*'], cwd: "./public/books/" + magazine.replace('.hpub', '') + "/hpub")
     res.contentType "hpub"
     zip.stdout.on "data", (data) -> res.write data
+    zip.stderr.on 'data', (data) -> console.log 'zip stderr: '+data
+
 
     zip.on "exit", (code) ->
       if code isnt 0
