@@ -58,7 +58,7 @@ module.exports.setup = (app) ->
               name: magazine.title
               title: magazine.title
               info: magazine.info
-              date: magazine.date
+              date: "1887-11-24 09:00:00"
               cover: "http://" + setting.settings.domain.value + "/public/books/" + magazine.title + "/cover.png"
               url: "http://" + setting.settings.domain.value + "/public/books/" +magazine.title+"/hpub/"+magazine.title+".hpub"
               product_id: magazine.product_id
