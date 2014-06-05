@@ -56,13 +56,7 @@
         // Optional - This constant specifies the URL to ping back when a user purchases an issue or a subscription.
         // For more information, see: https://github.com/Simbul/baker/wiki/Baker-Server-API
         // E.g. @"http://example.com/purchased"
-        <% if(settings.apptype.value == 'paid'){ %>
-        	#define PURCHASE_CONFIRMATION_URL @"http://<%= domain %>/purchased"
-        <% } else { %>
-           #define PURCHASES_CONFIRMATION_URL @""
-        <% } %>
-        
-        
+        #define PURCHASE_CONFIRMATION_URL @"http://<%= domain %>/purchased"
 
         // ----------------------------------------------------------------------------------------------------
         // Optional - This constant specifies a URL that will be used to retrieve the list of purchased issues.
