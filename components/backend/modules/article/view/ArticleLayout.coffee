@@ -22,7 +22,6 @@ define [
 
     afterRender:->
       @detailRegion.show new DetailView model: @model
-
       that = @
       fileAction = ->
         that.fileRegion.show new PreviewView

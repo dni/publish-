@@ -31,7 +31,6 @@ define [
       position: $(this).attr('data-position') || 'top left'
       change: (hex, opacity)-> true
       theme: 'bootstrap'
-
     # tinymce
     App.contentRegion.currentView.$el.find(".wysiwyg").tinymce
       theme: "modern"
