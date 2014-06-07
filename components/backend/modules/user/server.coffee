@@ -24,14 +24,10 @@ module.exports.setup = (app)->
       if a.length is 0 || a[0].settings.backend_development.value
         console.log "Starting backend in development mode"
         app.use '/components', express.static process.cwd()+'/components'
-        app.use '/admin', express.static process.cwd()+'/components/backend'
-        app.use '/modules', express.static process.cwd()+'/components/backend/modules' # workaround for requirejs i18n problem with /admin
         res.sendfile process.cwd()+'/components/backend/index.html'
       else
         console.log "Starting backend in production mode"
         app.use '/components', express.static process.cwd()+'/cache/build'
-        app.use '/admin', express.static process.cwd()+'/cache/build/backend'
-        app.use '/modules', express.static process.cwd()+'/cache/build/backend/modules' # workaround for requirejs i18n problem with /admin
         res.sendfile process.cwd()+'/cache/build/backend/index.html'
 
   app.get '/user', auth, (req, res)-> res.send app.user
