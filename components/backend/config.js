@@ -22,6 +22,7 @@ require.config({
 		tpl: 'vendor/tpl',
 		cs: 'vendor/cs',
 		css: 'vendor/css',
+		i18n: 'vendor/i18n',
 		d3: 'vendor/d3',
 		minicolors: 'vendor/minicolors/jquery.minicolors'
 	},

@@ -2,7 +2,7 @@ define [
   'cs!App'
   'cs!utils'
   'marionette'
-  'i18n!modules/article/nls/language'
+  'i18n!modules/article/nls/language.js'
   'cs!modules/article/view/ArticleListView'
   'cs!modules/article/view/ArticleLayout'
   'cs!utilities/views/TopView'
