@@ -9,4 +9,4 @@ define [
   class UserListView extends Marionette.CollectionView
     itemView: UserListItemView
     initialize: ->
-      @collection.on "change", @render
+      @collection?.on "change", @render

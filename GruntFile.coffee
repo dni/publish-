@@ -28,7 +28,7 @@ module.exports = (grunt)->
         options:
           specs: 'components/backend/modules/**/spec/*Spec.js'
           helpers: 'components/backend/modules/**/spec/*Helper.js'
-          # host : 'http://localhost:1666/'
+          # host : 'http://localhost:1666/admin/'
           template: require 'grunt-template-jasmine-requirejs'
           templateOptions:
             requireConfigFile: 'components/backend/config.js'

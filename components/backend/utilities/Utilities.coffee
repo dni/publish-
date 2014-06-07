@@ -33,10 +33,12 @@ define [
         else settingsToAdd.push [config.config.name, config.settings, i18n]
 
       # add module to navigation
-      if config.navigation then Vent.trigger 'publish:addNavItem', config.navigation, i18n
+      if config.navigation
+        Vent.trigger 'publish:addNavItem', config.navigation, i18n
 
       # fire ready event for every module except settings
-      if config.config.namespace != "settings" then Vent.trigger config.config.namespace+":ready"
+      if config.config.namespace != "settings"
+        Vent.trigger config.config.namespace+":ready"
 
 
     isMobile: ()->
