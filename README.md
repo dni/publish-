@@ -62,7 +62,7 @@ grunt build
 * reset the whole project, use npm install afterwards
 ```js
 grunt reset
-
+```
 * watch your coffeescript files while development
 ```js
 grunt watch
