@@ -6,7 +6,7 @@ define [
   'minicolors'
   'bootstrap'
 ], (App, i18n, $, tinymce, minicolors, bootstrap) ->
-  tinyMCE.baseURL = '/admin/vendor/tinymce'
+  tinyMCE.baseURL = '/components/backend/vendor/tinymce'
   App.addRegions
     navigationRegion:"#navigation"
     contentRegion:"#content"
@@ -40,7 +40,6 @@ define [
       convert_urls: true,
       remove_script_host:false,
       relative_urls : true,
-      baseURL : 'admin/vendor/tinymce'
       plugins: [
           "advlist autolink lists link charmap print preview hr anchor pagebreak",
           "searchreplace wordcount code fullscreen",
