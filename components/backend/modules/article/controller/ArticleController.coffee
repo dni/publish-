@@ -1,5 +1,6 @@
 define [
   'cs!App'
+  'cs!Settings'
   'cs!utils'
   'marionette'
   'i18n!modules/article/nls/language.js'
@@ -9,11 +10,11 @@ define [
   'cs!modules/article/model/Article'
   'cs!modules/files/model/Files'
   'cs!utilities/views/EmptyView'
-], ( App, Utils, Marionette, i18n, ArticleListView, ArticleLayout, TopView, Article, Files, EmptyView ) ->
+], ( App, Settings, Utils, Marionette, i18n, ArticleListView, ArticleLayout, TopView, Article, Files, EmptyView ) ->
 
   class ArticleController extends Marionette.Controller
     settings: (attr)->
-      (App.Settings.findWhere name: "Articles").getValue(attr)
+      (Settings.findWhere name: "Articles").getValue(attr)
 
     details: (id) ->
       article = App.Articles.findWhere _id: id
@@ -32,3 +33,4 @@ define [
     list: ->
       Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView navigation: i18n.navigation, newModel: 'newArticle'
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ArticleListView collection: App.Articles
+

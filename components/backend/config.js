@@ -2,6 +2,7 @@ require.config({
   baseUrl: 'components/backend/',
 	paths: {
 		App: "utilities/App",
+		Settings: "modules/settings/model/Settings",
 		Router: "utilities/Router",
 		utils: "utilities/Utilities",
 		io: "vendor/io",
@@ -17,11 +18,8 @@ require.config({
 		bootstrap: "vendor/bootstrap/dist/js/bootstrap",
 		marionette: "vendor/marionette",
         localstorage: "vendor/backbone-localstorage",
-		less: 'vendor/require-less/less',
 		text: 'vendor/text',
 		tpl: 'vendor/tpl',
-		cs: 'vendor/cs',
-		css: 'vendor/css',
 		i18n: 'vendor/i18n',
 		d3: 'vendor/d3',
 		minicolors: 'vendor/minicolors/jquery.minicolors'
@@ -49,10 +47,6 @@ require.config({
 	    name: 'coffee-script',
 	  	location: 'vendor',
 	    main: 'coffee-script'
-	  },{
-	    name: 'i18n',
-	  	location: 'vendor',
-	    main: 'i18n'
 	  }
     ],
 	shim: {

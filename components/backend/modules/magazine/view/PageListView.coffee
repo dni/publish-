@@ -58,7 +58,6 @@ define [
         success:->
 
     initialize:(args)->
-      @collection.sort()
       @magazine = args['magazine']
       @listenTo @collection, 'reset', @render
       @listenTo @collection, 'sort', @render
