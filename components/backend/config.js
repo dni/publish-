@@ -9,7 +9,7 @@ require.config({
 		jquery: "vendor/jquery",
 		"jquery.ui": "vendor/jquery.ui",
 		tinymce: "vendor/tinymce/tinymce.min",
-		"jquery.tinymce": "vendor/jquery.tinymce",
+		"jquery.tinymce": "vendor/tinymce/jquery.tinymce.min",
 		"jquery.form": "vendor/jquery.form",
 		underscore: "vendor/underscore",
 		wreqr: "vendor/wreqr",
