@@ -99,7 +99,7 @@ module.exports.setup = (app) ->
           _.each magazines, (magazine) ->
             date = magazine.date.format "%Y-%m-%d %H:%m:%S"
             item =
-              name: magazine.title
+              name: magazine.title.toLowerCase().split(" ").join("-")
               title: magazine.title
               info: magazine.info
               date: date
