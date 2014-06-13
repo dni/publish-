@@ -1,11 +1,12 @@
 define [
   'cs!utils'
+  'cs!Router'
   'marionette'
   'tpl!../templates/layout.html'
   'cs!./PageListView'
   'cs!./MagazineDetailView'
   'cs!modules/files/view/PreviewView'
-], (Utils, Marionette, Template, PageListView, DetailView, PreviewView) ->
+], (Utils, Router, Marionette, Template, PageListView, DetailView, PreviewView) ->
 
   class MagazineLayout extends Marionette.Layout
 
@@ -31,6 +32,7 @@ define [
 
     cancel: ->
       Utils.Vent.trigger 'app:closeRegion', 'contentRegion'
+      Router.navigate 'magazines', trigger:true
 
     initialize: (args) ->
       # custom arguments dont get passed automatically

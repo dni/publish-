@@ -8,7 +8,7 @@
 			<% } %>
 		</select>
 		<select class="layout form-control">
-			<% for(var i = 0, settings = getSettings(); i < settings.length; i++) { %>
+			<% for(var i = 0, settings = getLayouts(); i < settings.length; i++) { %>
 				<option <% if (layout == settings[i]) { %> selected <% } %> value="<%= settings[i] %>"><%= settings[i] %></option>
 			<% } %>
 		</select>

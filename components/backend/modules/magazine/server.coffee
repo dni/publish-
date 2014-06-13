@@ -7,14 +7,14 @@ HpubGenerator = require(__dirname + "/generators/HpubGenerator")
 
 
 module.exports.setup = (app) ->
-  app.get "/downloadPrint/:title", auth, PrintGenerator.download
+  app.get "/downloadPrint/:name", auth, PrintGenerator.download
   app.get "/downloadHpub/:id", auth, (req,res)->
     Magazine.findOne(_id: req.params.id).exec (err, magazine)->
       if err
         res.statusCode = 500
         res.end()
       spawn = require("child_process").spawn
-      zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + magazine.title)
+      zip = spawn("zip", ["-r", "-", "hpub"], cwd: "./public/books/" + magazine.name)
       res.contentType "zip"
       zip.stdout.on "data", (data) -> res.write data
       zip.on "exit", (code) ->
@@ -43,8 +43,9 @@ module.exports.setup = (app) ->
     a.files = req.body.files
     a.date = new Date()
     a.title = req.body.title
+    a.name = req.body.name
     a.save ->
-      createMagazineFiles req.body.title, ->
+      createMagazineFiles req.body.name, ->
         HpubGenerator.generate a
       #shortcut
       res.send a
@@ -52,13 +53,13 @@ module.exports.setup = (app) ->
   app.put "/magazines/:id", auth, (req, res) ->
     Magazine.findById req.params.id, (e, a) ->
       child_process = require("child_process").spawn
-      spawn = child_process("rm", ["-r", a.title], cwd: "./public/books/")
+      spawn = child_process("rm", ["-r", a.name], cwd: "./public/books/")
       spawn.on "exit", (code) ->
         if code isnt 0
           res.send a
-          console.log "remove Magazine " + a.title + " exited with code " + code
+          console.log "remove Magazine " + a.name + " exited with code " + code
         else
-          console.log "removed Magazine Files: " + req.body.title
+          console.log "removed Magazine Files: " + req.body.name
           a.editorial = req.body.editorial
           a.impressum = req.body.impressum
           a.cover = req.body.cover
@@ -72,9 +73,10 @@ module.exports.setup = (app) ->
           a.files = req.body.files
           a.date = new Date()
           a.title = req.body.title
+          a.name = req.body.name
           a.save ->
-            console.log "created Magazine Files: " + a.title
-            createMagazineFiles req.body.title, ->
+            console.log "created Magazine Files: " + a.name
+            createMagazineFiles req.body.name, ->
               HpubGenerator.generate a
             res.send a
 
@@ -103,7 +105,7 @@ module.exports.setup = (app) ->
     Magazine.findById req.params.id, (e, a)->
       a.remove ->
         child_process = require("child_process").spawn
-        spawn = child_process("rm", ["-rf", a.title], cwd: "./public/books/")
+        spawn = child_process("rm", ["-rf", a.name], cwd: "./public/books/")
         spawn.on "exit", (code) ->
           if code is 0 then res.send 'deleted'
           else

@@ -4,6 +4,7 @@ Schema = mongoose.Schema
 module.exports = mongoose.model 'Magazine', new Schema
   user: String
   title: String
+  name: String
   author: String
   desc: String
   editorial: String

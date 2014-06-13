@@ -1,18 +1,17 @@
 define [
   'cs!App'
-  'cs!Settings'
   'cs!Router'
   'cs!utils'
   'marionette'
   'tpl!../templates/detail.html'
   'i18n!../nls/language.js'
-], (App, Settings, Router, Utils, Marionette, Template, i18n) ->
+], (App, Router, Utils, Marionette, Template, i18n) ->
   class ArticleDetailView extends Marionette.ItemView
     template: Template
     templateHelpers:
       t: i18n
       renderCategories: (category, func)->
-        cats = (Settings.findWhere name:'Articles').getValue "categories"
+        cats = (App.Settings.findWhere name:'Articles').getValue "categories"
 
         for cat in cats.split ','
           cat = cat.replace " ", ""
