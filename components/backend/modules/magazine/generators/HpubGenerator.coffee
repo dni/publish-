@@ -97,24 +97,27 @@ module.exports.generate = (magazine) ->
         contents.push "Tail.html"
         contents.push "Book Back.html"
 
-        fs.writeFileSync "./public/books/" + magazine.name + "/hpub/book.json", JSON.stringify
-          hpub: 1
-          title: magazine.title
-          name: magazine.name
-          author: [magazine.author]
-          creator: [magazine.author]
-          date: new Date()
-          cover: "cover.png"
-          url: "book://server2.dnilabs.com:1666/issue/" + magazine.name
-          orientation: "both"
-          zoomable: false
-          "-baker-background": "#000000"
-          "-baker-vertical-bounce": true
-          "-baker-media-autoplay": true
-          "-baker-background-image-portrait": "gfx/background-portrait.png"
-          "-baker-background-image-landscape": "gfx/background-landscape.png"
-          "-baker-page-numbers-color": "#000000"
-          contents: contents
+        Settings.findOne(name: "General").execFind (err, res) ->
+          if err then throw err
+          domain = res[0].settings.domain.value
+
+          fs.writeFileSync "./public/books/" + magazine.name + "/hpub/book.json", JSON.stringify
+            hpub: 1
+            title: magazine.title
+            author: [magazine.author]
+            creator: [magazine.author]
+            date: new Date()
+            cover: "cover.png"
+            url: "book://"+domain+"/issue/"+magazine.name
+            orientation: "both"
+            zoomable: false
+            "-baker-background": "#000000"
+            "-baker-vertical-bounce": true
+            "-baker-media-autoplay": true
+            "-baker-background-image-portrait": "gfx/background-portrait.png"
+            "-baker-background-image-landscape": "gfx/background-landscape.png"
+            "-baker-page-numbers-color": "#000000"
+            contents: contents
 
       # CHAPTERS
       Page.find(magazine: magazine._id).exec (err, pages) ->
