@@ -6,6 +6,7 @@ html, body {
     height:100%;
     box-sizing:border-box;
 }
+
 body {
 
   margin:0; /** prevent scrolling */
@@ -13,6 +14,7 @@ body {
 
   overflow:hidden;
   color: #333;
+  background: purple;
   font-size: 12pt;
   font-family: "Titillium Web",Arial,Verdana;
   line-height: 1.45em;
