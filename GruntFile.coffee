@@ -1,6 +1,8 @@
 mongoose = require "mongoose"
 db = mongoose.connect 'mongodb://localhost/publish'
-
+Magazine = require __dirname+"/components/backend/modules/magazine/model/MagazineSchema"
+HpubGenerator = require __dirname + "/components/backend/modules/magazine/generators/HpubGenerator"
+fs = require "fs-extra"
 module.exports = (grunt)->
   grunt.initConfig
 
@@ -12,6 +14,12 @@ module.exports = (grunt)->
         tasks: ['test']
         options:
           spawn: false
+      magazine:
+        files: ['components/magazine/**/*']
+        tasks: ['generateMagazine']
+        options:
+          spawn: false
+
 
     coffeelint:
       all:
@@ -74,6 +82,11 @@ module.exports = (grunt)->
             'public/books'
             'public/files'
             'baker-master/books'
+          ]
+      useless:
+        options:
+          create: [
+            'components/magazine/nudel'
           ]
 
     bower:
@@ -205,6 +218,25 @@ module.exports = (grunt)->
       db.connection.db.dropDatabase (err)->
         if err then console.log err else console.log 'Successfully dropped database'
         mongoose.connection.close done
+
+  # clean db
+  grunt.registerTask 'generateMagazine', 'generate hpub and print', ->
+    #remake all magazines and pages
+    child_process = require("child_process").spawn
+    spawn = child_process("rm", ["-r", 'books'], cwd: "./public/")
+    spawn.on "exit", (code) ->
+      if code isnt 0
+        console.log "remove Magazines  exited with code " + code
+      else
+        fs.mkdirSync "./public/books"
+        Magazine.find().execFind (err, data) ->
+          for d in data
+            fs.mkdirSync "./public/books/" + d.name
+            fs.copySync "./components/magazine/gfx", "./public/books/" +  d.name + "/hpub/gfx"
+            fs.copySync "./components/magazine/css", "./public/books/" +  d.name + "/hpub/css"
+            fs.copySync "./components/magazine/js", "./public/books/" +  d.name + "/hpub/js"
+            fs.copySync "./components/magazine/images", "./public/books/" +  d.name + "/hpub/images"
+            HpubGenerator.generate d
 
   # TODO
   # grunt.registerTask 'backupDatabase', 'backup the database', ->
