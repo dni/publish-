@@ -1,6 +1,6 @@
 <h1><%= label %></h1>
 <div class="form-fields">
-	<% for (key in settings) { %>
+	<% console.log(settings);for (key in settings) { %>
 		<% if (settings[key].type=="checkbox") { %>
 			<div class="form-group">
 			    <label><%= settings[key].label %></label>

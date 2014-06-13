@@ -16,6 +16,5 @@ define [
       "papersize": "A4"
       "orientation": "horizontal"
 
-
     togglePublish: ->
       @.set "published", not @.get "published"

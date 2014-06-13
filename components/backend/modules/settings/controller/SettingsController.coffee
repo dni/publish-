@@ -15,10 +15,10 @@ define [
   class SettingsController extends Marionette.Controller
 
     details: (moduleName) ->
-      model = Settings.where name: moduleName
+      model = App.Settings.findWhere name: moduleName
       Utils.Vent.trigger 'app:updateRegion', "contentRegion", new Layout
-        model: model[0]
-        files: new Files App.Files.where relation: "setting:"+model[0].get "_id"
+        model: model
+        files: new Files App.Files.where relation: "setting:"+model.get "_id"
 
     list: ->
       Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView
@@ -26,7 +26,7 @@ define [
         newModel: 'settings/clearCache'
         icon: 'refresh'
 
-      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: Settings
+      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
 
 
     clearCache: ->

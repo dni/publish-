@@ -6,6 +6,7 @@ define [
   'cs!modules/publish/model/NavigationItem'
   'cs!modules/publish/model/NavigationItems'
   'cs!modules/publish/view/NavigationView'
+  'cs!modules/publish/Regions'
 ],
 ( App, Utils, i18n, Config, NavigationItem, NavigationItems, NavigationView)->
 

@@ -1,4 +1,4 @@
-  Setting = require("./../settings/model/SettingSchema")
+Setting = require("./../settings/model/SettingSchema")
 Magazine = require("./../magazine/model/MagazineSchema")
 auth = require './../../utilities/auth'
 http = require("http")
@@ -98,14 +98,13 @@ module.exports.setup = (app) ->
           setting = setting[0]
           _.each magazines, (magazine) ->
             date = magazine.date.format "%Y-%m-%d %H:%m:%S"
-            safeName = magazine.title.toLowerCase().split(" ").join("-")
             item =
-              name: safeName
+              name: magazine.name
               title: magazine.title
               info: magazine.info
               date: date
-              cover: "http://" + setting.settings.domain.value + "/public/books/" + safeName + "/hpub/cover.png"
-              url: "http://" + setting.settings.domain.value + "/issue/" +safeName+".hpub"
+              cover: "http://" + setting.settings.domain.value + "/public/books/" +magazine.name+ "/hpub/cover.png"
+              url: "http://" + setting.settings.domain.value + "/issue/" +magazine.name+".hpub"
               product_id: magazine.product_id
 
             delete item.product_id if bakersetting.settings.apptype.value isnt "paid"

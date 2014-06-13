@@ -1,12 +1,13 @@
 define [
   'cs!App'
   'cs!Router'
+  "cs!modules/settings/model/Settings"
   'cs!utils'
   'marionette'
   'tpl!../templates/detail.html'
   'i18n!modules/magazine/nls/language.js'
 ],
-( App, Router, Utils, Marionette, Template, i18n) ->
+( App, Router, Settings, Utils, Marionette, Template, i18n) ->
 
   class MagazineDetailView extends Marionette.ItemView
 
@@ -14,9 +15,9 @@ define [
     templateHelpers:
       t: i18n
       isPrint:->
-        setting = App.Settings.where name:'Magazines'
-        setting[0].getValue 'print'
-
+        Utils.Vent.on "settings:ready", ->
+          setting = Settings.findWhere name:'Magazines'
+          setting.getValue 'print'
     ui:
       title: '[name=title]'
       author: '[name=author]'
@@ -42,7 +43,6 @@ define [
       @model.togglePublish()
       @save()
 
-
     save: ->
       if @model.isNew() then check = 0 else check = 1
       if (App.Magazines.where title:@ui.title.val()).length > check
@@ -52,6 +52,7 @@ define [
       # set model
       @model.set
         title: @ui.title.val()
+        name: Utils.safeString(@ui.title.val())
         author: @ui.author.val()
         product_id: @ui.product_id.val()
         info: @ui.info.val()
