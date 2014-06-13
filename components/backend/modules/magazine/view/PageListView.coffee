@@ -1,19 +1,21 @@
 define [
   'cs!App'
+  'cs!utils'
+  "cs!modules/settings/model/Settings"
   "i18n!modules/magazine/nls/language.js"
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
   'cs!../model/Page',
   'jquery.ui'
-], (App, i18n, Marionette, Template, ItemTemplate, Page, jqueryui) ->
+], (App, Utils, Settings, i18n, Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
   class PageListItemView extends Marionette.ItemView
     template: ItemTemplate
     templateHelpers:
       getArticles: -> App.Articles.toJSON()
-      getSettings: -> App.Settings.where({name: "Magazines"})[0].getValue("layouts").split(",")
-      getMagazineName: (magazine)-> App.Magazines.findWhere(_id:magazine).get "title"
+      getLayouts: -> App.Settings.findWhere({name: "Magazines"}).getValue("layouts").split(",")
+      getMagazineName: (magazine)-> App.Magazines.findWhere(_id:magazine).get "name"
 
     ui:
       number: '.number'
@@ -24,10 +26,10 @@ define [
       "click .remove": "deletePage"
       "change select": "updatePage"
 
-    #save page onrender for initial article + layout
     initialize:->
       @model.on 'change', @render
-      # @on 'render', @updatePage
+      #save page onrender for initial article
+      if !@model.get("article") then @once 'render', @updatePage
 
     updatePage: ->
       @model.set
@@ -54,8 +56,9 @@ define [
       page = new Page
         number: @collection.length+1
         magazine: @magazine
-      @collection.create page,
-        success:->
+
+      @collection.create page
+
 
     initialize:(args)->
       @magazine = args['magazine']

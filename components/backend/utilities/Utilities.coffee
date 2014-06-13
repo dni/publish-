@@ -1,18 +1,18 @@
 define [
   'cs!utilities/Vent'
   'cs!utilities/Log'
+  'cs!utilities/Debug'
   'cs!utilities/Viewhelpers'
   'cs!utilities/Date'
-], ( Vent, Log, Viewhelpers) ->
+], ( Vent, Log, Debug, Viewhelpers) ->
 
 
-  addSetting = (configname, settings, i18n)-> Vent.trigger 'settings:addSetting', configname, settings, i18n
+  addSetting = (configname, settings, i18n)->
+    Vent.trigger 'settings:addSetting', configname, settings, i18n
 
-  isReady = false
   settingsToAdd = []
 
   Vent.on 'settings:ready', ->
-    isReady = true
     while setting = settingsToAdd.pop()
       addSetting.apply @, setting
 
@@ -21,7 +21,11 @@ define [
     Viewhelpers: Viewhelpers
     Vent: Vent
     Log: Log
+    Debug: Debug
     settingsready: false
+
+    safeString: (str)->
+      str.toLowerCase().split(" ").join("-")
 
     # addModule Shortcut
     addModule: (Config, i18n)->
@@ -29,8 +33,7 @@ define [
 
       #add module setting
       if config.settings
-        if isReady then addSetting config.config.name, config.settings, i18n
-        else settingsToAdd.push [config.config.name, config.settings, i18n]
+        settingsToAdd.push [config.config.name, config.settings, i18n]
 
       # add module to navigation
       if config.navigation

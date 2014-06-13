@@ -1,6 +1,5 @@
 define [
   'cs!App'
-  'cs!Settings'
   'cs!utils'
   'marionette'
   'i18n!modules/article/nls/language.js'
@@ -10,11 +9,11 @@ define [
   'cs!modules/article/model/Article'
   'cs!modules/files/model/Files'
   'cs!utilities/views/EmptyView'
-], ( App, Settings, Utils, Marionette, i18n, ArticleListView, ArticleLayout, TopView, Article, Files, EmptyView ) ->
+], ( App, Utils, Marionette, i18n, ArticleListView, ArticleLayout, TopView, Article, Files, EmptyView ) ->
 
   class ArticleController extends Marionette.Controller
     settings: (attr)->
-      (Settings.findWhere name: "Articles").getValue(attr)
+      (App.Settings.findWhere name: "Articles").getValue(attr)
 
     details: (id) ->
       article = App.Articles.findWhere _id: id
