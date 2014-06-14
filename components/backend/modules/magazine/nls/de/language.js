@@ -9,6 +9,7 @@ define({
     "addPage": "Seite hinzufügen",
 	"navigation": "Magazine",
 	"layouts": "Vorlagen",
+	"theme": "Design",
 	"print": "Druck Pdf's aktivieren",
 	"details": "Magazin Details",
 	"title": "Titel",

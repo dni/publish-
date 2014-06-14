@@ -14,9 +14,14 @@ define [
     template: Template
     templateHelpers:
       t: i18n
+      getThemes:->
+        setting = App.Settings.findWhere name:'Magazines'
+        themes = (setting.getValue 'theme').split(",")
+        _.map themes, (theme)-> return theme.trim()
       isPrint:->
         setting = App.Settings.findWhere name:'Magazines'
         setting.getValue 'print'
+
     ui:
       title: '[name=title]'
       author: '[name=author]'
@@ -24,6 +29,7 @@ define [
       info: '[name=info]'
       impressum: '[name=impressum]'
       editorial: '[name=editorial]'
+      theme: '[name=theme]'
       papersize: '[name=papersize]'
       orientation: '[name=orientation]'
       publish: '.publish'
@@ -57,6 +63,7 @@ define [
         info: @ui.info.val()
         impressum: @ui.impressum.val()
         editorial: @ui.editorial.val()
+        theme: @ui.theme.val()
         papersize: @ui.papersize.val()
         orientation: @ui.orientation.val()
 
