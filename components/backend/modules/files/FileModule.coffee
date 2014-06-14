@@ -6,6 +6,7 @@ define [
   "text!./configuration.json"
   'cs!./model/Files'
   'cs!./controller/FileController'
+  'less!./style/browse.less'
 ],( App, Router, Utils, i18n, Config, Files, Controller ) ->
 
   App.Files = new Files
