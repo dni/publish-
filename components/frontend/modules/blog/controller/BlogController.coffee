@@ -1,10 +1,11 @@
 define [
-    'cs!utilities/App'
-    'marionette'
-    'cs!./../model/Articles'
-    'cs!./../view/ListView'
-    'cs!./../view/DetailView'
+  'cs!utilities/App'
+  'marionette'
+  'cs!./../model/Articles'
+  'cs!./../view/ListView'
+  'cs!./../view/DetailView'
 ], (App, Marionette, Articles, ListView, DetailView) ->
+
   class BlogController extends Marionette.Controller
 
     list: ->
