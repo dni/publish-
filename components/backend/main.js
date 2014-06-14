@@ -18,5 +18,6 @@ define([
 	// coming soon in 2.0
 	// "cs!modules/reports/ReportModule",
 ], function(Backbone){
-    Backbone.history.start();
+    delayed = function(){ Backbone.history.start(); }
+    setTimeout(delayed, 1000);
 });
