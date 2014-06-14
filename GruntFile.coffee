@@ -232,10 +232,10 @@ module.exports = (grunt)->
         Magazine.find().execFind (err, data) ->
           for d in data
             fs.mkdirSync "./public/books/" + d.name
-            fs.copySync "./components/magazine/gfx", "./public/books/" +  d.name + "/hpub/gfx"
-            fs.copySync "./components/magazine/css", "./public/books/" +  d.name + "/hpub/css"
-            fs.copySync "./components/magazine/js", "./public/books/" +  d.name + "/hpub/js"
-            fs.copySync "./components/magazine/images", "./public/books/" +  d.name + "/hpub/images"
+            fs.copySync "./components/" + d.theme + "/magazine/gfx", "./public/books/" +  d.name + "/hpub/gfx"
+            fs.copySync "./components/" + d.theme + "/magazine/css", "./public/books/" +  d.name + "/hpub/css"
+            fs.copySync "./components/" + d.theme + "/magazine/js", "./public/books/" +  d.name + "/hpub/js"
+            fs.copySync "./components/" + d.theme + "/magazine/images", "./public/books/" +  d.name + "/hpub/images"
             HpubGenerator.generate d
 
   # TODO
