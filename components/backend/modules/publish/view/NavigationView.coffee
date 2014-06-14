@@ -21,4 +21,11 @@ define [
     clicked: (e)->
       @children.each (view)->
         view.$el.removeClass "active"
-      $(e.target).parent().addClass "active"
+
+      target = $(e.target) # clicked li
+      if target[0].nodeName.toLowerCase() is 'a'
+        target = target.parent() # clicked link
+      else if target[0].nodeName.toLowerCase() is 'span' # clicked icon
+        target = target.parent().parent()
+
+      target.addClass "active"
