@@ -11,10 +11,15 @@
 
     "settings": {
 		"layouts" : {
-	      "description": "Comma seperated list of layout keys",
-	      "value": "default, fullsize",
-	      "type": "text"
-		},
+          "description": "Comma seperated list of layout keys",
+          "value": "default, fullsize",
+          "type": "text"
+        },
+        "theme" : {
+          "description": "Comma seperated list of theme keys",
+          "value": "default",
+          "type": "text"
+        },
 		"print" : {
 	      "value": false,
 	      "type": "checkbox"

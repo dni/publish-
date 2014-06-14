@@ -10,6 +10,7 @@ define({
     	"pageHeadline": "Pages",
     	"addPage": "Add Page",
     	"layouts": "Layouts",
+    	"theme": "Theme",
     	"print": "Enable Print PDF",
     	"publish": "Publish",
     	"unpublish": "Unpublish",

@@ -39,13 +39,14 @@ module.exports.setup = (app) ->
     a.info = req.body.info
     a.published = req.body.published
     a.papersize = req.body.papersize
+    a.theme = req.body.theme
     a.orientation = req.body.orientation
     a.files = req.body.files
     a.date = new Date()
     a.title = req.body.title
     a.name = req.body.name
     a.save ->
-      createMagazineFiles req.body.name, ->
+      createMagazineFiles req.body.name, req.body.theme, ->
         HpubGenerator.generate a
       #shortcut
       res.send a
@@ -69,6 +70,7 @@ module.exports.setup = (app) ->
           a.info = req.body.info
           a.published = req.body.published
           a.papersize = req.body.papersize
+          a.theme = req.body.theme
           a.orientation = req.body.orientation
           a.files = req.body.files
           a.date = new Date()
@@ -76,7 +78,7 @@ module.exports.setup = (app) ->
           a.name = req.body.name
           a.save ->
             console.log "created Magazine Files: " + a.name
-            createMagazineFiles req.body.name, ->
+            createMagazineFiles req.body.name, req.body.theme, ->
               HpubGenerator.generate a
             res.send a
 
@@ -116,11 +118,11 @@ module.exports.setup = (app) ->
     Page.findById req.params.id, (e, model)->
       model.remove -> res.send 'page deleted'
 
-createMagazineFiles = (folder, cb) ->
+createMagazineFiles = (folder, theme, cb) ->
   fs.mkdirSync "./public/books/" + folder
-  fs.copySync "./components/magazine/gfx", "./public/books/" + folder + "/hpub/gfx"
-  fs.copySync "./components/magazine/css", "./public/books/" + folder + "/hpub/css"
-  fs.copySync "./components/magazine/js", "./public/books/" + folder + "/hpub/js"
-  fs.copySync "./components/magazine/images", "./public/books/" + folder + "/hpub/images"
+  fs.copySync "./components/magazine/" + theme + "/gfx", "./public/books/" + folder + "/hpub/gfx"
+  fs.copySync "./components/magazine/" + theme + "/css", "./public/books/" + folder + "/hpub/css"
+  fs.copySync "./components/magazine/" + theme + "/js", "./public/books/" + folder + "/hpub/js"
+  fs.copySync "./components/magazine/" + theme + "/images", "./public/books/" + folder + "/hpub/images"
   cb()
 
