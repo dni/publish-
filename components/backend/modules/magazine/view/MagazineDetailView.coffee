@@ -15,9 +15,8 @@ define [
     templateHelpers:
       t: i18n
       isPrint:->
-        Utils.Vent.on "settings:ready", ->
-          setting = Settings.findWhere name:'Magazines'
-          setting.getValue 'print'
+        setting = App.Settings.findWhere name:'Magazines'
+        setting.getValue 'print'
     ui:
       title: '[name=title]'
       author: '[name=author]'
@@ -35,7 +34,7 @@ define [
       "click #download": "downloadPrint"
 
     downloadPrint: ->
-      window.open(window.location.origin + '/downloadPrint/' + @model.get("title"),'_blank')
+      window.open(window.location.origin + '/downloadPrint/' + @model.get("name"),'_blank')
 
     publish:->
       # before model is toggled
