@@ -16,7 +16,7 @@ define [
     itemView: NavigationItemView
 
     events:
-      "click li": "clicked"
+      "click a": "clicked"
 
     clicked: (e)->
       @children.each (view)->
