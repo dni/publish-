@@ -10,6 +10,7 @@ require.config({
 		"jquery.ui": "vendor/jquery.ui",
 		tinymce: "vendor/tinymce/tinymce.min",
 		"jquery.tinymce": "vendor/tinymce/jquery.tinymce.min",
+		"jquery.jcrop": "vendor/jcrop/js/jquery.Jcrop",
 		"jquery.form": "vendor/jquery.form",
 		underscore: "vendor/underscore",
 		wreqr: "vendor/wreqr",
@@ -51,6 +52,7 @@ require.config({
     ],
 	shim: {
 		'jquery.ui':['jquery'],
+		'jquery.jcrop':['jquery'],
 		'jquery.tinymce':['jquery', 'tinymce'],
 		'jquery.form':['jquery'],
 		'bootstrap':['jquery'],

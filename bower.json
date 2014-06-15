@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "jquery": "*",
+    "jcrop": "*",
     "backbone-amd": "~1.1.0",
     "underscore-amd": "latest",
     "backbone-localstorage": "~0.3.1",

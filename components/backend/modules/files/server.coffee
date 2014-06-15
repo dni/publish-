@@ -81,6 +81,11 @@ module.exports.setup = (app)->
 
   app.put '/files/:id', auth, (req, res)->
     File.findById req.params.id, (e, a)->
+      if req.body.crop
+        # TODO crop picture with ratio
+        console.log req.body.crop
+        #done, do not do the usual edit stuff
+        res.end()
       name = req.body.name
       # rename file if name changes
       if a.name != name
