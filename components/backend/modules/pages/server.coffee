@@ -14,6 +14,7 @@ module.exports.setup = (app) ->
 
   app.post "/pages", auth, (req, res) ->
     a = new Page()
+    a.user = app.user.id
     a.magazine = req.body.magazine
     a.article = req.body.article
     a.number = req.body.number
@@ -24,6 +25,7 @@ module.exports.setup = (app) ->
 
   app.put "/pages/:id", auth, (req, res) ->
     Page.findById req.params.id, (e, a) ->
+      a.user = app.user.id
       a.magazine = req.body.magazine
       a.article = req.body.article
       a.number = req.body.number

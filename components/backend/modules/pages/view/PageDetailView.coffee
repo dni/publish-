@@ -4,7 +4,7 @@ define [
   'cs!utils'
   'marionette'
   'tpl!../templates/detail.html'
-  'i18n!modules/magazine/nls/language.js'
+  'i18n!modules/pages/nls/language.js'
 ],
 ( App, Router, Utils, Marionette, Template, i18n) ->
 
@@ -19,12 +19,13 @@ define [
 
     ui:
       title: '[name=title]'
-      papersize: '[name=papersize]'
-      orientation: '[name=orientation]'
+      number: '[name=number]'
+      article: '[name=article]'
+      layout: '[name=layout]'
       publish: '.publish'
 
     events:
-      "change [name=title]": 'save'
+      "click .save": 'save'
       "click .publish": 'publish'
 
     publish:->
@@ -42,6 +43,9 @@ define [
       # set model
       @model.set
         title: @ui.title.val()
+        number: @ui.number.val()
+        article: @ui.article.val()
+        layout: @layout.val()
 
       if @model.isNew()
         App.Pages.create @model,

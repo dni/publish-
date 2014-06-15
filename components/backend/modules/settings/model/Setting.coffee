@@ -18,6 +18,8 @@ define [
               option = i18n[optionkey]
         if i18n[key]
           setting.label = i18n[key]
+          if i18n[key+'_description']
+            setting.description = i18n[key+'_description']
       settings = @.set "settings", settings
       settings = @.set "label", i18n.navigation
       cb() if cb?
