@@ -3,7 +3,7 @@ define [
   'cs!Router'
   'marionette'
   'tpl!../templates/layout.html'
-  'cs!./PageListView'
+  'cs!modules/pages/view/PageMagazineListView'
   'cs!./MagazineDetailView'
   'cs!modules/files/view/PreviewView'
 ], (Utils, Router, Marionette, Template, PageListView, DetailView, PreviewView) ->

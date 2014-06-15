@@ -6,7 +6,7 @@ Magazine = require("./../model/MagazineSchema")
 Article = require("./../../article/model/ArticleSchema")
 File = require("./../../files/model/FileSchema")
 Settings = require("./../../settings/model/SettingSchema")
-Page = require("./../model/PageSchema")
+Page = require("./../../pages/model/PageSchema")
 
 module.exports.generate = (magazine) ->
 

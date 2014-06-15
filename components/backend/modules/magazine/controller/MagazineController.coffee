@@ -8,7 +8,7 @@ define [
   'cs!utilities/views/TopView'
   'cs!modules/magazine/model/Magazine'
   'cs!modules/magazine/model/Magazines'
-  'cs!modules/magazine/model/Pages'
+  'cs!modules/pages/model/Pages'
   'cs!modules/files/model/Files'
   'i18n!modules/magazine/nls/language.js'
   'cs!utilities/views/EmptyView'
