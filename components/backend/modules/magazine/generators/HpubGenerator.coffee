@@ -18,7 +18,7 @@ module.exports.generate = (magazine) ->
       _.each files, (file) ->
         fs.copy process.cwd() + "/public/files/" + file.name, process.cwd() + "/public/books/" + magazine.name + "/hpub/images/" + file.name
         magazinefiles[file.key] = file.name
-        if file.key is 'cover' then fs.copy process.cwd() + "/public/files/" + file.name, process.cwd() + "/public/books/" + magazine.name + "/hpub/cover."+file.name.split(".").pop()
+        if file.key is 'cover' then fs.copy process.cwd() + "/public/files/" + file.name, process.cwd() + "/public/books/" + magazine.name + "/hpub/cover.png"
 
       # generage INDEX
       Page.find(magazine: magazine._id).exec (err, pages) ->
