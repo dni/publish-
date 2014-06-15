@@ -22,7 +22,6 @@ define [
         onSelect: (coords)->
           that.coords = coords
 
-
     events:
       "click .save": "save"
       "click .cancel": "cancel"
