@@ -10,6 +10,7 @@ define([
   "cs!modules/settings/SettingsModule",
   "cs!modules/files/FileModule",
   "cs!modules/user/UserModule",
+  "cs!modules/pages/PageModule",
   "cs!modules/article/ArticleModule",
   "cs!modules/magazine/MagazineModule",
   "cs!modules/baker/BakerModule",

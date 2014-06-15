@@ -2,7 +2,7 @@ define [
   'cs!App'
   'cs!utils'
   "cs!modules/settings/model/Settings"
-  "i18n!modules/magazine/nls/language.js"
+  "i18n!modules/pages/nls/language.js"
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
@@ -10,7 +10,7 @@ define [
   'jquery.ui'
 ], (App, Utils, Settings, i18n, Marionette, Template, ItemTemplate, Page, jqueryui) ->
 
-  class PageListItemView extends Marionette.ItemView
+  class PageMagazineListItemView extends Marionette.ItemView
     template: ItemTemplate
     templateHelpers:
       getArticles: -> App.Articles.toJSON()
@@ -37,11 +37,11 @@ define [
       @model.destroy
         success: ->
 
-  class PageListView extends Marionette.CompositeView
+  class PageMagazineListView extends Marionette.CompositeView
 
     template: Template
     templateHelpers:t:i18n
-    itemView: PageListItemView
+    itemView: PageMagazineListItemView
     itemViewContainer: ".page-list"
 
     events:
@@ -54,7 +54,6 @@ define [
         article: App.Articles.first()
 
       @collection.create page
-
 
     initialize:(args)->
       @magazine = args['magazine']
