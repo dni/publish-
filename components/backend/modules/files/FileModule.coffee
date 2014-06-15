@@ -17,6 +17,7 @@ define [
     "files": "list"
     "file/:id": "show"
     "showfile/:id": "showfile"
+    "editfile/:id": "editfile"
     "filebrowser/:collection/:id": "filebrowser"
 
   Utils.addModule Config, i18n

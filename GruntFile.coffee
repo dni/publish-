@@ -19,7 +19,11 @@ module.exports = (grunt)->
         tasks: ['generateMagazine']
         options:
           spawn: false
-
+      server:
+        files: ['server.coffee']
+        tasks: ['restart']
+        options:
+          spawn: false
 
     coffeelint:
       all:
@@ -30,7 +34,6 @@ module.exports = (grunt)->
           src: ['components/backend/**/*.coffee', 'components/frontend/**/*.coffee']
 
     jasmine:
-
       backend:
         src: '*.js'
         options:
@@ -83,11 +86,6 @@ module.exports = (grunt)->
             'public/files'
             'baker-master/books'
           ]
-      useless:
-        options:
-          create: [
-            'components/magazine/nudel'
-          ]
 
     bower:
       install:
@@ -134,6 +132,7 @@ module.exports = (grunt)->
           "tinymce": "tinymce-builded/js/tinymce"
           "minicolors": 'jquery-minicolors'
           "fancybox": "fancybox/source"
+          "jcrop": "jcrop"
           "bootstrap": "bootstrap"
           "require-less": 'require-less'
 
