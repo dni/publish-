@@ -10,10 +10,11 @@ define [
   'cs!../view/TopView'
   'cs!utilities/views/EmptyView'
   'cs!../view/ShowFileView'
+  'cs!../view/EditFileView'
   'cs!../model/File'
   'cs!../model/Files'
 
-], ( App, Utils, i18n, $, Marionette, ListView, BrowseView, DetailView, TopView, EmptyView, ShowFileView, File, Files) ->
+], ( App, Utils, i18n, $, Marionette, ListView, BrowseView, DetailView, TopView, EmptyView, ShowFileView, EditFileView, File, Files) ->
   class FileController extends Marionette.Controller
 
     filebrowser: (namespace, id)->
@@ -58,10 +59,16 @@ define [
       Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
 
     showfile: (id) ->
-      fileView = App.contentRegion.currentView.fileRegion.currentView
-      view = new ShowFileView model: fileView.collection.findWhere _id: id
+      view = new ShowFileView model: App.Files.findWhere _id: id
 
       Utils.Vent.trigger 'app:updateRegion', 'overlayRegion', view
+      Utils.Vent.trigger 'overlay:action', ->
+        $('.modal').modal('hide')
+
+    editfile: (id) ->
+      view = new EditFileView model: App.Files.findWhere _id: id
+
+      App.overlayRegion.show view
       Utils.Vent.trigger 'overlay:action', ->
         $('.modal').modal('hide')
 
