@@ -26,11 +26,6 @@ define [
       "click .remove": "deletePage"
       "change select": "updatePage"
 
-    initialize:->
-      @model.on 'change', @render
-      #save page onrender for initial article
-      if !@model.get("article") then @once 'render', @updatePage
-
     updatePage: ->
       @model.set
         "number": @ui.number.text()
@@ -56,6 +51,7 @@ define [
       page = new Page
         number: @collection.length+1
         magazine: @magazine
+        article: App.Articles.first()
 
       @collection.create page
 
