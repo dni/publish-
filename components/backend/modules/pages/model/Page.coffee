@@ -9,3 +9,6 @@ define ['backbone'], (Backbone) ->
       "title": "noname"
       "magazine": ""
       "published": false
+
+    togglePublish: ->
+      @.set "published", not @.get "published"
