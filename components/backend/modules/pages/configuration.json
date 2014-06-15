@@ -1,0 +1,24 @@
+{
+    "config": {
+        "name": "Pages",
+        "namespace": "pages"
+    },
+    "navigation": {
+        "button": 0,
+        "route": "pages",
+        "classNames": "pages"
+    },
+
+    "settings": {
+		"layouts" : {
+          "description": "Comma seperated list of layout keys",
+          "value": "default, fullsize",
+          "type": "text"
+        },
+        "theme" : {
+          "description": "Comma seperated list of theme keys",
+          "value": "default",
+          "type": "text"
+        }
+	}
+}
