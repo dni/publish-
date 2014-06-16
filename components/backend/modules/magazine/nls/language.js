@@ -25,6 +25,7 @@ define({
         "editorial": "Editorial",
         "papersize": "Select Papersize (Print)",
         "orientation": "Select Orientation (Print)",
+       	"fileDescription": "Use 'cover' and 'back' templates keys",
         "newMagazine": "created new magazine",
         "updateMagazine": "updated magazine",
         "emptyMessage": "The magazine does not exist anymore",
