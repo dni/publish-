@@ -45,7 +45,7 @@ module.exports.setup = (app) ->
     a.title = req.body.title
     a.name = req.body.name
     a.save ->
-      createMagazineFiles req.body.name, req.body.theme
+      createMagazineFiles a, req.body.name, req.body.theme
       res.send a
 
   app.put "/magazines/:id", auth, (req, res) ->
@@ -73,7 +73,7 @@ module.exports.setup = (app) ->
           a.title = req.body.title
           a.name = req.body.name
           a.save ->
-            createMagazineFiles req.body.name, req.body.theme
+            createMagazineFiles a, req.body.name, req.body.theme
             res.send a
 
   app.delete '/magazines/:id', auth, (req, res)->
@@ -87,11 +87,11 @@ module.exports.setup = (app) ->
             res.statusCode = 500
             console.log('remove book/yourmagazine (rm) process exited with code ' + code)
 
-createMagazineFiles = (folder, theme) ->
+createMagazineFiles = (magazine, folder, theme) ->
   fs.mkdirSync "./public/books/" + folder
   fs.copySync "./components/magazine/" + theme + "/gfx", "./public/books/" + folder + "/hpub/gfx"
   fs.copySync "./components/magazine/" + theme + "/css", "./public/books/" + folder + "/hpub/css"
   fs.copySync "./components/magazine/" + theme + "/js", "./public/books/" + folder + "/hpub/js"
   fs.copySync "./components/magazine/" + theme + "/images", "./public/books/" + folder + "/hpub/images"
-  HpubGenerator.generate a
+  HpubGenerator.generate magazine
 
