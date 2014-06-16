@@ -21,6 +21,11 @@ define [
       @$el.find("img").Jcrop
         onSelect: (coords)->
           that.coords = coords
+          img = that.$el.find("img")
+          that.coords.origSize =
+            w: img.width()
+            h: img.height()
+          c.l that.coords
 
     events:
       "click .save": "save"

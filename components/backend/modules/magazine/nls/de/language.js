@@ -21,6 +21,7 @@ define({
 	"editorial": "Editorial",
 	"product_id": "Produkt ID",
     "info": "Info",
+    "fileDescription": "Use 'cover' and 'back' templates keys",
 	"papersize": "Papierformat auswählen (Druck)",
 	"orientation": "Paperausrichtung auswählen (Druck)",
 	"newMagazine": "hat eines Neues Magazine erstellt",
