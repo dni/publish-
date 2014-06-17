@@ -7,9 +7,9 @@ extend = require('util')._extend
 module.exports = (setting, cb)->
   sizeList = completeSizeList()
   formats = ["shelf", "launch", "icon"]
-  icon=''
-  background=''
-  logo=''
+  icon= ''
+  background= ''
+  logo= ''
   File.find(relation: 'setting:'+setting._id).exec (err, files)->
     if err then return
     if files.length != 0
@@ -62,7 +62,7 @@ module.exports = (setting, cb)->
             .crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2))
             .write process.cwd()+'/public/files/'+newBg, ->
               if format is "shelf"
-                topPos = 20
+                topPos = imgData.h/10
                 if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
                 else targetDir += "shelf-bg-landscape.imageset"
               else if format is "launch"
