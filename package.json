@@ -55,7 +55,8 @@
     "socket.io": "~0.9.16",
     "uglify-js": "~2.4.13",
     "uinexpress": "0.0.5",
-    "underscore": "~1.5.2"
+    "underscore": "~1.5.2",
+    "grunt-jsonlint": "~1.0.4"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
