@@ -16,7 +16,6 @@ module.exports = (setting, cb)->
       domain: generalsetting.settings.domain.value
 
     # Localizeable Strings
-    # console.log i18n
     template = fs.readFileSync(__dirname+"/templates/Localizable.strings", "utf-8")
     for key, language of i18n
       if !fs.existsSync dirname+"/Baker/"+key+".lproj" then fs.mkdirSync dirname+"/Baker/"+key+".lproj"
@@ -41,5 +40,9 @@ module.exports = (setting, cb)->
       template = fs.readFileSync(__dirname+"/templates/info.html", "utf-8")
       fs.writeFileSync dirname+"/BakerShelf/info/info.html", ejs.render template,
         block: block.data
+
+    # modified project file
+    template = fs.readFileSync(__dirname+"/templates/project.pbxproj", "utf-8")
+    fs.writeFileSync dirname+"/Baker.xcodeproj/project.pbxproj", template
 
     cb()
