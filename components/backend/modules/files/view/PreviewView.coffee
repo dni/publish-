@@ -36,7 +36,6 @@ define [
       @modelId = args['modelId']
       @namespace = args['namespace']
       @description = args['description']
-      c.l args['description']
       @templateHelpers = _.extend(@templateHelpers, description:args['description']);
 
       @$el.find(".file-list").sortable(

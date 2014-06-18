@@ -9,6 +9,7 @@ define({
     	"orLandscapeleft": "Landscape left",
     	"orLandscaperight": "Landscape right",
     	"uiconstants": "Baker UI Constants",
+    	"shelfNavigationTitle": "Shelf Navigation Title",
 		"bakerColorsetCoverBg": "Cover Background Color",
 		"bakerColorsetTitleColor": "Title Color",
 		"bakerColorsetInfoColor": "Info Color",

@@ -89,7 +89,10 @@
 	      "value": "#bc242a",
 	      "type": "color"
 		},
-
+		"shelfNavigationTitle" : {
+	      "value": "Baker Shelf",
+	      "type": "text"
+		},
 		"download" : {
 	      "type": "button",
 	      "event": "downloadApp"

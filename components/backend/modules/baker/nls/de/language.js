@@ -8,6 +8,7 @@ define({
 	"orLandscapeleft": "Landschaft links",
 	"orLandscaperight": "Landschaft rechts",
 	"uiconstants": "Baker UI Konstanten",
+	"shelfNavigationTitle": "Navigation Title Bücherregal",
 	"bakerColorsetCoverBg": "Cover Hintergrundfarbe",
 	"bakerColorsetTitleColor": "Titelfarbe",
 	"bakerColorsetInfoColor": "Infofarbe",
