@@ -45,7 +45,7 @@ define [
         title: @ui.title.val()
         number: @ui.number.val()
         article: @ui.article.val()
-        layout: @layout.val()
+        layout: @ui.layout.val()
 
       if @model.isNew()
         App.Pages.create @model,
