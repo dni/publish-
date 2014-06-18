@@ -28,9 +28,9 @@ define [
 
     updatePage: ->
       @model.set
-        "number": @ui.number.text()
-        "layout": @ui.layout.val()
-        "article": @ui.article.val()
+        number: @ui.number.text()
+        layout: @ui.layout.val()
+        article: @ui.article.val()
       @model.save()
 
     deletePage: ->

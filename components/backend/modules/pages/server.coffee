@@ -14,24 +14,24 @@ module.exports.setup = (app) ->
 
   app.post "/pages", auth, (req, res) ->
     a = new Page()
-    a.user = app.user.id
     a.magazine = req.body.magazine
     a.article = req.body.article
     a.number = req.body.number
     a.layout = req.body.layout
     a.published = req.body.published
     a.title = req.body.title
+    a.user = app.user.id
     a.save -> res.send a
 
   app.put "/pages/:id", auth, (req, res) ->
     Page.findById req.params.id, (e, a) ->
-      a.user = app.user.id
       a.magazine = req.body.magazine
       a.article = req.body.article
       a.number = req.body.number
       a.layout = req.body.layout
       a.published = req.body.published
       a.title = req.body.title
+      a.user = app.user.id
       a.save -> res.send a
 
   app.delete '/pages/:id', auth, (req, res)->
