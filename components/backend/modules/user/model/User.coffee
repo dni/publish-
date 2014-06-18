@@ -9,3 +9,4 @@ define ['backbone'], (Backbone) ->
       "email": "no@name.org"
       "role": "admin"
       "password": "******"
+      "language": ""

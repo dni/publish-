@@ -2,6 +2,7 @@ ejs = require "ejs"
 fs = require "fs-extra"
 StaticBlocks = require "./../../static/model/StaticBlockSchema"
 Settings = require "./../../settings/model/SettingSchema"
+i18n = require './../nls/baker.json'
 
 module.exports = (setting, cb)->
   Settings.findOne(name: "General").exec (error, generalsetting) ->
@@ -13,6 +14,16 @@ module.exports = (setting, cb)->
     fs.writeFileSync dirname+"/BakerShelf/Constants.h", ejs.render template,
       settings: setting.settings
       domain: generalsetting.settings.domain.value
+
+    # Localizeable Strings
+    # console.log i18n
+    template = fs.readFileSync(__dirname+"/templates/Localizable.strings", "utf-8")
+    for key, language of i18n
+      if !fs.existsSync dirname+"/Baker/"+key+".lproj" then fs.mkdirSync dirname+"/Baker/"+key+".lproj"
+      fs.writeFileSync dirname+"/Baker/"+key+".lproj/Localizable.strings", ejs.render template,
+        settings: setting.settings
+        localisation: language
+        domain: generalsetting.settings.domain.value
 
     # Ui constants
     template = fs.readFileSync(__dirname+"/templates/UIConstants.h", "utf-8")
