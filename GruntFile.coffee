@@ -1,4 +1,5 @@
 mongoose = require "mongoose"
+port = 1666
 db = mongoose.connect 'mongodb://localhost/publish'
 Magazine = require __dirname+"/components/backend/modules/magazine/model/MagazineSchema"
 HpubGenerator = require __dirname + "/components/backend/modules/magazine/generators/HpubGenerator"
@@ -12,6 +13,11 @@ module.exports = (grunt)->
       scripts:
         files: ['components/**/*.coffee']
         tasks: ['test']
+        options:
+          spawn: false
+      json:
+        files:  ['components/**/*.json']
+        tasks: ['jsonlint']
         options:
           spawn: false
       magazine:
@@ -32,6 +38,10 @@ module.exports = (grunt)->
             level: 'ignore'
         files:
           src: ['components/backend/**/*.coffee', 'components/frontend/**/*.coffee']
+
+    jsonlint:
+      all:
+        src:  ['components/**/*.json']
 
     jasmine:
       backend:
@@ -99,10 +109,10 @@ module.exports = (grunt)->
           directory: 'baker-master'
 
     forever:
-      server1:
+      production:
         options:
           command: 'coffee'
-          index: 'server.coffee'
+          index: 'server.coffee #{port}'
           logDir: 'cache'
 
     bowercopy:
@@ -200,6 +210,8 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-less'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
+
+  grunt.loadNpmTasks 'grunt-jsonlint'
 
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-coffeelint'

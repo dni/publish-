@@ -1,4 +1,4 @@
-port = 1666
+port = process.argv[2] || 1666
 sessionSecret = 'publish#crossplattform#app'
 
 express = require 'express.io'
