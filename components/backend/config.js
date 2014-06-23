@@ -23,7 +23,8 @@ require.config({
 		tpl: 'vendor/tpl',
 		i18n: 'vendor/i18n',
 		d3: 'vendor/d3',
-		minicolors: 'vendor/minicolors/jquery.minicolors'
+		minicolors: 'vendor/minicolors/jquery.minicolors',
+		notifyjs: 'vendor/notify'
 	},
 	map: {
 	    '*': {

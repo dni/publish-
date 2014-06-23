@@ -29,8 +29,8 @@
     "requirejs-i18n": "~2.0.4",
     "require-css": "~0.1.2",
     "socket.io-client": "~0.9.16",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "notifyjs": "~0.3.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

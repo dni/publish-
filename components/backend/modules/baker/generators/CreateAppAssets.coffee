@@ -19,8 +19,11 @@ module.exports = (setting, cb)->
         if file.key is 'icon' then icon = process.cwd()+'/public/files/'+file.name
 
     if background is "" then background = __dirname+'/templates/bg.jpg'
-    if logo is "" then logo = __dirname+'/templates/logo.png'
-    if icon is "" then icon = __dirname+'/templates/icon.png'
+    #if logo is "" && icon is ""
+   #   logo = __dirname+'/templates/logo.png'
+    #  icon = __dirname+'/templates/icon.png'
+    if logo is "" then logo = icon
+    else if icon is "" then icon = logo
     createIcons formats.pop()
 
   createIcons = (format)->
@@ -62,13 +65,13 @@ module.exports = (setting, cb)->
             .crop(imgData.w, imgData.h, (1024-imgData.w / 2), (1024-imgData.h / 2))
             .write process.cwd()+'/public/files/'+newBg, ->
               if format is "shelf"
-                topPos = imgData.h/10
+                topPos = (imgData.h/12)
                 if imgData.n.indexOf("portrait")>1 then targetDir += "shelf-bg-portrait.imageset"
                 else targetDir += "shelf-bg-landscape.imageset"
               else if format is "launch"
-                topPos = (imgData.h/2)-heightOfLogo
+                topPos = (imgData.h/2)-(heightOfLogo/2)
                 targetDir += "LaunchImage.launchimage"
-              else topPos = (imgData.h/2)-heightOfLogo
+              else topPos = (imgData.h/2)+(heightOfLogo/2)
               image
                 .in('-page', '+0+0').in(process.cwd()+'/public/files/'+newBg)
                 .in('-page', '+'+((imgData.w/2)-sizeOfLogo/2)+'+'+topPos)

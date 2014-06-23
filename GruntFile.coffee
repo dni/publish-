@@ -137,6 +137,7 @@ module.exports = (grunt)->
           "i18n.js": 'requirejs-i18n/i18n.js'
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'
+          "notify.js": 'notifyjs/dist/notify-combined.min.js'
           # Folders
           "css": 'require-css'
           "tinymce": "tinymce-builded/js/tinymce"
@@ -145,6 +146,7 @@ module.exports = (grunt)->
           "jcrop": "jcrop"
           "bootstrap": "bootstrap"
           "require-less": 'require-less'
+
 
       libsFrontend:
         options:
