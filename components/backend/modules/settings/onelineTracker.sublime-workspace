@@ -1,0 +1,505 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"world",
+				"worldEl"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"par",
+				"● parseFloat(str)"
+			],
+			[
+				"Array",
+				"arrayBuffer"
+			],
+			[
+				"t",
+				"type"
+			],
+			[
+				"out",
+				"outputElement"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/Gruntfile.coffee",
+			"settings":
+			{
+				"buffer_size": 1770,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/build/production.js",
+			"settings":
+			{
+				"buffer_size": 281864,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/build/main.js",
+			"settings":
+			{
+				"buffer_size": 9623,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 117.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"js",
+				"JS2Coffee: Convert & Overwrite Current File"
+			],
+			[
+				"js2",
+				"JS2Coffee: Convert & Make New File"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"add",
+				"Package Control: Add Repository"
+			],
+			[
+				"",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"ind",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"comm",
+				"Toggle Block Comment"
+			],
+			[
+				"git",
+				"Package Control: Add Repository"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 351.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/build/production.min.js",
+		"/home/drs/server/components/backend/modules/settings/server.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/magazine/nls/de/language.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/files/nls/de/language.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/settings/view/SettingsLayout.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/magazine/view/MagazineLayout.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/settings/nls/language.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/settings/nls/de/language.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/bower_components/requirejs-i18n/i18n.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/GruntFile.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/baker/generators/BakerGenerator.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/baker/generators/CreateAppAssets.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/.gitignore",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/server.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/baker/generators/AppAssets.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/modules/baker/generators/RenderConstants.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/config.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/package.json",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/components/backend/build.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/install.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-/README.md",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/htmlWorld/app.coffee",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/htmlWorld/public/style.less",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/htmlWorld/app.js",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/htmlWorld/bower.json",
+		"/home/drs/Websites/0_SUBLIME_PROJECTS/htmlWorld/package.json",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInput/seqInput.coffee",
+		"/home/drs/Websites/der-generator-compact/public/style.less",
+		"/home/drs/Websites/der-generator-compact/public/plugins/btnInput/btnInput.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/btnInput/btnInput.less",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInput/seqInput.less",
+		"/home/drs/Websites/der-generator-compact/public/instrumentPlugins/ThreePoint.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/faderInputD3/faderInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/public/view/CanvasVisual.coffee",
+		"/home/drs/Websites/der-generator-compact/public/index.html",
+		"/home/drs/Websites/der-generator-compact/public/plugins/lineInputD3/lineInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/rotaryInputD3/rotaryInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInputD3/seqInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/node_modules/audiolib/src/controls/adsr.js",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInputD3/seqInputD3.less",
+		"/home/drs/Websites/der-generator-compact/public/templates/BassDrum.html",
+		"/home/drs/Websites/der-generator-compact/public/require-config.js",
+		"/home/drs/Websites/der-generator-compact/public/instrumentPlugins/generators/ThreePoint.coffee",
+		"/home/drs/Websites/der-generator-compact/public/instrumentPlugins/noise.coffee",
+		"/home/drs/Websites/der-generator-compact/node_modules/audiolib/src/generators/noise.js",
+		"/home/drs/Websites/der-generator-compact/node_modules/audiolib/src/generators/noise.coffee",
+		"/home/drs/Websites/der-generator-compact/public/instrumentPlugins/BassDrum.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInputD3 /seqInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/public/plugins/seqInputD3 /seqInputD3.less",
+		"/home/drs/Websites/der-generator-compact/public/App.coffee",
+		"/home/drs/Websites/der-generator-compact/app.js",
+		"/home/drs/Websites/der-generator-compact/public/plugins/rotaryInputD3/rotaryInputD3.less",
+		"/home/drs/Websites/der-generator-compact/public/plugins/faderInputD3/faderInputD3.less",
+		"/home/drs/Websites/der-generator-compact/public/plugins/lineInputD3/lineInputD3.less",
+		"/home/drs/Websites/der-generator-compact/public/paramPlugins/lineInputD3.coffee",
+		"/home/drs/Websites/der-generator-compact/package.json",
+		"/home/drs/Websites/der-generator-compact/node_modules/socket.io/node_modules/socket.io-client/lib/vendor/web-socket-js/flash-src/com/hurlant/crypto/tests/BigIntegerTest.as",
+		"/home/x/Websites/nodeSocketIO-synth/app.js",
+		"/home/x/Websites/nodeSocketIO-synth/index.html",
+		"/home/drs/Websites/der-generator-compact/derGenerator.sublime-project",
+		"/home/drs/Downloads/Package Control.sublime-package",
+		"/home/x/Websites/htmlBoilerplate/script.js",
+		"/home/x/Websites/htmlBoilerplate/index.css",
+		"/home/x/Websites/htmlBoilerplate/index.html",
+		"/usr/share/nginx/html/js/melonJS-0.9.10.js",
+		"/usr/share/nginx/html/js/resources.js",
+		"/usr/share/nginx/html/js/entities/entities.js",
+		"/usr/share/nginx/html/js/game.js",
+		"/usr/share/nginx/html/data/img/free_tileset_version_10.png",
+		"/usr/share/nginx/html/Ragnarok/Scripts/main.js",
+		"/usr/share/nginx/html/Ragnarok/Scripts/Screens/playScreen.js",
+		"/usr/share/nginx/html/Ragnarok/Scripts/Screens/titleScreen.js",
+		"/usr/share/nginx/html/Ragnarok/Scripts/resources.js",
+		"/usr/share/nginx/html/Ragnarok/Scripts/pathfinding.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/home/drs/Websites/0_SUBLIME_PROJECTS/publish-",
+			"/home/drs/Websites/der-generator-compact/public/plugins",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"forever",
+			"language",
+			"language.js",
+			"spawn",
+			"setup",
+			"__",
+			"fileDescription",
+			"desc",
+			"Use 'cover' and 'back' templates keys",
+			"descr",
+			"sizeList",
+			"sizeList = sizeList();",
+			"filetype",
+			"iconInfos",
+			"createIcon",
+			"w",
+			"createIcons",
+			"middle",
+			"/public/files",
+			"publish-/public/files",
+			"icon.write err",
+			"console",
+			"newBg",
+			"./",
+			"cwd",
+			"filetype",
+			"default",
+			"demo",
+			"./public/files/",
+			"dirname",
+			"writeImage",
+			"imgData",
+			"password",
+			"31mINSTALLATION",
+			"gruntDev",
+			"admin",
+			"player",
+			"6",
+			"files",
+			"link",
+			"el",
+			"cfgNew",
+			"cfg",
+			"param",
+			"lineInputD3",
+			"endVal",
+			"middleValY",
+			"middleValX",
+			"startVal",
+			"c.l",
+			"endVal",
+			"middleValY",
+			"middleValX",
+			"startVal",
+			"renderInstrument",
+			"c.l",
+			"cons",
+			"c.l",
+			"drawBuff",
+			"tp",
+			"x2",
+			"y3",
+			"y2",
+			"y1",
+			"BassDrum",
+			"vol",
+			"volume",
+			"BasicSynth",
+			"stepValsTe",
+			"5",
+			"startVal",
+			"b",
+			"100",
+			"\" ",
+			"s",
+			"val",
+			"lineInputD3",
+			"els",
+			"{}",
+			"title",
+			"w+r*2",
+			"append",
+			"		<div class=\"lineInputD3\" title=\"valAttr\" startVal=\"50\" middleVal=\"100\" endVal=\"20\">valName</div>",
+			"stream",
+			"\n  ",
+			"4200",
+			"console",
+			"audiolib",
+			"console.log"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"pos",
+			"cfg",
+			"cfgNew",
+			"y3",
+			"y2",
+			"x2",
+			"y1",
+			"y3",
+			"y2",
+			"x2",
+			"y1",
+			"x1",
+			"xB",
+			"yC",
+			"yB",
+			"yA",
+			"ThreePoint",
+			"BassDrum",
+			"pos",
+			"faderInputD3",
+			"75",
+			"param",
+			"tw"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/Gruntfile.coffee",
+					"settings":
+					{
+						"buffer_size": 1770,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1757,
+								1757
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/build/production.js",
+					"settings":
+					{
+						"buffer_size": 281864,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								59861,
+								59861
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1224.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/drs/Websites/0_SUBLIME_PROJECTS/onelineTracker/build/main.js",
+					"settings":
+					{
+						"buffer_size": 9623,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9620,
+								9620
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 155.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 162.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 261.0,
+	"status_bar_visible": true
+}

@@ -260,4 +260,9 @@ module.exports = (grunt)->
     'forever:server1:start'
   ]
 
+  grunt.registerTask 'reloadSettings', 'Reloading for settings', [
+    #'build'
+    'forever:server1:restart'
+  ]
+
   return grunt
