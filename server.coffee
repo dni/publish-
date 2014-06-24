@@ -1,4 +1,4 @@
-port = 1666
+port = process.argv[2] || 1666
 sessionSecret = 'publish#crossplattform#app'
 
 express = require 'express.io'
@@ -6,7 +6,7 @@ app = express()
 passport = require "passport"
 LocalStrategy = require('passport-local').Strategy
 mongoose = require "mongoose"
-User = require __dirname+"/components/backend/modules/user/model/UserSchema"
+Users = require __dirname+"/components/backend/modules/user/model/UserSchema"
 db = mongoose.connect 'mongodb://localhost/publish'
 fs = require 'fs'
 
@@ -16,7 +16,7 @@ app.configure ->
 
   #authentication
   passport.use new LocalStrategy (username, password, done) ->
-    User.findOne(
+    Users.findOne(
       username: username
       password: password
     ).execFind (err, user)->
@@ -26,7 +26,7 @@ app.configure ->
     done null, user._id
 
   passport.deserializeUser (_id, done)->
-    User.findById _id, (err, user)->
+    Users.findById _id, (err, user)->
       if !err then app.user = user
       done(err, user)
 

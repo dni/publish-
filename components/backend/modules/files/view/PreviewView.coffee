@@ -26,13 +26,17 @@ define [
   class PreviewView extends Marionette.CompositeView
 
     template: Template
-    templateHelpers: t:i18n
+    templateHelpers:
+      t:i18n
+
     itemView: ItemView
     itemViewContainer: ".file-list"
 
     initialize:(args)->
       @modelId = args['modelId']
       @namespace = args['namespace']
+      @description = args['description']
+      @templateHelpers = _.extend(@templateHelpers, description:args['description']);
 
       @$el.find(".file-list").sortable(
         revert: true

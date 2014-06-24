@@ -6,7 +6,9 @@ define [
   'tpl!../templates/layout.html'
   'cs!../view/SettingsDetailView'
   'cs!modules/files/view/PreviewView'
-], (App, Router, Utils, Marionette, Template, DetailView, PreviewView)->
+  'i18n!modules/settings/nls/language.js'
+
+], (App, Router, Utils, Marionette, Template, DetailView, PreviewView, i18n)->
   class SettingsLayout extends Marionette.Layout
 
     template: Template
@@ -37,4 +39,5 @@ define [
         @fileRegion.show new PreviewView
           collection: @files
           namespace: 'setting'
+          description: i18n.fileDescription
           modelId: @model.get "_id"

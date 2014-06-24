@@ -16,9 +16,16 @@ define [
     itemView: NavigationItemView
 
     events:
-      "click li": "clicked"
+      "click a": "clicked"
 
     clicked: (e)->
       @children.each (view)->
         view.$el.removeClass "active"
-      $(e.target).parent().addClass "active"
+
+      target = $(e.target) # clicked li
+      if target[0].nodeName.toLowerCase() is 'a' # clicked link
+        target = target.parent()
+      else if target[0].nodeName.toLowerCase() is 'span' # clicked icon
+        target = target.parent().parent()
+
+      target.addClass "active"
