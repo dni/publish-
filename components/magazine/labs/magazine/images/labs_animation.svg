@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="286px" height="286px" viewBox="0 0 286 286" enable-background="new 0 0 286 286" xml:space="preserve">
+<g id="char-s">
+	<path id="bubble2_3_" fill="#0066B3" d="M216.623,164.355c0-2.656,2.155-4.812,4.81-4.812c2.657,0,4.813,2.155,4.813,4.812
+		c0,2.657-2.156,4.812-4.813,4.812C218.777,169.166,216.623,167.013,216.623,164.355z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -65" begin="1s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -30" begin="1s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="0" begin="1s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<circle id="bubble1_3_" fill="#0066B3" cx="218.633" cy="161.903" r="2.348">
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.7s" to="3 -30" begin="0s" from="3 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.7s" to="3 -30" begin="0s" from="3 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.7s" to="0" begin="0s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+		</animate>
+	</circle>
+	<path id="sblau" fill="#0066B3" d="M278.824,159.381v34.241H216.17v-10.562h52.1v-17.871h-52.1l0.004-5.838L278.824,159.381z"/>
+	<path id="outline_3_" d="M286,148.625v-24.768h-77.006v48.598h52.1v3.52h-52.1v24.91H286v-48.593h-52.11v-3.667H286L286,148.625z
+		 M278.824,159.381v34.241H216.17v-10.562h52.1v-17.871h-52.1l0.004-5.838V131.04h62.642v10.429h-52.098v17.888L278.824,159.381z"/>
+</g>
+<g id="char-b">
+	<path id="bubble3_1_" fill="#007DC5" d="M138.245,165.396c0-3.336,2.708-6.041,6.042-6.041c3.336,0,6.044,2.705,6.044,6.041
+		c0,3.339-2.708,6.043-6.044,6.043C140.952,171.439,138.245,168.735,138.245,165.396z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="-2 -65" begin="0s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="-2 -65" begin="0s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0" begin="0s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<path id="bubble2_1_" fill="#007DC5" d="M147.797,164.196c0-2.657,2.154-4.812,4.809-4.812c2.657,0,4.813,2.154,4.813,4.812
+		s-2.156,4.812-4.813,4.812C149.951,169.007,147.797,166.854,147.797,164.196z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -65" begin="2s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -65" begin="2s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="0" begin="2s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<circle id="bubble1_1_" fill="#007DC5" cx="138.159" cy="161.743" r="2.349">
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2.5s" to="-2 -65" begin="2s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2.5s" to="-2 -65" begin="2s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2.5s" to="0" begin="2s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+		</animate>
+	</circle>
+	<path id="bubble3_4_" fill="#007DC5" d="M186.18,165.396c0-3.336,2.707-6.041,6.042-6.041c3.337,0,6.044,2.705,6.044,6.041
+		c0,3.339-2.707,6.043-6.044,6.043C188.887,171.439,186.18,168.735,186.18,165.396z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -30" begin="1s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="-2 -30" begin="1s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="0" begin="1s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<path id="bubble2_4_" fill="#007DC5" d="M176.069,164.196c0-2.657,2.155-4.812,4.81-4.812c2.656,0,4.813,2.154,4.813,4.812
+		s-2.157,4.812-4.813,4.812C178.224,169.007,176.069,166.854,176.069,164.196z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.6s" to="-2 -30" begin="3s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.6s" to="-2 -30" begin="3s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.6s" to="0" begin="3s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<circle id="bubble1_4_" fill="#007DC5" cx="185.557" cy="161.744" r="2.348">
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1s" to="-2 -30" begin="0s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1s" to="-2 -30" begin="0s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1s" to="0" begin="0s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+		</animate>
+	</circle>
+	<path id="bblau" fill="#007DC5" d="M175.993,159.352h22.312v34.27h-62.513v-34.27H158.1l0.012,23.707h17.869L175.993,159.352z"/>
+	<path id="outline_2_" d="M165.288,85.162h-36.671v115.723h76.859v-77.028h-36.673v52.118h-3.516V85.162z M198.306,159.352v0.09
+		v34.181h-62.513v-34.181h-0.006V92.351h22.313v67.002l0.013,23.708h17.869l0.013-23.708V131.04h22.312L198.306,159.352
+		L198.306,159.352z"/>
+</g>
+<g id="char-a">
+	<path fill="#0095DA" d="M105.801,165.463c0-3.336,2.708-6.041,6.042-6.041c3.336,0,6.044,2.705,6.044,6.041
+		c0,3.338-2.708,6.043-6.044,6.043C108.508,171.506,105.801,168.801,105.801,165.463z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0 -30" begin="0s" from="0 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0 -30" begin="0s" from="0 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0" begin="0s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<path fill="#0095DA" d="M106.733,164.262c0-2.657,2.155-4.812,4.81-4.812c2.657,0,4.813,2.155,4.813,4.812
+		c0,2.656-2.157,4.811-4.813,4.811C108.889,169.072,106.733,166.918,106.733,164.262z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to="-5 -30" begin="4s" from="-5 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to="-5 -30" begin="4s" from="-5 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to="0" begin="4s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<circle fill="#0095DA" cx="97.969" cy="161.809" r="2.348">
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.5s" to="-2 -30" begin="3s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.5s" to="-2 -30" begin="3s" from="-2 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.5s" to="0" begin="3s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+		</animate>
+	</circle>
+	<polygon id="ablau" fill="#0095DA" points="117.926,159.352 117.926,193.622 55.419,193.622 55.419,159.381 77.737,159.381 
+		77.737,183.061 95.611,183.061 95.623,159.352 	"/>
+	<path id="outline_1_" d="M48.243,123.857v24.917h40.192v27.201h-3.521v-23.683H48.243v48.593h76.86v-77.028H48.243z
+		 M117.935,134.717v6.845v17.879h-0.009v34.181H55.419v-34.241h22.318v23.68H95.61l0.012-23.708v-17.789H55.363V131.04h62.571
+		L117.935,134.717L117.935,134.717z"/>
+</g>
+<g id="char-l">
+	<path id="bubble3_2_" fill="#00AEEF" d="M25.47,165.396c0-3.336,2.707-6.041,6.042-6.041c3.337,0,6.044,2.705,6.044,6.041
+		c0,3.339-2.707,6.043-6.044,6.043C28.178,171.439,25.47,168.735,25.47,165.396z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to=".5" begin="0s" from="1" attributeType="XML" attributeName="transform" fill="remove" type="scale">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="5 -50" begin="0s" from="5 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="2s" to="0" begin="0s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<path id="bubble2_2_" fill="#00AEEF" d="M21.913,164.196c0-2.657,2.156-4.812,4.811-4.812c2.657,0,4.812,2.154,4.812,4.812
+		s-2.155,4.812-4.812,4.812C24.069,169.007,21.913,166.854,21.913,164.196z	">
+<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to=".5" begin="2s" from="1" attributeType="XML" attributeName="transform" fill="remove" type="scale">
+			</animateTransform>
+		
+			<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0 -50" begin="2s" from="0 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+			</animateTransform>
+		
+			<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="3s" to="0" begin="2s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+			</animate>
+	</path>
+	<circle id="bubble1_2_" fill="#00AEEF" cx="17.639" cy="161.743" r="2.349">
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to=".5" begin="1s" from="1" attributeType="XML" attributeName="transform" fill="remove" type="scale">
+		</animateTransform>
+	
+		<animateTransform  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to="5 -50" begin="1s" from="5 0" attributeType="XML" attributeName="transform" fill="freeze" type="translate">
+		</animateTransform>
+	
+		<animate  restart="always" calcMode="linear" additive="replace" accumulate="none" repeatCount="indefinite" dur="1.8s" to="0" begin="1s" from="1" attributeType="CSS" attributeName="opacity" fill="remove">
+		</animate>
+	</circle>
+	<path id="outline" d="M8.06,200.885h36.666l0.001-115.722H8.06V200.885z M37.549,159.441H15.238V92.363h22.311V159.441z"/>
+	<rect id="lblau" x="15.237" y="159.352" fill="#00AEEF" width="22.311" height="34.27"/>
+</g>
+</svg>
