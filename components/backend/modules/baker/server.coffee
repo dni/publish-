@@ -97,7 +97,7 @@ module.exports.setup = (app) ->
         Setting.findOne(name: "General").execFind (arr, setting) ->
           setting = setting[0]
           _.each magazines, (magazine) ->
-            date = magazine.date.format "%Y-%m-%d %H:%m:%S"
+            date = magazine.date.format "%Y-%m-%d %H:%M:%S"
             item =
               name: magazine.name
               title: magazine.title

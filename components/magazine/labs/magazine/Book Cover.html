@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Cover: <%= magazine.title %></title>
-
+	<meta name="viewport" content="width=768; initial-scale=1.0;"/>
 	<link rel="stylesheet" type="text/css" href="css/book.css">
 	<link rel="stylesheet" media="print" type="text/css" href="css/print.css">
 	<style>
@@ -13,6 +13,10 @@
 	</style>
 </head>
 <body>
+	<div class="logo">
+				<object id="logo" data="images/labs_animation.svg" type="image/svg+xml">
+				</object>
+	</div>
 	<h1 id="cover-title"><%= magazine.title %></h1>
 
 
