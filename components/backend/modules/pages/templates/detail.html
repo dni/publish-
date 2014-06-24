@@ -1,0 +1,36 @@
+<h1><%= t.details %></h1>
+<div class="buttons-top">
+	<% if (published === false) { %>
+		<button class="publish btn btn-success"><%= t.publish %></button>
+	<% } else { %>
+		<button class="publish btn btn-default"><%= t.unpublish %></button>
+	<% } %>
+</div>
+
+<div class="form-fields">
+	<div class="form-group">
+        <label><%= t.title %></label>
+        <input type="text" name="title" class="form-control" value="<%= title %>" />
+    </div>
+    <div class="form-group">
+        <label><%= t.number %></label>
+        <input type="text" name="number" class="form-control" value="<%= number %>" />
+    </div>
+    <div class="form-group">
+        <label><%= t.article %></label>
+        <select name="article" class="form-control">
+            <% for(var i = 0, articles = getArticles(); i < articles.length; i++) { %>
+                <option <% if (articles[i]._id == article) { %> selected="selected" <% } %> value="<%= articles[i]._id %>"><%= articles[i].title %></option>
+            <% } %>
+        </select>
+    </div>
+    <div class="form-group">
+        <label><%= t.layouts %></label>
+        <select name="layout" class="form-control">
+            <% for(var i = 0, settings = getLayouts(); i < settings.length; i++) { %>
+                <option <% if (layout == settings[i]) { %> selected <% } %> value="<%= settings[i] %>"><%= settings[i] %></option>
+            <% } %>
+        </select>
+    </div>
+</div>
+<%= vhs.renderButtons %>

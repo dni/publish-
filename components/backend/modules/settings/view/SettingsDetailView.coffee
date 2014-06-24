@@ -6,11 +6,20 @@ define [
   'jquery'
   'marionette'
   'tpl!../templates/detail.html'
-], ( App, Router, Utils, i18n, $, Marionette, Template) ->
+  'bootstrap'
+], ( App, Router, Utils, i18n, $, Marionette, Template, bootstrap) ->
 
   class SettingsDetailView extends Marionette.ItemView
 
     template: Template
+
+    initialize:->
+      @on "render", @afterRender, @
+
+    afterRender:->
+      @$el.find('[data-toggle=tooltip]').tooltip
+        placement: 'right'
+        container: 'body'
 
     reset: ->
       Utils.Log i18n.deleteSetting, 'delete',

@@ -21,5 +21,6 @@ module.exports.setup = (app) ->
     console.log message
     message.save ->
       req.io.broadcast "updateCollection", "Messages"
+      req.io.broadcast "message", message
       res.send message
 

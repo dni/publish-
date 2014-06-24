@@ -1,7 +1,7 @@
 define([
   "backbone",
   "cs!App",
-  "css!modules/publish/style/jquery.minicolors.css",
+  "css!vendor/minicolors/jquery.minicolors.css",
   "less!modules/publish/style/main",
   "cs!modules/publish/Regions",
   "cs!modules/publish/Events",
@@ -10,6 +10,7 @@ define([
   "cs!modules/settings/SettingsModule",
   "cs!modules/files/FileModule",
   "cs!modules/user/UserModule",
+  "cs!modules/pages/PageModule",
   "cs!modules/article/ArticleModule",
   "cs!modules/magazine/MagazineModule",
   "cs!modules/baker/BakerModule",
@@ -18,5 +19,6 @@ define([
 	// coming soon in 2.0
 	// "cs!modules/reports/ReportModule",
 ], function(Backbone){
-    Backbone.history.start();
+    delayed = function(){ Backbone.history.start(); }
+    setTimeout(delayed, 1000);
 });

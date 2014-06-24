@@ -52,6 +52,18 @@
 		<label><%= t.editorial %></label>
 		<textarea rows="5" class="wysiwyg form-control" name="editorial"><%= editorial %></textarea>
 	</div>
+	<div class="form-group">
+          <label><%= t.theme %></label>
+          <select name="theme" class="form-control">
+            <% _.each(getThemes(), function(th){%>
+                <% if(theme==th) { %>
+                    <option selected value="<%= th %>"> <%= th %> </option>
+                <% } else { %>
+                    <option value="<%= th %>"> <%= th %> </option>
+                <% } %>
+            <% }) %>
+          </select>
+        </div>
 	<% if (isPrint()) { %>
 		<div class="form-group">
 		  <label><%= t.papersize %></label>
