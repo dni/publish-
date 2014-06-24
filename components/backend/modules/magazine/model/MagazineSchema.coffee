@@ -7,6 +7,7 @@ module.exports = mongoose.model 'Magazine', new Schema
   name: String
   author: String
   desc: String
+  theme: String
   editorial: String
   impressum: String
   published: Boolean

@@ -10,6 +10,7 @@ define [
       "product_id": "app.dnilabs.org.publish.magazine"
       "info": ""
       "author": "default author"
+      "theme": "default"
       "editorial": "Hello World!"
       "impressum": "dnilabs"
       "published": false

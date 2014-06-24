@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "jquery": "*",
+    "jcrop": "*",
     "backbone-amd": "~1.1.0",
     "underscore-amd": "latest",
     "backbone-localstorage": "~0.3.1",
@@ -28,8 +29,8 @@
     "requirejs-i18n": "~2.0.4",
     "require-css": "~0.1.2",
     "socket.io-client": "~0.9.16",
-    "requirejs": "latest"
+    "requirejs": "latest",
+    "notifyjs": "~0.3.1"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

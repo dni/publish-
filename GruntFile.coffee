@@ -1,6 +1,9 @@
 mongoose = require "mongoose"
+port = 1666
 db = mongoose.connect 'mongodb://localhost/publish'
-
+Magazine = require __dirname+"/components/backend/modules/magazine/model/MagazineSchema"
+HpubGenerator = require __dirname + "/components/backend/modules/magazine/generators/HpubGenerator"
+fs = require "fs-extra"
 module.exports = (grunt)->
   grunt.initConfig
 
@@ -12,6 +15,21 @@ module.exports = (grunt)->
         tasks: ['test']
         options:
           spawn: false
+      json:
+        files:  ['components/**/*.json']
+        tasks: ['jsonlint']
+        options:
+          spawn: false
+      magazine:
+        files: ['components/magazine/**/*']
+        tasks: ['generateMagazine']
+        options:
+          spawn: false
+      server:
+        files: ['server.coffee']
+        tasks: ['restart']
+        options:
+          spawn: false
 
     coffeelint:
       all:
@@ -21,8 +39,11 @@ module.exports = (grunt)->
         files:
           src: ['components/backend/**/*.coffee', 'components/frontend/**/*.coffee']
 
-    jasmine:
+    jsonlint:
+      all:
+        src:  ['components/**/*.json']
 
+    jasmine:
       backend:
         src: '*.js'
         options:
@@ -88,10 +109,10 @@ module.exports = (grunt)->
           directory: 'baker-master'
 
     forever:
-      server1:
+      production:
         options:
           command: 'coffee'
-          index: 'server.coffee'
+          index: 'server.coffee #{port}'
           logDir: 'cache'
 
     bowercopy:
@@ -116,13 +137,16 @@ module.exports = (grunt)->
           "i18n.js": 'requirejs-i18n/i18n.js'
           "coffee-script.js": 'coffee-script/index.js'
           "d3.js": 'd3/d3.js'
+          "notify.js": 'notifyjs/dist/notify-combined.min.js'
           # Folders
           "css": 'require-css'
           "tinymce": "tinymce-builded/js/tinymce"
           "minicolors": 'jquery-minicolors'
           "fancybox": "fancybox/source"
+          "jcrop": "jcrop"
           "bootstrap": "bootstrap"
           "require-less": 'require-less'
+
 
       libsFrontend:
         options:
@@ -189,6 +213,8 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-requirejs'
 
+  grunt.loadNpmTasks 'grunt-jsonlint'
+
   grunt.loadNpmTasks 'grunt-contrib-jasmine'
   grunt.loadNpmTasks 'grunt-coffeelint'
 
@@ -205,6 +231,25 @@ module.exports = (grunt)->
       db.connection.db.dropDatabase (err)->
         if err then console.log err else console.log 'Successfully dropped database'
         mongoose.connection.close done
+
+  # clean db
+  grunt.registerTask 'generateMagazine', 'generate hpub and print', ->
+    #remake all magazines and pages
+    child_process = require("child_process").spawn
+    spawn = child_process("rm", ["-r", 'books'], cwd: "./public/")
+    spawn.on "exit", (code) ->
+      if code isnt 0
+        console.log "remove Magazines  exited with code " + code
+      else
+        fs.mkdirSync "./public/books"
+        Magazine.find().execFind (err, data) ->
+          for d in data
+            fs.mkdirSync "./public/books/" + d.name
+            fs.copySync "./components/" + d.theme + "/magazine/gfx", "./public/books/" +  d.name + "/hpub/gfx"
+            fs.copySync "./components/" + d.theme + "/magazine/css", "./public/books/" +  d.name + "/hpub/css"
+            fs.copySync "./components/" + d.theme + "/magazine/js", "./public/books/" +  d.name + "/hpub/js"
+            fs.copySync "./components/" + d.theme + "/magazine/images", "./public/books/" +  d.name + "/hpub/images"
+            HpubGenerator.generate d
 
   # TODO
   # grunt.registerTask 'backupDatabase', 'backup the database', ->

@@ -3,10 +3,12 @@ define [
   'cs!Router'
   'marionette'
   'tpl!../templates/layout.html'
-  'cs!./PageListView'
+  'cs!modules/pages/view/PageMagazineListView'
   'cs!./MagazineDetailView'
-  'cs!modules/files/view/PreviewView'
-], (Utils, Router, Marionette, Template, PageListView, DetailView, PreviewView) ->
+  'cs!modules/files/view/PreviewView'#
+  'i18n!modules/magazine/nls/language.js'
+
+], (Utils, Router, Marionette, Template, PageListView, DetailView, PreviewView, i18n) ->
 
   class MagazineLayout extends Marionette.Layout
 
@@ -43,7 +45,7 @@ define [
     afterRender:->
       @detailRegion.show new DetailView model: @model
       # dont childviews if model is new and there no _id for the relation
-      if @model.isNew() then @model.on 'sync', @addChildViews, @ else @addChildViews()
+      if @model.isNew() then @model.once 'sync', @addChildViews, @ else @addChildViews()
 
     addChildViews:->
       @pageRegion.show new PageListView
@@ -52,6 +54,7 @@ define [
       @fileRegion.show new PreviewView
         collection: @files
         namespace: 'magazine'
+        description: i18n.fileDescription
         modelId: @model.get "_id"
 
     deleteMagazine: ->

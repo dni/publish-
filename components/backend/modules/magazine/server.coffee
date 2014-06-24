@@ -1,13 +1,13 @@
 Magazine = require(__dirname + "/model/MagazineSchema")
-Page = require(__dirname + "/model/PageSchema")
 fs = require("fs-extra")
 auth = require './../../utilities/auth'
 PrintGenerator = require(__dirname + "/generators/PrintGenerator")
 HpubGenerator = require(__dirname + "/generators/HpubGenerator")
 
-
 module.exports.setup = (app) ->
+
   app.get "/downloadPrint/:name", auth, PrintGenerator.download
+
   app.get "/downloadHpub/:id", auth, (req,res)->
     Magazine.findOne(_id: req.params.id).exec (err, magazine)->
       if err
@@ -21,7 +21,6 @@ module.exports.setup = (app) ->
         if code isnt 0
           res.statusCode = 500
         res.end()
-
 
   app.get "/magazines", auth, (req, res) ->
     Magazine.find().limit(20).execFind (arr, data) ->
@@ -39,15 +38,14 @@ module.exports.setup = (app) ->
     a.info = req.body.info
     a.published = req.body.published
     a.papersize = req.body.papersize
+    a.theme = req.body.theme
     a.orientation = req.body.orientation
     a.files = req.body.files
     a.date = new Date()
     a.title = req.body.title
     a.name = req.body.name
     a.save ->
-      createMagazineFiles req.body.name, ->
-        HpubGenerator.generate a
-      #shortcut
+      createMagazineFiles a, req.body.name, req.body.theme
       res.send a
 
   app.put "/magazines/:id", auth, (req, res) ->
@@ -59,7 +57,6 @@ module.exports.setup = (app) ->
           res.send a
           console.log "remove Magazine " + a.name + " exited with code " + code
         else
-          console.log "removed Magazine Files: " + req.body.name
           a.editorial = req.body.editorial
           a.impressum = req.body.impressum
           a.cover = req.body.cover
@@ -69,37 +66,15 @@ module.exports.setup = (app) ->
           a.info = req.body.info
           a.published = req.body.published
           a.papersize = req.body.papersize
+          a.theme = req.body.theme
           a.orientation = req.body.orientation
           a.files = req.body.files
           a.date = new Date()
           a.title = req.body.title
           a.name = req.body.name
           a.save ->
-            console.log "created Magazine Files: " + a.name
-            createMagazineFiles req.body.name, ->
-              HpubGenerator.generate a
+            createMagazineFiles a, req.body.name, req.body.theme
             res.send a
-
-  app.get "/pages", auth, (req, res) ->
-    res.send "no magazine id"  unless req.query.magazine
-    Page.find(magazine: req.query.magazine).execFind (arr, data) ->
-      res.send data
-
-  app.post "/pages", auth, (req, res) ->
-    a = new Page()
-    a.magazine = req.body.magazine
-    a.article = req.body.article
-    a.number = req.body.number
-    a.layout = req.body.layout
-    a.save -> res.send a
-
-  app.put "/pages/:id", auth, (req, res) ->
-    Page.findById req.params.id, (e, a) ->
-      a.magazine = req.body.magazine
-      a.article = req.body.article
-      a.number = req.body.number
-      a.layout = req.body.layout
-      a.save -> res.send a
 
   app.delete '/magazines/:id', auth, (req, res)->
     Magazine.findById req.params.id, (e, a)->
@@ -112,15 +87,11 @@ module.exports.setup = (app) ->
             res.statusCode = 500
             console.log('remove book/yourmagazine (rm) process exited with code ' + code)
 
-  app.delete '/pages/:id', auth, (req, res)->
-    Page.findById req.params.id, (e, model)->
-      model.remove -> res.send 'page deleted'
-
-createMagazineFiles = (folder, cb) ->
+createMagazineFiles = (magazine, folder, theme) ->
   fs.mkdirSync "./public/books/" + folder
-  fs.copySync "./components/magazine/gfx", "./public/books/" + folder + "/hpub/gfx"
-  fs.copySync "./components/magazine/css", "./public/books/" + folder + "/hpub/css"
-  fs.copySync "./components/magazine/js", "./public/books/" + folder + "/hpub/js"
-  fs.copySync "./components/magazine/images", "./public/books/" + folder + "/hpub/images"
-  cb()
+  fs.copySync "./components/magazine/" + theme + "/gfx", "./public/books/" + folder + "/hpub/gfx"
+  fs.copySync "./components/magazine/" + theme + "/css", "./public/books/" + folder + "/hpub/css"
+  fs.copySync "./components/magazine/" + theme + "/js", "./public/books/" + folder + "/hpub/js"
+  fs.copySync "./components/magazine/" + theme + "/images", "./public/books/" + folder + "/hpub/images"
+  HpubGenerator.generate magazine
 

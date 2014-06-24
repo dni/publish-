@@ -6,7 +6,9 @@ define [
   'minicolors'
   'bootstrap'
 ], (App, i18n, $, tinymce, minicolors, bootstrap) ->
+
   tinyMCE.baseURL = '/components/backend/vendor/tinymce'
+
   App.addRegions
     navigationRegion:"#navigation"
     contentRegion:"#content"

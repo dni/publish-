@@ -10,6 +10,7 @@ require.config({
 		"jquery.ui": "vendor/jquery.ui",
 		tinymce: "vendor/tinymce/tinymce.min",
 		"jquery.tinymce": "vendor/tinymce/jquery.tinymce.min",
+		"jquery.jcrop": "vendor/jcrop/js/jquery.Jcrop",
 		"jquery.form": "vendor/jquery.form",
 		underscore: "vendor/underscore",
 		wreqr: "vendor/wreqr",
@@ -22,7 +23,8 @@ require.config({
 		tpl: 'vendor/tpl',
 		i18n: 'vendor/i18n',
 		d3: 'vendor/d3',
-		minicolors: 'vendor/minicolors/jquery.minicolors'
+		minicolors: 'vendor/minicolors/jquery.minicolors',
+		notifyjs: 'vendor/notify'
 	},
 	map: {
 	    '*': {
@@ -51,6 +53,7 @@ require.config({
     ],
 	shim: {
 		'jquery.ui':['jquery'],
+		'jquery.jcrop':['jquery'],
 		'jquery.tinymce':['jquery', 'tinymce'],
 		'jquery.form':['jquery'],
 		'bootstrap':['jquery'],

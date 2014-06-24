@@ -13,6 +13,7 @@ define({
     	"description": "Description",
     	"alt": "Alt",
     	"filetype": "Filetype",
+    	"fileDescription": "Use 'cover' and 'back' templates keys",
         "emptyMessage": "The file does not exist anymore",
         "newFile": "uploaded new file",
         "deleteFile": "deleted file",
