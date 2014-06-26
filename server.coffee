@@ -1,4 +1,6 @@
-port = process.argv[2] || 1666
+config = require "./configuration.json"
+
+port = process.argv[2] || config.developmentPort
 sessionSecret = 'publish#crossplattform#app'
 
 express = require 'express.io'
@@ -7,7 +9,7 @@ passport = require "passport"
 LocalStrategy = require('passport-local').Strategy
 mongoose = require "mongoose"
 Users = require __dirname+"/components/backend/modules/user/model/UserSchema"
-db = mongoose.connect 'mongodb://localhost/publish'
+db = mongoose.connect 'mongodb://localhost/'+config.dbname
 fs = require 'fs'
 
 app.http().io()
