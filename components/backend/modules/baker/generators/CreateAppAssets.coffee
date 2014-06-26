@@ -19,13 +19,13 @@ module.exports = (setting, cb)->
         if file.key is 'icon' then icon = process.cwd()+'/public/files/'+file.name
 
     if background is "" then background = __dirname+'/templates/bg.jpg'
-    #if logo is "" && icon is ""
-   #   logo = __dirname+'/templates/logo.png'
-    #  icon = __dirname+'/templates/icon.png'
-    if logo is "" then logo = icon
+    if logo is '' && icon is ''
+      logo = __dirname+'/templates/logo.png'
+      icon = __dirname+'/templates/icon.png'
+    else if logo is "" then logo = icon
     else if icon is "" then icon = logo
-    console.log icon, logo
     createIcons formats.pop()
+
 
   createIcons = (format)->
     #key = if format is "icon" then "icon" else "logo"
@@ -89,7 +89,6 @@ module.exports = (setting, cb)->
                 topPos = (imgData.h-logoH)/2
                 targetDir += "LaunchImage.launchimage"
 
-              console.log(imgData.w, imgData.h)
               gm(background)
                 #.resize(sizeOfBg)
                 .crop(imgData.w, imgData.h)#, ((ww-sizeOfBg)/2), ((hh-sizeOfBg)/2))
