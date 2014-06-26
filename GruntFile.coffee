@@ -112,7 +112,7 @@ module.exports = (grunt)->
       production:
         options:
           command: 'coffee'
-          index: 'server.coffee #{port}'
+          index: 'server.coffee'#+port
           logDir: 'cache'
 
     bowercopy:
@@ -269,11 +269,11 @@ module.exports = (grunt)->
     # 'copy:tinymce' # translations for tinymce
     'clean:lib' #workaround ;()
     'build'
-    'forever:server1:start'
+    'forever:production:start'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [
-    'forever:server1:stop'
+    'forever:production:stop'
     'dropDatabase'
     'clean:reinstall'
     'install'
@@ -301,8 +301,8 @@ module.exports = (grunt)->
   grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine', 'restart']
 
   grunt.registerTask 'restart', 'Restart the app daemon', [
-    'forever:server1:stop'
-    'forever:server1:start'
+    'forever:production:stop'
+    'forever:production:start'
   ]
 
   grunt.registerTask 'reloadSettings', 'Reloading for settings', [
