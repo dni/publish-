@@ -112,18 +112,6 @@ module.exports = (grunt)->
           repository: 'https://github.com/bakerframework/baker.git'
           directory: 'baker-master'
 
-    # forever:
-      # development:
-        # options:
-          # command: 'coffee'
-#
-          # index: 'server.coffee '+config.developmentPort
-          # logDir: 'cache'
-      # production:
-        # options:
-          # command: 'coffee'
-          # index: 'server.coffee '+config.productionPort
-          # logDir: 'cache'
 
     bowercopy:
       libsBackend:
@@ -330,8 +318,7 @@ module.exports = (grunt)->
     'clean:lib' #workaround ;()
     'fixLibs' # https://github.com/requirejs/i18n/issues/21
     'build'
-    'forever:development:restart'
-    'forever:production:restart'
+    'forever:production:start'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [
@@ -362,10 +349,13 @@ module.exports = (grunt)->
   grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine', 'restart']
 
   grunt.registerTask 'restart', 'Restart the app daemon', [
-    'forever:production:stop'
-    'forever:production:start'
-    'forever:development:stop'
-    'forever:development:start'
+    # 'forever:production:stop'
+    # 'forever:production:start'
+  ]
+
+  grunt.registerTask 'reloadSettings', 'Reloading for settings', [
+    #'build'
+    # 'forever:server1:restart'
   ]
 
   return grunt
