@@ -7,6 +7,10 @@ define [
   'cs!modules/publish/model/NavigationItems'
   'cs!modules/publish/view/NavigationView'
   'cs!modules/publish/Regions'
+  "cs!modules/publish/Events"
+  "cs!modules/publish/Socket"
+  "css!vendor/minicolors/jquery.minicolors.css"
+  "less!modules/publish/style/main"
 ],
 ( App, Utils, i18n, Config, NavigationItem, NavigationItems, NavigationView)->
 

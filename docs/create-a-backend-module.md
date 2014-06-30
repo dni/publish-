@@ -1,11 +1,23 @@
 # Creating a new Backend Module
 In order to create a new backend module you have.... at ./components/backend/
 
+* Folder structure and Files
+* Module Configuration
+* Serverside / Nodejs
+* Translation
+* Tests
+
 
 ## Folder structure and Files
 
-module/
-
+mymodule/MyModule.coffee
+mymodule/configuration.json
+mymodule/server.coffee
+mymodule/model/MyModuleSchema.coffee
+mymodule/model/MyModuleModel.coffee
+mymodule/model/MyModuleCollection.coffee
+mymodule/controller/MyModuleController.coffee
+mymodule/view/MyModuleView.coffee
 
 ## Module Configuration
 In your module directory you have to put a configuration.json to hook your module into the feature of the backend

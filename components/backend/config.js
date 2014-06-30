@@ -2,6 +2,7 @@ require.config({
   baseUrl: 'components/backend/',
 	paths: {
 		App: "utilities/App",
+		Publish: "utilities/Publish",
 		Settings: "modules/settings/model/Settings",
 		Router: "utilities/Router",
 		utils: "utilities/Utilities",
@@ -61,4 +62,15 @@ require.config({
 	}
 });
 
-require(['main']);
+require(['text!configuration.json', 'main'], function(config){
+    var cfg = JSON.parse(config);
+    require(cfg.backend_modules, function(){
+        console.log(arguments);
+        for(var i = 0;i<arguments.length;i++) {
+
+            var Module = arguments[i];
+            console.log(Module);
+            // Module.init();
+        }
+    });
+});

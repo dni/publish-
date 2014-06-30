@@ -1,24 +1,5 @@
-define([
-  "backbone",
-  "cs!App",
-  "css!vendor/minicolors/jquery.minicolors.css",
-  "less!modules/publish/style/main",
-  "cs!modules/publish/Regions",
-  "cs!modules/publish/Events",
-  "cs!modules/publish/Socket",
-  "cs!modules/publish/PublishModule",
-  "cs!modules/settings/SettingsModule",
-  "cs!modules/files/FileModule",
-  "cs!modules/user/UserModule",
-  "cs!modules/pages/PageModule",
-  "cs!modules/article/ArticleModule",
-  "cs!modules/magazine/MagazineModule",
-  "cs!modules/baker/BakerModule",
-  "cs!modules/static/StaticModule",
-  "cs!modules/messages/MessageModule",
-	// coming soon in 2.0
-	// "cs!modules/reports/ReportModule",
-], function(Backbone){
-    delayed = function(){ Backbone.history.start(); }
-    setTimeout(delayed, 1000);
+require(["backbone", "cs!utils"],function(Backbone, Utils){
+    var start = function(){ Backbone.history.start(); }
+    Utils.Vent.on("app:ready", start)
+    setTimeout(start, 1000);
 });
