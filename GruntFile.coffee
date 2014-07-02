@@ -5,7 +5,7 @@ db = mongoose.connect 'mongodb://localhost/'+config.dbname
 Magazine = require __dirname+"/components/backend/modules/magazine/model/MagazineSchema"
 HpubGenerator = require __dirname + "/components/backend/modules/magazine/generators/HpubGenerator"
 fs = require "fs-extra"
-forever = require 'forever-monitor'
+foreverMon = require 'forever-monitor'
 
 
 module.exports = (grunt)->
@@ -205,21 +205,15 @@ module.exports = (grunt)->
             exclude: ['coffee-script', 'css', 'less']
           }]
 
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-less'
-  grunt.loadNpmTasks 'grunt-contrib-watch'
-  grunt.loadNpmTasks 'grunt-contrib-requirejs'
+    forever:
+      server1:
+        options:
+          command: 'coffee'
+          index: 'server.coffee'
+          logDir: 'cache'
 
-  grunt.loadNpmTasks 'grunt-jsonlint'
+  require('load-grunt-tasks')(grunt);
 
-  grunt.loadNpmTasks 'grunt-contrib-jasmine'
-  grunt.loadNpmTasks 'grunt-coffeelint'
-
-  grunt.loadNpmTasks 'grunt-mkdir'
-  grunt.loadNpmTasks 'grunt-bower-task'
-  grunt.loadNpmTasks 'grunt-git'
-  grunt.loadNpmTasks 'grunt-bowercopy'
 
   # clean db
   grunt.registerTask 'dropDatabase', 'drop the database', ->
@@ -274,40 +268,6 @@ module.exports = (grunt)->
       done()
 
 
-
-  grunt.registerTask 'start', 'Start the server', ->
-    production = new forever.Monitor "server.coffee",
-      max: 3
-      silent: true
-      options: [
-        max: 2 # Sets the maximum number of times a given script should run
-        command: "coffee" # Binary to run (default: 'node')
-        options: [config.productionPort]
-        logFile: "cache/production-log.txt" # Path to log output from forever process (when daemonized)
-        outFile: "cache/production-out.txt" # Path to log output from child stdout
-        errFile: "cache/production-err.txt" # Path to log output from child stderr
-      ]
-
-    development = new forever.Monitor "server.coffee",
-      max: 3
-      silent: true
-      options: [
-        max: 2 # Sets the maximum number of times a given script should run
-        command: "coffee" # Binary to run (default: 'node')
-        options: [ config.developmentPort ]
-        logFile: "cache/development-log.txt" # Path to log output from forever process (when daemonized)
-        outFile: "cache/development-out.txt" # Path to log output from child stdout
-        errFile: "cache/development-err.txt" # Path to log output from child stderr
-      ]
-    production.start()
-    development.start()
-
-  grunt.registerTask 'stop', 'Stop the server', ->
-    # production.stop()
-    # development.stop()
-
-  grunt.registerTask 'restart', 'Restart the server', [ "stop", "start" ]
-
   grunt.registerTask 'install', 'Install the App', [
     'bower:install'
     'gitclone:baker:clone'
@@ -348,14 +308,5 @@ module.exports = (grunt)->
 
   grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine', 'restart']
 
-  grunt.registerTask 'restart', 'Restart the app daemon', [
-    # 'forever:production:stop'
-    # 'forever:production:start'
-  ]
-
-  grunt.registerTask 'reloadSettings', 'Reloading for settings', [
-    #'build'
-    # 'forever:server1:restart'
-  ]
 
   return grunt
