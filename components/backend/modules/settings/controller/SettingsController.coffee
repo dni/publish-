@@ -28,8 +28,6 @@ define [
 
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
 
-
     clearCache: ->
       $.get "/clearCache", ->
-        console.log "cache cleared"
-        window.location = "/admin#settings"
+        Utils.Log i18n.clearCache, 'info'
