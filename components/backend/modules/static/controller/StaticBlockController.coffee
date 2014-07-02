@@ -1,27 +1,19 @@
 define [
-  'cs!App'
-  'cs!utils'
-  'i18n!modules/static/nls/language.js'
-  'marionette'
-  'cs!../view/ListView'
+  'cs!Publish'
   'cs!../view/DetailView'
+  'cs!../view/ListView'
   'cs!../model/StaticBlock'
-  'cs!utilities/views/EmptyView'
-  'cs!utilities/views/TopView'
-], ( App, Utils, i18n, Marionette, ListView, DetailView, Model, EmptyView, TopView ) ->
+  'cs!../model/StaticBlocks'
+  'text!../configuration.json'
+  'i18n!modules/static/nls/language.js'
+], ( Publish, DetailView, ListView, Model, Collection, Config, i18n) ->
 
-  class StaticController extends Marionette.Controller
+  class StaticController extends Publish.Controller
+    Config: Config
+    i18n: i18n
+    Model: Model
+    Collection: Collection
+    DetailView: DetailView
+    ListView: ListView
 
-    details: (id) ->
-      model = App.StaticBlocks.findWhere _id: id
-      if model
-        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new DetailView model: model
-      else
-        Utils.Vent.trigger 'app:updateRegion', "contentRegion", new EmptyView message: i18n.emptyMessage
-
-    add: ->
-      Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new DetailView model: new Model
-
-    list: ->
-      Utils.Vent.trigger 'app:updateRegion', 'listTopRegion', new TopView navigation: i18n.navigation, newModel: 'newStaticBlock'
-      Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.StaticBlocks
+  new StaticController

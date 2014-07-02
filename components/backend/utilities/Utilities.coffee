@@ -6,7 +6,6 @@ define [
   'cs!utilities/Date'
 ], ( Vent, Log, Debug, Viewhelpers) ->
 
-
   addSetting = (configname, settings, i18n)->
     Vent.trigger 'settings:addSetting', configname, settings, i18n
 
@@ -29,14 +28,23 @@ define [
 
     # addModule Shortcut
     addModule: (Config, i18n)->
-      config = JSON.parse Config
+
+      # TODO clean this after refactor
+      try
+        config = JSON.parse Config
+      catch e
+        config = Config
 
       #add module setting
       if config.settings
         settingsToAdd.push [config.config.name, config.settings, i18n]
 
       # add module to navigation
-      if config.navigation
+      # TODO navigation is true should by every module in navigation
+      if config.navigation is true
+        # console.log config.name
+        Vent.trigger 'publish:addNavItem', {button:config.navigationButton, route:config.name}, i18n
+      else if config.navigation
         Vent.trigger 'publish:addNavItem', config.navigation, i18n
 
       # fire ready event for every module except settings

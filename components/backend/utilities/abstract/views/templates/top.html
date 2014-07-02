@@ -1,6 +1,9 @@
 <h3><%= navigation %></h3>
 <% if (newModel) { %>
-	<a href="#<%= newModel %>" class="btn btn-default"><span class="glyphicon glyphicon-<%= icon %>"></span></a>
+    <a href="#<%= newModel %>" class="btn btn-default"><span class="glyphicon glyphicon-<%= icon %>"></span></a>
+<% } %>
+<% if (newRoute) { %>
+    <a href="#<%= newRoute %>" class="btn btn-default"><span class="glyphicon glyphicon-<%= icon %>"></span></a>
 <% } %>
 <% if (search) { %>
 	<form class="form-inline" role="form">

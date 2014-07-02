@@ -3,17 +3,29 @@ define [
     'cs!Router'
     'cs!utils'
 ], ( App, Router, Utils ) ->
-
   class Module
+    constructor: (@Controller)->
+      # @[key] = arg for key, arg in args
+
     init:->
+      config = @Controller.Config
 
-      App[@Config.collectionName] = new @Collection
-      App[@Config.collectionName].fetch
-        success:-> Utils.Vent.trigger @Config.moduleName+":collection:ready"
+      # collection
+      if config.collectionName
+        App[config.collectionName] = new @Controller.Collection
+        App[config.collectionName].fetch
+          success:->
+            Utils.Vent.trigger config.name+":collection:ready"
 
-      Router.processAppRoutes new @Controller,
-        @Config.moduleName: "show"
-        @Config.modelName: "details"
-        "new"+@Config.modelName: "add"
+      # Routes from Controller
+      routes = @Controller.routes || {}
 
-      Utils.addModule @Config, @i18n
+      # Standard Routes
+      routes[config.name] = "list"
+      routes[config.modelName+'/:id'] = "details"
+      routes['new'+config.modelName] = "add"
+      Router.processAppRoutes @Controller, routes
+
+      # add module (settings/navigation)
+      Utils.addModule config, @Controller.i18n
+

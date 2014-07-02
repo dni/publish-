@@ -4,12 +4,10 @@ define [
     'i18n!modules/mymodule/nls/language.js'
     'cs!./model/MyCollection'
     'cs!./controller/MyController'
-], ( Publish, Config, i18n, MyCollection, MyController ) ->
+], ( Publish, ConfigJSON, i18n, MyCollection, MyController ) ->
 
-  class MyModule extends Publish.Module
-    Config: Config
+  new Publish.Module
+    Config: JSON.parse ConfigJSON
     Controller: MyController
     Collection: MyCollection
     i18n: i18n
-
-  new MyModule

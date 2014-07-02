@@ -8,8 +8,8 @@ define [
 ], ( App, Publish, MyModule, i18n, MyModuleListView, MyModuleDetailView, MyModuleModel) ->
 
   class MyController extends Publish.Controller
-    Config: MyModule.Config
-    i18n: MyModule.i18n
-    Model: MyModuleModel
-    DetailView: MyModuleDetailView
-    ListView: MyModuleListView
+    # Config: MyModule.Config
+    # i18n: MyModule.i18n
+    # Model: MyModule.Model
+    # DetailView: MyModule.DetailView
+    # ListView: MyModule.ListView

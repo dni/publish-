@@ -5,7 +5,7 @@
     "urlRoot": "mymodule",
     "dbTable": "MyModule",
     "collectionName": "MyModules",
-    "navigation": true
+    "navigation": true,
 
 	"settings": {
 		"defaultAuthor" : {

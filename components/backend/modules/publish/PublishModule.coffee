@@ -21,6 +21,7 @@ define [
   Utils.Vent.on "publish:addNavItem", (config, i18n)->
     config.label = i18n.navigation if i18n
     NavigationItems.add new NavigationItem config
+    App.NavigationItems = NavigationItems
 
   # add Module Config
   Utils.addModule Config, i18n

@@ -9,6 +9,7 @@ define [
     defaults:
       navigation: 'Navigation Title'
       newModel:false
+      newRoute:false
       search:false
       icon: 'plus'
 

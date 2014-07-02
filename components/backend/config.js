@@ -62,15 +62,18 @@ require.config({
 	}
 });
 
-require(['text!configuration.json', 'main'], function(config){
-    var cfg = JSON.parse(config);
-    require(cfg.backend_modules, function(){
-        console.log(arguments);
-        for(var i = 0;i<arguments.length;i++) {
-
-            var Module = arguments[i];
-            console.log(Module);
-            // Module.init();
+require(['text!configuration.json', 'main'], function(configJSON){
+    var config = JSON.parse(configJSON);
+    require(config.backend_modules, function(){
+        for(var i = 0; i < arguments.length;i++) {
+            try {
+                arguments[i].init();
+            } catch(e) {
+                // TODO
+                // MODULES NEED TO BE UPDATED so they work here^^
+                // Only Mymodule should work now
+                // console.log(e);
+            }
         }
     });
 });

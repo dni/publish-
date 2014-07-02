@@ -1,11 +1,28 @@
 {
     "config": {
         "name": "StaticModule",
-        "namespace": "staticBlocks"
+        "namespace": "staticblocks"
     },
-    "navigation": {
-        "button": 0,
-        "route": "staticBlocks",
-        "classNames": "staticBlocks"
+
+    "name": "StaticModule",
+    "moduleName": "StaticModule",
+    "modelName": "StaticBlock",
+    "namespace": "staticblocks",
+    "url": "/staticblocks/",
+    "urlRoot": "staticblocks",
+    "dbTable": "staticblocks",
+    "collectionName": "StaticBlocks",
+
+    "navigation": true,
+
+    "settings": {
+        "defaultAuthor" : {
+          "value": "dnilabs e.U",
+          "type": "text"
+        },
+        "categories" : {
+          "value": "Webdevelopment, Interactive, Webdesign",
+          "type": "text"
+        }
     }
 }

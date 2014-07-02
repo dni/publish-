@@ -1,12 +1,15 @@
 define [
   'cs!App'
-  'cs!Publish'
+  'cs!utilities/Publish'
   'marionette'
 ], ( App, Publish, Marionette) ->
   class Controller extends Marionette.Controller
 
+    constructor:->
+      @Config = JSON.parse @Config
+
     settings: (attr)->
-      (App.Settings.findWhere name: @moduleName).getValue(attr)
+      (App.Settings.findWhere name: @Config.moduleName).getValue(attr)
 
     details: (id) ->
       model = App[@Config.collectionName].findWhere _id: id
@@ -20,9 +23,9 @@ define [
       App.contentRegion.show new @DetailView
         model: new @Model
 
-    show: ->
+    list: ->
       App.listTopRegion.show new Publish.Views.TopView
         navigation: @i18n.navigation
-        newRoute: 'new'+@Config.moduleName
+        newRoute: 'new'+@Config.modelName
       App.listRegion.show new @ListView collection: App[@Config.collectionName]
 

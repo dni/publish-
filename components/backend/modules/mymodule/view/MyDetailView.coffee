@@ -10,7 +10,7 @@ define [
   class MyDetailView extends Marionette.ItemView
     template: Template
     templateHelpers:
-      t: MyModule.i18n
+      # t: MyModule.i18n
       renderCategories: (category, func)->
         cats = (App.Settings.findWhere name:MyModule.Config.moduleName).getValue "categories"
         for cat in cats.split ','
@@ -31,7 +31,7 @@ define [
 
 
     destroy:->
-      Utils.Log MyModule.i18n.deleteArticle, 'delete', text: @model.get 'title'
+      # Utils.Log MyModule.i18n.deleteArticle, 'delete', text: @model.get 'title'
       @model.destroy success:->
 
     save: ->
@@ -43,13 +43,13 @@ define [
           wait: true
           success: (res) ->
             route = MyModule.Config.modelName+'/'+res.attributes._id
-            Utils.Log MyModule.i18n.newArticle, 'new',
-              text: res.attributes.title
-              href: route
+            # Utils.Log MyModule.i18n.newArticle, 'new',
+              # text: res.attributes.title
+              # href: route
             Router.navigate route, false
       else
-        Utils.Log MyModule.i18n.updateArticle, 'update',
-          text: @model.get 'title'
-          href:  MyModule.Config.modelName+'/'+@model.get '_id'
+        # Utils.Log MyModule.i18n.updateArticle, 'update',
+          # text: @model.get 'title'
+          # href:  MyModule.Config.modelName+'/'+@model.get '_id'
         @model.save()
 
