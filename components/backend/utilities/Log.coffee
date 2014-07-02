@@ -1,9 +1,7 @@
 define [
   'cs!App'
   'cs!modules/messages/model/Model'
-  'notifyjs'
-  'jquery'
-], (App, Message, notify, $) ->
+], (App, Message) ->
   (log, type, additionalinfo)->
     if !additionalinfo? then additionalinfo = ''
     if !type? then type = 'log'

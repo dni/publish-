@@ -40,8 +40,6 @@ app.configure ->
   app.use passport.initialize()
   app.use passport.session()
 
-
-
 # load/setup components
 componentsDir = __dirname+'/components/'
 fs.readdir componentsDir, (err, files)->
@@ -54,6 +52,6 @@ fs.readdir componentsDir, (err, files)->
             component = require componentsDir+file+'/server.coffee'
             component.setup app
 
-
 app.listen port
+
 console.log "Welcome to Publish! server runs on port "+port
