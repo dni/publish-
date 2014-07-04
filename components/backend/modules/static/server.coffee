@@ -1,18 +1,19 @@
-StaticBlock = require __dirname+'/model/StaticBlockSchema'
 fs = require "fs-extra"
 auth = require './../../utilities/auth'
 
-module.exports.setup = (app)->
+module.exports.setup = (app, config)->
+
+  StaticblockSchema = require('./../../lib/model/Schema')(config.dbTable)
 
   # Insert Frontend Layout Data
-  StaticBlock.count {}, (err, count)->
+  StaticblockSchema.count {}, (err, count)->
     if count is 0
       spawn = require('child_process').spawn
       mongoimport = spawn 'mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], cwd:__dirname+'/data/'
 
-  # get single static block data
+  # get single static block data frontend
   app.get '/StaticBlock/:id', auth, (req, res)->
-    StaticBlock.findOne key:req.params.id, (e, a)-> res.send a.data
+    Staticblock.findOne key:req.params.id, (e, a)-> res.send a.data
 
   # export StaticBlock
   app.get '/exportStaticBlocks', auth, (req, res)->
@@ -25,28 +26,3 @@ module.exports.setup = (app)->
       else
         res.send('Error: while exporting Static Blocks, code: ' + code)
         console.log('Error: while exporting Static Blocks, code: ' + code)
-
-	# crud
-  app.get '/StaticBlocks', auth, (req, res)->
-    StaticBlock.find().limit(20).execFind (arr,data)-> res.send data
-
-  app.post '/StaticBlocks', auth, (req, res)->
-    a = new StaticBlock
-    a.title = req.body.title
-    a.key = req.body.key
-    a.data = req.body.data
-    a.deleteable = req.body.deleteable
-    a.save -> res.send a
-
-  app.put '/StaticBlocks/:id', auth, (req, res)->
-    StaticBlock.findById req.params.id, (e, a)->
-      a.title = req.body.title
-      a.key = req.body.key
-      a.data = req.body.data
-      a.deleteable = req.body.deleteable
-      a.save -> res.send a
-
-  app.delete '/StaticBlocks/:id', auth, (req, res)->
-    StaticBlock.findById req.params.id, (e, a)->
-      a.remove -> res.send 'deleted static block'
-

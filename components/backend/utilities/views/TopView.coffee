@@ -1,7 +1,7 @@
 define [
   'backbone'
   'marionette'
-  'tpl!./templates/top.html'
+  'tpl!utilities/templates/top.html'
 ],
 (Backbone, Marionette, Template) ->
 
@@ -9,6 +9,7 @@ define [
     defaults:
       navigation: 'Navigation Title'
       newModel:false
+      newRoute:false
       search:false
       icon: 'plus'
 

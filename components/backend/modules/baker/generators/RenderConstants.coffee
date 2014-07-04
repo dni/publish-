@@ -1,6 +1,6 @@
 ejs = require "ejs"
 fs = require "fs-extra"
-StaticBlocks = require "./../../static/model/StaticBlockSchema"
+StaticBlocks =   require('./../../../lib/model/Schema')('staticblocks')
 Settings = require "./../../settings/model/SettingSchema"
 i18n = require './../nls/baker.json'
 
@@ -35,8 +35,8 @@ module.exports = (setting, cb)->
       settings: setting.settings
       domain: generalsetting.settings.domain.value
 
-    # info menu
-    StaticBlocks.findOne(key: "info").exec (err, block) ->
+    #info menu
+    StaticBlocks.findOne(attributes: key: "info").exec (err, block) ->
       template = fs.readFileSync(__dirname+"/templates/info.html", "utf-8")
       fs.writeFileSync dirname+"/BakerShelf/info/info.html", ejs.render template,
         block: block.data

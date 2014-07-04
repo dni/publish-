@@ -1,2 +1,4 @@
-define ['marionette'], (Marionette) ->
+define [
+  'marionette'
+], (Marionette) ->
   new Marionette.Application()

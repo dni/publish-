@@ -42,7 +42,6 @@ define [
       # add module to navigation
       # TODO navigation is true should by every module in navigation
       if config.navigation is true
-        # console.log config.name
         Vent.trigger 'publish:addNavItem', {button:config.navigationButton, route:config.name}, i18n
       else if config.navigation
         Vent.trigger 'publish:addNavItem', config.navigation, i18n

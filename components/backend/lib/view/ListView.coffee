@@ -1,6 +1,6 @@
 define [
   'marionette'
-  'tpl!../templates/listItem.html'
+  'tpl!../templates/list-item.html'
 ], (Marionette, Template) ->
 
   class ListItemView extends Marionette.ItemView
@@ -10,3 +10,5 @@ define [
 
   class ListView extends Marionette.CollectionView
     itemView: ListItemView
+
+  return ListView

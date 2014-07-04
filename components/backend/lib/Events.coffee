@@ -1,9 +1,8 @@
 define [
   'cs!App'
   'cs!utils'
-  'io'
   'jquery'
-], ( App, Utils, io, $ ) ->
+], ( App, Utils, $ ) ->
 
   # Event - app:updateRegion
   Utils.Vent.on 'app:updateRegion', (region, view, cb)->

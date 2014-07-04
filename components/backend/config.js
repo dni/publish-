@@ -2,7 +2,7 @@ require.config({
   baseUrl: 'components/backend/',
 	paths: {
 		App: "utilities/App",
-		Publish: "utilities/Publish",
+		Publish: "lib/Publish",
 		Settings: "modules/settings/model/Settings",
 		Router: "utilities/Router",
 		utils: "utilities/Utilities",

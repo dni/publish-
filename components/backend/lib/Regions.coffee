@@ -25,7 +25,6 @@ define [
     clearInterval()
 
   App.contentRegion.on "show", ->
-
     # colorpicker
     App.contentRegion.currentView.$el.find(".colorpicker").minicolors
       control: $(this).attr('data-control') || 'hue'

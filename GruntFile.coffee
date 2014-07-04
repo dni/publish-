@@ -346,7 +346,11 @@ module.exports = (grunt)->
     'requirejs:backend'
   ]
 
-  grunt.registerTask 'test', 'Test the App with Jasmine and Coffeelint', ['coffeelint', 'jasmine', 'restart']
+  grunt.registerTask 'test', 'Test the App with Jasmine and JSONlint, Coffeelint', [
+    'jsonlint'
+    'coffeelint'
+    'jasmine'
+  ]
 
   grunt.registerTask 'restart', 'Restart the app daemon', [
     # 'forever:production:stop'

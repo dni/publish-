@@ -1,7 +1,7 @@
 define [
   'underscore'
   'i18n!modules/publish/nls/language.js'
-  'text!./templates/buttons.html'
+  'text!lib/templates/buttons.html'
 ], (_, i18n, buttonTemplate) ->
 
   Viewhelpers =

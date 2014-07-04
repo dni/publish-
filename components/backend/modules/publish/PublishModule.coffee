@@ -6,11 +6,11 @@ define [
   'cs!modules/publish/model/NavigationItem'
   'cs!modules/publish/model/NavigationItems'
   'cs!modules/publish/view/NavigationView'
-  'cs!modules/publish/Regions'
-  "cs!modules/publish/Events"
-  "cs!modules/publish/Socket"
+  'cs!lib/Regions'
+  'cs!lib/Events'
+  'cs!lib/Socket'
   "css!vendor/minicolors/jquery.minicolors.css"
-  "less!modules/publish/style/main"
+  "less!lib/style/main"
 ],
 ( App, Utils, i18n, Config, NavigationItem, NavigationItems, NavigationView)->
 

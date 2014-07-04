@@ -8,21 +8,20 @@
     "moduleName": "StaticModule",
     "modelName": "StaticBlock",
     "namespace": "staticblocks",
+    "collectionName": "StaticBlocks",
     "url": "/staticblocks/",
     "urlRoot": "staticblocks",
     "dbTable": "staticblocks",
-    "collectionName": "StaticBlocks",
-
     "navigation": true,
 
-    "settings": {
-        "defaultAuthor" : {
-          "value": "dnilabs e.U",
-          "type": "text"
+    "model": {
+        "key" : {
+          "type": "text",
+          "mongooseType": "String"
         },
-        "categories" : {
-          "value": "Webdevelopment, Interactive, Webdesign",
-          "type": "text"
+        "data" : {
+          "type": "text",
+          "mongooseType": "String"
         }
     }
 }

@@ -1,4 +1,5 @@
 fs = require 'fs'
+crud = require './utilities/crud'
 module.exports.setup = (app)->
   app.configure ->
     # load/setup modules
@@ -11,4 +12,6 @@ module.exports.setup = (app)->
             fs.exists dir+file+'/server.coffee', (exists)->
               if exists
                 module = require dir+file+'/server.coffee'
-                module.setup app
+                config = require dir+file+'/configuration.json'
+                module.setup app, config
+                if config.model then crud app, config
