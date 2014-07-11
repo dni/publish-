@@ -8,9 +8,9 @@ app = express()
 passport = require "passport"
 LocalStrategy = require('passport-local').Strategy
 mongoose = require "mongoose"
-Users = require __dirname+"/components/backend/modules/user/model/UserSchema"
 db = mongoose.connect 'mongodb://localhost/'+config.dbname
 fs = require 'fs'
+User = require(__dirname+"/components/backend/lib/model/Schema")("users")
 
 app.http().io()
 
@@ -18,17 +18,19 @@ app.configure ->
 
   #authentication
   passport.use new LocalStrategy (username, password, done) ->
-    Users.findOne(
-      username: username
-      password: password
+    # console.log User
+    User.findOne(
+      'fields.username.value': username
+      'fields.password.value': password
     ).execFind (err, user)->
+      console.log user
       done err, user[0]
 
   passport.serializeUser (user, done) ->
     done null, user._id
 
   passport.deserializeUser (_id, done)->
-    Users.findById _id, (err, user)->
+    User.findById _id, (err, user)->
       if !err then app.user = user
       done(err, user)
 

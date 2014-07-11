@@ -62,7 +62,6 @@ define [
 
       model.urlRoot = @Config.urlRoot
       model.collectionName = @Config.collectionName
-
       App.contentRegion.show @newDetailView model
 
     list: ->

@@ -1,14 +1,14 @@
-User = require __dirname+'/model/UserSchema'
 Setting = require process.cwd()+'/components/backend/modules/settings/model/SettingSchema'
 express = require 'express'
 auth = require "../../utilities/auth"
 passport = require 'passport'
 
-module.exports.setup = (app)->
+module.exports.setup = (app, config)->
+  User = require('../../lib/model/Schema')(config.dbTable)
 
   # login
   app.get '/login', (req, res)->
-    res.sendfile process.cwd()+'/components/backend/modules/user/templates/login.html'
+    res.sendfile process.cwd()+'/components/backend/login.html'
 
   app.post '/login', passport.authenticate('local', failureRedirect: '/login'), (req, res)->
     res.redirect '/admin'
@@ -19,6 +19,9 @@ module.exports.setup = (app)->
 
   #admin route
   app.get '/admin', auth, (req, res)->
+
+    req.io.broadcast "userLogin", app.user._id
+
     Setting.find name:'General', (e, a)->
       # if setting doesnt exists start in development mode
       if a.length is 0 || a[0].settings.backend_development.value
@@ -30,43 +33,24 @@ module.exports.setup = (app)->
         app.use '/components', express.static process.cwd()+'/cache/build'
         res.sendfile process.cwd()+'/cache/build/backend/index.html'
 
-  app.get '/user', auth, (req, res)-> res.send app.user
-
-  #crud
-  app.get '/users', auth, (req, res)->
-    User.find().limit(20).execFind (arr,data)->
-      res.send data
-
-  app.post '/users', auth, (req, res)->
-    a = new User
-    a.name = req.body.name
-    a.username = req.body.username
-    a.email = req.body.email
-    a.role = req.body.role
-    a.password = req.body.password
-    a.save -> res.send a
-
-  app.put '/users/:id', auth, (req, res)->
-    User.findById req.params.id, (e, a)->
-      a.name = req.body.name
-      a.role = req.body.role
-      a.username = req.body.username
-      a.email = req.body.email
-      a.password = req.body.password
-      a.save -> res.send a
-
-  app.delete '/users/:id', auth, (req, res)->
-    User.findById req.params.id, (e, a)->
-      a.remove (err)-> if !err then res.send 'deleted' else console.log err
-
   # create default admin user if no user exists
   User.count {}, (err, count)->
     if count == 0
       admin = new User
-      admin.name = "Admin"
-      admin.email = "admin@publish.org"
-      admin.username = "admin"
-      admin.password = "password"
-      admin.role = 0
+      admin.name = config.modelName
+      admin.fields =
+        email:
+          type:"text"
+          value:"admin@publish.org"
+        username:
+          type:"text"
+          value:"admin"
+        password:
+          type:"text"
+          value:"password"
+        title:
+          type:"text"
+          value:"administrator"
+
       admin.save()
       console.log "admin user was created"

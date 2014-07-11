@@ -21,6 +21,9 @@ define [
     App[collection].fetch
       success:->
 
+  socket.on "userLogin", (user_id)->
+    App.User = App.Users.findWhere _id:user_id
+
   socket.on "disconnect", ->
     # reload page for new login after server restarts/crashed
     reload = -> document.location.reload()

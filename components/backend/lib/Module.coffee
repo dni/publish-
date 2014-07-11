@@ -11,12 +11,14 @@ define [
     init:->
       unless @Config? then return c.l "no module Config"
       unless @i18n? then return c.l "no module i18n"
+      unless @Controller? then @Controller = Controller
+
       @Config = JSON.parse @Config
       config = @Config
-      unless @Controller?
-        @Controller = new Controller
-          i18n: @i18n
-          Config: @Config
+
+      @Controller = new Controller
+        i18n: @i18n
+        Config: @Config
 
       # collection
       if @Config.collectionName

@@ -3,10 +3,7 @@ auth = require "./auth"
 module.exports = (app, config)->
   Schema = require('./../lib/model/Schema')(config.dbTable)
 
-    # crud
-
-  console.log(config)
-
+  # crud
   app.post '/'+config.urlRoot, auth, (req, res)->
     schema = new Schema
     schema.user = app.user._id
@@ -28,5 +25,3 @@ module.exports = (app, config)->
   app.delete '/'+config.urlRoot+'/:id', auth, (req, res)->
     Schema.findById req.params.id, (e, a)->
       a.remove -> res.send 'deleted'
-
-  console.log JSON.stringify app.routes

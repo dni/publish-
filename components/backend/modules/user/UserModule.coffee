@@ -1,25 +1,12 @@
 define [
-  'cs!App'
-  'cs!Router'
-  'cs!utils'
-  'jquery'
-  'marionette'
-  'cs!./model/Users'
-  'cs!./controller/UserController'
-  "text!./configuration.json"
-], ( App, Router, Utils, $, Marionette, Users, Controller, Config ) ->
+    'cs!App'
+    'cs!Publish'
+    'cs!./controller/UserController'
+    'text!./configuration.json'
+    'i18n!modules/user/nls/language.js'
+], ( App, Publish, Controller, Config, i18n ) ->
 
-  App.Users = new Users
-  App.Users.fetch
-    success:->
-      $.get '/user', (user) ->
-        App.User = App.Users.findWhere _id:user._id
-
-
-  Router.processAppRoutes new Controller,
-    "users": "list"
-    "logout": "logout"
-    "user/:id": "details"
-    "newUser": "add"
-
-  Utils.addModule Config
+  new Publish.Module
+    Controller: Controller
+    Config: Config
+    i18n: i18n
