@@ -1,10 +1,10 @@
 ejs = require "ejs"
 fs = require "fs-extra"
-StaticBlocks =   require('./../../../lib/model/Schema')('staticblocks')
 Settings = require "./../../settings/model/SettingSchema"
 i18n = require './../nls/baker.json'
 
 module.exports = (setting, cb)->
+  StaticBlocks =   require('./../../../lib/model/Schema')('staticblocks')
   Settings.findOne(name: "General").exec (error, generalsetting) ->
 
     dirname = process.cwd()+"/cache/publish-baker";

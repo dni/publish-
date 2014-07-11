@@ -34,7 +34,6 @@ define [
       routes[@Config.modelName+'/:id'] = "details"
       routes['new'+@Config.modelName] = "add"
       Router.processAppRoutes @Controller, routes
-      c.l @Config, routes
       # add module (settings/navigation)
       Utils.addModule @Config, @i18n
 

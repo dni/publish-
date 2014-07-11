@@ -20,9 +20,19 @@ define [
       unless @TopView? then @TopView = TopView
       unless @EmptyView? then @EmptyView = EmptyView
 
+    newDetailView:(model)->
+      new @DetailView
+        model: model
+        Config: @Config
+        i18n: @i18n
+
     defaults: ->
       defaults = {}
-      return defaults[key] = '' for key, data in @Config.model
+      for key, data in @Config.model
+        defaults[key].type = data.type
+        defaults[key].value = 'lolol'
+        defaults[key].key = key
+      return defaults
 
     settings: (attr)->
       (App.Settings.findWhere name: @Config.moduleName).getValue(attr)
@@ -30,23 +40,33 @@ define [
     details: (id) ->
       model = App[@Config.collectionName].findWhere _id: id
       if model
-        view = new @DetailView model: model
+        view = @newDetailView model
       else
         view = new @EmptyView message: @i18n.emptyMessage
+
+      view.i18n = @i18n
       App.contentRegion.show view
 
     add: ->
-      model = new @Model
-        defaults: @defaults()
-      model.urlRoot = @Config.urlRoot
-      model.modelName = @Config.modelName
+      fields = {}
+      for key, field of @Config.model
+        fields[key] =
+          value: ''
+          type: field.type
 
-      App.contentRegion.show new @DetailView
-        model: model
+      model = new @Model
+
+      model.set
+        fields: fields
+        name: @Config.modelName
+
+      model.urlRoot = @Config.urlRoot
+      model.collectionName = @Config.collectionName
+
+      App.contentRegion.show @newDetailView model
 
     list: ->
       App.listTopRegion.show new @TopView
         navigation: @i18n.navigation
         newRoute: 'new'+@Config.modelName
       App.listRegion.show new @ListView collection: App[@Config.collectionName]
-

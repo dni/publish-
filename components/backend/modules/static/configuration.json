@@ -15,12 +15,12 @@
     "navigation": true,
 
     "model": {
-        "key" : {
+        "title" : {
           "type": "text",
           "mongooseType": "String"
         },
         "data" : {
-          "type": "text",
+          "type": "wysiwyg",
           "mongooseType": "String"
         }
     }

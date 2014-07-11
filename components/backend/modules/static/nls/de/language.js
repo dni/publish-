@@ -4,7 +4,11 @@ define({
 	"key": "Schlüssel",
 	"data": "Inhalt",
 	"emptyMessage": "Der statische Block existiert nicht mehr",
-	"newStatic": "hat statischen Block erstellt",
-	"deleteStatic": "hat statischen Block gelöscht",
-	"updateStatic": "hat statischen Block aktuelisiert"
+	"newModel": "hat statischen Block erstellt",
+	"deleteModel": "hat statischen Block gelöscht",
+	"updateModel": "hat statischen Block aktuelisiert",
+	"attributes": {
+        "title": "Schlüssel",
+        "data": "Inhalt"
+    }
 });

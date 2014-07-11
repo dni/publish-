@@ -22,6 +22,9 @@ module.exports = (grunt)->
       json:
         files:  ['components/**/*.json']
         tasks: ['jsonlint']
+        ignore: [
+          "staticblocks.json"
+        ]
         options:
           spawn: false
       magazine:

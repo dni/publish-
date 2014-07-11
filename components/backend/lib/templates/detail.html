@@ -1,44 +1,30 @@
 <h1><%= t.details %></h1>
 <div class="buttons-top">
-
-	<div class="btn-group">
-	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><%= t.preview %> <span class="caret"></span></button>
-	  <ul class="dropdown-menu" role="menu">
-	    <li><a href="public/books/<%= name %>/hpub/Book Cover.html" target="_blank"><%= t.cover %></a></li>
-	    <li><a href="public/books/<%= name %>/hpub/Book Back.html" target="_blank"><%= t.back %></a></li>
-	    <li><a href="public/books/<%= name %>/hpub/Book Index.html" target="_blank"><%= t.index %></a></li>
-	    <li><a href="public/books/<%= name %>/hpub/Tail.html" target="_blank"><%= t.editorial %></a></li>
-	    <li class="divider"></li>
-	    <li><a href="/downloadHpub/<%= _id %>" target="_blank"><%= t.downloadHpub %></a></li>
-	  </ul>
-	</div>
-
-	<% if (published === false) { %>
-		<button class="publish btn btn-success"><%= t.publish %></button>
-	<% } else { %>
-		<button class="publish btn btn-default"><%= t.unpublish %></button>
-	<% } %>
-	<% if (isPrint()) { %>
-		<button id="download" class="btn btn-default"><%= t.downloadPdf %></button>
-	<% } %>
+    <%= vhs.renderButtons %>
 </div>
 <div class="form-fields">
-
-    <% attributes(function(key, attribute){ %>
+    <% foreachAttribute(fields, function(key, attribute){ %>
     	<div class="form-group">
-    	    <label><%= t.attributes[attribute].label %></label>
-
+    	    <label><%= t.attributes[key] %></label>
 
             <% if (attribute.type === "text") { %>
-                <input type="text" name="attribute.name" class="form-control" value="<%= attribute.value %>" />
+                <input type="text" name="<%= key %>" class="form-control" value="<%= attribute.value %>" />
+             <% } %>
+
+             <% if (attribute.type === "wysiwyg") { %>
+                <textarea name="<%= key %>" class="form-control wysiwyg"><%= attribute.value %></textarea>
+             <% } %>
+
+             <% if (attribute.type === "textarea") { %>
+                <input type="text" class="form-control" value="<%= attribute.value %>"  name="<%= key %>" >
              <% } %>
 
             <% if (attribute.type === "range") { %>
-                <input type="range" class="form-control range" step="<%= attribute.step %>" min="<%= attribute.min %>" max="<%= attribute.max %>" name="<%= attribute.name %>" value="<%= attribute.value %>">
+                <input type="range" class="form-control range" step="<%= attribute.step %>" min="<%= attribute.min %>" max="<%= attribute.max %>" name="<%= attribute.key %>" value="<%= attribute.value %>">
             <% } %>
 
             <% if (attribute.type === "color") { %>
-                <input type="text" class="form-control colorpicker" value="<%= attribute.value %>"  name="<%= attribute.name %>" >
+                <input type="text" class="form-control colorpicker" value="<%= attribute.value %>"  name="<%= key %>" >
             <% } %>
 
             <% if (attribute.type=="select") { %>
@@ -55,49 +41,4 @@
 
     	</div>
     <% }); %>
-
-    <% for (key in settings) { if (settings[key].type == "button") continue; %>
-        <% if (settings[key].type=="header") { %>
-            <h2><%= settings[key].label %></h2>
-        <% } else { %>
-            <div class="form-group">
-                <label><%= settings[key].label %>
-                  <% if (settings[key].description) { %>
-                      <a href="#" data-toggle="tooltip" data-placement="right" title="<%= settings[key].description %>" class="badge">?</a>
-                  <% } %>
-                </label>
-
-                <% if (settings[key].type=="checkbox") { %>
-                  <% if (settings[key].value != "0" || settings[key].value) { %>
-                    <input class="setting form-control" type="checkbox" name="<%= key %>" checked>
-                  <% } else { %>
-                    <input class="setting form-control" type="checkbox" name="<%= key %>">
-                  <% } %>
-
-                <% } if (settings[key].type=="select") { %>
-                    <select class="setting form-control" name="<%= key %>" >
-                        <% for (option in settings[key].options) { %>
-                            <% if (settings[key].value == option) { %>
-                                <option selected value="<%= option %>"><%= settings[key].options[option] %></option>
-                            <% } else { %>
-                                <option value="<%= option %>"><%= settings[key].options[option] %></option>
-                            <% } %>
-                        <% } %>
-                    </select>
-                <% } %>
-                <% } if (settings[key].type=="text") { %>
-                    <input type="<%= settings[key].type %>" class="setting form-control" name="<%= key %>" value="<%= settings[key].value %>">
-                <% } %>
-
-                <% if (settings[key].type=="range") { %>
-                    <input type="<%= settings[key].type %>" class="setting form-control range" step="<%= settings[key].step %>" min="<%= settings[key].min %>" max="<%= settings[key].max %>" name="<%= key %>" value="<%= settings[key].value %>">
-                <% } %>
-
-                <% if (settings[key].type=="color") { %>
-                    <input type="text" class="setting form-control colorpicker <%= key %>" value="<%= settings[key].value %>"  name="<%= key %>" >
-                <% } %>
-            </div>
-        <% } %>
-    <% } %>
-</div>
 </div>

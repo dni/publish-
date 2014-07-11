@@ -22,6 +22,7 @@ define [
       Utils.Vent.trigger 'app:updateRegion', "contentRegion", view
 
     add: ->
+      console.log new UserDetailView model:new User
       Utils.Vent.trigger 'app:updateRegion', 'contentRegion', new UserDetailView model:new User
 
     list: ->

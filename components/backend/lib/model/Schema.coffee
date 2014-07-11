@@ -5,10 +5,10 @@ collections = {}
 module.exports = (dbTable)->
   unless collections[dbTable]?
     collections[dbTable] = mongoose.model dbTable, new Schema
-      modelName : String
+      sortorder: Number
       user: String
       crdate: Date
       date: Date
-      attributes: {}
-
+      name: String
+      fields: Object
   collections[dbTable]

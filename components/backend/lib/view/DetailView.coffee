@@ -9,20 +9,28 @@ define [
 
   class DetailView extends Marionette.ItemView
 
-    constructor:(@Config)->
-      @ui[key] = arg for key, arg in @Config.model
+    initialize:(args)->
+      @ui = {}
+      @ui[key] = "[name="+key+"]" for key, arg of args.Config.model
+      @bindUIElements()
 
     template: Template
 
-    templateHelpers:
+    templateHelpers: ->
       vhs: Utils.Viewhelpers
-      t: @i18n
+      t: @options.i18n
+      foreachAttribute: (fields, cb)->
+        for key, attribute of fields
+          cb key, attribute
 
-    ui:
-      key: 'input[name=key]'
-      data: 'textarea[name=data]'
+    getAttributes:->
+      attr = {}
+      for key, arg of @options.Config.model
+        attr[key] =
+          value: @ui[key].val()
+          type: arg.type
 
-    getAttributes:-> return attr[key] = @ui[key].val() for key, arg in @Config.model
+      return attr
 
     events:
       "click .save": "save"
@@ -31,28 +39,30 @@ define [
 
     cancel: ->
       App.contentRegion.close()
-      Router.navigate @Config.name
+      Router.navigate @Config?.collectionName
 
     save: ->
-      @model.set @getAttributes()
+      @model.set "name", @options.Config.modelName
+      @model.set "fields", @getAttributes()
+      that = @
       if @model.isNew()
-        App[@Config.collectionName].create @model,
+        App[that.options.Config.collectionName].create @model,
           wait: true
           success: (res) ->
-            route = @Config.modelName+'/'+res.attributes._id
-            Utils.Log i18n.newModel, 'new',
+            route = res.attributes.name+'/'+res.attributes._id
+            Utils.Log that.options.i18n.newModel, 'new',
               text: res.attributes._id
               href: route
             Router.navigate route, false
       else
-        Utils.Log i18n.updateModel, 'update',
+        Utils.Log @options.i18n.updateModel, 'update',
           text: @model.get '_id'
-          href: @Config.modelName+'/'+@model.get '_id'
+          href: @model.get("name")+'/'+@model.get '_id'
         @model.save()
 
 
     deleteModel: ->
-      Utils.Log i18n.deleteModel, 'delete', text: @model.get '_id'
+      Utils.Log @options.i18n.deleteModel, 'delete', text: @model.get '_id'
       @model.destroy
         success:->
       App.contentRegion.close()
