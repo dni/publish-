@@ -1,5 +1,6 @@
 define [
   'cs!App'
+  'cs!Publish'
   'cs!Settings'
   'cs!utils'
   'i18n!modules/settings/nls/language.js'
@@ -10,9 +11,12 @@ define [
   'cs!utilities/views/TopView'
   'cs!modules/files/model/Files'
 ],
-( App, Settings, Utils, i18n, $, Marionette, ListView, Layout, TopView, Files ) ->
+( App, Publish, Settings, Utils, i18n, $, Marionette, ListView, Layout, TopView, Files ) ->
 
-  class SettingsController extends Marionette.Controller
+  class SettingsController extends Publish.Controller
+
+    routes:
+      "settings/clearCache": "clearCache"
 
     details: (moduleName) ->
       model = App.Settings.findWhere name: moduleName
@@ -27,7 +31,6 @@ define [
         icon: 'refresh'
 
       Utils.Vent.trigger 'app:updateRegion', 'listRegion', new ListView collection: App.Settings
-
 
     clearCache: ->
       $.get "/clearCache", ->

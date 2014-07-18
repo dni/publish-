@@ -1,7 +1,7 @@
 define [
   'jquery'
   'marionette'
-  'tpl!../templates/navItem.html'
+  'tpl!../templates/nav-item.html'
 ],
 ($, Marionette, Template) ->
 

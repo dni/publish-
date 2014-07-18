@@ -8,6 +8,9 @@ define [
   'cs!lib/view/DetailView'
   'cs!lib/view/EmptyView'
   'cs!lib/view/TopView'
+  'cs!lib/Regions'
+  'cs!lib/Events'
+  'cs!lib/Socket'
 ], ( Utils, Controller, Module, Model, Collection, ListView, DetailView, EmptyView, TopView) ->
   Utils: Utils
   Module: Module

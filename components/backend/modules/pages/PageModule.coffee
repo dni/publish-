@@ -1,20 +1,9 @@
 define [
-    'cs!App'
-    'cs!Router'
-    'cs!utils'
+    'Publish'
+    "text!./pages/configuration.json"
     'i18n!modules/pages/nls/language.js'
-    "text!modules/pages/configuration.json"
-    'cs!modules/pages/controller/PageController'
-    'cs!modules/pages/model/Pages'
-], ( App, Router, Utils, i18n, Config, Controller, Pages ) ->
+], (Publish, i18n, Config) ->
 
-  App.Pages = new Pages
-  App.Pages.fetch
-    success:->
-
-  Router.processAppRoutes new Controller,
-    "newPage": "addPage"
-    "page/:id": "detailsPage"
-    "pages": "pages"
-
-  Utils.addModule Config, i18n
+  new Publish.Module
+    Config:Config
+    i18n:i18n

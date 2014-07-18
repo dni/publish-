@@ -1,23 +1,9 @@
 define [
   'cs!App'
-  'cs!utils'
-  'cs!Router'
   "text!./configuration.json"
+  "i18n!modules/settings/nls/language.js"
   'cs!./controller/SettingsController'
-  'cs!./model/Settings'
-  'cs!./model/Setting'
-], ( App, Utils, Router, Config, Controller, Settings, Setting ) ->
-
-  Router.processAppRoutes new Controller,
-    "settings": "list"
-    "setting/:id": "details"
-    "settings/clearCache": "clearCache"
-
-  App.Settings = new Settings
-  App.Settings.fetch
-    success:->
-      Utils.Vent.trigger("settings:ready")
-
+], ( App, Config, i18n, Controller ) ->
 
   Utils.Vent.on "settings:addSetting", (name, settings, i18n)->
     setting = App.Settings.findWhere name: name
@@ -31,5 +17,5 @@ define [
     else
       if i18n then setting.translate i18n, -> setting.save()
 
-
-  Utils.addModule Config
+  new Publish.Module
+    Controller: Controller
