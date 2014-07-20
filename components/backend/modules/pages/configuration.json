@@ -1,24 +1,34 @@
 {
-    "config": {
-        "name": "Pages",
-        "namespace": "pages"
-    },
-    "navigation": {
-        "button": 0,
-        "route": "pages",
-        "classNames": "pages"
-    },
-
-    "settings": {
-		"layouts" : {
-          "description": "Comma seperated list of layout keys",
-          "value": "default, fullsize",
-          "type": "text"
+    "name": "PageModule",
+    "moduleName": "PageModule",
+    "modelName": "PageBlock",
+    "namespace": "pages",
+    "collectionName": "Pages",
+    "url": "/pages/",
+    "urlRoot": "pages",
+    "dbTable": "pages",
+    "navigation": true,
+    "model": {
+        "title" : {
+          "type": "text",
+          "mongooseType": "String"
         },
-        "theme" : {
-          "description": "Comma seperated list of theme keys",
-          "value": "default",
-          "type": "text"
+        "magazine" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "article" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "layout" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "number" : {
+          "type": "text",
+          "mongooseType": "String"
         }
-	}
+
+    }
 }

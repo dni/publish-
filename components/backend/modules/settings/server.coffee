@@ -1,6 +1,6 @@
 auth = require './../../utilities/auth'
 module.exports.setup = (app, config)->
-  Setting = require('../../model/Schema')(config.dbTable)
+  Setting = require('../../lib/model/Schema')(config.dbTable)
 
   # clear cache /rebuild
   app.get "/clearCache", auth, (req, res) ->

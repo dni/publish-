@@ -1,9 +1,9 @@
 define [
   'cs!App'
+  'cs!./model/Model'
   'cs!utils'
   'io'
-], (App, Utils, io ) ->
-
+], (App, Model, Utils, io ) ->
   socket = io.connect()
 
   socket.on "message", (msg)->
@@ -21,14 +21,15 @@ define [
     App[collection].fetch
       success:->
 
-  socket.on "userLogin", (user_id)->
-    App.User = App.Users.findWhere _id:user_id
-
   socket.on "disconnect", ->
     # reload page for new login after server restarts/crashed
     reload = -> document.location.reload()
     setTimeout reload, 3000
 
+  socket.on "connect", ->
+    # reload page for new login after server restarts/crashed
+    $.get "/user", (user)->
+      App.User = new Model user
 
   socket.on "error", (err)->
     Utils.Log "SOCKET ERROR: " + err

@@ -18,12 +18,11 @@ app.configure ->
 
   #authentication
   passport.use new LocalStrategy (username, password, done) ->
-    # console.log User
     User.findOne(
       'fields.username.value': username
       'fields.password.value': password
     ).execFind (err, user)->
-      console.log user
+      app.user = user[0]
       done err, user[0]
 
   passport.serializeUser (user, done) ->

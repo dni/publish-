@@ -1,13 +1,27 @@
 {
-	"config": {
-	    "name": "SettingsModule",
-    	"namespace": "settings"
+    "config": {
+        "name": "SettingsModule",
+        "namespace": "settings"
     },
 
-	"navigation": {
-		"button": "cog",
-		"route": "settings",
-		"label": "Settings",
-		"classNames": ""
-	}
+    "name": "SettingsModule",
+    "moduleName": "SettingsModule",
+    "modelName": "Setting",
+    "namespace": "settings",
+    "collectionName": "Settings",
+    "url": "/settings/",
+    "urlRoot": "settings",
+    "dbTable": "settings",
+    "navigation": true,
+    "navigationButton": "cog",
+    "model": {
+        "name": {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "settings" : {
+          "type": "Object",
+          "default": {}
+        }
+    }
 }

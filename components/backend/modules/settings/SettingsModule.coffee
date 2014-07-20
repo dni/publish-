@@ -1,9 +1,11 @@
 define [
   'cs!App'
+  'cs!Publish'
   "text!./configuration.json"
+  "cs!utils"
   "i18n!modules/settings/nls/language.js"
   'cs!./controller/SettingsController'
-], ( App, Config, i18n, Controller ) ->
+], ( App, Publish, Config, Utils, i18n, Controller ) ->
 
   Utils.Vent.on "settings:addSetting", (name, settings, i18n)->
     setting = App.Settings.findWhere name: name

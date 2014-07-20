@@ -321,7 +321,7 @@ module.exports = (grunt)->
     'clean:lib' #workaround ;()
     'fixLibs' # https://github.com/requirejs/i18n/issues/21
     'build'
-    'forever:production:start'
+    #'forever:production:start'
   ]
 
   grunt.registerTask 'reinstall', 'Reinstalling the App', [

@@ -1,6 +1,6 @@
 define [
-    'Publish'
-    "text!./pages/configuration.json"
+    'cs!Publish'
+    "text!./configuration.json"
     'i18n!modules/pages/nls/language.js'
 ], (Publish, i18n, Config) ->
 
