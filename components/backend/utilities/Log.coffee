@@ -1,13 +1,13 @@
 define [
   'cs!App'
-  'cs!modules/messages/model/Model'
+  'cs!lib/model/Model'
   'notifyjs'
   'jquery'
-], (App, Message, notify, $) ->
+], (App, Model, notify, $) ->
   (log, type, additionalinfo)->
     if !additionalinfo? then additionalinfo = ''
     if !type? then type = 'log'
-    message = new Message
+    message = new Model
     message.set
       message: log
       username: App.User.get "name"

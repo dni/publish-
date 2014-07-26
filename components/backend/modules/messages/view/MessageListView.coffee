@@ -1,10 +1,10 @@
 define [
   'cs!App'
+  'cs!Publish'
   'marionette'
-  'cs!../model/Model'
   'tpl!../templates/list.html'
   'i18n!modules/messages/nls/language.js'
-], (App, Marionette, Model, Template, i18n) ->
+], (App, Publish, Marionette, Template, i18n) ->
 
   class MessageListView extends Marionette.ItemView
 
@@ -37,7 +37,7 @@ define [
       # do nothing on empty message
       if not @ui.message.val() then return
 
-      message = new Model
+      message = new Publish.Model
       message.set
         message: @ui.message.val()
         username: App.User.get "name"

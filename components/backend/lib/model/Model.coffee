@@ -6,10 +6,15 @@ define [
     defaults:
       fields: {}
 
-    # getValue: (fieldname)->
-      # fields = @.get "fields"
-      # if fields[fieldname]
+    setValue: (fieldname, val)->
+      fields = @.get "fields"
+      field = fields[fieldname]
+      field.value = val
+      @.set "fields", fields
 
+    getValue: (fieldname)->
+      fields = @.get "fields"
+      return fields[fieldname].value
 
     togglePublish: ->
       @.set "published", not @.get "published"

@@ -1,4 +1,4 @@
-Message = require __dirname + "/model/Schema"
+Message = require("./../../lib/model/Schema")('messages')
 fs = require "fs"
 auth = require './../../utilities/auth'
 

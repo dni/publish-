@@ -1,5 +1,5 @@
 File = require __dirname+'/model/FileSchema'
-Setting = require './../settings/model/SettingSchema'
+Setting = require('./../../lib/model/Schema')("settings")
 auth = require './../../utilities/auth'
 gm = require 'gm'
 multiparty = require "multiparty"

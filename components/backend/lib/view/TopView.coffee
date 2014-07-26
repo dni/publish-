@@ -16,5 +16,4 @@ define [
   class TopView extends Marionette.ItemView
     template: Template
     initialize: (args)->
-      c.l args
       @model = new TopModel args

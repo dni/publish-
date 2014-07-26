@@ -12,9 +12,10 @@ define [
       if @model.get("button") then @$el.addClass "pull-right"
 
   class NavigationView extends Marionette.CollectionView
-    el: "#navigation"
-    itemView: NavigationItemView
+    tagName: "ul"
+    className: "nav navbar-nav"
 
+    childView: NavigationItemView
     events:
       "click a": "clicked"
 

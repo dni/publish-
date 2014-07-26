@@ -5,7 +5,7 @@ PrintGenerator = require(__dirname + "/PrintGenerator")
 Magazine = require("./../model/MagazineSchema")
 Article = require("./../../article/model/ArticleSchema")
 File = require("./../../files/model/FileSchema")
-Settings = require("./../../settings/model/SettingSchema")
+Settings = require("./../../../lib/model/Schema")("settings")
 Page = require("./../../../lib/model/Schema")("pages")
 
 module.exports.generate = (magazine) ->

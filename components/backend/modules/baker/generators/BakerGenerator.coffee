@@ -2,7 +2,9 @@ fs = require("fs-extra")
 File = require "./../../files/model/FileSchema"
 Emitter = require("events").EventEmitter
 EE = new Emitter
-Settings = require "./../../settings/model/SettingSchema"
+
+Settings = require("./../../../lib/model/Schema")('settings')
+##Magazine = require("./../magazine/model/MagazineSchema")
 createAppAssests = require './CreateAppAssets'
 renderConstants = require './RenderConstants'
 

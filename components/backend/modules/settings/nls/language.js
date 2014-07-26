@@ -1,9 +1,10 @@
 define({
 	"root": {
-		"headline": "Settings",
+		"navigation": "Settings",
 		"deleteSetting": "deleted setting",
-		"fileDescription":
-			"Use template keys for icon-generator 'logo','icon','background'",
+		"attributes": {
+      "title": "No Title"
+    },
 		"updateSetting": "updated setting"
 	},
 	"de": true

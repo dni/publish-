@@ -6,10 +6,10 @@ module.exports.setup = (app, config)->
   StaticblockSchema = require('./../../lib/model/Schema')(config.dbTable)
 
   # Insert Frontend Layout Data
-  StaticblockSchema.count {}, (err, count)->
-    if count is 0
-      spawn = require('child_process').spawn
-      mongoimport = spawn 'mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], cwd:__dirname+'/data/'
+  # StaticblockSchema.count {}, (err, count)->
+  #   if count is 0
+  #     spawn = require('child_process').spawn
+  #     mongoimport = spawn 'mongoimport', ['--db', 'publish', '--collection', 'staticblocks', '--file', 'staticblocks.json'], cwd:__dirname+'/data/'
 
   # get single static block data frontend
   app.get '/StaticBlock/:id', auth, (req, res)->

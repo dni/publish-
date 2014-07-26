@@ -20,11 +20,8 @@ module.exports = (grunt)->
         options:
           spawn: false
       json:
-        files:  ['components/**/*.json']
+        files:  ['components/**/*.json', '!staticblocks.json']
         tasks: ['jsonlint']
-        ignore: [
-          "staticblocks.json"
-        ]
         options:
           spawn: false
       magazine:
@@ -121,22 +118,22 @@ module.exports = (grunt)->
         options:
           destPrefix: "components/backend/vendor"
         files:
-          "io.js": "socket.io-client/dist/socket.io.js"
+          "io.js": "socket.io-client/socket.io.js"
           "jquery.js": "jquery/dist/jquery.js"
           "require.js": "requirejs/require.js"
-          "jquery.ui.js": "jquery-ui/ui/jquery-ui.js"
+          "jquery.ui.js": "jquery-ui/jquery-ui.js"
           "jquery.form.js": "jquery-form/jquery.form.js"
-          "underscore.js": "underscore-amd/underscore.js"
-          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
+          "underscore.js": "underscore/underscore.js"
+          "wreqr.js": "backbone.wreqr/lib/backbone.wreqr.js"
           "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js"
-          "backbone.js": "backbone-amd/backbone.js"
-          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js"
+          "backbone.js": "backbone/backbone.js"
+          "marionette.js": "marionette/lib/backbone.marionette.js"
           "localstorage.js": "backbone-localstorage/backbone-localstorage.js"
           "text.js": 'requirejs-text/text.js'
           "tpl.js": 'requirejs-tpl/tpl.js'
           "cs.js": 'require-cs/cs.js'
           "i18n.js": 'requirejs-i18n/i18n.js'
-          "coffee-script.js": 'coffee-script/index.js'
+          "coffee-script.js": 'coffee-script/extras/coffee-script.js'
           "d3.js": 'd3/d3.js'
           "notify.js": 'notifyjs/dist/notify-combined.min.js'
           # Folders
@@ -155,12 +152,12 @@ module.exports = (grunt)->
         files:
           "jquery.js": "jquery/dist/jquery.js"
           "require.js": "requirejs/require.js"
-          "backbone.js": "backbone-amd/backbone.js"
-          "marionette.js": "marionette/lib/core/amd/backbone.marionette.js"
+          "backbone.js": "backbone/backbone.js"
+          "marionette.js": "marionette/lib/backbone.marionette.js"
           "babysitter.js": "backbone.babysitter/lib/backbone.babysitter.js"
-          "wreqr.js": "backbone.wreqr/lib/amd/backbone.wreqr.js"
-          "coffee-script.js": 'coffee-script/index.js'
-          "underscore.js": 'underscore-amd/underscore.js'
+          "wreqr.js": "backbone.wreqr/lib/backbone.wreqr.js"
+          "coffee-script.js": 'coffee-script/extras/coffee-script.js'
+          "underscore.js": 'underscore/underscore.js'
           "text.js": 'requirejs-text/text.js'
           "tpl.js": 'requirejs-tpl/tpl.js'
           "cs.js": 'require-cs/cs.js'

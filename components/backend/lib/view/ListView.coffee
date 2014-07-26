@@ -9,6 +9,6 @@ define [
       @model.on 'change', @render, @
 
   class ListView extends Marionette.CollectionView
-    itemView: ListItemView
+   childView: ListItemView
 
   return ListView

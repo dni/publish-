@@ -19,7 +19,7 @@ define [
 
   # close detailview if now listview is shown
   App.listRegion.on "show", ->
-    if App.contentRegion.currentView? then App.contentRegion.currentView.close()
+    if App.contentRegion.currentView? then App.contentRegion.currentView.destroy()
 
   App.contentRegion.on "close", ->
     clearInterval()

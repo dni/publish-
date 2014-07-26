@@ -7,17 +7,42 @@ define [
   'cs!./controller/SettingsController'
 ], ( App, Publish, Config, Utils, i18n, Controller ) ->
 
-  Utils.Vent.on "settings:addSetting", (name, settings, i18n)->
-    setting = App.Settings.findWhere name: name
-    if !setting
-      setting = new Setting
-      setting.set "settings", settings
-      setting.set "name", name
-      setting.set "label", name
-      if i18n then setting.translate i18n
-      App.Settings.create setting
-    else
-      if i18n then setting.translate i18n, -> setting.save()
-
-  new Publish.Module
+  module = new Publish.Module
+    Config: Config
+    i18n: i18n
     Controller: Controller
+  
+  pConfig = JSON.parse Config
+
+  settingsready = false
+  settingsToAdd = []
+
+  Utils.Vent.on "SettingsModule:collection:ready", ->
+    settingsready = true
+    for setting in settingsToAdd
+      createSettings setting
+
+  Utils.Vent.on "SettingsModule:addSetting", (config, lang)->
+    for key, value of lang.attributes
+      module.i18n.attributes[key] = value
+         
+    if settingsready
+      createSettings config
+    else
+      settingsToAdd.push config
+
+  createSettings = (config)->
+    setting = App.Settings.findSetting config.moduleName
+    if !setting
+      setting = new Publish.Model
+
+      config.settings['title'] =
+        value: config.moduleName
+        type: "hidden"
+        mongooseType: "String"
+      
+      setting.set "name", pConfig.modelName
+      setting.set "fields", config.settings
+      App.Settings.create setting
+
+  return module

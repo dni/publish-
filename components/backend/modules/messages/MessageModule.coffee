@@ -1,20 +1,13 @@
 define [
-    'cs!App'
-    'cs!utils'
-    'cs!Router'
-    'marionette'
-    'cs!modules/messages/model/Collection'
-    'cs!./controller/Controller'
+    'cs!Publish'
+    'cs!./controller/MessageController'
     "text!./configuration.json"
+    "i18n!./nls/language.js"
     'less!./style'
 ],
-( App, Utils, Router, Marionette, Collection, Controller, Config ) ->
+( Publish, Controller, Config, i18n ) ->
 
-  App.Messages = new Collection
-  App.Messages.fetch
-    success:->
-
-  Router.processAppRoutes new Controller,
-    "messages": "list"
-
-  Utils.addModule Config
+  new Publish.Module
+    Controller: Controller
+    Config: Config
+    i18n: i18n

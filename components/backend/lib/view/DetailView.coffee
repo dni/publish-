@@ -4,7 +4,7 @@ define [
   'cs!utils'
   'cs!Router'
   'marionette'
-  'tpl!lib//templates/detail.html'
+  'tpl!lib/templates/detail.html'
 ], (App, Publish, Utils, Router, Marionette, Template) ->
 
   class DetailView extends Marionette.ItemView
@@ -25,7 +25,15 @@ define [
 
     getAttributes:->
       attr = {}
-      for key, arg of @options.Config.model
+      if @model.get("name") is "Setting"
+        options = @options.Config.settings
+        options['title'] =
+          value: @options.Config.moduleName
+          type: "hidden"
+      else   
+        options = @options.Config.model
+      
+      for key, arg of options
         attr[key] =
           value: @ui[key].val()
           type: arg.type
@@ -49,6 +57,7 @@ define [
         App[that.options.Config.collectionName].create @model,
           wait: true
           success: (res) ->
+            c.l res
             route = res.attributes.name+'/'+res.attributes._id
             Utils.Log that.options.i18n.newModel, 'new',
               text: res.attributes._id

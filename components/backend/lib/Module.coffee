@@ -32,11 +32,14 @@ define [
       routes = @Controller.routes || {}
 
       # Standard Routes
-      routes[@Config.name] = "list"
-      routes[@Config.modelName+'/:id'] = "details"
-      routes['new'+@Config.modelName] = "add"
-      Router.processAppRoutes @Controller, routes
-      # add module (settings/navigation)
-      Utils.addModule @Config, @i18n
+      unless @disableRoutes
+        routes[@Config.moduleName] = "list"
+        routes[@Config.modelName+'/:id'] = "details"
+        routes['new'+@Config.modelName] = "add"
+        Router.processAppRoutes @Controller, routes
 
+      if config.settings
+        Utils.Vent.trigger 'SettingsModule:addSetting', config, @i18n
 
+      if config.navigation is true
+        Utils.Vent.trigger 'publish:addNavItem', {button:config.navigationButton, route:config.name}, @i18n

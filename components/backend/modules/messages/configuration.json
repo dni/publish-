@@ -1,11 +1,26 @@
 {
-    "config": {
-        "name": "MessageModule",
-        "namespace": "messages"
+  "name": "MessagesModule",
+  "moduleName": "MessagesModule",
+  "modelName": "Message",
+  "namespace": "messages",
+  "collectionName": "Messages",
+  "url": "/messages/",
+  "urlRoot": "messages",
+  "dbTable": "messages",
+  "navigation": true,
+  "navigationButton": "comment",
+  "model": {
+    "name": {
+      "type": "text",
+      "mongooseType": "String"
     },
-    "navigation": {
-        "button": "comment",
-        "route": "messages",
-        "label": "Messages"
+    "type": {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "message" : {
+      "type": "Object",
+      "default": {}
     }
+  }
 }

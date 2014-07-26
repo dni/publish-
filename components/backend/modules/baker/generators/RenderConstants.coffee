@@ -1,6 +1,7 @@
 ejs = require "ejs"
 fs = require "fs-extra"
-Settings = require "./../../settings/model/SettingSchema"
+Settings = require("./../../../lib/model/Schema")("settings")
+createAppAssests = require './CreateAppAssets'
 i18n = require './../nls/baker.json'
 
 module.exports = (setting, cb)->

@@ -1,14 +1,13 @@
 define [
   'cs!App'
   'cs!utils'
-  "cs!modules/settings/model/Settings"
+  'cs!Publish'
   "i18n!modules/pages/nls/language.js"
   'marionette'
   'tpl!../templates/page.html',
   'tpl!../templates/page-item.html',
-  'cs!../model/Page',
   'jquery.ui'
-], (App, Utils, Settings, i18n, Marionette, Template, ItemTemplate, Page, jqueryui) ->
+], (App, Publish, Utils, i18n, Marionette, Template, ItemTemplate, jqueryui) ->
 
   class PageMagazineListItemView extends Marionette.ItemView
     template: ItemTemplate
@@ -48,7 +47,7 @@ define [
       "click #addPage": 'addPage'
 
     addPage: ->
-      page = new Page
+      page = new Publish.Model
         number: @collection.length+1
         magazine: @magazine
         article: App.Articles.first()

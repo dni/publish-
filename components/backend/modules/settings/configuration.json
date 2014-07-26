@@ -1,13 +1,7 @@
 {
-    "config": {
-        "name": "SettingsModule",
-        "namespace": "settings"
-    },
-
-    "name": "SettingsModule",
     "moduleName": "SettingsModule",
+    "name": "SettingsModule",
     "modelName": "Setting",
-    "namespace": "settings",
     "collectionName": "Settings",
     "url": "/settings/",
     "urlRoot": "settings",
@@ -15,13 +9,9 @@
     "navigation": true,
     "navigationButton": "cog",
     "model": {
-        "name": {
-          "type": "text",
-          "mongooseType": "String"
-        },
-        "settings" : {
-          "type": "Object",
-          "default": {}
-        }
+      "test": {
+        "type": "text",
+        "mongooseType": "String"
+      }
     }
 }

@@ -1,14 +1,18 @@
 define({
-	"pageHeadline": "Seiten",
-    "addPage": "Seite hinzufügen",
+  "addModel": "Seite hinzufügen",
 	"navigation": "Seiten",
 	"layouts": "Vorlagen",
 	"details": "Seiten Details",
-	"title": "Titel",
-	"number": "Sortierung",
-	"article": "Artikel",
-	"newPage": "hat eine neue Seite erstellt",
-    "updateMagazine": "hat eine Seite aktualisiert",
-    "emptyMessage": "Die Seite existiert nicht mehr",
-    "deleteMagazine": "hat eine Seite gelöscht"
+  "attributes": {
+    "title": "Titel",
+    "number": "Sortierung",
+    "article": "Artikel",
+    "magazine": "Magazine",
+    "layout": "Layout",
+    "number": "Nummer"
+  },
+	"newModel": "hat eine neue Seite erstellt",
+  "updateModel": "hat eine Seite aktualisiert",
+  "emptyMessage": "Die Seite existiert nicht mehr",
+  "deleteModel": "hat eine Seite gelöscht"
 });

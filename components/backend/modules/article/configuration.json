@@ -1,23 +1,62 @@
 {
-	"config": {
-	    "name": "Articles",
-    	"namespace": "article"
+  "name": "ArticleModule",
+  "moduleName": "ArticleModule",
+  "modelName": "Article",
+  "collectionName": "Articles",
+  "url": "/articles/",
+  "urlRoot": "articles",
+  "dbTable": "articles",
+  "navigation": true,
+  "settings": {
+    "defaultAuthor" : {
+      "value": "dnilabs e.U",
+      "type": "text"
     },
-
-	"navigation": {
-		"button": 0,
-		"route": "articles",
-		"classNames": "articles"
-	},
-
-	"settings": {
-		"defaultAuthor" : {
-	      "value": "dnilabs e.U",
-	      "type": "text"
-		},
-		"categories" : {
-	      "value": "Webdevelopment, Interactive, Webdesign",
-	      "type": "text"
-		}
-	}
+    "categories" : {
+      "value": "Webdevelopment, Interactive, Webdesign",
+      "type": "text"
+    }
+  },
+  "model": {
+    "title" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "author" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "teaser" : {
+      "type": "textarea",
+      "mongooseType": "String"
+    },
+    "category" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "tags" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "files" : {
+      "type": "hidden",
+      "mongooseType": "Object"
+    },
+    "desc" : {
+      "type": "wysiwyg",
+      "mongooseType": "String"
+    },
+    "magazine" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "layout" : {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "number":{
+      "type": "text",
+      "mongooseType": "String"
+    }
+  }
 }

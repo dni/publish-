@@ -34,6 +34,20 @@ define [
         defaults[key].key = key
       return defaults
 
+    createNewModel: ->
+      fields = {}
+      for key, field of @Config.model
+        fields[key] =
+          value: ''
+          type: field.type
+      model = new @Model
+      model.set
+        fields: fields
+        name: @Config.modelName
+      model.urlRoot = @Config.urlRoot
+      model.collectionName = @Config.collectionName
+      return model
+
     settings: (attr)->
       (App.Settings.findWhere name: @Config.moduleName).getValue(attr)
 
@@ -48,20 +62,7 @@ define [
       App.contentRegion.show view
 
     add: ->
-      fields = {}
-      for key, field of @Config.model
-        fields[key] =
-          value: ''
-          type: field.type
-
-      model = new @Model
-
-      model.set
-        fields: fields
-        name: @Config.modelName
-
-      model.urlRoot = @Config.urlRoot
-      model.collectionName = @Config.collectionName
+      model = @createNewModel()
       App.contentRegion.show @newDetailView model
 
     list: ->

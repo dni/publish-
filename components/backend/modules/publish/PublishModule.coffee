@@ -14,7 +14,6 @@ define [
   # show navigation
   App.navigationRegion.show new NavigationView collection: NavigationItems
 
-  # events
   Publish.Utils.Vent.on "publish:addNavItem", (config, i18n)->
     config.label = i18n.navigation if i18n
     NavigationItems.add new NavigationItem config
@@ -23,4 +22,5 @@ define [
   new Publish.Module
     Config: Config
     i18n: i18n
+    disableRoutes: true
 

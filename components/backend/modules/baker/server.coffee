@@ -1,5 +1,5 @@
-Setting = require("./../settings/model/SettingSchema")
-Magazine = require("./../magazine/model/MagazineSchema")
+Setting = require("./../../lib/model/Schema")('settings')
+Magazine = require("./../../lib/model/Schema")('magazines')
 auth = require './../../utilities/auth'
 http = require("http")
 _ = require("underscore")

@@ -1,4 +1,4 @@
-Setting = require process.cwd()+'/components/backend/modules/settings/model/SettingSchema'
+Setting = require('./../../lib/model/Schema')("settings")
 express = require 'express'
 auth = require "../../utilities/auth"
 passport = require 'passport'
@@ -18,7 +18,6 @@ module.exports.setup = (app, config)->
     res.redirect '/login'
 
   app.get "/user", (req, res)->
-    console.log app.user
     res.send app.user
 
   #admin route
