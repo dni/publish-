@@ -3,8 +3,8 @@ fs = require "fs-extra"
 ejs = require("ejs")
 PrintGenerator = require(__dirname + "/PrintGenerator")
 Magazine = require("./../model/MagazineSchema")
-Article = require("./../../article/model/ArticleSchema")
-File = require("./../../files/model/FileSchema")
+Article = require("./../../../lib/model/Schema")("articles")
+File = require("./../../../lib/model/Schema")("files")
 Settings = require("./../../../lib/model/Schema")("settings")
 Page = require("./../../../lib/model/Schema")("pages")
 

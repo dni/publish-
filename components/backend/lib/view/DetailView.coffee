@@ -30,9 +30,9 @@ define [
         options['title'] =
           value: @options.Config.moduleName
           type: "hidden"
-      else   
+      else
         options = @options.Config.model
-      
+
       for key, arg of options
         attr[key] =
           value: @ui[key].val()
@@ -46,7 +46,7 @@ define [
       "click .delete": "deleteModel"
 
     cancel: ->
-      App.contentRegion.close()
+      App.contentRegion.empty()
       Router.navigate @Config?.collectionName
 
     save: ->

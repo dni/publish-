@@ -1,4 +1,4 @@
-File = require __dirname+'/model/FileSchema'
+File = require('./../../lib/model/Schema')("files")
 Setting = require('./../../lib/model/Schema')("settings")
 auth = require './../../utilities/auth'
 gm = require 'gm'
@@ -6,7 +6,6 @@ multiparty = require "multiparty"
 fs = require "fs"
 
 module.exports.setup = (app)->
-
 
   app.post "/uploadFile", auth, (req,res)->
 

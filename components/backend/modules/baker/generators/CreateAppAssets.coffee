@@ -1,7 +1,7 @@
 gm = require "gm"
 fs = require "fs-extra"
 completeSizeList = require "./AppAssets"
-File = require "./../../files/model/FileSchema"
+File = require("./../../../lib/model/Schema")("files")
 extend = require('util')._extend
 
 module.exports = (setting, cb)->

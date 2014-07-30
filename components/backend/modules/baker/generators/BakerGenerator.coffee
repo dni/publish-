@@ -1,12 +1,10 @@
-fs = require("fs-extra")
-File = require "./../../files/model/FileSchema"
-Emitter = require("events").EventEmitter
-EE = new Emitter
-
 Settings = require("./../../../lib/model/Schema")('settings')
-##Magazine = require("./../magazine/model/MagazineSchema")
 createAppAssests = require './CreateAppAssets'
 renderConstants = require './RenderConstants'
+
+fs = require("fs-extra")
+Emitter = require("events").EventEmitter
+EE = new Emitter
 
 module.exports.download = (req, res) ->
 

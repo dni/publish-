@@ -4,8 +4,9 @@ define [
   'cs!utils'
   'io'
 ], (App, Model, Utils, io ) ->
-  socket = io.connect()
-
+  socket = io()
+  socket.set("close timeout", 30);
+  socket.set("heartbeat interval", 30);
   socket.on "message", (msg)->
     msgType = ""
     msgText = msg.username+" "+msg.message
@@ -29,6 +30,7 @@ define [
   socket.on "connect", ->
     # reload page for new login after server restarts/crashed
     $.get "/user", (user)->
+      console.log "user"
       App.User = new Model user
 
   socket.on "error", (err)->

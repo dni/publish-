@@ -1,8 +1,7 @@
 define [
   'cs!App'
   'marionette'
-  'cs!../model/Files'
-  'tpl!../templates/listItem.html'
+  'tpl!../templates/list-item.html'
 ], (App, Marionette, Files, Template) ->
 
   class ItemView extends Marionette.ItemView

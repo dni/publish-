@@ -2,7 +2,7 @@ define [
   'cs!App'
   'jquery'
   'marionette'
-  'tpl!../templates/browseItem.html'
+  'tpl!../templates/browse-item.html'
 ], (App, $, Marionette, Template) ->
 
   class ItemView extends Marionette.ItemView

@@ -1,16 +1,64 @@
 {
-
-    "config": {
-        "name": "Files",
-        "namespace": "files"
+    "name": "FileModule",
+    "moduleName": "FileModule",
+    "modelName": "File",
+    "namespace": "files",
+    "collectionName": "Files",
+    "url": "/files/",
+    "urlRoot": "files",
+    "dbTable": "files",
+    "navigation": true,
+    "navigationButton": "cloud-upload",
+    "model": {
+        "title" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "link" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "type" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "info" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "alt" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "desc" : {
+          "type": "wysiwyg",
+          "mongooseType": "String"
+        },
+        "relation" : {
+          "type": "hidden",
+          "mongooseType": "String"
+        },
+        "parent" : {
+          "type": "hidden",
+          "mongooseType": "String"
+        },
+        "key" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "thumbnail" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "smallPic" : {
+          "type": "text",
+          "mongooseType": "String"
+        },
+        "bigPic" : {
+          "type": "text",
+          "mongooseType": "String"
+        }
     },
-
-    "navigation": {
-        "button": "cloud-upload",
-        "route": "files",
-        "classNames": "files"
-    },
-
     "settings": {
         "thumbnail" : {
           "value": "200",
@@ -33,3 +81,5 @@
         }
     }
 }
+
+

@@ -28,11 +28,10 @@ define [
           success:->
             Utils.Vent.trigger config.name+":collection:ready"
 
-      # Routes from Controller
-      routes = @Controller.routes || {}
-
-      # Standard Routes
       unless @disableRoutes
+        # Routes from Controller
+        routes = @Controller.routes || {}
+        # Standard Routes
         routes[@Config.moduleName] = "list"
         routes[@Config.modelName+'/:id'] = "details"
         routes['new'+@Config.modelName] = "add"
