@@ -11,14 +11,13 @@ define [
   'cs!../view/EditFileView'
 ], ( App, Publish, Utils, i18n, $, ListView, BrowseView, TopView, ShowFileView, EditFileView) ->
   class FileController extends Publish.Controller.Controller
-
     constructor:(args)->
       super args
-      console.log @
-    # routes:
-    #   "showfile/:id": "showfile"
-    #   "editfile/:id": "editfile"
-    #   "filebrowser/:collection/:id": "filebrowser"
+
+    routes:
+      "showfile/:id": "showfile"
+      "editfile/:id": "editfile"
+      "filebrowser/:collection/:id": "filebrowser"
 
     showfile: (id) ->
       App.overlayRegion.show new ShowFileView

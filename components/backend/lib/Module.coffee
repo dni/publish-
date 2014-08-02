@@ -9,6 +9,7 @@ define [
       @[key] = arg for key, arg of args
 
     init:->
+
       unless @Config? then return c.l "no module Config"
       unless @i18n? then return c.l "no module i18n"
       unless @Controller? then @Controller = Controller
@@ -16,7 +17,7 @@ define [
       @Config = JSON.parse @Config
       config = @Config
 
-      @Controller = new Controller
+      @Controller = new @Controller
         i18n: @i18n
         Config: @Config
 

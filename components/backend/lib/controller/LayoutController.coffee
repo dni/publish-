@@ -4,7 +4,6 @@ define [
 ], ( App, Controller ) ->
   class LayoutController extends Controller
 
-
     constructor: (args)->
       unless args.LayoutView? then @LayoutView = LayoutView
       super args
