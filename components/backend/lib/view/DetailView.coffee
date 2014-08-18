@@ -73,4 +73,4 @@ define [
       Utils.Log @options.i18n.deleteModel, 'delete', text: @model.get '_id'
       @model.destroy
         success:->
-      App.contentRegion.currentView.close()
+      App.contentRegion.empty()

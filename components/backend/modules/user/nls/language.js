@@ -2,7 +2,8 @@ define({
     "root": {
     	"details": "User details",
     	"navigation": "Users",
-    	"attributes": {
+      "confirmLogout": "Do you really want to logout?",
+      "attributes": {
         	"title": "Name",
         	"username": "Username",
         	"email": "Email",

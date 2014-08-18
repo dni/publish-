@@ -11,7 +11,7 @@ define [
     if !type? then type = 'log'
 
     config.model.message.value =  log
-    config.model.name.value = App.User.get "name"
+    config.model.name.value = App.User.attributes.fields.title.value
     config.model.type.value = type
     config.model.additionalinfo.value = additionalinfo
 
