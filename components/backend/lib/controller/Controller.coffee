@@ -21,10 +21,14 @@ define [
       unless @EmptyView? then @EmptyView = EmptyView
 
     newDetailView:(model)->
+      model = @createNewModel() unless model?
       new @DetailView
         model: model
         Config: @Config
         i18n: @i18n
+
+    getContentView:(model)->
+      @newDetailView model
 
     defaults: ->
       defaults = {}
@@ -54,7 +58,7 @@ define [
     details: (id) ->
       model = App[@Config.collectionName].findWhere _id: id
       if model
-        view = @newDetailView model
+        view = @getContentView model
       else
         view = new @EmptyView message: @i18n.emptyMessage
 
@@ -62,8 +66,7 @@ define [
       App.contentRegion.show view
 
     add: ->
-      model = @createNewModel()
-      App.contentRegion.show @newDetailView model
+      App.contentRegion.show @getContentView()
 
     list: ->
       App.listTopRegion.show new @TopView

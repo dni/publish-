@@ -16,7 +16,6 @@ define [
 
       @Config = JSON.parse @Config
       config = @Config
-
       @Controller = new @Controller
         i18n: @i18n
         Config: @Config

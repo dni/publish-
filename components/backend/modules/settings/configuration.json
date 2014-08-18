@@ -8,10 +8,5 @@
     "dbTable": "settings",
     "navigation": true,
     "navigationButton": "cog",
-    "model": {
-      "test": {
-        "type": "text",
-        "mongooseType": "String"
-      }
-    }
+    "model": true
 }

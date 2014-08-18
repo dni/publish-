@@ -1,6 +1,7 @@
 {
     "name": "UserModule",
     "moduleName": "UserModule",
+    "name": "UserModule",
     "modelName": "User",
     "collectionName": "Users",
     "url": "/users/",

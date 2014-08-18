@@ -57,7 +57,6 @@ define [
         App[that.options.Config.collectionName].create @model,
           wait: true
           success: (res) ->
-            c.l res
             route = res.attributes.name+'/'+res.attributes._id
             Utils.Log that.options.i18n.newModel, 'new',
               text: res.attributes._id
@@ -74,4 +73,4 @@ define [
       Utils.Log @options.i18n.deleteModel, 'delete', text: @model.get '_id'
       @model.destroy
         success:->
-      App.contentRegion.close()
+      App.contentRegion.currentView.close()

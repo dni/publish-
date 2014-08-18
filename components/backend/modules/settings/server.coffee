@@ -1,5 +1,6 @@
 auth = require './../../utilities/auth'
 module.exports.setup = (app, config)->
+  console.log config.dbTable
   Setting = require('../../lib/model/Schema')(config.dbTable)
 
   # clear cache /rebuild
@@ -12,7 +13,7 @@ module.exports.setup = (app, config)->
     # grunt.on "close", (code) ->
     #     if code isnt 0
     #       res.statusCode = 500
-    #       console.log "grunt process exited with code " + code
+    #       console.lcog "grunt process exited with code " + code
     #       res.end()
     #     else
     #       console.log "grunt task done without errors"
@@ -20,7 +21,6 @@ module.exports.setup = (app, config)->
     exec = require("child_process").exec
     child = undefined
     child = exec("grunt restart", (error, stdout, stderr) ->
-      console.log "GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG"
       console.log "stdout: " + stdout
       console.log "stderr: " + stderr
       console.log "exec error: " + error  if error isnt null

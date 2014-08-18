@@ -1,7 +1,8 @@
 define [
   'cs!App'
   'cs!lib/controller/Controller'
-], ( App, Controller ) ->
+  'cs!lib/view/LayoutView'
+], ( App, Controller, LayoutView ) ->
   class LayoutController extends Controller
 
     constructor: (args)->
@@ -13,23 +14,18 @@ define [
       cloned.reset()
       cloned
 
-    details: (id) ->
-      model = App[@Config.collectionName].findWhere _id: id
-      if model
-        files = @getNewFileCollection()
-        view = new @LayoutView
-          detailView: @DetailView
-          model: model
-          files: files.reset App.Files.where relation: "article:"+id
-        view.i18n = @i18n
-      else
-        view = new EmptyView message: @i18n.emptyMessage
+    getContentView:(model)->
+      c.l "getlayoutview"
+      @newLayoutView model
 
-      App.contentRegion.show view
-
+    newLayoutView:(model)->
+      detailView = @newDetailView model
+      new @LayoutView
+        detailView: detailView
+        files: files.reset App.Files.where relation: @Config.modelName+":"+id
 
     add: ->
+      detailView = @newDetailView()
       App.contentRegion.show new @LayoutView
-        detailView: new @DetailView
-        model: new @Model
+        detailView: detailView
         files: @getNewFileCollection()

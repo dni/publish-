@@ -1,10 +1,13 @@
 <span class="label label-default date"><%= (new Date(date)).format() %></span>
-<label><%= username %>: </label>
-<p><%= message %></p>
+<label><%= fields.name.value %>: </label>
+<p><%= fields.message.value %></p>
 
-<% if (additionalinfo.href) { %>
-	<a href="#<%= additionalinfo.href %>"<span class="label label-info additional"><%= additionalinfo.text %></span>
-<% } else if (additionalinfo.text) { %>
-	<span class="label label-info additional"><%= additionalinfo.text %></span>
+
+<% if (fields.additionalinfo.value) { %>
+<% if (fields.additionalinfo.value.href) { %>
+	<a href="#<%= fields.additionalinfo.value.href %>"<span class="label label-info additional"><%= fields.additionalinfo.value.text %></span>
+<% } else if (fields.additionalinfo.value.text) { %>
+	<span class="label label-info additional"><%= fields.additionalinfo.value.text %></span>
+<% } %>
 <% } %>
 

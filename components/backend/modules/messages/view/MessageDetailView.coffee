@@ -9,7 +9,7 @@ define [
       @$el.addClass @model.get "type"
     template: Template
 
-  class MessageDetailView extends Backbone.Marionette.CollectionView
+  class MessageDetailView extends Marionette.CollectionView
     tagName: 'ul'
     className: 'messages'
-    itemView: MessageDetailItemView
+    childView: MessageDetailItemView

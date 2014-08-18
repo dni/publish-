@@ -1,10 +1,13 @@
 define [
   'cs!App'
   'cs!Publish'
+  'text!modules/messages/configuration.json'
   'marionette'
   'tpl!../templates/list.html'
   'i18n!modules/messages/nls/language.js'
-], (App, Publish, Marionette, Template, i18n) ->
+], (App, Publish, Config, Marionette, Template, i18n) ->
+
+  config = JSON.parse Config
 
   class MessageListView extends Marionette.ItemView
 
@@ -37,12 +40,14 @@ define [
       # do nothing on empty message
       if not @ui.message.val() then return
 
+      config.model.message.value =  @ui.message.val()
+      config.model.name.value = App.User.get "name"
+      config.model.type.value = 'message'
+
       message = new Publish.Model
-      message.set
-        message: @ui.message.val()
-        username: App.User.get "name"
-        date: new Date()
-        type: 'message'
+      message.set "name", config.modelName
+      message.set "date", Date.now()
+      message.set "fields", config.model
 
       @ui.message.val('')
 

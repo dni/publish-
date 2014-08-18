@@ -11,7 +11,7 @@ define [
   'cs!lib/view/TopView'
   'cs!lib/Regions'
   'cs!lib/Events'
-  # 'cs!lib/Socket'
+  'cs!lib/Socket'
 ], ( Utils, Controller, LayoutController, Module, Model, Collection, ListView, DetailView, EmptyView, TopView) ->
   Utils: Utils
   Module: Module

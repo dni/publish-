@@ -6,4 +6,5 @@ define [
 
   new Publish.Module
     Controller: Publish.Controller.LayoutController
+    Config: Config
     i18n:i18n

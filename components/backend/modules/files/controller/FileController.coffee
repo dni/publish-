@@ -10,6 +10,7 @@ define [
   'cs!../view/ShowFileView'
   'cs!../view/EditFileView'
 ], ( App, Publish, Utils, i18n, $, ListView, BrowseView, TopView, ShowFileView, EditFileView) ->
+
   class FileController extends Publish.Controller.Controller
     constructor:(args)->
       super args
@@ -28,7 +29,8 @@ define [
         model: App.Files.findWhere _id: id
 
     list: ->
-      console.log TopView, "lol"
+      files = App.Files.where "fields.title.value":undefined
+      console.log files
       App.listTopRegion.show new TopView
       App.listRegion.show new ListView
         collection: new @Collection App.Files.where parent:undefined

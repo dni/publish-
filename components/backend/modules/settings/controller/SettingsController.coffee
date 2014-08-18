@@ -1,14 +1,17 @@
 define [
-  'cs!App'
   'cs!Publish'
-  'cs!utils'
+  'cs!../view/TopView'
   'jquery'
 ],
-( App, Publish, Utils, $) ->
-  class SettingsController extends Publish.Controller
+( Publish, TopView, $) ->
+  class SettingsController extends Publish.Controller.Controller
+
+    constructor: (args)->
+      @TopView = TopView
+      super args
 
     routes:
-      "settings/clearCache": "clearCache"
+      "clearCache": "clearCache"
 
     clearCache: ->
       $.get "/clearCache", ->

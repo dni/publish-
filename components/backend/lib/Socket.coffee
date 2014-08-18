@@ -4,15 +4,15 @@ define [
   'cs!utils'
   'io'
 ], (App, Model, Utils, io ) ->
-  socket = io()
-  socket.set("close timeout", 30);
-  socket.set("heartbeat interval", 30);
+
+  socket = io.connect()
   socket.on "message", (msg)->
+    msg = msg.fields
     msgType = ""
-    msgText = msg.username+" "+msg.message
-    if msg.type is "update" or msg.type is "message" then msgType = "info"
-    else if msg.type is "delete" then msgType = "warn"
-    else if msg.type is "new" then msgType = "success"
+    msgText = msg.name.value+" "+msg.message.value
+    if msg.type is "update" or msg.type.value is "message" then msgType = "info"
+    else if msg.type.value is "delete" then msgType = "warn"
+    else if msg.type.value is "new" then msgType = "success"
     #else if msgType is "update" then msgType = "error"
     $.notify msgText,
       className: msgType
@@ -30,7 +30,6 @@ define [
   socket.on "connect", ->
     # reload page for new login after server restarts/crashed
     $.get "/user", (user)->
-      console.log "user"
       App.User = new Model user
 
   socket.on "error", (err)->

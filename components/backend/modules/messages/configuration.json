@@ -18,7 +18,11 @@
       "type": "text",
       "mongooseType": "String"
     },
-    "message" : {
+    "message": {
+      "type": "text",
+      "mongooseType": "String"
+    },
+    "additionalinfo" : {
       "type": "Object",
       "default": {}
     }

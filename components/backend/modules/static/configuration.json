@@ -1,9 +1,4 @@
 {
-    "config": {
-        "name": "StaticModule",
-        "namespace": "staticblocks"
-    },
-
     "name": "StaticModule",
     "moduleName": "StaticModule",
     "modelName": "StaticBlock",

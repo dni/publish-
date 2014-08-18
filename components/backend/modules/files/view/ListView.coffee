@@ -1,21 +1,13 @@
 define [
   'cs!App'
-  'marionette'
-  'tpl!../templates/list-item.html'
-], (App, Marionette, Files, Template) ->
+  'cs!Publish'
+], (App, Publish ) ->
 
-  class ItemView extends Marionette.ItemView
-    template: Template
-    initialize: ->
-      @model.on "change", @render
-
-
-  class ListView extends Marionette.CollectionView
-    itemView: ItemView
+  class ListView extends Publish.View.ListView
     initialize: ->
       App.Files.on "sync", @sync, @
 
     sync: ->
-      files = App.Files.where parent:undefined
+      files = App.Files.where "fields.parent.value":undefined
       @collection.reset files
       @render()

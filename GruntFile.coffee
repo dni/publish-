@@ -118,7 +118,7 @@ module.exports = (grunt)->
         options:
           destPrefix: "components/backend/vendor"
         files:
-          "io.js": "socket.io-client/socket.io.js"
+          "io.js": "socket.io-client/dist/socket.io.js"
           "jquery.js": "jquery/dist/jquery.js"
           "require.js": "requirejs/require.js"
           "jquery.ui.js": "jquery-ui/jquery-ui.js"

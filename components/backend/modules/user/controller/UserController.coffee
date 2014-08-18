@@ -1,7 +1,7 @@
 define [
   'Publish'
 ], (Publish) ->
-  class UserController extends Publish.Controller
+  class UserController extends Publish.Controller.Controller
 
     routes:
       "logout": "logout"

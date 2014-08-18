@@ -1,166 +1,98 @@
 File = require('./../../lib/model/Schema')("files")
 Setting = require('./../../lib/model/Schema')("settings")
+async = require "async"
+moduleSetting = ''
 auth = require './../../utilities/auth'
 gm = require 'gm'
 multiparty = require "multiparty"
 fs = require "fs"
+dir = "./public/files/";
 
-module.exports.setup = (app)->
+module.exports.setup = (app, cfg)->
+
+  Setting.findOne("fields.title.value": cfg.moduleName).exec (err, setting) ->
+    moduleSetting = setting
+
+  app.on cfg.moduleName+':after:put', (req, res, file)->
+    if req.params.crop
+      filename = file.fields.title.value
+      gmImg = gm(dir+filename)
+      crop = req.body.crop
+      gmImg.size (err, size)->
+        return if err
+        ratio = size.width / crop.origSize.w
+        gmImg.crop(crop.w*ratio, crop.h*ratio, crop.x*ratio, crop.y*ratio)
+        gmImg.write dir+filename, ->
+          createImages file, req
+    else
+      title = file.fields.title.value
+      link = file.fields.link.value
+      if title != link
+        fs.renameSync dir+link, dir+title
+        file.fields.link.value = title
+        file.save ->
+          req.io.broadcast 'updateCollection', cfg.collectionName
+
 
   app.post "/uploadFile", auth, (req,res)->
-
     form = new multiparty.Form
     form.parse req, (err, fields, files)->
       if err then return console.log 'formparse error', err
       files['files[]'].forEach (srcFile)->
-        file = new File()
-        name = srcFile.originalFilename
 
-        ext = name.split(".").pop()
-        filename = name.split(".")
-        filename.pop()
-        filename = filename.join(".")
+        title = srcFile.originalFilename
+        if fs.existsSync(dir+title) is true
+          title = title.replace ".", Date.now()+"_copy."
+        fs.renameSync srcFile.path, dir+title
 
-        targetLink = "./public/files/" + name
-        if fs.existsSync(targetLink) is true
-          name = filename+"_copy_"+Date.now()+"."+ext
-          targetLink = "./public/files/"+name
-        file.name = name
-        file.type = srcFile.headers['content-type']
-        file.link = name
-        fs.renameSync srcFile.path, targetLink
+        file = new File
+        file.name = cfg.modelName
+        file.fields = cfg.model
+        file.fields.type.value = srcFile.headers['content-type']
+        file.fields.link.value = title
+        file.fields.title.value = title
 
         if srcFile.headers['content-type'].split("/")[0] is "image"
-          Setting.findOne(name: "Files").execFind (err, setting) ->
-            cfg = setting.pop()
-            createImages file, name, res, req, cfg
-            return
-
+           createImages file, req
         else
           file.save ->
-            req.io.broadcast "updateCollection", "Files"
-            res.send file
-            return
-
+            req.io.broadcast "updateCollection", cfg.collectionName
 
     res.send "success"
 
-
-  app.get '/files', auth, (req, res)->
-    send = (arr, data)-> res.send(data)
-    if req.query.parents
-      File.find({'parent':undefined}).execFind send
-    else
-      File.find().execFind send
-
-  app.post "/files", auth, (req, res) ->
-    newfile = req.body
-    ext = newfile.name.split(".").pop()
-    filename = newfile.name.split(".")
-    filename.pop()
-    filename = filename.join(".")
-
-    file = new File()
-
-    filename = filename+"_copy_"+Date.now()+"."+ext
-    fs.writeFileSync "./public/files/" + filename, fs.readFileSync("./public/files/" + newfile.name)
-
-    file.name = filename
-    file.type = newfile.type
-    file.link = filename
-    file.info = newfile.info
-    file.alt = newfile.alt
-    file.desc = newfile.desc
-    file.parent = newfile.parent
-    file.relation = newfile.relation
-    file.key = newfile.key
-
-    if newfile.type.split("/")[0] is "image"
-      Setting.findOne(name: "Files").execFind (err, setting) ->
-        cfg = setting.pop()
-        createImages file, filename, res, req, cfg
-
+  #create new copy of the file
+  app.on cfg.moduleName+":after:post", (req, res, file) ->
+    oldFileName = file.fields.title.value
+    newFileName = 'new_'+Date.now()+oldFileName
+    fs.writeFileSync dir+oldFileName, fs.readFileSync dir+newFileName
+    if file.fields.type.value.split("/")[0] is "image"
+      createImages file, req
     else
       file.save ->
         req.io.broadcast "updateCollection", "Files"
-        res.send file
 
-  app.delete '/files/:id', auth, (req, res)->
-    File.findById req.params.id, (e, file)->
-      file.remove (err)->
-        if err then return res.send "error while removing file "+a.name
-        types = ["thumbnail","smallPic","bigPic", "link"]
-        for type in types
-          if fs.existsSync "./public/files/"+file[type] then fs.unlink "./public/files/"+file[type]
-        res.send 'removing file '+file.name
+  # clean up files after model is deleted
+  app.on cfg.moduleName+':after:delete', (req, res, file)->
+    types = ["thumbnail", "smallPic", "bigPic", "link"]
+    for type in types
+      if fs.existsSync "./public/files/"+file.fields[type].value
+        fs.unlink "./public/files/"+file.fields[type].value
 
-  app.put '/files/:id', auth, (req, res)->
-    File.findById req.params.id, (e, a)->
-      gmImg = gm('./public/files/' + req.body.name)
-      if req.body.crop
-        crop = req.body.crop
-        # TODO crop picture with ratio
-        gmImg.size (err, size)->
-          if err then throw err
-          ratio = size.width / crop.origSize.w
-          gmImg.crop(crop.w*ratio, crop.h*ratio, crop.x*ratio, crop.y*ratio)
-            .write('./public/files/' + req.body.name, ->
-              Setting.findOne(name: "Files").execFind (err, setting) ->
-                if err then throw err else createImages a, a.name, res, req, setting.pop()
-            )
-
-      else
-        name = req.body.name
-        # rename file if name changes
-        if a.name != name
-          link = './public/files/' + a.name
-          targetLink = './public/files/' + name
-          if fs.existsSync(targetLink) is true
-            name = 'copy_'+Date.now()+'_'+ name
-            targetLink = './public/files/' + name
-          fs.renameSync link, targetLink
-          a.link = name
-        a.name = name
-        a.info = req.body.info
-        a.alt = req.body.alt
-        a.desc = req.body.desc
-        a.parent = req.body.parent
-        a.relation = req.body.relation
-        a.key = req.body.key
-        a.save ->
-          req.io.broadcast 'updateCollection', 'Files'
-
-createImages = (file, filename, res, req, cfg) ->
-  shrinkPic = (type, size) ->
-    maxSize = cfg.settings[type].value
-
-    targetName = filename+"_"+type+"."+ext
-    file[type] = targetName
-    targetLink = "./public/files/" + targetName
-    image.quality parseInt(cfg.settings.quality.value)
-    if size.width > size.height
-      image.resize maxSize
-    else
-      image.resize null, maxSize
-    image.write targetLink, (err) ->
-      if err then return console.error "image.write('./public/files/iconset/ err=", err
-      if types.length > 0
-        shrinkPic types.pop(), size
-      else
-        file.save ->
-          req.io.broadcast "updateCollection", "Files"
-          res.send file
-
-  types = [
-    "thumbnail"
-    "smallPic"
-    "bigPic"
-  ]
-  ext = filename.split(".").pop()
-  filename = filename.split(".")
-  filename.pop()
-  filename = filename.join(".")
-  image = gm("./public/files/" + filename+"."+ext)
-  image.size (err, size) ->
-    if err then return console.error "createWebPic getSize err=", err
-    shrinkPic types.pop(), size
+  createImages = (file, req) ->
+    filename = file.fields.title.value
+    portrait = false
+    types = ["thumbnail","smallPic","bigPic"]
+    image = gm(dir+filename).size (err, size) ->
+      if err then return console.error "createWebPic getSize err=", err
+      portrait = true if size.width < size.height
+      async.each types, (type, cb)->
+        maxSize = moduleSetting.fields[type].value
+        targetName = filename.replace '.', type+'.'
+        file.fields[type].value = targetName
+        image.quality parseInt(moduleSetting.fields.quality.value)
+        if portrait then image.resize null, maxSize
+        else image.resize maxSize
+        image.write dir+targetName, (err) ->
+          file.save ->
+            req.io.broadcast "updateCollection", cfg.collectionName
+            cb()
