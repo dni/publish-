@@ -1,3 +1,5 @@
+# old repo
+visit <a href="https://github.com/dni/publish-cms">https://github.com/dni/publish-cms/</a> instead.
 # Publish! Crossplattform Publishing
 Publish your data on all channels!
 
